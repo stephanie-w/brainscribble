@@ -1,0 +1,73 @@
+---
+title: "Earthquakes from the past 30 days"
+output:
+  html_document:
+    theme: flatly
+    highlight: tango
+    
+---
+
+
+```{r setup, cache = F, echo = F, message = F, warning = F, tidy = F}
+library(knitr)
+options(width = 100)
+opts_chunk$set(message = F, error = F, warning = F, fig.align = 'center', dpi = 100, tidy = T, cache = F, cache.path = '.cache/', fig.path = 'fig/')
+knit_hooks$set(inline = function(x) {
+  if(is.numeric(x)) {
+    round(x, getOption('digits'))
+  } else {
+    paste(as.character(x), collapse = ', ')
+  }
+})
+knit_hooks$set(plot = knitr:::hook_plot_html)
+```
+
+
+Earthquakes of the last 30 months from the earthquake.usgs.gov feed : http://earthquake.usgs.gov/earthquakes/feed/v1.0/csv.php feed. 
+
+
+Below are the fields included in the spreadsheet output:
+
+    time
+    latitude
+    longitude
+    depth
+    mag
+    magType
+    nst
+    gap
+    dmin
+    rms
+    net
+    id
+    updated
+    place
+
+```{r}
+library(reshape2)
+library(ggplot2)
+library(ggmap)
+eq <- read.csv("http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv", as.is = T)
+head(eq[c("time", "longitude", "latitude", "mag")])
+
+eq$area <- factor(sub("^[^,]+, ", "", eq$place))
+eq$date <- as.Date(strtrim(eq$time, 19), format = "%Y-%m-%dT%H:%M:%S")
+eqFreq1 <- table(eq$date, eq$mag, eq$area)
+eqFreq2 <- melt(eqFreq1)
+names(eqFreq2) <- c("date", "M", "area", "freq")
+head(subset(eqFreq2, freq > 0 & M > 0))
+```
+
+`
+
+```{r, fig.width=8}
+eqFreq2$M <- factor(round(eqFreq2$M))
+ggplot(eqFreq2, aes(date, weight = freq, fill = M)) + geom_bar(binwidth = 60 * 60 * 24) + labs(x = "Date", y = "Frequency", title = "Earthquakes Frequency from the past 30 days") + theme(axis.text.x = element_text(angle = 90 ,
+    hjust = 1))
+
+world_map <- map_data("world")
+p <- ggplot() + coord_fixed() + xlab("") + ylab("")
+base_world <- p + geom_polygon(data = world_map, aes(x = long, y = lat, group = group), colour = "light green", fill = "light green")
+
+base_world + geom_point(aes(x = longitude, y = latitude, size = mag), data = eq, colour = "Deep Pink", fill = "Pink", pch = 21, alpha = I(0.7))
+```

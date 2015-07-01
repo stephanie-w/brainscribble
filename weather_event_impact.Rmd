@@ -1,0 +1,240 @@
+---
+title: "U.S. National Oceanic and Atmospheric Administration's (NOAA) storm database : Analysis of weather events impact on population health and economy."
+author: "Stephanie W"
+date: "17/6/2015"
+output: html_document
+---
+
+```{r setup, cache = F, echo = F, message = F, warning = F, tidy = F}
+library(knitr)
+options(width = 100)
+opts_chunk$set(message = F, error = F, warning = F, fig.align = 'center', dpi = 100, tidy = T, cache = F, cache.path = '.cache/', fig.path = 'fig/')
+knit_hooks$set(inline = function(x) {
+  if(is.numeric(x)) {
+    round(x, getOption('digits'))
+  } else {
+    paste(as.character(x), collapse = ', ')
+  }
+})
+knit_hooks$set(plot = knitr:::hook_plot_html)
+```
+##Synopsis
+
+This analysis involves exploring the U.S. National Oceanic and Atmospheric Administration's (NOAA) storm database. 
+
+This database tracks characteristics of major storms and weather events in the United States, including when and where they occur, as well as estimates of any fatalities, injuries, and property damage.
+
+This analysis focuses on fatalities, injuries, property and crop damages to answer to the 2 following questions : 
+Across the United States, which types of events (as indicated in the EVTYPE variable) are most harmful with respect to population health?
+Across the United States, which types of events have the greatest economic consequences?
+
+
+## Data Processing
+The data comes in the form of a comma-separated-value file compressed via the bzip2.
+
+We download it and unzip it in a ProjectData directory:
+```{r}
+download.file("https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2FStormData.csv.bz2",
+              "FStormData.csv.bz2", method="curl", quiet=TRUE)
+
+raw <- read.csv(bzfile("FStormData.csv.bz2"),
+                sep=",", quote='"', header=TRUE, stringsAsFactors=FALSE)
+raw$BGN_DATE <- as.Date(raw$BGN_DATE, format="%m/%d/%Y %H:%M:%S")
+raw$END_DATE <- as.Date(raw$END_DATE, format="%m/%d/%Y %H:%M:%S")
+```
+
+The Storm Events Database reports that all weather events are only recorded since 1996 (see http://www.ncdc.noaa.gov/stormevents/details.jsp).
+
+        Event Types Available:
+        Add more info about event types here. Link to collections page/tab when referencing data collection source.
+
+        1. Tornado: From 1950 through 1954, only tornado events were recorded.
+        
+        2. Tornado, Thunderstorm Wind and Hail: From 1955 through 1992, only tornado, thunderstorm wind and hail events were keyed from the paper publications into digital data. From 1993 to 1995, only tornado, thunderstorm wind and hail events have been extracted from the Unformatted Text Files.
+        
+        3. All Event Types (48 from Directive 10-1605): From 1996 to present, 48 event types are recorded as defined in NWS Directive 10-1605. 
+
+Since we're reporting impacts from various weather events, we'll focus our study on data since 1996.
+
+```{r}
+data <- raw[raw$BGN_DATE > "1996-01-01",]
+rm(raw)
+```
+
+##Results
+*Weather events impact on population health across the United States since 1996*
+
+To study the weather events impact on poulation health, we examine the INJURIES AND FATALITIES columns of the dataset.
+
+We compute the sum of total of injuries/fatalities by weather event type an store the values in a new dataset:
+```{r}
+fat_by_ev <- aggregate(FATALITIES ~ EVTYPE, data=data, sum, na.rm=TRUE)
+inj_by_ev <- aggregate(INJURIES ~ EVTYPE, data=data, sum, na.rm=TRUE)
+```
+
+For fatalities, the quantile function shows that only 1% of the values of the total of injuries/fatalities by event type are significant (> 326 fatalities, > 1635 injuries).
+
+```{r}
+quantile(fat_by_ev$FATALITIES, probs=seq(0.9, 1, 0.01))
+quantile(inj_by_ev$INJURIES, probs=seq(0.9, 1, 0.01))
+```
+
+We order the new datas by fatalities/injuries (decreasing order) and display the 10th first rows:
+```{r}
+fat_temp <- fat_by_ev[order(fat_by_ev$FATALITIES, decreasing=TRUE),][1:10,]
+colnames(fat_temp) <- c("event.type", "fatalities")
+inj_temp <- inj_by_ev[order(inj_by_ev$INJURIES, decreasing=TRUE),][1:10,]
+colnames(inj_temp) <- c("event.type", "injuries")
+library(knitr)
+kable(fat_temp, caption="Total fatalities by weather event type since 1996")
+kable(inj_temp, caption="Total injuries by weather event type since 1996")
+```
+
+Then plot the datas:
+```{r}
+library(ggplot2)
+ggplot(fat_temp, aes(reorder(factor(event.type), -fatalities), fatalities)) +
+        geom_bar(stat="identity") +
+        labs(x="Weather event type", y="Fatalities", title="Total fatalities by weather event type since 1996") +
+        theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+ggplot(inj_temp, aes(reorder(factor(event.type), -injuries), injuries)) +
+        geom_bar(stat="identity") +
+        labs(x="Weather event type", y="Injuries", title="Total injuries by weather event type since 1996") +
+        theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+        
+To go deeper, we can examine single weather types by having a closer look on their frequency/injuries and fatalities ratio :
+
+```{r}
+library(plyr)
+fat_ev_count <- count(data[data$FATALITIES > 0,], vars = "EVTYPE")
+
+temp <- merge(fat_ev_count, fat_by_ev, by="EVTYPE")
+temp$ratio <- temp$FATALITIES/temp$freq
+colnames(temp) <- c("event.type", "event.frequency", "event.fatalities", "event.fatalities.ratio")
+kable(temp[order(temp$event.frequency, decreasing=TRUE),][1:30,],
+      caption="Total fatalities by weather event type (ordered by frequency desc) since 1996")
+
+inj_ev_count <- count(data[data$INJURIES > 0,], vars = "EVTYPE")
+temp <- merge(inj_ev_count, inj_by_ev, by="EVTYPE")
+temp$ratio <- temp$INJURIES/temp$freq
+colnames(temp) <- c("event.type", "event.frequency", "event.injuries","event.injuries.ratio")
+kable(temp[order(temp$event.frequency, decreasing=TRUE),][1:30,],
+      caption="Total Injuries by weather event type (ordered by frequency desc) since 1996")
+
+```
+
+*Weather events economic impact across Unites States*
+
+We'll examine the property and crop damages columns (PROPDMG * 10^PROPDMGEXP and CROPDMG * 10^CROPDMGEXP, respectively) from the dataset.
+
+We need to preprocess the data to convert PROPDMG and PROPDMGEXP into numbers, idem for CROPDMG and CROPDMGEXP.
+
+Values for the CROPDMGEXP and PROPDMEXP are:
+
+* 0 or blank
+* H for Hundred
+* K for Thousand
+* M for Million
+* B for Billion
+
+Note: Except for these exponential values (H,K,M,B), there is some inexpected values : ? + - and numbers in the initial dataset. This values doesn't appear in the dataset filtered by BGN_DATE > 1996-01-01.
+
+Let's check the repartition of the exponential categories:
+```{r}
+table(data$CROPDMGEXP)
+table(data$PROPDMGEXP)
+```
+
+We convert PROPDMG/PROPDMGEXP and CROPDMG/CROPDMGEXP pairs into numbers:
+```{r}
+data$cropdmg.exp <- 1
+data[data$CROPDMGEXP=="H","cropdmg.exp"] <- 100
+data[data$CROPDMGEXP=="K","cropdmg.exp"] <- 1000
+data[data$CROPDMGEXP=="M","cropdmg.exp"] <- 10^6
+data[data$CROPDMGEXP=="B","cropdmg.exp"] <- 10^9
+data$cropdmg.val <- data$CROPDMG*data$cropdmg.exp
+
+data$propdmg.exp <- 1
+data[data$PROPDMGEXP=="H","propdmg.exp"] <- 100
+data[data$PROPDMGEXP=="K","propdmg.exp"] <- 1000
+data[data$PROPDMGEXP=="M","propdmg.exp"] <- 1e+06
+data[data$PROPDMGEXP=="B","propdmg.exp"] <- 1e+09
+data$propdmg.val <- data$PROPDMG*data$propdmg.exp
+```
+
+We perform the same analysis as for weather type impact on population health:
+```{r}
+crop_by_ev <- aggregate(cropdmg.val ~ EVTYPE, data=data, sum, na.rm=TRUE)
+quantile(crop_by_ev$cropdmg.val, probs=seq(0.9, 1, 0.01))
+prop_by_ev <- aggregate(propdmg.val ~ EVTYPE, data=data, sum, na.rm=TRUE)
+quantile(prop_by_ev$propdmg.val, probs=seq(0.9, 1, 0.01))
+```
+
+```{r}
+crop_temp <- crop_by_ev[order(crop_by_ev$cropdmg.val, decreasing=TRUE),][1:20,]
+colnames(crop_temp) <- c("event.type", "cropdmg.val")
+prop_temp <- prop_by_ev[order(prop_by_ev$propdmg.val, decreasing=TRUE),][1:20,]
+colnames(prop_temp) <- c("event.type", "propdmg.val")
+kable(crop_temp, caption="Total crop damages in (US dollars) by weather event type")
+kable(prop_temp, caption="Total property damages (in US dollars) by weather event type")
+```
+
+```{r fig.weigth=9}
+ggplot(crop_temp, aes(reorder(factor(event.type), -cropdmg.val), cropdmg.val)) +
+        geom_bar(stat="identity") +
+        labs(x="Weather event type", y="Crop damages in US dollars", title="Total Crop damages by weather event type") +
+        theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+ggplot(prop_temp, aes(reorder(factor(event.type), -propdmg.val), propdmg.val)) +
+        geom_bar(stat="identity") +
+        labs(x="Weather event type type", y="Properties damages in US dollars", title="Total Properties damages by weather event type") +
+        theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+and we check damages ratio by event type:
+
+```{r}
+crop_ev_count <- count(data[data$cropdmg.val > 0,], vars = "EVTYPE")
+temp <- merge(crop_ev_count, crop_by_ev, by="EVTYPE")
+temp$ratio <- temp$cropdmg.val/temp$freq
+colnames(temp) <- c("event.type", "event.frequency", "event.cropdamages","event.cropdamages.ratio")
+kable(temp[order(temp$event.frequency, decreasing=TRUE),][1:20,],
+      caption="Total crop domages (in US dollars) by weather event type (ordered by frequency desc) since 1996")
+
+prop_ev_count <- count(data[data$propdmg.val > 0, ], vars = "EVTYPE")
+temp <- merge(prop_ev_count, prop_by_ev, by="EVTYPE")
+temp$ratio <- temp$propdmg.val/temp$freq
+colnames(temp) <- c("event.type", "event.frequency", "event.propdamages","event.propdamages.ratio")
+kable(temp[order(temp$event.frequency, decreasing=TRUE),][1:20,],
+      caption="Total property damages (in US dollars) by weather event type (ordered by frequency desc) since 1996")
+```
+
+##Conclusions
+*Wheater events impact on population health*
+Our analysys shows that since 1996:
+
+* The "Tornado" event caused the most injuries
+* Both the "Tornado" and "Excessive heat" events caused the most fatalities
+
+From the frequency/ratio table, we can notice that:
+
+* The "Lightning", "Flash Flood" and "Excessive Heat" are the most frequent events regarding events causing fatalities
+* The "Lightning", "Tornado" and "TSM Wind" are the most frequent events regarding events causing injuries
+* The "Excessive heat", "Flood" and "Heat", have a very high ratio regarding injuries
+
+
+*Wheater events impact on economy*
+Our analysys shows that since 1996:
+
+* The "Drought" event caused the most crop damages
+* The "Flood" events caused the most property damages
+
+From the frequency/ratio table, we can notice that:
+
+* The "Hail" event is the most frequent event regarding events causing crop damages
+* The "TSTM Wind" event is the most frequent event regarding events causing property damages
+* The "Drought" and "Hurricane" events have a very high crop damages ratio
+* The "Flood" and "Tropical storm" events have a very high property damages ratio
