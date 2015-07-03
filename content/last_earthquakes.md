@@ -31,6 +31,7 @@ Below are the fields included in the spreadsheet output:
     updated
     place
 
+Plotting earthquakes frequency and location:
 
 ```r
 library(reshape2)
