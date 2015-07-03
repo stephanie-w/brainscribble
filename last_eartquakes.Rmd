@@ -11,9 +11,9 @@ output:
 ```{r setup, cache = F, echo = F, message = F, warning = F, tidy = F}
 library(knitr)
 options(width = 100)
-opts_chunk$set(message = F, error = F, warning = F, fig.align = 'center', dpi = 100, tidy = T, cache = F, cache.path = '.cache/', fig.path = 'fig/')
+opts_chunk$set(message = F, error = F, warning = F, fig.align = 'center', dpi = 100, tidy = T, cache = F, cache.path = '.cache/', unnamed.chunk.label = "earthquakes", fig.width=8)
 knit_hooks$set(inline = function(x) {
-  if(is.numeric(x)) {
+  if(is.numeric(x)){ 
     round(x, getOption('digits'))
   } else {
     paste(as.character(x), collapse = ', ')
@@ -58,13 +58,14 @@ names(eqFreq2) <- c("date", "M", "area", "freq")
 head(subset(eqFreq2, freq > 0 & M > 0))
 ```
 
-`
 
-```{r, fig.width=8}
+```{r earthquakes_frequency}
 eqFreq2$M <- factor(round(eqFreq2$M))
 ggplot(eqFreq2, aes(date, weight = freq, fill = M)) + geom_bar(binwidth = 60 * 60 * 24) + labs(x = "Date", y = "Frequency", title = "Earthquakes Frequency from the past 30 days") + theme(axis.text.x = element_text(angle = 90 ,
     hjust = 1))
+```
 
+```{r earthquakes_worldmap}
 world_map <- map_data("world")
 p <- ggplot() + coord_fixed() + xlab("") + ylab("")
 base_world <- p + geom_polygon(data = world_map, aes(x = long, y = lat, group = group), colour = "light green", fill = "light green")

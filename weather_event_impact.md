@@ -21,8 +21,15 @@ Across the United States, which types of events have the greatest economic conse
 The data comes in the form of a comma-separated-value file compressed via the bzip2.
 
 We download it and unzip it in a ProjectData directory:
+
+```r
 download.file("https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2FStormData.csv.bz2", "FStormData.csv.bz2", 
-    method = "curl", quiet = TRUE)raw <- read.csv(bzfile("FStormData.csv.bz2"), sep = ",", quote = "\"", header = TRUE, stringsAsFactors = FALSE)raw$BGN_DATE <- as.Date(raw$BGN_DATE, format = "%m/%d/%Y %H:%M:%S")raw$END_DATE <- as.Date(raw$END_DATE, format = "%m/%d/%Y %H:%M:%S")
+    method = "curl", quiet = TRUE)
+
+raw <- read.csv(bzfile("FStormData.csv.bz2"), sep = ",", quote = "\"", header = TRUE, stringsAsFactors = FALSE)
+raw$BGN_DATE <- as.Date(raw$BGN_DATE, format = "%m/%d/%Y %H:%M:%S")
+raw$END_DATE <- as.Date(raw$END_DATE, format = "%m/%d/%Y %H:%M:%S")
+```
 
 The Storm Events Database reports that all weather events are only recorded since 1996 (see http://www.ncdc.noaa.gov/stormevents/details.jsp).
 
@@ -37,7 +44,11 @@ The Storm Events Database reports that all weather events are only recorded sinc
 
 Since we're reporting impacts from various weather events, we'll focus our study on data since 1996.
 
-data <- raw[raw$BGN_DATE > "1996-01-01", ]rm(raw)
+
+```r
+data <- raw[raw$BGN_DATE > "1996-01-01", ]
+rm(raw)
+```
 
 ##Results
 *Weather events impact on population health across the United States since 1996*
@@ -45,18 +56,45 @@ data <- raw[raw$BGN_DATE > "1996-01-01", ]rm(raw)
 To study the weather events impact on poulation health, we examine the INJURIES AND FATALITIES columns of the dataset.
 
 We compute the sum of total of injuries/fatalities by weather event type an store the values in a new dataset:
-fat_by_ev <- aggregate(FATALITIES ~ EVTYPE, data = data, sum, na.rm = TRUE)inj_by_ev <- aggregate(INJURIES ~ EVTYPE, data = data, sum, na.rm = TRUE)
+
+```r
+fat_by_ev <- aggregate(FATALITIES ~ EVTYPE, data = data, sum, na.rm = TRUE)
+inj_by_ev <- aggregate(INJURIES ~ EVTYPE, data = data, sum, na.rm = TRUE)
+```
 
 For fatalities, the quantile function shows that only 1% of the values of the total of injuries/fatalities by event type are significant (> 326 fatalities, > 1635 injuries).
 
-quantile(fat_by_ev$FATALITIES, probs = seq(0.9, 1, 0.01))##     90%     91%     92%     93%     94%     95%     96%     97%     98%     99%    100% 
-##    4.00    5.74    9.88   14.02   28.80   57.90   78.08  105.32  198.92  326.14 1797.00
-quantile(inj_by_ev$INJURIES, probs = seq(0.9, 1, 0.01))##      90%      91%      92%      93%      94%      95%      96%      97%      98%      99%     100% 
-##    21.60    25.74    39.76    70.04    85.76   171.90   304.56   477.80  1034.84  1635.64 20667.00
 
+```r
+quantile(fat_by_ev$FATALITIES, probs = seq(0.9, 1, 0.01))
+```
+
+```
+##     90%     91%     92%     93%     94%     95%     96%     97%     98%     99%    100% 
+##    4.00    5.74    9.88   14.02   28.80   57.90   78.08  105.32  198.92  326.14 1797.00
+```
+
+```r
+quantile(inj_by_ev$INJURIES, probs = seq(0.9, 1, 0.01))
+```
+
+```
+##      90%      91%      92%      93%      94%      95%      96%      97%      98%      99%     100% 
+##    21.60    25.74    39.76    70.04    85.76   171.90   304.56   477.80  1034.84  1635.64 20667.00
+```
 
 We order the new datas by fatalities/injuries (decreasing order) and display the 10th first rows:
-fat_temp <- fat_by_ev[order(fat_by_ev$FATALITIES, decreasing = TRUE), ][1:10, ]colnames(fat_temp) <- c("event.type", "fatalities")inj_temp <- inj_by_ev[order(inj_by_ev$INJURIES, decreasing = TRUE), ][1:10, ]colnames(inj_temp) <- c("event.type", "injuries")library(knitr)kable(fat_temp, caption = "Total fatalities by weather event type since 1996")
+
+```r
+fat_temp <- fat_by_ev[order(fat_by_ev$FATALITIES, decreasing = TRUE), ][1:10, ]
+colnames(fat_temp) <- c("event.type", "fatalities")
+inj_temp <- inj_by_ev[order(inj_by_ev$INJURIES, decreasing = TRUE), ][1:10, ]
+colnames(inj_temp) <- c("event.type", "injuries")
+library(knitr)
+kable(fat_temp, caption = "Total fatalities by weather event type since 1996")
+```
+
+
 
 |    |event.type     | fatalities|
 |:---|:--------------|----------:|
@@ -71,7 +109,11 @@ fat_temp <- fat_by_ev[order(fat_by_ev$FATALITIES, decreasing = TRUE), ][1:10, ]c
 |161 |HIGH WIND      |        235|
 |16  |AVALANCHE      |        223|
 
+```r
 kable(inj_temp, caption = "Total injuries by weather event type since 1996")
+```
+
+
 
 |    |event.type        | injuries|
 |:---|:-----------------|--------:|
@@ -86,21 +128,41 @@ kable(inj_temp, caption = "Total injuries by weather event type since 1996")
 |167 |HURRICANE/TYPHOON |     1275|
 |143 |HEAT              |     1222|
 
-
-
 Then plot the datas:
-library(ggplot2)ggplot(fat_temp, aes(reorder(factor(event.type), -fatalities), fatalities)) + geom_bar(stat = "identity") + 
+
+```r
+library(ggplot2)
+ggplot(fat_temp, aes(reorder(factor(event.type), -fatalities), fatalities)) + geom_bar(stat = "identity") + 
     labs(x = "Weather event type", y = "Fatalities", title = "Total fatalities by weather event type since 1996") + 
-    theme(axis.text.x = element_text(angle = 90, hjust = 1))<div class="rimage center"><img src="fig/unnamed-chunk-6-1.pdf" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" class="plot" /></div>
+    theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+<div class="rimage center"><img src="figure/weather_events_impact_fatalities-1.png" title="plot of chunk weather_events_impact_fatalities" alt="plot of chunk weather_events_impact_fatalities" class="plot" /></div>
+
+
+```r
 ggplot(inj_temp, aes(reorder(factor(event.type), -injuries), injuries)) + geom_bar(stat = "identity") + 
     labs(x = "Weather event type", y = "Injuries", title = "Total injuries by weather event type since 1996") + 
-    theme(axis.text.x = element_text(angle = 90, hjust = 1))<div class="rimage center"><img src="fig/unnamed-chunk-6-2.pdf" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" class="plot" /></div>
+    theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
 
+<div class="rimage center"><img src="figure/weather_events_impact_injuries-1.png" title="plot of chunk weather_events_impact_injuries" alt="plot of chunk weather_events_impact_injuries" class="plot" /></div>
 
         
 To go deeper, we can examine single weather types by having a closer look on their frequency/injuries and fatalities ratio :
 
-library(plyr)fat_ev_count <- count(data[data$FATALITIES > 0, ], vars = "EVTYPE")temp <- merge(fat_ev_count, fat_by_ev, by = "EVTYPE")temp$ratio <- temp$FATALITIES/temp$freqcolnames(temp) <- c("event.type", "event.frequency", "event.fatalities", "event.fatalities.ratio")kable(temp[order(temp$event.frequency, decreasing = TRUE), ][1:30, ], caption = "Total fatalities by weather event type (ordered by frequency desc) since 1996")
+
+```r
+library(plyr)
+fat_ev_count <- count(data[data$FATALITIES > 0, ], vars = "EVTYPE")
+
+temp <- merge(fat_ev_count, fat_by_ev, by = "EVTYPE")
+temp$ratio <- temp$FATALITIES/temp$freq
+colnames(temp) <- c("event.type", "event.frequency", "event.fatalities", "event.fatalities.ratio")
+kable(temp[order(temp$event.frequency, decreasing = TRUE), ][1:30, ], caption = "Total fatalities by weather event type (ordered by frequency desc) since 1996")
+```
+
+
 
 |    |event.type              | event.frequency| event.fatalities| event.fatalities.ratio|
 |:---|:-----------------------|---------------:|----------------:|----------------------:|
@@ -135,7 +197,15 @@ library(plyr)fat_ev_count <- count(data[data$FATALITIES > 0, ], vars = "EVTYPE")
 |98  |URBAN/SML STREAM FLD    |              22|               28|               1.272727|
 |50  |HURRICANE/TYPHOON       |              19|               64|               3.368421|
 
-inj_ev_count <- count(data[data$INJURIES > 0, ], vars = "EVTYPE")temp <- merge(inj_ev_count, inj_by_ev, by = "EVTYPE")temp$ratio <- temp$INJURIES/temp$freqcolnames(temp) <- c("event.type", "event.frequency", "event.injuries", "event.injuries.ratio")kable(temp[order(temp$event.frequency, decreasing = TRUE), ][1:30, ], caption = "Total Injuries by weather event type (ordered by frequency desc) since 1996")
+```r
+inj_ev_count <- count(data[data$INJURIES > 0, ], vars = "EVTYPE")
+temp <- merge(inj_ev_count, inj_by_ev, by = "EVTYPE")
+temp$ratio <- temp$INJURIES/temp$freq
+colnames(temp) <- c("event.type", "event.frequency", "event.injuries", "event.injuries.ratio")
+kable(temp[order(temp$event.frequency, decreasing = TRUE), ][1:30, ], caption = "Total Injuries by weather event type (ordered by frequency desc) since 1996")
+```
+
+
 
 |    |event.type           | event.frequency| event.injuries| event.injuries.ratio|
 |:---|:--------------------|---------------:|--------------:|--------------------:|
@@ -170,8 +240,6 @@ inj_ev_count <- count(data[data$INJURIES > 0, ], vars = "EVTYPE")temp <- merge(i
 |86  |TROPICAL STORM       |              23|            338|            14.695652|
 |11  |DENSE FOG            |              20|            143|             7.150000|
 
-
-
 *Weather events economic impact across Unites States*
 
 We'll examine the property and crop damages columns (PROPDMG * 10^PROPDMGEXP and CROPDMG * 10^CROPDMGEXP, respectively) from the dataset.
@@ -189,29 +257,81 @@ Values for the CROPDMGEXP and PROPDMEXP are:
 Note: Except for these exponential values (H,K,M,B), there is some inexpected values : ? + - and numbers in the initial dataset. This values doesn't appear in the dataset filtered by BGN_DATE > 1996-01-01.
 
 Let's check the repartition of the exponential categories:
-table(data$CROPDMGEXP)## 
+
+```r
+table(data$CROPDMGEXP)
+```
+
+```
+## 
 ##             B      K      M 
 ## 373047      4 278685   1771
-table(data$PROPDMGEXP)## 
+```
+
+```r
+table(data$PROPDMGEXP)
+```
+
+```
+## 
 ##             0      B      K      M 
 ## 276166      1     32 369934   7374
-
+```
 
 We convert PROPDMG/PROPDMGEXP and CROPDMG/CROPDMGEXP pairs into numbers:
-data$cropdmg.exp <- 1data[data$CROPDMGEXP == "H", "cropdmg.exp"] <- 100data[data$CROPDMGEXP == "K", "cropdmg.exp"] <- 1000data[data$CROPDMGEXP == "M", "cropdmg.exp"] <- 10^6data[data$CROPDMGEXP == "B", "cropdmg.exp"] <- 10^9data$cropdmg.val <- data$CROPDMG * data$cropdmg.expdata$propdmg.exp <- 1data[data$PROPDMGEXP == "H", "propdmg.exp"] <- 100data[data$PROPDMGEXP == "K", "propdmg.exp"] <- 1000data[data$PROPDMGEXP == "M", "propdmg.exp"] <- 1e+06data[data$PROPDMGEXP == "B", "propdmg.exp"] <- 1e+09data$propdmg.val <- data$PROPDMG * data$propdmg.exp
+
+```r
+data$cropdmg.exp <- 1
+data[data$CROPDMGEXP == "H", "cropdmg.exp"] <- 100
+data[data$CROPDMGEXP == "K", "cropdmg.exp"] <- 1000
+data[data$CROPDMGEXP == "M", "cropdmg.exp"] <- 10^6
+data[data$CROPDMGEXP == "B", "cropdmg.exp"] <- 10^9
+data$cropdmg.val <- data$CROPDMG * data$cropdmg.exp
+
+data$propdmg.exp <- 1
+data[data$PROPDMGEXP == "H", "propdmg.exp"] <- 100
+data[data$PROPDMGEXP == "K", "propdmg.exp"] <- 1000
+data[data$PROPDMGEXP == "M", "propdmg.exp"] <- 1e+06
+data[data$PROPDMGEXP == "B", "propdmg.exp"] <- 1e+09
+data$propdmg.val <- data$PROPDMG * data$propdmg.exp
+```
 
 We perform the same analysis as for weather type impact on population health:
-crop_by_ev <- aggregate(cropdmg.val ~ EVTYPE, data = data, sum, na.rm = TRUE)quantile(crop_by_ev$cropdmg.val, probs = seq(0.9, 1, 0.01))##         90%         91%         92%         93%         94%         95%         96%         97% 
+
+```r
+crop_by_ev <- aggregate(cropdmg.val ~ EVTYPE, data = data, sum, na.rm = TRUE)
+quantile(crop_by_ev$cropdmg.val, probs = seq(0.9, 1, 0.01))
+```
+
+```
+##         90%         91%         92%         93%         94%         95%         96%         97% 
 ##       80000      522000     1830000     8518338    15105600    22067850    51986350   225801006 
 ##         98%         99%        100% 
 ##   611260434  1328471682 13367566000
-prop_by_ev <- aggregate(propdmg.val ~ EVTYPE, data = data, sum, na.rm = TRUE)quantile(prop_by_ev$propdmg.val, probs = seq(0.9, 1, 0.01))##          90%          91%          92%          93%          94%          95%          96% 
+```
+
+```r
+prop_by_ev <- aggregate(propdmg.val ~ EVTYPE, data = data, sum, na.rm = TRUE)
+quantile(prop_by_ev$propdmg.val, probs = seq(0.9, 1, 0.01))
+```
+
+```
+##          90%          91%          92%          93%          94%          95%          96% 
 ##      6087080      7928162      9823200     19765792     40787880    117527100    551709366 
 ##          97%          98%          99%         100% 
 ##   1328347705   4595502763  14205618003 143944833550
+```
 
 
-crop_temp <- crop_by_ev[order(crop_by_ev$cropdmg.val, decreasing = TRUE), ][1:20, ]colnames(crop_temp) <- c("event.type", "cropdmg.val")prop_temp <- prop_by_ev[order(prop_by_ev$propdmg.val, decreasing = TRUE), ][1:20, ]colnames(prop_temp) <- c("event.type", "propdmg.val")kable(crop_temp, caption = "Total crop damages in (US dollars) by weather event type")
+```r
+crop_temp <- crop_by_ev[order(crop_by_ev$cropdmg.val, decreasing = TRUE), ][1:20, ]
+colnames(crop_temp) <- c("event.type", "cropdmg.val")
+prop_temp <- prop_by_ev[order(prop_by_ev$propdmg.val, decreasing = TRUE), ][1:20, ]
+colnames(prop_temp) <- c("event.type", "propdmg.val")
+kable(crop_temp, caption = "Total crop damages in (US dollars) by weather event type")
+```
+
+
 
 |    |event.type        | cropdmg.val|
 |:---|:-----------------|-----------:|
@@ -236,7 +356,11 @@ crop_temp <- crop_by_ev[order(crop_by_ev$cropdmg.val, decreasing = TRUE), ][1:20
 |150 |HEAVY SNOW        |    71122100|
 |330 |STRONG WIND       |    64953500|
 
+```r
 kable(prop_temp, caption = "Total property damages (in US dollars) by weather event type")
+```
+
+
 
 |    |event.type        |  propdmg.val|
 |:---|:-----------------|------------:|
@@ -262,18 +386,35 @@ kable(prop_temp, caption = "Total property damages (in US dollars) by weather ev
 |437 |TYPHOON           |    600230000|
 
 
-
+```r
 ggplot(crop_temp, aes(reorder(factor(event.type), -cropdmg.val), cropdmg.val)) + geom_bar(stat = "identity") + 
     labs(x = "Weather event type", y = "Crop damages in US dollars", title = "Total Crop damages by weather event type") + 
-    theme(axis.text.x = element_text(angle = 90, hjust = 1))<div class="rimage center"><img src="fig/unnamed-chunk-12-1.pdf" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" class="plot" /></div>
+    theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+<div class="rimage center"><img src="figure/weather_events_impact_crop_damages-1.png" title="plot of chunk weather_events_impact_crop_damages" alt="plot of chunk weather_events_impact_crop_damages" class="plot" /></div>
+
+
+```r
 ggplot(prop_temp, aes(reorder(factor(event.type), -propdmg.val), propdmg.val)) + geom_bar(stat = "identity") + 
     labs(x = "Weather event type type", y = "Properties damages in US dollars", title = "Total Properties damages by weather event type") + 
-    theme(axis.text.x = element_text(angle = 90, hjust = 1))<div class="rimage center"><img src="fig/unnamed-chunk-12-2.pdf" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" class="plot" /></div>
+    theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
 
+<div class="rimage center"><img src="figure/weather_events_impact_properties_damages-1.png" title="plot of chunk weather_events_impact_properties_damages" alt="plot of chunk weather_events_impact_properties_damages" class="plot" /></div>
 
 and we check damages ratio by event type:
 
-crop_ev_count <- count(data[data$cropdmg.val > 0, ], vars = "EVTYPE")temp <- merge(crop_ev_count, crop_by_ev, by = "EVTYPE")temp$ratio <- temp$cropdmg.val/temp$freqcolnames(temp) <- c("event.type", "event.frequency", "event.cropdamages", "event.cropdamages.ratio")kable(temp[order(temp$event.frequency, decreasing = TRUE), ][1:20, ], caption = "Total crop domages (in US dollars) by weather event type (ordered by frequency desc) since 1996")
+
+```r
+crop_ev_count <- count(data[data$cropdmg.val > 0, ], vars = "EVTYPE")
+temp <- merge(crop_ev_count, crop_by_ev, by = "EVTYPE")
+temp$ratio <- temp$cropdmg.val/temp$freq
+colnames(temp) <- c("event.type", "event.frequency", "event.cropdamages", "event.cropdamages.ratio")
+kable(temp[order(temp$event.frequency, decreasing = TRUE), ][1:20, ], caption = "Total crop domages (in US dollars) by weather event type (ordered by frequency desc) since 1996")
+```
+
+
 
 |   |event.type           | event.frequency| event.cropdamages| event.cropdamages.ratio|
 |:--|:--------------------|---------------:|-----------------:|-----------------------:|
@@ -298,7 +439,15 @@ crop_ev_count <- count(data[data$cropdmg.val > 0, ], vars = "EVTYPE")temp <- mer
 |55 |WILD/FOREST FIRE     |              35|         106782330|              3050923.71|
 |29 |HURRICANE/TYPHOON    |              33|        2607872800|             79026448.48|
 
-prop_ev_count <- count(data[data$propdmg.val > 0, ], vars = "EVTYPE")temp <- merge(prop_ev_count, prop_by_ev, by = "EVTYPE")temp$ratio <- temp$propdmg.val/temp$freqcolnames(temp) <- c("event.type", "event.frequency", "event.propdamages", "event.propdamages.ratio")kable(temp[order(temp$event.frequency, decreasing = TRUE), ][1:20, ], caption = "Total property damages (in US dollars) by weather event type (ordered by frequency desc) since 1996")
+```r
+prop_ev_count <- count(data[data$propdmg.val > 0, ], vars = "EVTYPE")
+temp <- merge(prop_ev_count, prop_by_ev, by = "EVTYPE")
+temp$ratio <- temp$propdmg.val/temp$freq
+colnames(temp) <- c("event.type", "event.frequency", "event.propdamages", "event.propdamages.ratio")
+kable(temp[order(temp$event.frequency, decreasing = TRUE), ][1:20, ], caption = "Total property damages (in US dollars) by weather event type (ordered by frequency desc) since 1996")
+```
+
+
 
 |    |event.type           | event.frequency| event.propdamages| event.propdamages.ratio|
 |:---|:--------------------|---------------:|-----------------:|-----------------------:|
@@ -322,8 +471,6 @@ prop_ev_count <- count(data[data$propdmg.val > 0, ], vars = "EVTYPE")temp <- mer
 |167 |WINTER WEATHER       |             373|          20866000|                55941.02|
 |162 |WILD/FOREST FIRE     |             303|        3001782500|              9906872.94|
 |88  |LAKE-EFFECT SNOW     |             194|          40115000|               206778.35|
-
-
 
 ##Conclusions
 *Wheater events impact on population health*

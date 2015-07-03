@@ -8,7 +8,7 @@ output: html_document
 ```{r setup, cache = F, echo = F, message = F, warning = F, tidy = F}
 library(knitr)
 options(width = 100)
-opts_chunk$set(message = F, error = F, warning = F, fig.align = 'center', dpi = 100, tidy = T, cache = F, cache.path = '.cache/', fig.path = 'fig/')
+opts_chunk$set(message = F, error = F, warning = F, fig.align = 'center', dpi = 100, tidy = T, cache = F, cache.path = '.cache/')
 knit_hooks$set(inline = function(x) {
   if(is.numeric(x)) {
     round(x, getOption('digits'))
@@ -91,13 +91,15 @@ kable(inj_temp, caption="Total injuries by weather event type since 1996")
 ```
 
 Then plot the datas:
-```{r}
+```{r weather_events_impact_fatalities}
 library(ggplot2)
 ggplot(fat_temp, aes(reorder(factor(event.type), -fatalities), fatalities)) +
         geom_bar(stat="identity") +
         labs(x="Weather event type", y="Fatalities", title="Total fatalities by weather event type since 1996") +
         theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
 
+```{r weather_events_impact_injuries}
 ggplot(inj_temp, aes(reorder(factor(event.type), -injuries), injuries)) +
         geom_bar(stat="identity") +
         labs(x="Weather event type", y="Injuries", title="Total injuries by weather event type since 1996") +
@@ -182,12 +184,14 @@ kable(crop_temp, caption="Total crop damages in (US dollars) by weather event ty
 kable(prop_temp, caption="Total property damages (in US dollars) by weather event type")
 ```
 
-```{r fig.weigth=9}
+```{r weather_events_impact_crop_damages, fig.weigth=9}
 ggplot(crop_temp, aes(reorder(factor(event.type), -cropdmg.val), cropdmg.val)) +
         geom_bar(stat="identity") +
         labs(x="Weather event type", y="Crop damages in US dollars", title="Total Crop damages by weather event type") +
         theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
 
+```{r weather_events_impact_properties_damages, fig.weigth=9}
 ggplot(prop_temp, aes(reorder(factor(event.type), -propdmg.val), propdmg.val)) +
         geom_bar(stat="identity") +
         labs(x="Weather event type type", y="Properties damages in US dollars", title="Total Properties damages by weather event type") +
