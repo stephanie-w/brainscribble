@@ -7,11 +7,7 @@ output:
     
 ---
 
-
-
-
-
-Earthquakes of the last 30 months from the earthquake.usgs.gov feed : http://earthquake.usgs.gov/earthquakes/feed/v1.0/csv.php feed. 
+Earthquakes of the last 30 months from [the earthquake.usgs.gov feed](http://earthquake.usgs.gov/earthquakes/feed/v1.0/csv.php feed).
 
 
 Below are the fields included in the spreadsheet output:

@@ -2,10 +2,10 @@
 title: "Notes on Statistical Inference : Hypothesis Testing and t-tests"
 author: "Stephanie W"
 output: html_document
+
 ---
 
 These are  my notes on the Statistical Inference course (2th part) : Hypothesis Testing and t-tests
-
 
 
 ## CLT : Central Limit Theorem
@@ -14,49 +14,6 @@ The distribution of sample statistics (e.g. mean) is approximatively normal, reg
 
 $\bar{X} \sim N(mean = \mu, sd = \frac{\sigma}{\sqrt{n}})$ 
 
-*Experimentation*
-
-We build a matrix with 40 exponentials (we take lambda=0.2) x 1000 and compute the mean of each row, storing the result in a `means` vector:
-
-
-```r
-set.seed(1234)
-n <- 40
-nosim <- 1000
-lambda <- 0.2
-means <- apply(matrix(rexp(nosim * n, lambda), nosim), 1, mean)
-head(means)
-```
-
-```
-## [1] 4.602510 6.017790 5.463686 4.176755 7.144672 4.427567
-```
-
-and plot an histogram of the `means` vector and the density distribution:
-
-
-```r
-library(ggplot2)
-dat <- data.frame(x = 1:nosim, y = means)
-
-ggplot(dat, aes(x = y)) + geom_histogram(colour = "black", fill = "white") + 
-    geom_vline(aes(xintercept = mean(y)), color = "red", linetype = "dashed", 
-        size = 1) + labs(x = "Means", y = "Frequency", title = "Means Frequency")
-```
-
-<div class="rimage center"><img src="figure/means_histogram-1.png" title="plot of chunk means_histogram" alt="plot of chunk means_histogram" class="plot" /></div>
-
-
-```r
-ggplot(dat, aes(x = y)) + geom_histogram(binwidth = 0.3, colour = "black", fill = "white", 
-    aes(y = ..density..)) + stat_function(fun = dnorm, args = list(mean = 1/lambda, 
-    sd = 1/lambda/sqrt(n))) + labs(x = "Means", y = "Dendity", title = "Distribution") + 
-    geom_density(alpha = 0.2, fill = "#FF6666")
-```
-
-<div class="rimage center"><img src="figure/means_distribution-1.png" title="plot of chunk means_distribution" alt="plot of chunk means_distribution" class="plot" /></div>
-
-To confirm this distribution fits the normal distribution, we've draw the hump of the density of a random variable normally distributed with a mean $1/\lambda$ and a standard deviation $\frac{1/\lambda}{\sqrt{n}}$.
 
 *Conditions for CLT*
 
@@ -70,7 +27,8 @@ To confirm this distribution fits the normal distribution, we've draw the hump o
 *Confidence Interval*
 
 An interval estimate of a population parameter.  
-It is Computed as sample mean +/- margin of error (SE, ie. standard error) : $\bar x = z \times SE$ where $SE = \frac{s}{\sqrt{n}}$  
+It is computed as sample mean +/- margin of error (SE, ie. standard error) :  
+$\bar x = z \times SE$ where $SE = \frac{s}{\sqrt{n}}$  
 A 95% confidence interval would contain 95% of all values and would be $x \pm 2SE$ or $x \pm 1.96 \times \frac{s}{\sqrt{n}}$
 
 Example:
@@ -100,10 +58,10 @@ Thus we need a sample size of at least 195 primary school children.
 ## Hypothesis testing
 
 Hypothesis testing is concerned with making decisions using data.
-Null Hypothesis $H_0$ : The status quo that is assumed to be true
-Alternative hypothesis : $H_a$ : An alternative claim under consideration that will require statistical evidence to accept, and thus, reject the null hypothesis
+Null Hypothesis $H_0$ : The status quo that is assumed to be true.   
+Alternative hypothesis : $H_a$ : An alternative claim under consideration that will require statistical evidence to accept, and thus, reject the null hypothesis.   
 We will consider $H_0$ to be true and accept it unless the evidence in favour of $H_a$ is so strong that we reject $H_0$ in favour of $H_a$.
-The alternative hypotheses are typically of the form <, > or $\neq$?.
+The alternative hypotheses are typically of the form <, > or $\neq$.
 We have four possible outcomes:
 
 Truth   |   Decide      |       Result
@@ -159,7 +117,7 @@ Example:
 
 From the previous example, with a significant level equal to 0.05:
 
-$\bar{X} ~ N(\mu = 151, SE = 1)$ #Null hypothesis
+$\bar{X} \sim N(\mu = 151, SE = 1)$ #Null hypothesis
 
 Test Statistic or Z-score:
 
@@ -169,7 +127,7 @@ The probability that we are at most -1 standard deviation from the mean:
 
 $P\left(Z \le 1\right) = 1 - 0.8413 = 0.1587$
 
-This probability can be computed with the qnorm function:
+This probability can be computed with the qnorm R function:
 
 ```r
 pnorm(-1)
@@ -220,12 +178,12 @@ With R:
 
 ## Decision rule
 
-Right Tailed Test:
-$H_0 : \mu = \mu_0$ parameter = value
-$H_a : \mu < \mu_0$ parameter  < value
-with alpha = 0.5
-ie. if sqrt(n) * ( X' - mu) / s > Z_{1-alpha} 
-ie. if Z is more that Z_95 (the 95% percentile) standard deviations to the right of the mean $\mu_0$
+Right Tailed Test:   
+$H_0 : \mu = \mu_0$ parameter = value   
+$H_a : \mu < \mu_0$ parameter  < value   
+with alpha = 0.5   
+ie. if sqrt(n) * ( X' - mu) / s > Z_{1-alpha}   
+ie. if Z is more that Z_95 (the 95% percentile) standard deviations to the right of the mean $\mu_0$   
 
 
 ```r
@@ -239,9 +197,9 @@ Z_95
 
 <div class="rimage center"><img src="figure/Z_95-1.png" title="plot of chunk Z_95" alt="plot of chunk Z_95" class="plot" /></div>
 
-Right Tailed Test:
-$H_0 : \mu = \mu_0$ parameter = value
-$H_a : \mu > \mu_0$ parameter > value
+Right Tailed Test:   
+$H_0 : \mu = \mu_0$ parameter = value   
+$H_a : \mu > \mu_0$ parameter > value   
 Reject $H_0$, if sqrt(n) * ( X' - mu) / s < Z_{alpha}, ie. if Z is more than Z_5 standard deviations (the 5% quantile) to the left of the mean $\mu_0$
 
 
@@ -257,16 +215,16 @@ Z_5
 <div class="rimage center"><img src="figure/Z_5-1.png" title="plot of chunk Z_5" alt="plot of chunk Z_5" class="plot" /></div>
 
 
-Two Tailed Test:
-$H_0 : \mu = \mu_0$ parameter = value
-$H_a : \mu \neq \mu_0 parameter \neq value$  (Another way to write not equal is < or >)
-Reject $H_0$, if the test statistics is in the region of rejection, .ie if it is larger than Z_95 or smaller than Z_5.
+Two Tailed Test:   
+$H_0 : \mu = \mu_0$ parameter = value   
+$H_a : \mu \neq \mu_0 parameter \neq value$  (Another way to write not equal is < or >)   
+Reject $H_0$, if the test statistics is in the region of rejection, .ie if it is larger than Z_95 or smaller than Z_5.   
 
 The decision rule can be summarized as follows:
 
 Reject $H_0$ if the test statistic falls in the critical region (reject $H_0$ if the test statistic is more extreme than the critical value or reject $H_0$ ), otherwise, we fail to reject $H_0$.
 
-The p-value tells us if the test statistic is inside our outside the region.
+The p-value tells us if the test statistic is inside our outside the region.   
 Reject $H_0$ if p-value is less that the specified $\alpha$, otherwise, we fail to reject $H_0$.
 
 Note : I you fail to reject the one sided test, you know that you will fail to reject the two sided.
@@ -330,7 +288,7 @@ pt(q = 2.5, df = 15, lower.tail = FALSE)
 ```
 ## [1] 0.0122529
 ```
-the P(X > 2.5)if $H_0$ were true. We would see this large a test statistic with probability 1% which is rather a small probability.
+the P(X > 2.5) if $H_0$ were true. We would see this large a test statistic with probability 1% which is rather a small probability.
 
 * df refers to the number of independent observations in data set
 * nb of independent observations = sample size - 1
@@ -388,7 +346,7 @@ t.test(father.son$sheight, father.son$fheight, paired = TRUE)
 ##               0.9969728
 ```
 
-The test statistic is ```` which is quite hight so we reject the null hypothesis that the true mean of the difference is 0, (if you ran the test on the difference sheight-fheight) or that the true difference in means was 0 (if you ran the test on the two separate but paired columns).
+The test statistic is 11.789 which is quite hight so we reject the null hypothesis that the true mean of the difference is 0, (if you ran the test on the difference sheight-fheight) or that the true difference in means was 0 (if you ran the test on the two separate but paired columns).
 
 Note the 95% confidence interval, 0.8310296 1.1629160, returned by t.test. It does not contain the hypothesized population mean 0 so we're pretty confident we can safely reject the hypothesis. This tells us that either our hypothesis is wrong or we're making a mistake (Type 1) in rejecting it.
 

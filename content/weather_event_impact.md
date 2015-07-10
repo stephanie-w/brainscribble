@@ -2,6 +2,7 @@
 title: "U.S. National Oceanic and Atmospheric Administration's (NOAA) storm database : Analysis of weather events impact on population health and economy."
 author: "Stephanie W"
 output: html_document
+
 ---
 
 
