@@ -31,6 +31,15 @@ It is computed as sample mean +/- margin of error (SE, ie. standard error) :
 $\bar x = z \times SE$ where $SE = \frac{s}{\sqrt{n}}$  
 A 95% confidence interval would contain 95% of all values and would be $x \pm 2SE$ or $x \pm 1.96 \times \frac{s}{\sqrt{n}}$
 
+
+![](http://upload.wikimedia.org/wikipedia/en/b/bf/NormalDist1.96.png)
+
+
+1.96 correspond to the 95% + 2.5% = 97.5% quantile, according to the Z table ( find 0.975 in the table and add the column header with the row header).
+
+![](http://4.bp.blogspot.com/_5u1UHojRiJk/TEh9BHxxPUI/AAAAAAAAAIQ/DafeQNMYFoE/s200/ztable.gif)
+
+
 Example:
 
 You have taken a random sample of 100 primary school children. Their heights had mean = 150cm and sd = 10 cm. We estimate the true average height of primary school children based on this sample using a 95% confidence interval.
@@ -38,6 +47,7 @@ You have taken a random sample of 100 primary school children. Their heights had
 $\bar{x} = z \times SE = x\bar \pm 1.96 \times \frac{s}{\sqrt{n}} = 150 \pm 1.96 \times \frac{10}{\sqrt{100}} = 150 \pm \times 1.96 \times 1 = (148.04, 151.96)$
 
 We are 95% confident that primary school children mean height is between 148.04cm and 151.96cm.
+
 
 ## Required sample size for margin of error
 
@@ -57,11 +67,13 @@ Thus we need a sample size of at least 195 primary school children.
 
 ## Hypothesis testing
 
-Hypothesis testing is concerned with making decisions using data.
+Hypothesis testing is concerned with making decisions using data. It compares the data being studied to an observed characteristic of the population from which the data are sampled.
+The researcher has a proposed hypothesis about a population characteristic and conducts a study to discover if it is reasonable, or, acceptable. The proposed hypothesis is called the alternative hypothesis and is labelled Ha.
+
 Null Hypothesis $H_0$ : The status quo that is assumed to be true.   
-Alternative hypothesis : $H_a$ : An alternative claim under consideration that will require statistical evidence to accept, and thus, reject the null hypothesis.   
-We will consider $H_0$ to be true and accept it unless the evidence in favour of $H_a$ is so strong that we reject $H_0$ in favour of $H_a$.
-The alternative hypotheses are typically of the form <, > or $\neq$.
+Alternative hypothesis : $H_a$ : An alternative claim under consideration that will require statistical evidence to accept, and thus, reject the null hypothesis. The alternative hypothesis claims that the population characteristic is different than the observed parameter. This difference is either that the characteristic has increased, decreased, or, possibly either increased or decreased.
+
+The alternative hypotheses are typically of the form < (decrease), > (increase) or $\neq$ (either increase or decrease).
 We have four possible outcomes:
 
 Truth   |   Decide      |       Result
@@ -70,6 +82,9 @@ H0      |       H0      |       Correctly accept null
 H0      |       Ha      |       Type I error (False Positive, falsely claims a significant result)
 Ha      |       Ha      |       Correctly reject null
 Ha      |       H0      |       Type II error (False Negative falsely claims a nonsignificant result)
+
+A test statistic is used to make an assumtion, the null is made upon this assumption. The test statistic will have a certain likelihood for occuring, according to the distribution being used. When this likelihood is small, this indicates that the sample data are either from an unusual sample, or, that the distribution of the population actually is different than assumed. 
+If the sample is properly drawn, there is small risk that the sample is unusual, and, so, it is safe to draw a conclusion that the distribution may be changed.  This allows the conclusion that the null hypothesis may have changed, and that the alternative hypothesis might be accepted instead.  This conclusion leads the researcher to "reject" the null hypothesis.
 
 Example:
 
@@ -234,7 +249,8 @@ Note : I you fail to reject the one sided test, you know that you will fail to r
 ```
 ## [1] 1.644854
 ```
-the 95% percentile corresponds to the value 1.64.
+the 95% percentile corresponds to the value 1.64 (see also zthe z table above).
+
 
 ## Hypothesis tests and Confidence Intervals
 
@@ -292,12 +308,19 @@ the P(X > 2.5) if $H_0$ were true. We would see this large a test statistic with
 
 * df refers to the number of independent observations in data set
 * nb of independent observations = sample size - 1
+
 When df increases, the t distribution approaches the normal distribution.
+
 Normal distribution vs t distribution: if you're unsure which one to use, use the t distribution since it approximates to the normal distribution with large sample sizes.
+
+T table
+![](http://3.bp.blogspot.com/_5u1UHojRiJk/TEdJJc6of2I/AAAAAAAAAIE/Ai0MW5VgIhg/s1600/t-table.jpg)
+
+
 
 ## Independent and dependent t-tests
 
-Dependent : when evaluating the effect between two related samples. Example :you feed a group of 100 people fast food everyday, did they gain weight?
+Dependent : when evaluating the effect between two related samples. Example : You feed a group of 100 people fast food everyday, did they gain weight?
 
 Independent : when evaluating the effect between two independent sample: You feed 50 males and 50 males fast food everyday. Did males or females gain more weight after 30 days?
 
@@ -350,3 +373,9 @@ The test statistic is 11.789 which is quite hight so we reject the null hypothes
 
 Note the 95% confidence interval, 0.8310296 1.1629160, returned by t.test. It does not contain the hypothesized population mean 0 so we're pretty confident we can safely reject the hypothesis. This tells us that either our hypothesis is wrong or we're making a mistake (Type 1) in rejecting it.
 
+
+<!--
+Sources 
+http://statstutorstl.blogspot.fr/search/label/inferential%20statistics
+http://fr.slideshare.net/eugeneyan/statistical-inference-3
+-->
