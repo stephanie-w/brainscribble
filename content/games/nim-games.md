@@ -53,12 +53,15 @@ XOR is a logical bitwise operation, XOR is true only when an odd number of input
 
 XOR Thruth Table:
 
-Input | Output
-------|-------
-0   0 |  0
-0   1 |  1
-1   0 |  1
-1   1 |  0
+p | q | $p \oplus q$
+--|---|-------
+0 | 0 |  0
+0 | 1 |  1
+1 | 0 |  1
+1 | 1 |  0
+
+_0 = FALSE_  
+_1 = TRUE_
 
 Proof:  
 (1') : If you change a single bits in a XOR of bits, you'll change the final result, ie. if $s = 0$ then $t \ne 0$   

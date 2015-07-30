@@ -1,5 +1,5 @@
 ---
-title: "River Crossing Puzzle"
+title: River Crossing Puzzle
 
 ---
 
