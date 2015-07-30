@@ -1,5 +1,6 @@
 ---
-title: "Kanban Practices"
+title: Kanban Practices
+summary: Kanban in the context of software development mean a visual process-management system that tells what to produce, when to produce it, and how much to produce - inspired by the Toyota Production System and by Lean manufacturing.
 
 ---
 

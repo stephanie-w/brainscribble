@@ -1,5 +1,5 @@
 ---
-title: 'Git Workflows vs "All to Master"'
+title: Git Workflows vs "All to Master"
 
 ---
 

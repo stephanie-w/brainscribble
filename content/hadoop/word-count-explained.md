@@ -1,5 +1,5 @@
 ---
-title: "Word Count Code explained"
+title: Word Count Code explained
 
 
 ---
@@ -8,6 +8,8 @@ title: "Word Count Code explained"
 Map Reduce Data Flow Diagram
 
 ![Map Reduce WordCount Diagram](/figure/wordcount.png)
+
+<div class="rimage center"><img src="/figure/wordcount.png" alt="Map Reduce WordCount Diagram" style="width:800px" /></div>
 
 ## Mapper Code
 

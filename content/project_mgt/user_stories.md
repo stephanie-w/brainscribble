@@ -1,5 +1,5 @@
 ---
-title: "User stories"
+title: User stories
 
 ---
 

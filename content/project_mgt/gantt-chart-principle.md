@@ -1,5 +1,6 @@
 ---
-title:Gantt Chart Principle
+title: Gantt Chart Principle
+summary: A Gantt Chart illustrates a project schedule by presenting scheduling and dependencies information about the activities involved in implementing a project.
 
 ---
 

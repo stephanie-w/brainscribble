@@ -1,5 +1,5 @@
 ---
-title: "Experimentation of the Cental Limit Theorem"
+title: Experimentation of the Cental Limit Theorem
 author: "Stephanie W"
 
 ---

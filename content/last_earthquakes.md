@@ -1,5 +1,5 @@
 ---
-title: "Earthquakes from the past 30 days"
+title: Earthquakes from the past 30 days
 output:
   html_document:
     theme: flatly
