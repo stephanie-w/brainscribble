@@ -1,13 +1,15 @@
 ---
-title: "Notes on Statistical Inference : Hypothesis Testing and t-tests"
+title: Notes on Statistical Inference : Hypothesis Testing and t-tests
 author: "Stephanie W"
 output: html_document
 
----
+[TOC]
 
+---
+<!-- BEGIN_SUMMARY -->
 These are  my notes on the Statistical Inference course (2th part) : Hypothesis Testing and t-tests
 
-
+<!-- END_SUMMARY -->
 ## CLT : Central Limit Theorem
 
 The distribution of sample statistics (e.g. mean) is approximatively normal, regardless of the underlying distribution, with mean = $\mu$ and variance = $\sigma^2$
@@ -107,9 +109,8 @@ Thus we need a sample size of at least 385 primary school children.
 
 ## Hypothesis testing
 
-Confidence intervals are closely related to statistical significance testing.
+When interpreting an experimental finding, a natural question arises as to whether the finding could have occurred by chance. Hypothesis testing is a statistical procedure for testing whether chance is a plausible explanation of an experimental finding.
 
-Hypothesis testing is concerned with making decisions using data. It compares the data being studied to an observed characteristic of the population from which the data are sampled.
 The researcher has a proposed hypothesis about a population characteristic and conducts a study to discover if it is reasonable, or, acceptable.
 
 Null Hypothesis $H_0$ : The status quo that is assumed to be true.   
@@ -149,12 +150,7 @@ Our observed data are -1 standard deviation from the hypothesis mean.
 
 A reasonable strategy would be : do not reject the null hypothesis, ie. "primary school children have mean height of 151 cm", if there is more than x% chance of getting a random sample of 100 children with a sample mean 150, with x enough hight (more than 5% usually).
 
-The 5% is considered as the region of rejection, if the z score is outside the region of rejection (determined by $alpha$), we fail to reject $H_0$.
-
-The p-value is the probability under the null hypothesis of obtaining evidence as or more extreme than your z-score or test statistic (obtained from your observed data) in the direction of the alternative hypothesis.
-So if the p-value (probability of seeing your test statistic) is small, then one of two things happens. EITHER $H_0$ is true and you have observed a rare event (in this unusual test statistic) OR $H_0$ is false.
-
-The p-value is as an attained significance level, ie. the smallest value of alpha at which you will reject the null hypothesis.
+The probability under the null hypothesis of obtaining evidence as or more extreme than your z-score or test statistic (obtained from your observed data) in the direction of the alternative hypothesis is the p-value.
 
 ## P-value
 
@@ -169,6 +165,16 @@ Note:
 If the p-value is low (ie. lower than the significant level ($\alpha$), usually 5% as a standard level of rejection), then we saw that is very unlikely to observe the data if the null hypothesis is true and reject it.
 
 If the p-value is high (ie. higher than ($\alpha$), we say that it is likely to observe the data even if the null hypothesis was true, and thus do not reject it.
+
+## Interpreting the p-value
+
+When a probability value is below the $\alpha$ level, the effect is statistically significant and the null hypothesis is rejected.  
+However, not all statistically significant effects should be treated the same way. For example, you should have less confidence that the null hypothesis is false if p = 0.049 than p = 0.003.  
+If the null hypothesis is rejected, then the alternative to the null hypothesis (called the alternative hypothesis) is accepted.  
+
+In many situations it is very unlikely two conditions will have the same population means. Therefore, even before an experiment comparing their effectiveness is conducted, the researcher knows that the null hypothesis of exactly no difference is false. If a test of the difference is significant, then the direction of the difference is established.
+
+When a significance test results in a high probability value, it means that the data provide little or no evidence that the null hypothesis is false. However, the high probability value is not evidence that the null hypothesis is true. The problem is that it is impossible to distinguish a null effect from a very small effect.
 
 Example:
 
@@ -276,7 +282,7 @@ Z_5
 
 Two Tailed Test:   
 $H_0 : \mu = \mu_0$ parameter = value   
-$H_a : \mu \neq \mu_0$ parameter \neq value$  (Another way to write not equal is < or >)   
+$H_a : \mu \neq \mu_0$ parameter $\neq$ value  (Another way to write not equal is < or >)   
 Reject $H_0$, if the test statistics is in the region of rejection, ie. if it is larger than Z_95 or smaller than Z_5.   
 
 The decision rule can be summarized as follows:
@@ -292,20 +298,20 @@ Note : I you fail to reject the one sided test, you know that you will fail to r
 ## Hypothesis tests and Confidence Intervals
 
 They're equivalent.  
-If you set $\alpha$ to some value (say 0.05) and ran many tests checking alternative hypotheses against $H_0$, that $\mu=\mu_0$, the set of all possible values for which you fail to reject $H_0$ forms the (1-$\alpha$)% (that is 95%) confidence interval for $mu_0$.
-Similarly, if a (1-\alpha)% interval contains mu_0, then we fail to reject $H_0$.
+If you set $\alpha$ to some value and ran many tests checking alternative hypotheses against $H_0$ that $\mu=\mu_0$, the set of all possible values for which you fail to reject $H_0$ forms the $(1\alpha)%$ (that is 95%) confidence interval for $\mu_0$.
+Similarly, if a $(1\alpha)%$ interval contains mu_0, then we fail to reject $H_0$.
 
 So, to resume:
-If the confidence interval contains the null value ($mu_0$, the value of $H_0$), don't reject $H_0$.
+If the confidence interval contains the null value ($\mu_0$, the value of $H_0$), don't reject $H_0$.
 If the confidence interval does not contain the null value, reject $H_0$, cause this tells us that either our hypothesis is wrong or we're making a mistake (Type 1) in rejecting it.
 
 Previously, we found the 95% interval for heights of primary school children to be (148, 152). Given that our null hypothesis ($H_0 = 151$) falls within this 95% Cl, we do not reject it.
 
-
+<pre>
               <- 95% confident that the av is somewherer in here ->
     ---------|-----------------------------------------------------|---------
              148cm                                                 152
-
+</pre>
 
 A two-sided hypothesis with significance level $\alpha$ is equivalent to a confidence interval with $CL = 1 - \alpha$. 
 A one-sided hypothesis with significance level $\alpha$ is equivalent to a confidence interval with $CL = 1 - 2\alpha$. 
@@ -376,7 +382,7 @@ t (single sample)| Sample mean  | Pop. mean  | SE of the mean
 t(dependent)    | Sample mean of <br> difference scores | Pop. mean of <br> difference scores | SE of the mean difference
 t(independent)  | Difference between <br> two sample means | Difference between <br> two pop. mean | SE of the difference between means 
 
-
+<!--
 Test Statistics (in each case, the test statistics = (Observed - Expected) / SE)
 
 -               | value            | SE
@@ -385,7 +391,7 @@ z               |  M - M0 / SE     | S / &radic;N
 t(single sample)|                  |  
 t(dependent)    |  M - 0 / SE      | 
 t(independent)  | (M1 - M2)/SE     | (SE1 + SE2)/2 
-
+-->
 
 Degrees of freedom:
 
@@ -474,6 +480,24 @@ The test statistic is 11.789 which is quite hight so we reject the null hypothes
 
 Note the 95% confidence interval, 0.8310296 1.1629160, returned by t.test. It does not contain the hypothesized population mean 0 so we're pretty confident we can safely reject the hypothesis. This tells us that either our hypothesis is wrong or we're making a mistake (Type 1) in rejecting it.
 
+<!--
+
+Drawing conclusions comparing the probability value ( the probability of obtaining a sample statistic as different or more different from the parameter specified in the null hypothesis given that the null hypothesis is true.) with the $\alpha$ level. If the probability value is lower then you reject the null hypothesis. Keep in mind that rejecting the null hypothesis is not an all-or-none decision. The lower the probability value, the more confidence you can have that the null hypothesis is false. However, if your probability value is higher than the conventional $\alpha$ level of 0.05, most scientists will consider your findings inconclusive. Failure to reject the null hypothesis does not constitute support for the null hypothesis. It just means you do not have sufficiently strong data to reject it. 
+
+There is a close relationship between confidence intervals and significance tests. Specifically, if a statistic is significantly different from 0 at the 0.05 level, then the 95% confidence interval will not contain 0. All values in the confidence interval are plausible values for the parameter, whereas values outside the interval are rejected as plausible values for the parameter
+
+
+Confidence intervals are closely related to statistical significance testing.
+Hypothesis testing is concerned with making decisions using data. It compares the data being studied to an observed characteristic of the population from which the data are sampled.
+
+The 5% is considered as the region of rejection, if the z score is outside the region of rejection (determined by $alpha$), we fail to reject $H_0$.
+
+The p-value is the probability under the null hypothesis of obtaining evidence as or more extreme than your z-score or test statistic (obtained from your observed data) in the direction of the alternative hypothesis.
+So if the p-value (probability of seeing your test statistic) is small, then one of two things happens. EITHER $H_0$ is true and you have observed a rare event (in this unusual test statistic) OR $H_0$ is false.
+
+The p-value is as an attained significance level, ie. the smallest value of alpha at which you will reject the null hypothesis.
+
+-->
 
 <!--
 Sources 
