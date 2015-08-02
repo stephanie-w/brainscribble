@@ -3,8 +3,11 @@ title: User stories
 
 ---
 
+
+<!-- BEGIN_SUMMARY -->
 A user story is a tool used in Agile software development to capture a description of a software feature from an end-user perspective. The user story describes the type of user, what they want and why. A user story helps to create a simplified description of a requirement.
 
+<!-- END_SUMMARY -->
 A user story typically follow a simple template:
 
     As a <type of user>, I want <some goal> so that <some reason>.  
@@ -52,8 +55,7 @@ The chronological order of how users will typically use the application goes lef
 Even before writing the first user story, the product team had to work on a profile for typical product users. Such a profile looks like a short biography ; it explains the motivations guiding the user's actions and it's called a Persona. 
 During the same product definition phase, the product team listed the needs of each of the personas. They selected the needs to be addressed by the product, and left the other needs aside.
 
-![](http://image.slidesharecdn.com/fromideatoproduct-150608153131-lva1-app6892/95/from-idea-to-product-14-638.jpg?cb=1433777781)
-
+![Personas](http://image.slidesharecdn.com/fromideatoproduct-150608153131-lva1-app6892/95/from-idea-to-product-14-638.jpg?cb=1433777781)
 
 
 

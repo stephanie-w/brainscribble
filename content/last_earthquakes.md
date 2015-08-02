@@ -1,17 +1,14 @@
 ---
-title: Earthquakes from the past 30 days
-output:
-  html_document:
-    theme: flatly
-    highlight: tango
-    
+title: R: Earthquakes from the past 30 days
+
 ---
 
+<!-- BEGIN_SUMMARY -->
 Earthquakes of the last 30 months from [the earthquake.usgs.gov feed](http://earthquake.usgs.gov/earthquakes/feed/v1.0/csv.php feed).
 
-
+<!-- END_SUMMARY -->
 Below are the fields included in the spreadsheet output:
-
+<pre>
     time
     latitude
     longitude
@@ -26,6 +23,7 @@ Below are the fields included in the spreadsheet output:
     id
     updated
     place
+</pre>
 
 Plotting earthquakes frequency and location:
 
@@ -75,7 +73,7 @@ ggplot(eqFreq2, aes(date, weight = freq, fill = M)) + geom_bar(binwidth = 60 * 6
     hjust = 1))
 ```
 
-<div class="rimage center"><img src="figure/earthquakes_frequency-1.png" title="plot of chunk earthquakes_frequency" alt="plot of chunk earthquakes_frequency" class="plot" /></div>
+<div class="rimage center"><img src="figure/earthquakes_frequency-1.png" title="plot of chunk earthquakes_frequency" alt="plot of chunk earthquakes_frequency" class="plot" style="width:800px"/></div>
 
 
 ```r
@@ -88,4 +86,4 @@ base_world + geom_point(aes(x = longitude, y = latitude, size = mag), data = eq,
     fill = "Pink", pch = 21, alpha = I(0.7))
 ```
 
-<div class="rimage center"><img src="figure/earthquakes_worldmap-1.png" title="plot of chunk earthquakes_worldmap" alt="plot of chunk earthquakes_worldmap" class="plot" /></div>
+<div class="rimage center"><img src="figure/earthquakes_worldmap-1.png" title="plot of chunk earthquakes_worldmap" alt="plot of chunk earthquakes_worldmap" class="plot" style="width:800px"/></div>

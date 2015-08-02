@@ -4,12 +4,11 @@ title: Word Count Code explained
 
 ---
 
-
+<!-- BEGIN_SUMMARY -->
 Map Reduce Data Flow Diagram
 
-![Map Reduce WordCount Diagram](/figure/wordcount.png)
-
 <div class="rimage center"><img src="/figure/wordcount.png" alt="Map Reduce WordCount Diagram" style="width:800px" /></div>
+<!-- END_SUMMARY -->
 
 ## Mapper Code
 

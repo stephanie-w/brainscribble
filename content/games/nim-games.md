@@ -2,12 +2,14 @@
 title: Nim Games
 summary: Nim is a mathematical game of strategy in which two players take turns removing objects from distinct heaps. On each turn, a player must remove at least one object, and may remove any number of objects provided they all come from the same heap.
 
+[TOC]
+
 ---
 
-##Principle
-
+<!-- BEGIN_SUMMARY -->
 Nim is a mathematical game of strategy in which two players take turns removing objects from distinct heaps. On each turn, a player must remove at least one object, and may remove any number of objects provided they all come from the same heap.
 
+<!-- END_SUMMARY -->
 On a table, there is heaps of stones (or matches) from various sizes. Each player takes one or several stones in a single heap. The winner is the one who can empty the table.
 
 ## Game Graph
