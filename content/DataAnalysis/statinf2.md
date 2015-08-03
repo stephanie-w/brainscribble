@@ -1,7 +1,6 @@
 ---
 title: Notes on Statistical Inference : Hypothesis Testing and t-tests
-author: "Stephanie W"
-output: html_document
+tags: R, stats
 
 [TOC]
 

@@ -1,6 +1,7 @@
 ---
 title: R: Experimentation of the Cental Limit Theorem
 author: "Stephanie W"
+tags: R, stats
 
 ---
 

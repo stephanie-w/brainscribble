@@ -1,5 +1,6 @@
 ---
 title: R: Earthquakes from the past 30 days
+tags: R
 
 ---
 

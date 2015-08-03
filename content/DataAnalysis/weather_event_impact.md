@@ -1,7 +1,6 @@
 ---
 title: R: Analysis of weather events impact on population health and economy.
-author: "Stephanie W"
-output: html_document
+tags: R
 
 ---
 

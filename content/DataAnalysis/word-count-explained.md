@@ -1,5 +1,6 @@
 ---
 title: Word Count Code explained
+tags: R
 
 
 ---

@@ -1,6 +1,7 @@
 ---
 title:Data Types
 status: draft
+tags: hadoop
 
 ---
 

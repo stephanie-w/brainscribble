@@ -1,6 +1,7 @@
 ---
 title: "R : Variance Inflation"
 status: draft
+tags: R, stats, regression
 
 ---
 
