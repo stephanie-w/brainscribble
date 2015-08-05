@@ -136,7 +136,7 @@ ggplot(fat_temp, aes(reorder(factor(event.type), -fatalities), fatalities)) + ge
     theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 
-<div class="rimage center"><img src="figure/weather_events_impact_fatalities-1.png" title="plot of chunk weather_events_impact_fatalities" alt="plot of chunk weather_events_impact_fatalities" class="plot" /></div>
+<div class="rimage center"><img src="/figure/weather_events_impact_fatalities-1.png" title="plot of chunk weather_events_impact_fatalities" alt="plot of chunk weather_events_impact_fatalities" class="plot" /></div>
 
 
 ```r
@@ -145,7 +145,7 @@ ggplot(inj_temp, aes(reorder(factor(event.type), -injuries), injuries)) + geom_b
     theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 
-<div class="rimage center"><img src="figure/weather_events_impact_injuries-1.png" title="plot of chunk weather_events_impact_injuries" alt="plot of chunk weather_events_impact_injuries" class="plot" /></div>
+<div class="rimage center"><img src="/figure/weather_events_impact_injuries-1.png" title="plot of chunk weather_events_impact_injuries" alt="plot of chunk weather_events_impact_injuries" class="plot" /></div>
 
         
 To go deeper, we can examine single weather types by having a closer look on their frequency/injuries and fatalities ratio :
@@ -391,7 +391,7 @@ ggplot(crop_temp, aes(reorder(factor(event.type), -cropdmg.val), cropdmg.val)) +
     theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 
-<div class="rimage center"><img src="figure/weather_events_impact_crop_damages-1.png" title="plot of chunk weather_events_impact_crop_damages" alt="plot of chunk weather_events_impact_crop_damages" class="plot" /></div>
+<div class="rimage center"><img src="/figure/weather_events_impact_crop_damages-1.png" title="plot of chunk weather_events_impact_crop_damages" alt="plot of chunk weather_events_impact_crop_damages" class="plot" /></div>
 
 
 ```r
@@ -400,7 +400,7 @@ ggplot(prop_temp, aes(reorder(factor(event.type), -propdmg.val), propdmg.val)) +
     theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 
-<div class="rimage center"><img src="figure/weather_events_impact_properties_damages-1.png" title="plot of chunk weather_events_impact_properties_damages" alt="plot of chunk weather_events_impact_properties_damages" class="plot" /></div>
+<div class="rimage center"><img src="/figure/weather_events_impact_properties_damages-1.png" title="plot of chunk weather_events_impact_properties_damages" alt="plot of chunk weather_events_impact_properties_damages" class="plot" /></div>
 
 and we check damages ratio by event type:
 

@@ -8,13 +8,13 @@ A basic git workflow is the feature branch workflow. All feature (or task, or st
 The stories/features branch exist as long as the feature is in development.  
 At the end of the development, the branch is usually submitted for review (pull request) and merged to master.
 
-![Feature Branch Flow](figure/gitflow-1.png)
+![Feature Branch Flow](/figure/gitflow-1.png)
 
 Some layers can be added to this model:
 
 The integration/dev branch : It hold all feature branches commits, allow to check all pieces of dev work together.
 
-![Dev Branch Flow](figure/gitflow-2.png)
+![Dev Branch Flow](/figure/gitflow-2.png)
 
 There could be variations on how and when to merge:
 

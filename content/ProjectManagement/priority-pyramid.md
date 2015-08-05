@@ -6,7 +6,7 @@ summary: The priority pyramid is a visualized backlog with a prioritization proc
 
 The priority pyramid is a visualized backlog with a prioritization process.
 
-![Priority Pyramid](figure/priority_pyramid.png =600x500)
+![Priority Pyramid](/figure/priority_pyramid.png =600x500)
 
 The pyramid has four level:
 
@@ -20,7 +20,7 @@ To each pyramid level is associated a maximum number of tasks/user stories a lev
 
 How to operate with the priority pyramid:
 
-![Priority Pyramid](figure/priority_pyramid_process.png)
+![Priority Pyramid](/figure/priority_pyramid_process.png)
 
 <!--
 Sources
