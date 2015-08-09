@@ -1,15 +1,16 @@
 ---
-title: Word Count Code explained
-tags: R
+title: Hadoop: Word Count Code explained
+tags: hadoop
 
 
 ---
 
 <!-- BEGIN_SUMMARY -->
+<!-- END_SUMMARY -->
+
 Map Reduce Data Flow Diagram
 
 <div class="rimage center"><img src="/figure/wordcount.png" alt="Map Reduce WordCount Diagram" style="width:800px" /></div>
-<!-- END_SUMMARY -->
 
 ## Mapper Code
 
