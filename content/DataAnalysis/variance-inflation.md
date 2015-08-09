@@ -1,17 +1,23 @@
 ---
-title: "R : Variance Inflation"
-status: draft
+title: R : Variance Inflation
 tags: R, stats, regression
 
 ---
 
-This is my note on swirl course Regression Model : Overfitting_and_Underfitting.
+This is my note on swirl course Regression Model : Overfitting and Underfitting.
+
+## Definition
 <!-- BEGIN_SUMMARY -->
 A variance inflation factor (VIF) is a ratio of estimated variances, the variance due to including the ith regressor, divided by that due to including a corresponding ideal regressor which is uncorrelated with the others.
 VIF is the square of standard error inflation.
-<!-- END_SUMMARY -->
 
-To expore VIF, we'll use the Swiss Fertility and Socioeconomic Indicators (1888) dataset which reports standardized fertility measure and socio-economic indicators for each of 47 French-speaking provinces of Switzerland at about 1888. 
+<!-- END_SUMMARY -->
+More simply, it estimates how much the variance of a coefficient is "inflated" because of linear dependence with other predictors. Thus, a VIF of 1.8 tells us that the variance of a particular coefficient is 80% larger than it would be if that predictor was completely uncorrelated with all the other predictors.  
+The VIF has a lower bound of 1 but no upper bound. 
+
+
+## Examples with the swiss dataset
+To explore VIF, we'll use the Swiss Fertility and Socioeconomic Indicators (1888) dataset which reports standardized fertility measure and socio-economic indicators for each of 47 French-speaking provinces of Switzerland at about 1888. 
 
 ```r
 data(swiss)
@@ -165,4 +171,15 @@ anova(fit1, fit3, fit5, fit6)
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
-It appears that each model is a significant improvement on its predecessor
+It appears that each model is a significant improvement on its predecessor.
+
+<!-- 
+## Experimenting VIF high values
+
+Regardless of your criterion for what constitutes a high VIF, there are at least three situations in which a high VIF is not a problem and can be safely ignored:
+
+2. The high VIFs are caused by the inclusion of powers or products of other variables.
+
+Sources
+http://statisticalhorizons.com/multicollinearity
+-->
