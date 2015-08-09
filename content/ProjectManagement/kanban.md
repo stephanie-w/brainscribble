@@ -1,14 +1,14 @@
 ---
 title: Kanban Practices
-summary: Kanban in the context of software development mean a visual process-management system that tells what to produce, when to produce it, and how much to produce - inspired by the Toyota Production System and by Lean manufacturing.
 
 [TOC]
 
 ---
 
-
+<!--BEGIN_SUMMARY-->
 Kanban in the context of software development mean a visual process-management system that tells what to produce, when to produce it, and how much to produce - inspired by the Toyota Production System and by Lean manufacturing.
 
+<!--END_SUMMARY-->
 A Kanban board must be visual, tactile, collaborative.  
 
 ## Kanban Composants 
@@ -78,13 +78,6 @@ The key data points of the CFD are:
 This metric help understand the state of current work  and what might need to be done to speed up the pace of delivery.  
 The diagram should run smoothly. Large steps and flat horizontal lines indicate impediments to flow or lack of flow. Variations in the gap or bands stand for bottleneck situations, which usually occur due to irrelevant work in progress limits.
 ![](http://brodzinski.com/wp-content/uploads/cfd-03.jpg)
-<!--
-(the triangle in the chart provides a visual representation of "Little's Law")
-The long-term average number of customers in a stable system L is equal to the long-term average effective arrival rate, $\gamma$, multiplied by the (Palm‑)average time a customer spends in the system, W; or expressed algebraically: $L = $\gammaW$.
-![](https://jazz.net/library/content/articles/insight/1.1.1.1/kanban-metrics/images/2.jpg)
-![](http://static.kanbantool.com/seo-landing-page/kanban-presentation/cumulative-flow-chart7.png)
-![](http://static.kanbantool.com/seo-landing-page/kanban-analytics-and-metrics/lead-cycle-time-diagram-kanban-tool-10.jpg)
--->
 
 ### Lead Time Average
 
