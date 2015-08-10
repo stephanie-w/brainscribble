@@ -5,9 +5,9 @@ status: draft
 ---
 
 
-<!--BEGIN_SUMMARY-->
+<!-- BEGIN_SUMMARY -->
 The Cumulative Flow Diagram report represents the relative amount of work for each stage of project over the time.
-<!--END_SUMMARY-->
+<!-- END_SUMMARY -->
 
 The key data points of the CFD are:
 
