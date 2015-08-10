@@ -6,7 +6,7 @@ summary: A Gantt Chart illustrates a project schedule by presenting scheduling a
 
 A Gantt Chart illustrates a project schedule by presenting scheduling and dependencies information about the activities involved in implementing a project.
 
-![](http://www.technologyuk.net/computing/project_management/images/ganttproject02.gif)
+![](http://www.rff.com/gantt1.png)
 
 The horizontal (x) axis of the chart shows the timescale over which the project work is carried out, and is divided into appropriate time units (the units of time used will depend on the overall timescale for the project).   
 The vertical (y) axis identifies the various tasks that must be carried out.  
