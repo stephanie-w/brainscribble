@@ -36,7 +36,7 @@ ggplot(dat, aes(x = y)) + geom_histogram(colour = "black", fill = "white") +
         size = 1) + labs(x = "Means", y = "Frequency", title = "Means Frequency")
 ```
 
-<div class="rimage center"><img src="/figure/means_histogram-1.png" title="plot of chunk means_histogram" alt="plot of chunk means_histogram" class="plot" /></div>
+<div class="rimage center"><img src="figure/means_histogram-1.png" title="plot of chunk means_histogram" alt="plot of chunk means_histogram" class="plot" /></div>
 
 
 ```r
@@ -46,6 +46,6 @@ ggplot(dat, aes(x = y)) + geom_histogram(binwidth = 0.3, colour = "black", fill 
     geom_density(alpha = 0.2, fill = "#FF6666")
 ```
 
-<div class="rimage center"><img src="/figure/means_distribution-1.png" title="plot of chunk means_distribution" alt="plot of chunk means_distribution" class="plot" /></div>
+<div class="rimage center"><img src="figure/means_distribution-1.png" title="plot of chunk means_distribution" alt="plot of chunk means_distribution" class="plot" /></div>
 
 To confirm this distribution fits the normal distribution, we've draw the hump of the density of a random variable normally distributed with a mean $1/\lambda$ and a standard deviation $\frac{1/\lambda}{\sqrt{n}}$.

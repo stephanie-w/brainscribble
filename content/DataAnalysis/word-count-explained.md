@@ -10,7 +10,7 @@ tags: hadoop
 
 Map Reduce Data Flow Diagram
 
-<div class="rimage center"><img src="/figure/wordcount.png" alt="Map Reduce WordCount Diagram" style="width:800px" /></div>
+<div class="rimage center"><img src="figure/wordcount.png" alt="Map Reduce WordCount Diagram" style="width:800px" /></div>
 
 ## Mapper Code
 

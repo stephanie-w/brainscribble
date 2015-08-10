@@ -10,8 +10,8 @@ import sys
 sys.path.append(os.curdir)
 from pelicanconf import *
 
-SITEURL = 'http://stephanie-w.github.io'
-RELATIVE_URLS = True
+SITEURL = 'http://stephanie-w.github.io/blog'
+RELATIVE_URLS = False
 
 FEED_ALL_ATOM = 'feeds/all.atom.xml'
 CATEGORY_FEED_ATOM = 'feeds/%s.atom.xml'
@@ -27,10 +27,10 @@ SHOW_ARTICLE_AUTHOR = False
 #DISQUS_SITENAME = ""
 #GOOGLE_ANALYTICS = ""
 
-PROFILE_IMAGE_URL = "/images/post_1246903_635089122565391744.jpg"
+PROFILE_IMAGE_URL = "images/post_1246903_635089122565391744.jpg"
 BOOTSTRAP_THEME = "lumen"
 #SITELOGO = "images/post_1246903_635089122565391744.jpg"
-SIDEBAR_IMAGES = ["/images/post_1246903_635089122565391744.jpg"]
+SIDEBAR_IMAGES = ["images/post_1246903_635089122565391744.jpg"]
 FAVICON = "images/post_1246903_635089122565391744.jpg"
 BOOTSTRAP_NAVBAR_INVERSE = False
 

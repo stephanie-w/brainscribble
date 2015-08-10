@@ -16,7 +16,7 @@ On a table, there is heaps of stones (or matches) from various sizes. Each playe
 
 The following graph represents a game with three heaps containing 1, 2 and 3 matches respectively.  
 
-![](/figure/nim-graph.png)
+![](figure/nim-graph.png)
 
 The graph shows the allowed and possible state after a given state.  
 For example from (1,1,2), the game rule allows the following states (1,1,1) or (1,2) or (1,1).
@@ -86,7 +86,7 @@ By removing $x_k$ - $y_k$ objects from heap k, we get a let a loosing position f
 
 From our previous graph, applying XOR sum on heap sizes, we get: 
 
-![](/figure/nim-graph-2.png)
+![](figure/nim-graph-2.png)
 
 By computing these numbers to the graph, we define a Grundy function. The Grundy numbers are also called nimbers, as value of Nim heap.
 

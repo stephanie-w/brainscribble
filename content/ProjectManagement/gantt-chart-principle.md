@@ -30,7 +30,7 @@ The first step is listing the tasks:
 
 Next step is drawing a network diagram (or the activity-on-arrow diagram or PERT Chart) to organize tasks according to dependencies. To each task is assigned a duration estimation.
 
-![PERT Chart](/figure/pertchart.png)
+![PERT Chart](figure/pertchart.png)
 
 The longest path of planned activities to logical end points or to the end of the project is in red. The sequence of project network activities which add up to the longest overall duration. This determines the shortest time possible to complete the project.
 
@@ -44,7 +44,7 @@ The best obvious idea in the project is to set the "recruit a manager" task as e
 The "recruit staff" task comes after the "recruit a manager" task and before the "open" task. Since it has a cost, the better idea is to set the "staff" task as late as possible. The "recruit staff" is a floating task depending on an other floating task. If the "recruit a manager" task takes longer or starts later, there will be less float space for the "recruit a staff" task. 
 
 
-![Gantt Chart](/figure/gantt-chart.png)
+![Gantt Chart](figure/gantt-chart.png)
 
 
 <!--

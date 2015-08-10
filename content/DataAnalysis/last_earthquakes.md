@@ -74,7 +74,7 @@ ggplot(eqFreq2, aes(date, weight = freq, fill = M)) + geom_bar(binwidth = 60 * 6
     hjust = 1))
 ```
 
-<div class="rimage center"><img src="/figure/earthquakes_frequency-1.png" title="plot of chunk earthquakes_frequency" alt="plot of chunk earthquakes_frequency" class="plot" style="width:800px"/></div>
+<div class="rimage center"><img src="figure/earthquakes_frequency-1.png" title="plot of chunk earthquakes_frequency" alt="plot of chunk earthquakes_frequency" class="plot" style="width:800px"/></div>
 
 
 ```r
@@ -87,4 +87,4 @@ base_world + geom_point(aes(x = longitude, y = latitude, size = mag), data = eq,
     fill = "Pink", pch = 21, alpha = I(0.7))
 ```
 
-<div class="rimage center"><img src="/figure/earthquakes_worldmap-1.png" title="plot of chunk earthquakes_worldmap" alt="plot of chunk earthquakes_worldmap" class="plot" style="width:800px"/></div>
+<div class="rimage center"><img src="figure/earthquakes_worldmap-1.png" title="plot of chunk earthquakes_worldmap" alt="plot of chunk earthquakes_worldmap" class="plot" style="width:800px"/></div>

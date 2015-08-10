@@ -30,10 +30,10 @@ To draw the graph, let's have graph nodes listing items on one side of the river
 
 The departure river side graph is :
 
-![Departure River Side](/figure/river-crossing-departure-en.png)
+![Departure River Side](figure/river-crossing-departure-en.png)
 
 The arrival river side graph is :
-![Arrival River Side](/figure/river-crossing-arrival-en.png)
+![Arrival River Side](figure/river-crossing-arrival-en.png)
 
 These two graphs are inverted (right/left inversion from the other one), as there is only one graph of possible transitions, which is the same at the both river sides.
 You can draw them simultaneously as two nodes at the same position on the graph must contains all items.

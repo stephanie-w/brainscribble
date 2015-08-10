@@ -260,7 +260,7 @@ Z_95
 the 95% percentile corresponds to the value 1.64 (see also zthe z table above).
 
 
-<div class="rimage center"><img src="/figure/Z_5-1.png" title="plot of chunk Z_5" alt="plot of chunk Z_5" class="plot" /></div>
+<div class="rimage center"><img src="figure/Z_5-1.png" title="plot of chunk Z_5" alt="plot of chunk Z_5" class="plot" /></div>
 
 Right Tailed Test:   
 $H_0 : \mu = \mu_0$ parameter = value   
@@ -276,7 +276,7 @@ Z_5
 ## [1] -1.644854
 ```
 
-<div class="rimage center"><img src="/figure/Z_95-1.png" title="plot of chunk Z_95" alt="plot of chunk Z_95" class="plot" /></div>
+<div class="rimage center"><img src="figure/Z_95-1.png" title="plot of chunk Z_95" alt="plot of chunk Z_95" class="plot" /></div>
 
 
 Two Tailed Test:   
