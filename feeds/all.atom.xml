@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Brain Scribble</title><link href="http://stephanie-w.github.io/blog/" rel="alternate"></link><link href="http://stephanie-w.github.io/blog/feeds/all.atom.xml" rel="self"></link><id>http://stephanie-w.github.io/blog/</id><updated>2015-08-10T12:47:09+02:00</updated><entry><title>The priority pyramid</title><link href="http://stephanie-w.github.io/blog/priority-pyramid.html" rel="alternate"></link><updated>2015-08-10T12:47:09+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/priority-pyramid.html</id><summary type="html">&lt;hr /&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Brain Scribble</title><link href="http://stephanie-w.github.io/blog/" rel="alternate"></link><link href="http://stephanie-w.github.io/blog/feeds/all.atom.xml" rel="self"></link><id>http://stephanie-w.github.io/blog/</id><updated>2015-08-10T16:09:14+02:00</updated><entry><title>The priority pyramid</title><link href="http://stephanie-w.github.io/blog/priority-pyramid.html" rel="alternate"></link><updated>2015-08-10T16:09:14+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/priority-pyramid.html</id><summary type="html">&lt;hr /&gt;
 &lt;p&gt;The priority pyramid is a visualized backlog with a prioritization process.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Priority Pyramid" src="figure/priority_pyramid.png" title="=600x500" /&gt;&lt;/p&gt;
 &lt;p&gt;The pyramid has four level:&lt;/p&gt;
@@ -15,7 +15,7 @@
 &lt;!--
 Sources
 http://jaxenter.com/agile-tips-the-priority-pyramid-116292.html
---&gt;</summary></entry><entry><title>User stories</title><link href="http://stephanie-w.github.io/blog/user_stories.html" rel="alternate"></link><updated>2015-08-10T12:47:09+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/user_stories.html</id><summary type="html">&lt;hr /&gt;
+--&gt;</summary></entry><entry><title>User stories</title><link href="http://stephanie-w.github.io/blog/user_stories.html" rel="alternate"></link><updated>2015-08-10T16:09:14+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/user_stories.html</id><summary type="html">&lt;hr /&gt;
 
 
 &lt;p&gt;A user story is a tool used in Agile software development to capture a description of a software feature from an end-user perspective. The user story describes the type of user, what they want and why. A user story helps to create a simplified description of a requirement.&lt;/p&gt;
@@ -66,7 +66,7 @@ http://www.agilemodeling.com/artifacts/userStory.htm
 http://winnipegagilist.blogspot.fr/2012/03/how-to-create-user-story-map.html
 http://fr.slideshare.net/mikecohn/prioritizing-your-product-backlog-22870228?related=1
 http://www.mountaingoatsoftware.com/blog/visualizing-a-large-product-backlog-with-a-treemap
---&gt;</summary></entry><entry><title>River Crossing Puzzle</title><link href="http://stephanie-w.github.io/blog/crossing_river.html" rel="alternate"></link><updated>2015-08-10T12:47:09+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/crossing_river.html</id><summary type="html">&lt;hr /&gt;
+--&gt;</summary></entry><entry><title>River Crossing Puzzle</title><link href="http://stephanie-w.github.io/blog/crossing_river.html" rel="alternate"></link><updated>2015-08-10T16:09:14+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/crossing_river.html</id><summary type="html">&lt;hr /&gt;
 &lt;p&gt;A river crossing puzzle is a type of transport puzzle in which the object is to carry items from one river bank to another. The difficulty of the puzzle may arise from restrictions on which or how many items can be transported at the same time, or from which or how many items may be safely left together. The setting may vary cosmetically, for example, by replacing the river by a bridge.&lt;/p&gt;
 &lt;p&gt;The story:&lt;/p&gt;
 &lt;p&gt;Once upon a time a farmer went to market and purchased a fox, a goose, and a bag of beans. On his way home, the farmer came to the bank of a river and rented a boat. But in crossing the river by boat, the farmer could carry only himself and a single one of his purchases - the fox, the goose, or the bag of beans.&lt;/p&gt;
@@ -91,9 +91,9 @@ So we can't have F and G together and G and B together.&lt;/p&gt;
 &lt;img alt="Arrival River Side" src="figure/river-crossing-arrival-en.png" /&gt;&lt;/p&gt;
 &lt;p&gt;These two graphs are inverted (right/left inversion from the other one), as there is only one graph of possible transitions, which is the same at the both river sides.
 You can draw them simultaneously as two nodes at the same position on the graph must contains all items.&lt;/p&gt;
-&lt;p&gt;There is two solutions to the problem, after leaving the goose alone on the arrival river side, the farmer can leave either the fox either the beans on the departure river side.&lt;/p&gt;</summary></entry><entry><title>Gantt Chart Principle</title><link href="http://stephanie-w.github.io/blog/gantt-chart-principle.html" rel="alternate"></link><updated>2015-08-10T12:47:09+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/gantt-chart-principle.html</id><summary type="html">&lt;hr /&gt;
+&lt;p&gt;There is two solutions to the problem, after leaving the goose alone on the arrival river side, the farmer can leave either the fox either the beans on the departure river side.&lt;/p&gt;</summary></entry><entry><title>Gantt Chart Principle</title><link href="http://stephanie-w.github.io/blog/gantt-chart-principle.html" rel="alternate"></link><updated>2015-08-10T16:09:14+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/gantt-chart-principle.html</id><summary type="html">&lt;hr /&gt;
 &lt;p&gt;A Gantt Chart illustrates a project schedule by presenting scheduling and dependencies information about the activities involved in implementing a project.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://www.technologyuk.net/computing/project_management/images/ganttproject02.gif" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.rff.com/gantt1.png" /&gt;&lt;/p&gt;
 &lt;p&gt;The horizontal (x) axis of the chart shows the timescale over which the project work is carried out, and is divided into appropriate time units (the units of time used will depend on the overall timescale for the project). &lt;br /&gt;
 The vertical (y) axis identifies the various tasks that must be carried out.&lt;br /&gt;
 Each task is represented by a horizontal bar, occupying its own row on the y-axis.&lt;br /&gt;
@@ -126,7 +126,7 @@ The "recruit staff" task comes after the "recruit a manager" task and before the
 &lt;!--
 Sources:
 http://www.oracle.com/webfolder/ux/middleware/richclient/index.html?/webfolder/ux/middleware/richclient/guidelines5/gantt.html
---&gt;</summary></entry><entry><title>Git Workflows vs "All to Master"</title><link href="http://stephanie-w.github.io/blog/git-workflows.html" rel="alternate"></link><updated>2015-08-10T12:47:09+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/git-workflows.html</id><summary type="html">&lt;hr /&gt;
+--&gt;</summary></entry><entry><title>Git Workflows vs "All to Master"</title><link href="http://stephanie-w.github.io/blog/git-workflows.html" rel="alternate"></link><updated>2015-08-10T16:09:14+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/git-workflows.html</id><summary type="html">&lt;hr /&gt;
 &lt;p&gt;A basic git workflow is the feature branch workflow. All feature (or task, or story) developments are taken place in a dedicated branch (the feature branch).&lt;br /&gt;
 The stories/features branch exist as long as the feature is in development.&lt;br /&gt;
 At the end of the development, the branch is usually submitted for review (pull request) and merged to master.&lt;/p&gt;
@@ -173,11 +173,11 @@ The challenge in continuous deployment is determining what needs to be released 
 &lt;p&gt;Sources : 
 https://bocoup.com/weblog/git-workflows-for-successful-deployment/&lt;br /&gt;
 http://blogs.wandisco.com/2013/07/24/git-workflows-and-continuous-delivery-using-multisite-replication-to-facilitate-a-global-mainline/&lt;br /&gt;
-https://www.atlassian.com/git/tutorials/comparing-workflows&lt;/p&gt;</summary></entry><entry><title>Kanban Practices</title><link href="http://stephanie-w.github.io/blog/kanban.html" rel="alternate"></link><updated>2015-08-10T12:47:09+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/kanban.html</id><summary type="html">
+https://www.atlassian.com/git/tutorials/comparing-workflows&lt;/p&gt;</summary></entry><entry><title>Kanban Practices</title><link href="http://stephanie-w.github.io/blog/kanban.html" rel="alternate"></link><updated>2015-08-10T16:09:14+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/kanban.html</id><summary type="html">
 &lt;hr/&gt;
-&lt;!--BEGIN_SUMMARY--&gt;
+
 &lt;p&gt;Kanban in the context of software development mean a visual process-management system that tells what to produce, when to produce it, and how much to produce - inspired by the Toyota Production System and by Lean manufacturing.&lt;/p&gt;
-&lt;!--END_SUMMARY--&gt;
+
 &lt;p&gt;A Kanban board must be visual, tactile, collaborative.  &lt;/p&gt;
 &lt;h2 id="kanban-composants"&gt;Kanban Composants&lt;/h2&gt;
 &lt;p&gt;The Kanban composants are :&lt;/p&gt;
@@ -294,7 +294,7 @@ The number of Kanbans is reduced carefully to lower inventories and to reveal pr
 &lt;a href="https://jazz.net/library/article/1350"&gt;Improve predictability and efficiency with Kanban metrics using IBM Rational Insight&lt;/a&gt;&lt;br/&gt;
 &lt;a href="https://www.atlassian.com/agile/kanban"&gt;A brief introduction to kanban&lt;/a&gt;
 &lt;a href="http://brodzinski.com/2013/07/cumulative-flow-diagram.html"&gt;Cumulative Flow Diagram&lt;/a&gt;
-&lt;a href="http://pm.stackexchange.com/questions/10657/what-are-some-commonly-tracked-metrics-in-kanban"&gt;http://pm.stackexchange.com/questions/10657/what-are-some-commonly-tracked-metrics-in-kanban&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>Nim Games</title><link href="http://stephanie-w.github.io/blog/nim-games.html" rel="alternate"></link><updated>2015-08-10T12:47:09+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/nim-games.html</id><summary type="html">
+&lt;a href="http://pm.stackexchange.com/questions/10657/what-are-some-commonly-tracked-metrics-in-kanban"&gt;http://pm.stackexchange.com/questions/10657/what-are-some-commonly-tracked-metrics-in-kanban&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>Nim Games</title><link href="http://stephanie-w.github.io/blog/nim-games.html" rel="alternate"></link><updated>2015-08-10T16:09:14+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/nim-games.html</id><summary type="html">
 &lt;hr/&gt;
 &lt;!-- BEGIN_SUMMARY --&gt;
 &lt;p&gt;Nim is a mathematical game of strategy in which two players take turns removing objects from distinct heaps. On each turn, a player must remove at least one object, and may remove any number of objects provided they all come from the same heap.&lt;/p&gt;
@@ -465,7 +465,7 @@ http://math.stackexchange.com/questions/416042/why-xor-operator-works
         "}";
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</summary></entry><entry><title>Notes on Statistical Inference : Hypothesis Testing and t-tests</title><link href="http://stephanie-w.github.io/blog/statinf2.html" rel="alternate"></link><updated>2015-08-10T12:47:09+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/statinf2.html</id><summary type="html">
+&lt;/script&gt;</summary></entry><entry><title>Notes on Statistical Inference : Hypothesis Testing and t-tests</title><link href="http://stephanie-w.github.io/blog/statinf2.html" rel="alternate"></link><updated>2015-08-10T16:09:14+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/statinf2.html</id><summary type="html">
 &lt;hr/&gt;
 &lt;p&gt;
 These are  my notes on the Statistical Inference course (2th part) : Hypothesis Testing and t-tests&lt;/p&gt;
@@ -917,7 +917,7 @@ http://www.stat.yale.edu/Courses/1997-98/101/confint.htm
         "}";
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</summary><category term="R"></category><category term="stats"></category></entry><entry><title>R : Variance Inflation</title><link href="http://stephanie-w.github.io/blog/variance-inflation.html" rel="alternate"></link><updated>2015-08-10T12:47:09+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/variance-inflation.html</id><summary type="html">&lt;hr /&gt;
+&lt;/script&gt;</summary><category term="R"></category><category term="stats"></category></entry><entry><title>R : Variance Inflation</title><link href="http://stephanie-w.github.io/blog/variance-inflation.html" rel="alternate"></link><updated>2015-08-10T16:09:14+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/variance-inflation.html</id><summary type="html">&lt;hr /&gt;
 &lt;p&gt;This is my note on swirl course Regression Model : Overfitting and Underfitting.&lt;/p&gt;
 &lt;h2 id="definition"&gt;Definition&lt;/h2&gt;
 &lt;p&gt;
@@ -1074,7 +1074,7 @@ Regardless of your criterion for what constitutes a high VIF, there are at least
 
 Sources
 http://statisticalhorizons.com/multicollinearity
---&gt;</summary><category term="R"></category><category term="stats"></category><category term="regression"></category></entry><entry><title>R: Analysis of weather events impact on population health and economy.</title><link href="http://stephanie-w.github.io/blog/weather_event_impact.html" rel="alternate"></link><updated>2015-08-10T12:47:09+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/weather_event_impact.html</id><summary type="html">&lt;hr /&gt;
+--&gt;</summary><category term="R"></category><category term="stats"></category><category term="regression"></category></entry><entry><title>R: Analysis of weather events impact on population health and economy.</title><link href="http://stephanie-w.github.io/blog/weather_event_impact.html" rel="alternate"></link><updated>2015-08-10T16:09:14+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/weather_event_impact.html</id><summary type="html">&lt;hr /&gt;
 &lt;h2 id="synopsis"&gt;Synopsis&lt;/h2&gt;
 &lt;p&gt;This analysis involves exploring the U.S. National Oceanic and Atmospheric Administration's (NOAA) storm database. &lt;/p&gt;
 &lt;p&gt;This database tracks characteristics of major storms and weather events in the United States, including when and where they occur, as well as estimates of any fatalities, injuries, and property damage.&lt;/p&gt;
@@ -2431,14 +2431,13 @@ Our analysys shows that since 1996:&lt;/p&gt;
 &lt;li&gt;The "TSTM Wind" event is the most frequent event regarding events causing property damages&lt;/li&gt;
 &lt;li&gt;The "Drought" and "Hurricane" events have a very high crop damages ratio&lt;/li&gt;
 &lt;li&gt;The "Flood" and "Tropical storm" events have a very high property damages ratio&lt;/li&gt;
-&lt;/ul&gt;</summary><category term="R"></category></entry><entry><title>Hadoop: Word Count Code explained</title><link href="http://stephanie-w.github.io/blog/word-count-explained.html" rel="alternate"></link><updated>2015-08-10T12:47:09+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/word-count-explained.html</id><summary type="html">&lt;hr /&gt;
+&lt;/ul&gt;</summary><category term="R"></category></entry><entry><title>Hadoop: Word Count Code explained</title><link href="http://stephanie-w.github.io/blog/word-count-explained.html" rel="alternate"></link><updated>2015-08-10T16:09:14+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/word-count-explained.html</id><summary type="html">&lt;hr /&gt;
 
 
 
 
 &lt;p&gt;Map Reduce Data Flow Diagram&lt;/p&gt;
-&lt;div class="rimage center"&gt;&lt;img src="figure/wordcount.png" alt="Map Reduce WordCount Diagram" style="width:800px" /&gt;&lt;/div&gt;
-
+&lt;p&gt;&lt;img alt="Map Reduce WordCount Diagram" src="figure/wordcount.png" /&gt;&lt;/p&gt;
 &lt;h2 id="mapper-code"&gt;Mapper Code&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;java.io.IOException&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;/span&gt;
 &lt;span class="code-line"&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;java.util.StringTokenizer&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;/span&gt;
@@ -2665,7 +2664,7 @@ iThe instances of OutputFormat provided by Hadoop write to files on the local di
 &lt;!--
 Sources:
 developpper.yahoo.com/hadoop/tutorial/module4.html
---&gt;</summary><category term="hadoop"></category></entry><entry><title>R: Experimentation of the Cental Limit Theorem</title><link href="http://stephanie-w.github.io/blog/experimentation-of-clt.html" rel="alternate"></link><updated>2015-08-10T12:47:09+02:00</updated><author><name>"Stephanie W"</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/experimentation-of-clt.html</id><summary type="html">&lt;hr /&gt;
+--&gt;</summary><category term="hadoop"></category></entry><entry><title>R: Experimentation of the Cental Limit Theorem</title><link href="http://stephanie-w.github.io/blog/experimentation-of-clt.html" rel="alternate"></link><updated>2015-08-10T16:09:14+02:00</updated><author><name>"Stephanie W"</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/experimentation-of-clt.html</id><summary type="html">&lt;hr /&gt;
 &lt;p&gt;The CLT Theorem: &lt;br /&gt;
 The distribution of sample statistics (e.g. mean) is approximatively normal, regardless of the underlying distribution, with mean = &lt;span class="math"&gt;\(\mu\)&lt;/span&gt; and variance = &lt;span class="math"&gt;\(\sigma^2\)&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;To experiment this theory, we've built a matrix with 40 exponentials (we take lambda=0.2) x 1000 and compute the mean of each row, storing the result in a &lt;code&gt;means&lt;/code&gt; vector:&lt;/p&gt;
@@ -2757,7 +2756,7 @@ The distribution of sample statistics (e.g. mean) is approximatively normal, reg
         "}";
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</summary><category term="R"></category><category term="stats"></category></entry><entry><title>R: Earthquakes from the past 30 days</title><link href="http://stephanie-w.github.io/blog/last_earthquakes.html" rel="alternate"></link><updated>2015-08-10T12:47:09+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/last_earthquakes.html</id><summary type="html">&lt;hr /&gt;
+&lt;/script&gt;</summary><category term="R"></category><category term="stats"></category></entry><entry><title>R: Earthquakes from the past 30 days</title><link href="http://stephanie-w.github.io/blog/last_earthquakes.html" rel="alternate"></link><updated>2015-08-10T16:09:14+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/last_earthquakes.html</id><summary type="html">&lt;hr /&gt;
 
 
 &lt;p&gt;Earthquakes of the last 30 months from &lt;a href="http://earthquake.usgs.gov/earthquakes/feed/v1.0/csv.php feed"&gt;the earthquake.usgs.gov feed&lt;/a&gt;.&lt;/p&gt;
@@ -2825,8 +2824,7 @@ The distribution of sample statistics (e.g. mean) is approximatively normal, reg
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="rimage center"&gt;&lt;img src="figure/earthquakes_frequency-1.png" title="plot of chunk earthquakes_frequency" alt="plot of chunk earthquakes_frequency" class="plot" style="width:800px"/&gt;&lt;/div&gt;
-
+&lt;p&gt;&lt;img alt="" src="figure/earthquakes_frequency-1.png" /&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;world_map &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; map_data&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;world&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
 &lt;span class="code-line"&gt;p &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; ggplot&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; coord_fixed&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; xlab&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; ylab&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
 &lt;span class="code-line"&gt;base_world &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; p &lt;span class="o"&gt;+&lt;/span&gt; geom_polygon&lt;span class="p"&gt;(&lt;/span&gt;data &lt;span class="o"&gt;=&lt;/span&gt; world_map&lt;span class="p"&gt;,&lt;/span&gt; aes&lt;span class="p"&gt;(&lt;/span&gt;x &lt;span class="o"&gt;=&lt;/span&gt; long&lt;span class="p"&gt;,&lt;/span&gt; y &lt;span class="o"&gt;=&lt;/span&gt; lat&lt;span class="p"&gt;,&lt;/span&gt; group &lt;span class="o"&gt;=&lt;/span&gt; group&lt;span class="p"&gt;),&lt;/span&gt; colour &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;light green&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;/span&gt;
@@ -2837,7 +2835,7 @@ The distribution of sample statistics (e.g. mean) is approximatively normal, reg
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="rimage center"&gt;&lt;img src="figure/earthquakes_worldmap-1.png" title="plot of chunk earthquakes_worldmap" alt="plot of chunk earthquakes_worldmap" class="plot" style="width:800px"/&gt;&lt;/div&gt;</summary><category term="R"></category></entry><entry><title>R: Multivariable Regression</title><link href="http://stephanie-w.github.io/blog/multivariable-regression.html" rel="alternate"></link><updated>2015-08-10T12:47:09+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/multivariable-regression.html</id><summary type="html">&lt;hr /&gt;
+&lt;p&gt;&lt;img alt="" src="figure/earthquakes_worldmap-1.png" /&gt;&lt;/p&gt;</summary><category term="R"></category></entry><entry><title>R: Multivariable Regression</title><link href="http://stephanie-w.github.io/blog/multivariable-regression.html" rel="alternate"></link><updated>2015-08-10T16:09:14+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/multivariable-regression.html</id><summary type="html">&lt;hr /&gt;
 &lt;p&gt;
 
 This is my note on swirl course Regression Model : Multivariable Examples 3. &lt;/p&gt;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Brain Scribble</title><link href="http://stephanie-w.github.io/blog/" rel="alternate"></link><link href="http://stephanie-w.github.io/blog/feeds/projectmanagement.atom.xml" rel="self"></link><id>http://stephanie-w.github.io/blog/</id><updated>2015-08-10T12:47:09+02:00</updated><entry><title>The priority pyramid</title><link href="http://stephanie-w.github.io/blog/priority-pyramid.html" rel="alternate"></link><updated>2015-08-10T12:47:09+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/priority-pyramid.html</id><summary type="html">&lt;hr /&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Brain Scribble</title><link href="http://stephanie-w.github.io/blog/" rel="alternate"></link><link href="http://stephanie-w.github.io/blog/feeds/projectmanagement.atom.xml" rel="self"></link><id>http://stephanie-w.github.io/blog/</id><updated>2015-08-10T16:09:14+02:00</updated><entry><title>The priority pyramid</title><link href="http://stephanie-w.github.io/blog/priority-pyramid.html" rel="alternate"></link><updated>2015-08-10T16:09:14+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/priority-pyramid.html</id><summary type="html">&lt;hr /&gt;
 &lt;p&gt;The priority pyramid is a visualized backlog with a prioritization process.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Priority Pyramid" src="figure/priority_pyramid.png" title="=600x500" /&gt;&lt;/p&gt;
 &lt;p&gt;The pyramid has four level:&lt;/p&gt;
@@ -15,7 +15,7 @@
 &lt;!--
 Sources
 http://jaxenter.com/agile-tips-the-priority-pyramid-116292.html
---&gt;</summary></entry><entry><title>User stories</title><link href="http://stephanie-w.github.io/blog/user_stories.html" rel="alternate"></link><updated>2015-08-10T12:47:09+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/user_stories.html</id><summary type="html">&lt;hr /&gt;
+--&gt;</summary></entry><entry><title>User stories</title><link href="http://stephanie-w.github.io/blog/user_stories.html" rel="alternate"></link><updated>2015-08-10T16:09:14+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/user_stories.html</id><summary type="html">&lt;hr /&gt;
 
 
 &lt;p&gt;A user story is a tool used in Agile software development to capture a description of a software feature from an end-user perspective. The user story describes the type of user, what they want and why. A user story helps to create a simplified description of a requirement.&lt;/p&gt;
@@ -66,9 +66,9 @@ http://www.agilemodeling.com/artifacts/userStory.htm
 http://winnipegagilist.blogspot.fr/2012/03/how-to-create-user-story-map.html
 http://fr.slideshare.net/mikecohn/prioritizing-your-product-backlog-22870228?related=1
 http://www.mountaingoatsoftware.com/blog/visualizing-a-large-product-backlog-with-a-treemap
---&gt;</summary></entry><entry><title>Gantt Chart Principle</title><link href="http://stephanie-w.github.io/blog/gantt-chart-principle.html" rel="alternate"></link><updated>2015-08-10T12:47:09+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/gantt-chart-principle.html</id><summary type="html">&lt;hr /&gt;
+--&gt;</summary></entry><entry><title>Gantt Chart Principle</title><link href="http://stephanie-w.github.io/blog/gantt-chart-principle.html" rel="alternate"></link><updated>2015-08-10T16:09:14+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/gantt-chart-principle.html</id><summary type="html">&lt;hr /&gt;
 &lt;p&gt;A Gantt Chart illustrates a project schedule by presenting scheduling and dependencies information about the activities involved in implementing a project.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://www.technologyuk.net/computing/project_management/images/ganttproject02.gif" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.rff.com/gantt1.png" /&gt;&lt;/p&gt;
 &lt;p&gt;The horizontal (x) axis of the chart shows the timescale over which the project work is carried out, and is divided into appropriate time units (the units of time used will depend on the overall timescale for the project). &lt;br /&gt;
 The vertical (y) axis identifies the various tasks that must be carried out.&lt;br /&gt;
 Each task is represented by a horizontal bar, occupying its own row on the y-axis.&lt;br /&gt;
@@ -101,7 +101,7 @@ The "recruit staff" task comes after the "recruit a manager" task and before the
 &lt;!--
 Sources:
 http://www.oracle.com/webfolder/ux/middleware/richclient/index.html?/webfolder/ux/middleware/richclient/guidelines5/gantt.html
---&gt;</summary></entry><entry><title>Git Workflows vs "All to Master"</title><link href="http://stephanie-w.github.io/blog/git-workflows.html" rel="alternate"></link><updated>2015-08-10T12:47:09+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/git-workflows.html</id><summary type="html">&lt;hr /&gt;
+--&gt;</summary></entry><entry><title>Git Workflows vs "All to Master"</title><link href="http://stephanie-w.github.io/blog/git-workflows.html" rel="alternate"></link><updated>2015-08-10T16:09:14+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/git-workflows.html</id><summary type="html">&lt;hr /&gt;
 &lt;p&gt;A basic git workflow is the feature branch workflow. All feature (or task, or story) developments are taken place in a dedicated branch (the feature branch).&lt;br /&gt;
 The stories/features branch exist as long as the feature is in development.&lt;br /&gt;
 At the end of the development, the branch is usually submitted for review (pull request) and merged to master.&lt;/p&gt;
@@ -148,11 +148,11 @@ The challenge in continuous deployment is determining what needs to be released 
 &lt;p&gt;Sources : 
 https://bocoup.com/weblog/git-workflows-for-successful-deployment/&lt;br /&gt;
 http://blogs.wandisco.com/2013/07/24/git-workflows-and-continuous-delivery-using-multisite-replication-to-facilitate-a-global-mainline/&lt;br /&gt;
-https://www.atlassian.com/git/tutorials/comparing-workflows&lt;/p&gt;</summary></entry><entry><title>Kanban Practices</title><link href="http://stephanie-w.github.io/blog/kanban.html" rel="alternate"></link><updated>2015-08-10T12:47:09+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/kanban.html</id><summary type="html">
+https://www.atlassian.com/git/tutorials/comparing-workflows&lt;/p&gt;</summary></entry><entry><title>Kanban Practices</title><link href="http://stephanie-w.github.io/blog/kanban.html" rel="alternate"></link><updated>2015-08-10T16:09:14+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/kanban.html</id><summary type="html">
 &lt;hr/&gt;
-&lt;!--BEGIN_SUMMARY--&gt;
+
 &lt;p&gt;Kanban in the context of software development mean a visual process-management system that tells what to produce, when to produce it, and how much to produce - inspired by the Toyota Production System and by Lean manufacturing.&lt;/p&gt;
-&lt;!--END_SUMMARY--&gt;
+
 &lt;p&gt;A Kanban board must be visual, tactile, collaborative.  &lt;/p&gt;
 &lt;h2 id="kanban-composants"&gt;Kanban Composants&lt;/h2&gt;
 &lt;p&gt;The Kanban composants are :&lt;/p&gt;
