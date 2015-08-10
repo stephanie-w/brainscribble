@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Nim Games - Brain Scribble</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="./images/post_1246903_635089122565391744.jpg" rel="icon">
+
+<link rel="canonical" href="./nim-games.html">
+
+        <meta name="author" content="Stephanie W" />
+        <meta name="description" content="Nim is a mathematical game of strategy in which two players take turns removing objects from distinct heaps. On each turn, a player must remove at least one object, and may remove any number of objects provided they all come from the same heap." />
+
+        <meta property="og:site_name" content="Brain Scribble" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Nim Games"/>
+        <meta property="og:url" content="./nim-games.html"/>
+        <meta property="og:description" content="Nim is a mathematical game of strategy in which two players take turns removing objects from distinct heaps. On each turn, a player must remove at least one object, and may remove any number of objects provided they all come from the same heap."/>
+        <meta property="article:published_time" content="2015-08-05" />
+            <meta property="article:section" content="Games" />
+            <meta property="article:author" content="Stephanie W" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="./theme/css/bootstrap.lumen.min.css" type="text/css"/>
+    <link href="./theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="./theme/css/pygments/monokai.css" rel="stylesheet">
+    <link rel="stylesheet" href="./theme/css/style.css" type="text/css"/>
+
+        <link href="./feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Brain Scribble ATOM Feed"/>
+
+
+
+        <link href="./feeds/games.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Brain Scribble Games ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="./" class="navbar-brand">
+Brain Scribble            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="./category/dataanalysis.html">Dataanalysis</a>
+                        </li>
+                        <li class="active">
+                            <a href="./category/games.html">Games</a>
+                        </li>
+                        <li >
+                            <a href="./category/projectmanagement.html">Projectmanagement</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="./archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="./nim-games.html"
+                       rel="bookmark"
+                       title="Permalink to Nim Games">
+                        Nim Games
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2015-08-05T13:32:04.447975+02:00"> 05/August/2015</time>
+    </span>
+
+
+
+
+
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                
+<hr/>
+<!-- BEGIN_SUMMARY -->
+<p>Nim is a mathematical game of strategy in which two players take turns removing objects from distinct heaps. On each turn, a player must remove at least one object, and may remove any number of objects provided they all come from the same heap.</p>
+<!-- END_SUMMARY -->
+<p>On a table, there is heaps of stones (or matches) from various sizes. Each player takes one or several stones in a single heap. The winner is the one who can empty the table.</p>
+<h2 id="game-graph">Game Graph</h2>
+<p>The following graph represents a game with three heaps containing 1, 2 and 3 matches respectively.  </p>
+<p><img alt="" src="/figure/nim-graph.png"/></p>
+<p>The graph shows the allowed and possible state after a given state.<br/>
+For example from (1,1,2), the game rule allows the following states (1,1,1) or (1,2) or (1,1).</p>
+<p>The nodes in red compose the graph core. The graph core has the following property:</p>
+<p>(1) Every node out of a core has at least one successor, and among them a node of the core<br/>
+(2) Any node from the core can't have as successor (if exist) a node from the core  </p>
+<p>A game state or position (or option) can be inside or outside the core. The loosing position(s) is inside the core (from first property).  </p>
+<p>The first position can be inside or outside the core.<br/>
+Let's say it is outside, there is a winning strategy for the first player: step in the core (possible, cause of the first property), the second player will step out from the core (from the second property). Then the first player will step in the core once again, etc. If the first position was inside the core, then the second player could adopt the wining strategy of step in, step out the core alternalively.</p>
+<p>In the context of a finding a winning strategy, properties above can be rewritten as follow:</p>
+<p>(1') From a winning position, there is at least one move to a losing position (in the core)<br/>
+(2') From a losing position, all moves lead to a winning position (outside the core)  </p>
+<h2 id="determining-the-graph-core">Determining the graph core</h2>
+<h3 id="the-xor-way">The XOR way</h3>
+<p>Let's try to find a way to compute a positive number for each node determining if the node is in the core or not.<br/>
+Let's 0, the number assigned to the nodes of the core, so any number different from 0 is outside the core.  </p>
+<p>Let <span class="math">\(x_1,\)</span> ..., <span class="math">\(x_n\)</span> be the sizes of the heaps before a move, and <span class="math">\(y_1\)</span>, ..., <span class="math">\(y_n\)</span> the corresponding sizes after a move. 
+We have to find an operation ? where, for a given position:<br/>
+(1') if s = <span class="math">\(x_0\)</span> ? <span class="math">\(x_1 ? ... ? x_n = 0\)</span> then all successor positions of this position verifing t = <span class="math">\(y_0\)</span> ? <span class="math">\(y_1 ? ... ? y_n \ne 0\)</span><br/>
+(1') s = if <span class="math">\(x_0\)</span> ? <span class="math">\(x_1 ? ... ? x_n \ne 0\)</span> it exists a least a successor position of this position verifing t = <span class="math">\(y_0\)</span> ? <span class="math">\(y_1 ? ... ? y_n = 0\)</span><br/>
+with <span class="math">\(x_i = y_i\)</span> for all <span class="math">\(i \ne k\)</span>, and <span class="math">\(x_k &gt; y_k\)</span> (any move from a position to an other can only change one of the <span class="math">\(x_k\)</span>).</p>
+<p>A such operation is the XOR (exclusive or) operation sybolized by <span class="math">\(\oplus\)</span>.<br/>
+XOR is a logical bitwise operation, XOR is true only when an odd number of inputs is true.</p>
+<p>XOR Thruth Table:</p>
+<table>
+<thead>
+<tr>
+<th>p</th>
+<th>q</th>
+<th><span class="math">\(p \oplus q\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p><em>0 = FALSE</em><br/>
+<em>1 = TRUE</em></p>
+<p>Proof:<br/>
+(1') : If you change a single bits in a XOR of bits, you'll change the final result, ie. if <span class="math">\(s = 0\)</span> then <span class="math">\(t \ne 0\)</span> <br/>
+(2') : From s, there is at least one way to get a sum t equal to 0 while respecting the rule of the game (ie. removing elements from a single heap): Let d be the position of the  leftmost one bit in s and k a heap where the dth bit is also one (it has to exist), then from position d (included) flip all the bit of <span class="math">\(x_k\)</span> correponding to the 1 in the sum s. The new sum s will be 0.</p>
+<p>Example : The sum is 01011 (the leftmost nonzero bit is at 2th bit). Using the first heap, flipping the 2nd, 4th and 5th bits:</p>
+<div class="highlight"><pre><span class="code-line">    *</span>
+<span class="code-line">  1 1 0 0 1         1 0 0 1 0 </span>
+<span class="code-line">  0 1 1 1 1         0 1 1 1 1</span>
+<span class="code-line">  1 0 0 1 1         1 0 0 1 1</span>
+<span class="code-line">  0 0 0 1 1    =&gt;   0 0 0 1 1</span>
+<span class="code-line">  0 1 1 0 1         0 1 1 0 1</span>
+<span class="code-line">  ---------         ---------</span>
+<span class="code-line">  0 1 0 1 1         0 0 0 0 0</span>
+</pre></div>
+<p>We verify  <span class="math">\(y_k\)</span> &lt; <span class="math">\(x_k\)</span> : all bits to the left of d are the same in <span class="math">\(x_k\)</span> and <span class="math">\(y_k\)</span>, bit d decreases from 1 to 0 (decreasing the value by 2d), and any change in the remaining bits will amount to at most <span class="math">\(2^d-1\)</span>.</p>
+<p>By removing <span class="math">\(x_k\)</span> - <span class="math">\(y_k\)</span> objects from heap k, we get a let a loosing position for the other player.</p>
+<p>From our previous graph, applying XOR sum on heap sizes, we get: </p>
+<p><img alt="" src="/figure/nim-graph-2.png"/></p>
+<p>By computing these numbers to the graph, we define a Grundy function. The Grundy numbers are also called nimbers, as value of Nim heap.</p>
+<p>For any finite combinatorial game, there is only one way to decompose the (finite) set of positions into nimbers.</p>
+<h3 id="the-hard-way">The hard way</h3>
+<p>An other way to find the core:</p>
+<p>A number can be assigned to each node so it follows the following property: The number of each node is the smallest number not in the successor numbers list.<br/>
+For example A with number 3 has for successors B, C, D, F, then the successor numbers list is (0, 1, 2).</p>
+<p>This is an illustration of the Sprague-Grundy theorem which states that every impartial game is equivalent to a nim heap of a certain size.
+Nimber addition (also known as nim-addition) can be used to calculate the size of a single heap equivalent to a collection of heaps. It is defined recursively by:</p>
+<div class="math">$$\alpha \oplus \beta = \operatorname{mex}(\{\,\alpha' \oplus \beta : \alpha' &lt; \alpha\,\} \cup \{\, \alpha  \oplus \beta' : \beta' &lt; \beta \,\})$$</div>
+<p>where for a set S of ordinals, mex(S) is defined to be the "minimum excluded ordinal", i.e. mex(S) is the smallest ordinal which is not an element of S.</p>
+<p>From our previous properties:<br/>
+(1) Every node out of a core has at least one successor, and among them a node of the core<br/>
+(2) Any node from the core can't have as successor (if exist) a node from the core  </p>
+<p>the relation with the Grundy number 0 and the core is a follow:<br/>
+A number outside the core has a Grundy Number &gt; 0, then 0 is in its successor number list (in respect of the first(1)).
+A node with number 0 has as successors only successors with numbers not equal to 0, and then outside the core (in respect of (2)).</p>
+<p>For any finite combinatorial game, there is only one way to decompose the (finite) set of positions into two classes which satisfy (1) and (2).</p>
+<p>Note :<br/>
+Example of a digital sum <span class="math">\(7 \oplus 11\)</span>: <br/>
+<span class="math">\(7 = 4 + 2 + 1 = 1.2^{2} + 1.2^{1} + 1.2^{0} = 111\)</span><br/>
+<span class="math">\(11 = 8 + 2 + 1 = 1.2^{3} + 0.2^{2} + 1.2^{1} + 1.2^{0} = 1011\)</span><br/>
+Then we sum, the base 2 numbers, with 1 + 1 = 0  </p>
+<div class="highlight"><pre><span class="code-line">    1 1 1</span>
+<span class="code-line">+ 1 0 1 1</span>
+<span class="code-line"> --------</span>
+<span class="code-line">  1 1 0 0</span>
+</pre></div>
+<p><span class="math">\(1100= 1.2^{3} + 1.2^{2} + 0.2^{1} + 0.2^{0} = 12\)</span></p>
+<p><span class="math">\(7 \oplus 11 = 12\)</span></p>
+<!--
+Sources:
+https://en.wikipedia.org/wiki/Nim
+https://en.wikipedia.org/wiki/Nimber
+https://en.wikipedia.org/wiki/Exclusive_or
+http://math.stackexchange.com/questions/416042/why-xor-operator-works
+-->
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+    
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+        <ul class="list-group" id="links">
+            <img width="100%" class="img-thumbnail" src="/images/post_1246903_635089122565391744.jpg"/>
+        </ul>
+    </li>
+            <li class="list-group-item"><h4><i class="fa fa-crosshairs"></i><span class="icon-label">Table of Contents</span></h4>
+            <div class="toc">
+<ul>
+<li><a href="#game-graph">Game Graph</a></li>
+<li><a href="#determining-the-graph-core">Determining the graph core</a><ul>
+<li><a href="#the-xor-way">The XOR way</a></li>
+<li><a href="#the-hard-way">The hard way</a></li>
+</ul>
+</li>
+</ul>
+</div>
+             <hr />
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="https://fr.linkedin.com/pub/stephanie-werli/26/b69/a0b"><i class="fa fa-linkedin-square fa-lg"></i> linkedin</a></li>
+                <li class="list-group-item"><a href="http://github.com/stephanie-w"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+              </ul>
+            </li>
+
+
+
+
+
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2015 Stephanie W
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="./theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="./theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="./theme/js/respond.min.js"></script>
+
+
+</body>
+</html>

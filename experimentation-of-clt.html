@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>R: Experimentation of the Cental Limit Theorem - Brain Scribble</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="./images/post_1246903_635089122565391744.jpg" rel="icon">
+
+<link rel="canonical" href="./experimentation-of-clt.html">
+
+        <meta name="author" content=""Stephanie W"" />
+        <meta name="keywords" content="R,stats" />
+        <meta name="description" content="The CLT Theorem: The distribution of sample statistics (e.g. mean) is approximatively normal, regardless of the underlying distribution, with mean = \(\mu\) and variance = \(\sigma^2\) To experiment this theory, we&#39;ve built a matrix with 40 exponentials (we take lambda=0.2) x 1000 and compute the mean of ...if (!document.getElementById(&#39;mathjaxscript_pelican_#%@#$@#&#39;)) { var align = &#34;center&#34;, indent = &#34;0em&#34;, linebreak = &#34;false&#34;; if (false) { align = (screen.width" />
+
+        <meta property="og:site_name" content="Brain Scribble" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="R: Experimentation of the Cental Limit Theorem"/>
+        <meta property="og:url" content="./experimentation-of-clt.html"/>
+        <meta property="og:description" content="The CLT Theorem: The distribution of sample statistics (e.g. mean) is approximatively normal, regardless of the underlying distribution, with mean = \(\mu\) and variance = \(\sigma^2\) To experiment this theory, we&#39;ve built a matrix with 40 exponentials (we take lambda=0.2) x 1000 and compute the mean of ...if (!document.getElementById(&#39;mathjaxscript_pelican_#%@#$@#&#39;)) { var align = &#34;center&#34;, indent = &#34;0em&#34;, linebreak = &#34;false&#34;; if (false) { align = (screen.width"/>
+        <meta property="article:published_time" content="2015-08-05" />
+            <meta property="article:section" content="DataAnalysis" />
+            <meta property="article:tag" content="R" />
+            <meta property="article:tag" content="stats" />
+            <meta property="article:author" content=""Stephanie W"" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="./theme/css/bootstrap.lumen.min.css" type="text/css"/>
+    <link href="./theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="./theme/css/pygments/monokai.css" rel="stylesheet">
+    <link rel="stylesheet" href="./theme/css/style.css" type="text/css"/>
+
+        <link href="./feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Brain Scribble ATOM Feed"/>
+
+
+
+        <link href="./feeds/dataanalysis.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Brain Scribble DataAnalysis ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="./" class="navbar-brand">
+Brain Scribble            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="./category/dataanalysis.html">Dataanalysis</a>
+                        </li>
+                        <li >
+                            <a href="./category/games.html">Games</a>
+                        </li>
+                        <li >
+                            <a href="./category/projectmanagement.html">Projectmanagement</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="./archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="./experimentation-of-clt.html"
+                       rel="bookmark"
+                       title="Permalink to R: Experimentation of the Cental Limit Theorem">
+                        R: Experimentation of the Cental Limit Theorem
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2015-08-05T15:35:27.805996+02:00"> 05/August/2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="./tag/r.html">R</a>
+        /
+	<a href="./tag/stats.html">stats</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <hr />
+<p>The CLT Theorem: <br />
+The distribution of sample statistics (e.g. mean) is approximatively normal, regardless of the underlying distribution, with mean = <span class="math">\(\mu\)</span> and variance = <span class="math">\(\sigma^2\)</span></p>
+<p>To experiment this theory, we've built a matrix with 40 exponentials (we take lambda=0.2) x 1000 and compute the mean of each row, storing the result in a <code>means</code> vector:</p>
+<div class="highlight"><pre><span class="code-line"><span class="kp">set.seed</span><span class="p">(</span><span class="m">1234</span><span class="p">)</span></span>
+<span class="code-line">n <span class="o">&lt;-</span> <span class="m">40</span></span>
+<span class="code-line">nosim <span class="o">&lt;-</span> <span class="m">1000</span></span>
+<span class="code-line">lambda <span class="o">&lt;-</span> <span class="m">0.2</span></span>
+<span class="code-line">means <span class="o">&lt;-</span> <span class="kp">apply</span><span class="p">(</span><span class="kt">matrix</span><span class="p">(</span>rexp<span class="p">(</span>nosim <span class="o">*</span> n<span class="p">,</span> lambda<span class="p">),</span> nosim<span class="p">),</span> <span class="m">1</span><span class="p">,</span> <span class="kp">mean</span><span class="p">)</span></span>
+<span class="code-line"><span class="kp">head</span><span class="p">(</span>means<span class="p">)</span></span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="code-line">## [1] 4.602510 6.017790 5.463686 4.176755 7.144672 4.427567</span>
+</pre></div>
+
+
+<p>and plot an histogram of the <code>means</code> vector and the density distribution:</p>
+<div class="highlight"><pre><span class="code-line"><span class="kn">library</span><span class="p">(</span>ggplot2<span class="p">)</span></span>
+<span class="code-line">dat <span class="o">&lt;-</span> <span class="kt">data.frame</span><span class="p">(</span>x <span class="o">=</span> <span class="m">1</span><span class="o">:</span>nosim<span class="p">,</span> y <span class="o">=</span> means<span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line">ggplot<span class="p">(</span>dat<span class="p">,</span> aes<span class="p">(</span>x <span class="o">=</span> y<span class="p">))</span> <span class="o">+</span> geom_histogram<span class="p">(</span>colour <span class="o">=</span> <span class="s">&quot;black&quot;</span><span class="p">,</span> fill <span class="o">=</span> <span class="s">&quot;white&quot;</span><span class="p">)</span> <span class="o">+</span> </span>
+<span class="code-line">    geom_vline<span class="p">(</span>aes<span class="p">(</span>xintercept <span class="o">=</span> <span class="kp">mean</span><span class="p">(</span>y<span class="p">)),</span> color <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> linetype <span class="o">=</span> <span class="s">&quot;dashed&quot;</span><span class="p">,</span> </span>
+<span class="code-line">        size <span class="o">=</span> <span class="m">1</span><span class="p">)</span> <span class="o">+</span> labs<span class="p">(</span>x <span class="o">=</span> <span class="s">&quot;Means&quot;</span><span class="p">,</span> y <span class="o">=</span> <span class="s">&quot;Frequency&quot;</span><span class="p">,</span> title <span class="o">=</span> <span class="s">&quot;Means Frequency&quot;</span><span class="p">)</span></span>
+</pre></div>
+
+
+<div class="rimage center"><img src="/figure/means_histogram-1.png" title="plot of chunk means_histogram" alt="plot of chunk means_histogram" class="plot" /></div>
+
+<div class="highlight"><pre><span class="code-line">ggplot<span class="p">(</span>dat<span class="p">,</span> aes<span class="p">(</span>x <span class="o">=</span> y<span class="p">))</span> <span class="o">+</span> geom_histogram<span class="p">(</span>binwidth <span class="o">=</span> <span class="m">0.3</span><span class="p">,</span> colour <span class="o">=</span> <span class="s">&quot;black&quot;</span><span class="p">,</span> fill <span class="o">=</span> <span class="s">&quot;white&quot;</span><span class="p">,</span> </span>
+<span class="code-line">    aes<span class="p">(</span>y <span class="o">=</span> <span class="m">..</span>density..<span class="p">))</span> <span class="o">+</span> stat_function<span class="p">(</span>fun <span class="o">=</span> dnorm<span class="p">,</span> args <span class="o">=</span> <span class="kt">list</span><span class="p">(</span>mean <span class="o">=</span> <span class="m">1</span><span class="o">/</span>lambda<span class="p">,</span> </span>
+<span class="code-line">    sd <span class="o">=</span> <span class="m">1</span><span class="o">/</span>lambda<span class="o">/</span><span class="kp">sqrt</span><span class="p">(</span>n<span class="p">)))</span> <span class="o">+</span> labs<span class="p">(</span>x <span class="o">=</span> <span class="s">&quot;Means&quot;</span><span class="p">,</span> y <span class="o">=</span> <span class="s">&quot;Dendity&quot;</span><span class="p">,</span> title <span class="o">=</span> <span class="s">&quot;Distribution&quot;</span><span class="p">)</span> <span class="o">+</span> </span>
+<span class="code-line">    geom_density<span class="p">(</span>alpha <span class="o">=</span> <span class="m">0.2</span><span class="p">,</span> fill <span class="o">=</span> <span class="s">&quot;#FF6666&quot;</span><span class="p">)</span></span>
+</pre></div>
+
+
+<div class="rimage center"><img src="/figure/means_distribution-1.png" title="plot of chunk means_distribution" alt="plot of chunk means_distribution" class="plot" /></div>
+
+<p>To confirm this distribution fits the normal distribution, we've draw the hump of the density of a random variable normally distributed with a mean <span class="math">\(1/\lambda\)</span> and a standard deviation <span class="math">\(\frac{1/\lambda}{\sqrt{n}}\)</span>.</p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+    
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="./variance-inflation.html">R : Variance Inflation</a></li>
+        <li><a href="./statinf2.html">Notes on Statistical Inference : Hypothesis Testing and t-tests</a></li>
+        <li><a href="./last_earthquakes.html">R: Earthquakes from the past 30 days</a></li>
+        <li><a href="./weather_event_impact.html">R: Analysis of weather events impact on population health and economy.</a></li>
+    </ul>
+</section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+        <ul class="list-group" id="links">
+            <img width="100%" class="img-thumbnail" src="/images/post_1246903_635089122565391744.jpg"/>
+        </ul>
+    </li>
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="https://fr.linkedin.com/pub/stephanie-werli/26/b69/a0b"><i class="fa fa-linkedin-square fa-lg"></i> linkedin</a></li>
+                <li class="list-group-item"><a href="http://github.com/stephanie-w"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+              </ul>
+            </li>
+
+
+
+
+
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2015 Stephanie W
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="./theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="./theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="./theme/js/respond.min.js"></script>
+
+
+</body>
+</html>

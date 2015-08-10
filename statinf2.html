@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Notes on Statistical Inference : Hypothesis Testing and t-tests - Brain Scribble</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="./images/post_1246903_635089122565391744.jpg" rel="icon">
+
+<link rel="canonical" href="./statinf2.html">
+
+        <meta name="author" content="Stephanie W" />
+        <meta name="keywords" content="R,stats" />
+        <meta name="description" content="These are my notes on the Statistical Inference course (2th part) : Hypothesis Testing and t-tests" />
+
+        <meta property="og:site_name" content="Brain Scribble" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Notes on Statistical Inference : Hypothesis Testing and t-tests"/>
+        <meta property="og:url" content="./statinf2.html"/>
+        <meta property="og:description" content="These are my notes on the Statistical Inference course (2th part) : Hypothesis Testing and t-tests"/>
+        <meta property="article:published_time" content="2015-08-05" />
+            <meta property="article:section" content="DataAnalysis" />
+            <meta property="article:tag" content="R" />
+            <meta property="article:tag" content="stats" />
+            <meta property="article:author" content="Stephanie W" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="./theme/css/bootstrap.lumen.min.css" type="text/css"/>
+    <link href="./theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="./theme/css/pygments/monokai.css" rel="stylesheet">
+    <link rel="stylesheet" href="./theme/css/style.css" type="text/css"/>
+
+        <link href="./feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Brain Scribble ATOM Feed"/>
+
+
+
+        <link href="./feeds/dataanalysis.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Brain Scribble DataAnalysis ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="./" class="navbar-brand">
+Brain Scribble            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="./category/dataanalysis.html">Dataanalysis</a>
+                        </li>
+                        <li >
+                            <a href="./category/games.html">Games</a>
+                        </li>
+                        <li >
+                            <a href="./category/projectmanagement.html">Projectmanagement</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="./archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="./statinf2.html"
+                       rel="bookmark"
+                       title="Permalink to Notes on Statistical Inference : Hypothesis Testing and t-tests">
+                        Notes on Statistical Inference : Hypothesis Testing and t-tests
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2015-08-05T15:36:12.144594+02:00"> 05/August/2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="./tag/r.html">R</a>
+        /
+	<a href="./tag/stats.html">stats</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                
+<hr/>
+<p>
+These are  my notes on the Statistical Inference course (2th part) : Hypothesis Testing and t-tests</p>
+
+<h2 id="clt-central-limit-theorem">CLT : Central Limit Theorem</h2>
+<p>The distribution of sample statistics (e.g. mean) is approximatively normal, regardless of the underlying distribution, with mean = <span class="math">\(\mu\)</span> and variance = <span class="math">\(\sigma^2\)</span></p>
+<p><span class="math">\(\bar{X} \sim N(mean = \mu, sd = \frac{\sigma}{\sqrt{n}})\)</span> </p>
+<p>Conditions for CLT:</p>
+<ul>
+<li>Independence : The sampled observations must be independent <ul>
+<li>random sample / assignment</li>
+<li>if sampling without replacement, n &lt; 10 % of population</li>
+</ul>
+</li>
+<li>Sample Size / skew :<ul>
+<li>population should be normal</li>
+<li>if not sample size should be large (rule of thumb &gt; 30)</li>
+</ul>
+</li>
+</ul>
+<h2 id="confidence-interval">Confidence Interval</h2>
+<p>A confidence interval gives an estimated range of values which is likely to include an unknown population parameter, the estimated range being calculated from a given set of sample data (the interval is a random observed variable depending on the sample).  </p>
+<p>The level <span class="math">\(\alpha\)</span> of a confidence interval gives the probability that the interval produced by the method employed includes the true value of this parameter.
+The level of confidence is the percentage of chance the unknown parameter is contained in the interval (which would differ for each sample across repeated sampling).
+The confidence interval represents values for the population parameter for which the difference between this parameter and the observed estimate is not statistically significant at the <span class="math">\(\alpha\)</span> level.  </p>
+<p>Let X be a random sample from a probability distribution <span class="math">\(\theta\)</span>, a quantity to be estimated. A confidence interval I for <span class="math">\(\theta\)</span> with confidence level <span class="math">\(\alpha\)</span> has the property:</p>
+<p><span class="math">\(P(\theta \in I(x)) \geq 1 - \alpha\)</span> with P a density probability depending on theta.</p>
+<p>Let's take the example of the estimation of the mean of a population normally distributed which is the simpleast usage of condidence interval.<br/>
+The confidence interval of a sample mean <span class="math">\(\bar X\)</span> from a normally distributed sample is also normally distributed (from CLT), with the same expectation <span class="math">\(\mu\)</span> and a standard deviation :</p>
+<p><span class="math">\(\frac {\sigma}{\sqrt{n}}\)</span> (the standard deviation of a dsitribution of sample means is called standard error, SE)</p>
+<p>By standardizing <span class="math">\(\bar X\)</span>, we get a random variable: </p>
+<p><span class="math">\(Z = \frac {\bar X-\mu}{\sigma/\sqrt{n}}\)</span> </p>
+<p>Z depend on the parameter <span class="math">\(\mu\)</span> to be estimated and a standard normal distribution independent of the parameter <span class="math">\(\mu\)</span>. We look for numbers -z and z, independent of <span class="math">\(\mu\)</span> between which Z lies with a probability <span class="math">\(1 - \alpha\)</span>. </p>
+<p>For a 95% of confidence, we take <span class="math">\(1 - \alpha\)</span> = 0.95, so</p>
+<p><span class="math">\(\!P(-z\le Z\le z) = 1-\alpha = 0.95\)</span></p>
+<p>Z follows the cumulative normal distribution (Z is standardized)</p>
+<p><span class="math">\(\Phi(z) = P(Z \le z) = 1 - \tfrac{\alpha}{2} = 0.975\)</span></p>
+<p><span class="math">\(\Phi(z)  = \Phi^{-1}(\Phi(z)) = \Phi^{-1}(0.975) = 1.96\)</span></p>
+<p><img alt="" src="http://upload.wikimedia.org/wikipedia/en/b/bf/NormalDist1.96.png"/>
+1.96 correspond to the 95% + 2.5% = 97.5% quantile of the normal distribution, according to the Z table (find 0.975 in the table and add the column header with the row header).
+<img alt="" src="http://cosstatistics.pbworks.com/f/1281154582/6368.png"/>
+<img alt="Standard deviation diagram" src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Standard_deviation_diagram.svg"/></p>
+<p>and</p>
+<p><span class="math">\(0.95 = 1-\alpha=P(-z \le Z \le z)=P \left(-1.96 \le \frac {\bar X-\mu}{\sigma/\sqrt{n}} \le 1.96 \right)\)</span></p>
+<p><span class="math">\(0.95 = P \left( \bar X - 1.96 \frac{\sigma}{\sqrt{n}} \le \mu \le \bar X + 1.96 \frac{\sigma}{\sqrt{n}}\right)\)</span></p>
+<p>The lower endpoint of the the interval is <span class="math">\(\bar X - 1.96 \frac{\sigma}{\sqrt{n}}\)</span> <br/>
+The upper endpoint of the the interval is <span class="math">\(\bar X + 1.96 \frac{\sigma}{\sqrt{n}}\)</span> </p>
+<p>We've computed our interval that can be interpreted this way : If we take 100 samples of  size n and for each sample we compute the interval, then the parameter will be in 95 of the intervals computed, and outside of 5 intervals. We are 95% confident ot the result. </p>
+<p>Example:</p>
+<p>You have taken a random sample of 100 primary school children. Their heights had mean = 150cm and sd = 10 cm. We estimate the true average height of primary school children based on this sample using a 95% confidence interval.</p>
+<p><span class="math">\(\bar{x} = z \times SE = x\bar \pm 1.96 \times \frac{s}{\sqrt{n}} = 150 \pm 1.96 \times \frac{10}{\sqrt{100}} = 150 \pm \times 1.96 \times 1 = (148.04, 151.96)\)</span></p>
+<p>We are 95% confident that primary school children mean height is between 148.04cm and 151.96cm.</p>
+<p>As the standard deviation of the population <span class="math">\(\sigma\)</span> is known in this case, the distribution of the sample mean <span class="math">\(\bar X\)</span> is a normal distribution with <span class="math">\(\mu\)</span> the only unknown parameter. In most of practical case, the parameter <span class="math">\(\sigma\)</span> is also unknown, which calls for using the (Student's) t-distribution.</p>
+<h2 id="required-sample-size-for-margin-of-error">Required sample size for margin of error</h2>
+<p>Given a target margin of error and confidence level, and the standard deviation of a sample (or population), we can work backwards to determine the required sample size.</p>
+<p>Example :</p>
+<p>From previous measurements of primary school heights. What should be the sample size in order to get a 95% confidence interval with a margin of error less or equal to 1 cm:</p>
+<p><span class="math">\(ME = z \times SE\)</span></p>
+<p><span class="math">\(1 = 1.96 \times \frac{10}{\sqrt{n}}\)</span></p>
+<p><span class="math">\(n = \left(\frac{1.96 \times 10}{1}\right)^2 = 19.6^2 = 384.16\)</span></p>
+<p>Thus we need a sample size of at least 385 primary school children.</p>
+<h2 id="hypothesis-testing">Hypothesis testing</h2>
+<p>When interpreting an experimental finding, a natural question arises as to whether the finding could have occurred by chance. Hypothesis testing is a statistical procedure for testing whether chance is a plausible explanation of an experimental finding.</p>
+<p>The researcher has a proposed hypothesis about a population characteristic and conducts a study to discover if it is reasonable, or, acceptable.</p>
+<p>Null Hypothesis <span class="math">\(H_0\)</span> : The status quo that is assumed to be true. <br/>
+Alternative hypothesis <span class="math">\(H_a\)</span> : An alternative claim under consideration that will require statistical evidence to accept, and thus, reject the null hypothesis. The alternative hypothesis claims that the population characteristic is different than the observed parameter. This difference is either that the characteristic has increased, decreased, or, possibly either increased or decreased.</p>
+<p>The alternative hypotheses are typically of the form &lt; (decrease), &gt; (increase) or <span class="math">\(\neq\)</span> (either increase or decrease).
+We have four possible outcomes:</p>
+<table>
+<thead>
+<tr>
+<th>Truth</th>
+<th>Decide</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H0</td>
+<td>H0</td>
+<td>Correctly accept null</td>
+</tr>
+<tr>
+<td>H0</td>
+<td>Ha</td>
+<td>Type I error (False Positive, falsely claims a significant result)</td>
+</tr>
+<tr>
+<td>Ha</td>
+<td>Ha</td>
+<td>Correctly reject null</td>
+</tr>
+<tr>
+<td>Ha</td>
+<td>H0</td>
+<td>Type II error (False Negative falsely claims a nonsignificant result)</td>
+</tr>
+</tbody>
+</table>
+<p>A test statistic is used to make an assumption, the null is made upon this assumption. The test statistic will have a certain likelihood for occurring, according to the distribution being used. When this likelihood is small, this indicates that the sample data are either from an unusual sample, or, that the distribution of the population actually is different than assumed. 
+If the sample is properly drawn, there is small risk that the sample is unusual, and, so, it is safe to draw a conclusion that the distribution may be changed.  This allows the conclusion that the null hypothesis may have changed, and that the alternative hypothesis might be accepted instead.  This conclusion leads the researcher to "reject" the null hypothesis.</p>
+<p>Example:</p>
+<p>From previous example, does the data support the hypothesis that primary school children on average are shorter than 151cm?</p>
+<p><span class="math">\(H_0 : \mu_0 = 151\)</span> </p>
+<p><span class="math">\(H_a : \mu_0 &lt; 151\)</span></p>
+<p>Assuming <span class="math">\(H_0\)</span>, how unusual or extreme is the sample value we get from our OBSERVED data? or
+Assuming <span class="math">\(H_0\)</span>, what is the probability to obtain the observed data (ie. a mean of 150cm &lt; 151 cm, with a sd=10cm) or a more extreme values?</p>
+<p>An equivalent question is, assuming <span class="math">\(H_0\)</span>, ie. assuming X' normally distributed with <span class="math">\(X' \sim N(150, 1)\)</span>, what is the probability to obtain a standard deviation at least that far from the mean? </p>
+<p>We must determine how our hypothesis mean is far from our OBSERVED sample mean (the z-score):</p>
+<p><span class="math">\(Z = \frac{\bar{X} - \mu}{\bar{\sigma_X}} = \frac{150 - 151}{1} = -1\)</span></p>
+<p>Our observed data are -1 standard deviation from the hypothesis mean.</p>
+<p>A reasonable strategy would be : do not reject the null hypothesis, ie. "primary school children have mean height of 151 cm", if there is more than x% chance of getting a random sample of 100 children with a sample mean 150, with x enough hight (more than 5% usually).</p>
+<p>The probability under the null hypothesis of obtaining evidence as or more extreme than your z-score or test statistic (obtained from your observed data) in the direction of the alternative hypothesis is the p-value.</p>
+<h2 id="p-value">P-value</h2>
+<p>Probability of obtaining the observed result or results that are more "extreme", given that hypothesis is true, ie. P(observed or more extreme outcome | <span class="math">\(H_0\)</span>).</p>
+<p>A reasonable strategy would reject the null hypothesis if the sample mean <span class="math">\(\bar X\)</span> is larger or lower than some constant C, chosen so that the probability of a Type I error is <span class="math">\(\alpha\)</span></p>
+<p>Note:
+  <span class="math">\(C = \mu + qnorm(\alpha) \times sd\)</span>
+  instead of computing a constant C as a cutpoint for accepting or rejecting <span class="math">\(H_0\)</span>, we simply compute a Z-score based on alpha, the number of standard deviations the sample mean is from the hypothesized mean.</p>
+<p>If the p-value is low (ie. lower than the significant level (<span class="math">\(\alpha\)</span>), usually 5% as a standard level of rejection), then we saw that is very unlikely to observe the data if the null hypothesis is true and reject it.</p>
+<p>If the p-value is high (ie. higher than (<span class="math">\(\alpha\)</span>), we say that it is likely to observe the data even if the null hypothesis was true, and thus do not reject it.</p>
+<h2 id="interpreting-the-p-value">Interpreting the p-value</h2>
+<p>When a probability value is below the <span class="math">\(\alpha\)</span> level, the effect is statistically significant and the null hypothesis is rejected.<br/>
+However, not all statistically significant effects should be treated the same way. For example, you should have less confidence that the null hypothesis is false if p = 0.049 than p = 0.003.<br/>
+If the null hypothesis is rejected, then the alternative to the null hypothesis (called the alternative hypothesis) is accepted.  </p>
+<p>In many situations it is very unlikely two conditions will have the same population means. Therefore, even before an experiment comparing their effectiveness is conducted, the researcher knows that the null hypothesis of exactly no difference is false. If a test of the difference is significant, then the direction of the difference is established.</p>
+<p>When a significance test results in a high probability value, it means that the data provide little or no evidence that the null hypothesis is false. However, the high probability value is not evidence that the null hypothesis is true. The problem is that it is impossible to distinguish a null effect from a very small effect.</p>
+<p>Example:</p>
+<p>From the previous example, with a significant level equal to 0.05:</p>
+<p><span class="math">\(\bar{X} \sim N(\mu = 151, SE = 1)\)</span> #Null hypothesis</p>
+<p>Test statistic or Z-score:</p>
+<p><span class="math">\(Z = \frac{\bar X - \mu}{SE} = \frac{150 - 151}{1} = -1\)</span></p>
+<p>The probability that we are at most -1 standard deviation from the mean:</p>
+<p><span class="math">\(P\left(Z &lt; -1\right) = 1 - 0.8413 = 0.1587\)</span></p>
+<p>This probability can be computed with the qnorm R function:</p>
+<div class="highlight"><pre><span class="code-line">pnorm<span class="p">(</span><span class="m">-1</span><span class="p">)</span></span>
+</pre></div>
+<div class="highlight"><pre><span class="code-line">## [1] 0.1586553</span>
+</pre></div>
+<p>If we assume <span class="math">\(H_0\)</span> (<span class="math">\(mu = 151\)</span>), the probability of getting a sample this "extreme" (<span class="math">\(\mu = 150\)</span>) or actually more extreme is 15.9%.
+Since p-value is higher than 5%, we don't to reject <span class="math">\(H_0\)</span>.</p>
+<p>Interpretation :</p>
+<ul>
+<li>If in fact, primary school children have mean height of 151 cm, there is a 15,9% chance that a random sample of 100 children would yield a sample mean of 150cm or lower.</li>
+<li>This is a pretty hight probability</li>
+<li>Thus the sample mean of 150 could have likely occured by chance.</li>
+</ul>
+<h2 id="two-sided-hypothesis-testing">Two-sided Hypothesis testing</h2>
+<p>The test above was a one-side or one-tailed test.
+What is the probability that the children have mean height different from 151cm?</p>
+<p><span class="math">\(H_0 : \mu = 151\)</span> </p>
+<p><span class="math">\(H_a : \mu \neq 151\)</span></p>
+<p>We could reject <span class="math">\(H_0\)</span> (and accept <span class="math">\(H_a\)</span>) when our sample mean is significant different that 151, that is either less than OR greater that 151. 
+We consider values at both tails at the .025 and the .975 percentiles.
+This means that the test statistic is less than .025, Z_(alpha/2), or greater than .975, Z_(1-alpha/2).
+Notice that if we reject H_0, either it was FALSE (and hence our model is wrong and we are correct to reject it) OR H_0 is TRUE and we have made an error (Type I). The probability of this is 5%.</p>
+<p>P-value:</p>
+<p><span class="math">\(P\left(Z &lt; -1\right) +  P\left(Z &gt; 1\right) = 2 \times (1-0.8413) = 0.3174\)</span></p>
+<p>With R:</p>
+<div class="highlight"><pre><span class="code-line"><span class="m">2</span> <span class="o">*</span> pnorm<span class="p">(</span><span class="m">-1</span><span class="p">)</span></span>
+</pre></div>
+<div class="highlight"><pre><span class="code-line">## [1] 0.3173105</span>
+</pre></div>
+<h2 id="decision-rule">Decision rule</h2>
+<p>The decision rule is to reject the null hypothesis H0 if the observed value is in the critical region, and to accept or "fail to reject" the hypothesis otherwise.</p>
+<p>Left Tailed Test: <br/>
+<span class="math">\(H_0 : \mu = \mu_0\)</span> parameter = value <br/>
+<span class="math">\(H_a : \mu &lt; \mu_0\)</span> parameter  &lt; value <br/>
+with alpha = 0.5 <br/>
+Reject <span class="math">\(H_0\)</span>, if the test statistics is in the region of rejection, ie. if it is smaller than Z_5.   </p>
+<div class="highlight"><pre><span class="code-line">Z_95 <span class="o">&lt;-</span> qnorm<span class="p">(</span><span class="m">0.95</span><span class="p">)</span></span>
+<span class="code-line">Z_95</span>
+</pre></div>
+<div class="highlight"><pre><span class="code-line">## [1] 1.644854</span>
+</pre></div>
+<p>the 95% percentile corresponds to the value 1.64 (see also zthe z table above).</p>
+<div class="rimage center"><img alt="plot of chunk Z_5" class="plot" src="/figure/Z_5-1.png" title="plot of chunk Z_5"/></div>
+<p>Right Tailed Test: <br/>
+<span class="math">\(H_0 : \mu = \mu_0\)</span> parameter = value <br/>
+<span class="math">\(H_a : \mu &gt; \mu_0\)</span> parameter &gt; value <br/>
+Reject <span class="math">\(H_0\)</span>, if the test statistics is in the region of rejection, ie. if it is larger than Z_95.   </p>
+<div class="highlight"><pre><span class="code-line">Z_5 <span class="o">&lt;-</span> qnorm<span class="p">(</span><span class="m">0.05</span><span class="p">)</span></span>
+<span class="code-line">Z_5</span>
+</pre></div>
+<div class="highlight"><pre><span class="code-line">## [1] -1.644854</span>
+</pre></div>
+<div class="rimage center"><img alt="plot of chunk Z_95" class="plot" src="/figure/Z_95-1.png" title="plot of chunk Z_95"/></div>
+<p>Two Tailed Test: <br/>
+<span class="math">\(H_0 : \mu = \mu_0\)</span> parameter = value <br/>
+<span class="math">\(H_a : \mu \neq \mu_0\)</span> parameter <span class="math">\(\neq\)</span> value  (Another way to write not equal is &lt; or &gt;) <br/>
+Reject <span class="math">\(H_0\)</span>, if the test statistics is in the region of rejection, ie. if it is larger than Z_95 or smaller than Z_5.   </p>
+<p>The decision rule can be summarized as follows:</p>
+<p>Reject <span class="math">\(H_0\)</span> if the test statistic falls in the critical region (reject <span class="math">\(H_0\)</span> if the test statistic is more extreme than the critical value or reject <span class="math">\(H_0\)</span> ), otherwise, we fail to reject <span class="math">\(H_0\)</span>.</p>
+<p>The p-value tells us if the test statistic is inside our outside the region. <br/>
+Reject <span class="math">\(H_0\)</span> if p-value is less that the specified <span class="math">\(\alpha\)</span>, otherwise, we fail to reject <span class="math">\(H_0\)</span>.</p>
+<p>Note : I you fail to reject the one sided test, you know that you will fail to reject the two sided.</p>
+<h2 id="hypothesis-tests-and-confidence-intervals">Hypothesis tests and Confidence Intervals</h2>
+<p>They're equivalent.<br/>
+If you set <span class="math">\(\alpha\)</span> to some value and ran many tests checking alternative hypotheses against <span class="math">\(H_0\)</span> that <span class="math">\(\mu=\mu_0\)</span>, the set of all possible values for which you fail to reject <span class="math">\(H_0\)</span> forms the <span class="math">\((1\alpha)%\)</span> (that is 95%) confidence interval for <span class="math">\(\mu_0\)</span>.
+Similarly, if a <span class="math">\((1\alpha)%\)</span> interval contains mu_0, then we fail to reject <span class="math">\(H_0\)</span>.</p>
+<p>So, to resume:
+If the confidence interval contains the null value (<span class="math">\(\mu_0\)</span>, the value of <span class="math">\(H_0\)</span>), don't reject <span class="math">\(H_0\)</span>.
+If the confidence interval does not contain the null value, reject <span class="math">\(H_0\)</span>, cause this tells us that either our hypothesis is wrong or we're making a mistake (Type 1) in rejecting it.</p>
+<p>Previously, we found the 95% interval for heights of primary school children to be (148, 152). Given that our null hypothesis (<span class="math">\(H_0 = 151\)</span>) falls within this 95% Cl, we do not reject it.</p>
+<pre><span class="code-line"></span>
+<span class="code-line">              &lt;- 95% confident that the av is somewherer in here -&gt;</span>
+<span class="code-line">    ---------|-----------------------------------------------------|---------</span>
+<span class="code-line">             148cm                                                 152</span>
+</pre>
+<p>A two-sided hypothesis with significance level <span class="math">\(\alpha\)</span> is equivalent to a confidence interval with <span class="math">\(CL = 1 - \alpha\)</span>. 
+A one-sided hypothesis with significance level <span class="math">\(\alpha\)</span> is equivalent to a confidence interval with <span class="math">\(CL = 1 - 2\alpha\)</span>. </p>
+<h2 id="type-ii-error">Type II error</h2>
+<p>Let the probability of a type II error (accepting H_0 when it is false) to be beta.
+The term POWER refers to the quantity 1-beta and it represents the probability of rejecting <span class="math">\(H_0\)</span> when it's false. This is used to determine appropriate sample sizes in experiments.</p>
+<h2 id="the-t-distribution">The t distribution</h2>
+<p>So far, we use normal distribution and implicitly relying on the Central Limit Theorem.
+According to CLT, the distribution of sample statistics is approximatively normal, if:</p>
+<ul>
+<li>Population is normal</li>
+<li>Sample size is large (n&gt; 30)
+If so, we can use the population sd (<span class="math">\(s\sigma\)</span>) to compute a z-score.</li>
+</ul>
+<p>However, when we deal with small sample size and do not know the standard deviation of the population (<span class="math">\(\sigma\)</span>), we rely on the t distribution.<br/>
+The t distribution takes into account that spread of possible <span class="math">\(\sigma\)</span>'s.<br/>
+The test statistic is the same as before <span class="math">\(\frac{Observed-Expected}{SE}\)</span> ie. <span class="math">\(\frac{Observed-Expected}{s/\sqrt{n}}\)</span> and the test statistic is compared to <span class="math">\(t_{1-\alpha, df}\)</span> or/and <span class="math">\(t_{\alpha, df}\)</span> (with df the degree of freedom = size - 1).</p>
+<p>Shape of the distribution:</p>
+<ul>
+<li>Observations are more likely to fall beyond 2 sd from the mean</li>
+<li>The thicker tails are helpful in adjusting for the less reliable data on the standard deviation.
+The t distribution has one parameter, degrees of freedom (df) which determines the thickness of the tail</li>
+</ul>
+<p>Under <span class="math">\(H_0\)</span>, the probability that the test statistic is larger than the 95th percentile of the t distribution is 5%. The associated quantile is:</p>
+<div class="highlight"><pre><span class="code-line">n <span class="o">&lt;-</span> <span class="m">16</span>  <span class="c1"># sample size</span></span>
+<span class="code-line">pt<span class="p">(</span>q <span class="o">=</span> <span class="m">2.5</span><span class="p">,</span> df <span class="o">=</span> <span class="m">15</span><span class="p">,</span> lower.tail <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span></span>
+</pre></div>
+<div class="highlight"><pre><span class="code-line">## [1] 0.0122529</span>
+</pre></div>
+<p>the P(X &gt; 2.5) if <span class="math">\(H_0\)</span> were true. We would see this large a test statistic with probability 1% which is rather a small probability.</p>
+<ul>
+<li>df refers to the number of independent observations in data set</li>
+<li>nb of independent observations = sample size - 1</li>
+</ul>
+<p>When df increases, the t distribution approaches the normal distribution.</p>
+<p>Normal distribution vs t distribution: if you're unsure which one to use, use the t distribution since it approximates to the normal distribution with large sample sizes.</p>
+<p>T table
+<img alt="" src="http://3.bp.blogspot.com/_5u1UHojRiJk/TEdJJc6of2I/AAAAAAAAAIE/Ai0MW5VgIhg/s1600/t-table.jpg"/></p>
+<h2 id="independent-and-dependent-t-tests">Independent and dependent t-tests</h2>
+<p>Dependent t-test: when evaluating the effect between two related samples, ie.  when the same subjects are being compared or when two samples are matched at the level of individual subjects.<br/>
+Example : You feed a group of 100 people fast food everyday, did they gain weight?<br/>
+You can calculate a difference score and then determine if the mean difference score is significantly different from zero and so if there is significantly change.</p>
+<p>Independent t-test: when evaluating the effect between two independent sample: You feed 50 males and 50 males fast food everyday. Did males or females gain more weight after 30 days?</p>
+<h2 id="test-comparisons">Test Comparisons</h2>
+<table>
+<thead>
+<tr>
+<th>-</th>
+<th>Observed</th>
+<th>Expected</th>
+<th>SE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>z</td>
+<td>Sample mean</td>
+<td>Pop. mean</td>
+<td>SE of the mean</td>
+</tr>
+<tr>
+<td>t (single sample)</td>
+<td>Sample mean</td>
+<td>Pop. mean</td>
+<td>SE of the mean</td>
+</tr>
+<tr>
+<td>t(dependent)</td>
+<td>Sample mean of <br> difference scores</br></td>
+<td>Pop. mean of <br> difference scores</br></td>
+<td>SE of the mean difference</td>
+</tr>
+<tr>
+<td>t(independent)</td>
+<td>Difference between <br> two sample means</br></td>
+<td>Difference between <br> two pop. mean</br></td>
+<td>SE of the difference between means</td>
+</tr>
+</tbody>
+</table>
+<!--
+Test Statistics (in each case, the test statistics = (Observed - Expected) / SE)
+
+-               | value            | SE
+----------------|------------------|------------------------
+z               |  M - M0 / SE     | S / &radic;N
+t(single sample)|                  |  
+t(dependent)    |  M - 0 / SE      | 
+t(independent)  | (M1 - M2)/SE     | (SE1 + SE2)/2 
+-->
+<p>Degrees of freedom:</p>
+<table>
+<thead>
+<tr>
+<th>-</th>
+<th>df</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>z</td>
+<td>NA</td>
+</tr>
+<tr>
+<td>t (single sample)</td>
+<td>N-1</td>
+</tr>
+<tr>
+<td>t(dependent)</td>
+<td>N-1</td>
+</tr>
+<tr>
+<td>t(independent)</td>
+<td>(N1-1) + (N2-1)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="using-the-r-ttest-function">Using the R t.test function</h2>
+<h3 id="mean-of-difference">Mean of difference</h3>
+<p>From the father.son library, which contains 1078 measurements of a father's height and his son's height, we test the mean of the difference of the vectors sheight (son height) and fheight (father height), the null hypothesis is the true mean of the difference is 0.</p>
+<div class="highlight"><pre><span class="code-line"><span class="kn">library</span><span class="p">(</span><span class="s">"UsingR"</span><span class="p">)</span></span>
+<span class="code-line">data<span class="p">(</span>father.son<span class="p">)</span></span>
+<span class="code-line">t.test<span class="p">(</span>father.son<span class="o">$</span>sheight <span class="o">-</span> father.son<span class="o">$</span>fheight<span class="p">)</span></span>
+</pre></div>
+<div class="highlight"><pre><span class="code-line"><span class="cp">##</span><span class="c"> </span><span class="x"></span></span>
+<span class="code-line"><span class="cp">##</span><span class="c">  One Sample t-test</span><span class="x"></span></span>
+<span class="code-line"><span class="cp">##</span><span class="c"> </span><span class="x"></span></span>
+<span class="code-line"><span class="cp">##</span><span class="c"> data:  father.son$sheight - father.son$fheight</span><span class="x"></span></span>
+<span class="code-line"><span class="cp">##</span><span class="c"> t = 11.789, df = 1077, p-value &lt; 2.2e-16</span><span class="x"></span></span>
+<span class="code-line"><span class="cp">##</span><span class="c"> alternative hypothesis: true mean is not equal to 0</span><span class="x"></span></span>
+<span class="code-line"><span class="cp">##</span><span class="c"> 95 percent confidence interval:</span><span class="x"></span></span>
+<span class="code-line"><span class="cp">##</span><span class="c">  0.8310296 1.1629160</span><span class="x"></span></span>
+<span class="code-line"><span class="cp">##</span><span class="c"> sample estimates:</span><span class="x"></span></span>
+<span class="code-line"><span class="cp">##</span><span class="c"> mean of x </span><span class="x"></span></span>
+<span class="code-line"><span class="cp">##</span><span class="c"> 0.9969728</span><span class="x"></span></span>
+</pre></div>
+<p>As said before, t = <span class="math">\(\frac{X'-\mu}{SE}\)</span> ie. <span class="math">\(\frac{X'- \mu}{s/\sqrt{n}}\)</span><br/>
+<span class="math">\(\mu = 0\)</span> as we test difference of means.
+We can check that t = 11.789 as returned by the t.test function,</p>
+<div class="highlight"><pre><span class="code-line">v <span class="o">&lt;-</span> father.son<span class="o">$</span>sheight <span class="o">-</span> father.son<span class="o">$</span>fheight</span>
+<span class="code-line">t <span class="o">&lt;-</span> <span class="kp">mean</span><span class="p">(</span>v<span class="p">)</span> <span class="o">/</span> <span class="p">(</span>sd<span class="p">(</span>v<span class="p">)</span><span class="o">/</span><span class="kp">sqrt</span><span class="p">(</span><span class="kp">length</span><span class="p">(</span>v<span class="p">)))</span></span>
+<span class="code-line"><span class="kp">t</span></span>
+</pre></div>
+<div class="highlight"><pre><span class="code-line">[1] 11.78855</span>
+</pre></div>
+<p>confidence intervals:</p>
+<div class="highlight"><pre><span class="code-line"><span class="o">&lt;-</span> <span class="kp">mean</span><span class="p">(</span>v<span class="p">)</span> <span class="o">+</span> <span class="kt">c</span><span class="p">(</span><span class="m">-1</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span>sd<span class="p">(</span>v<span class="p">)</span><span class="o">/</span><span class="kp">sqrt</span><span class="p">(</span><span class="kp">length</span><span class="p">(</span>v<span class="p">)))</span></span>
+</pre></div>
+<h3 id="difference-in-means">Difference in means</h3>
+<p>We test the difference in means of the vectors sheight and fheight, the null hypothesis is the true difference in means is 0.</p>
+<div class="highlight"><pre><span class="code-line">t.test<span class="p">(</span>father.son<span class="o">$</span>sheight<span class="p">,</span> father.son<span class="o">$</span>fheight<span class="p">,</span> paired <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span></span>
+</pre></div>
+<div class="highlight"><pre><span class="code-line"><span class="cp">##</span><span class="c"> </span><span class="x"></span></span>
+<span class="code-line"><span class="cp">##</span><span class="c">  Paired t-test</span><span class="x"></span></span>
+<span class="code-line"><span class="cp">##</span><span class="c"> </span><span class="x"></span></span>
+<span class="code-line"><span class="cp">##</span><span class="c"> data:  father.son$sheight and father.son$fheight</span><span class="x"></span></span>
+<span class="code-line"><span class="cp">##</span><span class="c"> t = 11.789, df = 1077, p-value &lt; 2.2e-16</span><span class="x"></span></span>
+<span class="code-line"><span class="cp">##</span><span class="c"> alternative hypothesis: true difference in means is not equal to 0</span><span class="x"></span></span>
+<span class="code-line"><span class="cp">##</span><span class="c"> 95 percent confidence interval:</span><span class="x"></span></span>
+<span class="code-line"><span class="cp">##</span><span class="c">  0.8310296 1.1629160</span><span class="x"></span></span>
+<span class="code-line"><span class="cp">##</span><span class="c"> sample estimates:</span><span class="x"></span></span>
+<span class="code-line"><span class="cp">##</span><span class="c"> mean of the differences </span><span class="x"></span></span>
+<span class="code-line"><span class="cp">##</span><span class="c">               0.9969728</span><span class="x"></span></span>
+</pre></div>
+<p>The test statistic is 11.789 which is quite hight so we reject the null hypothesis that the true mean of the difference is 0, (if you ran the test on the difference sheight-fheight) or that the true difference in means was 0 (if you ran the test on the two separate but paired columns).</p>
+<p>Note the 95% confidence interval, 0.8310296 1.1629160, returned by t.test. It does not contain the hypothesized population mean 0 so we're pretty confident we can safely reject the hypothesis. This tells us that either our hypothesis is wrong or we're making a mistake (Type 1) in rejecting it.</p>
+<!--
+
+Drawing conclusions comparing the probability value ( the probability of obtaining a sample statistic as different or more different from the parameter specified in the null hypothesis given that the null hypothesis is true.) with the $\alpha$ level. If the probability value is lower then you reject the null hypothesis. Keep in mind that rejecting the null hypothesis is not an all-or-none decision. The lower the probability value, the more confidence you can have that the null hypothesis is false. However, if your probability value is higher than the conventional $\alpha$ level of 0.05, most scientists will consider your findings inconclusive. Failure to reject the null hypothesis does not constitute support for the null hypothesis. It just means you do not have sufficiently strong data to reject it. 
+
+There is a close relationship between confidence intervals and significance tests. Specifically, if a statistic is significantly different from 0 at the 0.05 level, then the 95% confidence interval will not contain 0. All values in the confidence interval are plausible values for the parameter, whereas values outside the interval are rejected as plausible values for the parameter
+
+
+Confidence intervals are closely related to statistical significance testing.
+Hypothesis testing is concerned with making decisions using data. It compares the data being studied to an observed characteristic of the population from which the data are sampled.
+
+The 5% is considered as the region of rejection, if the z score is outside the region of rejection (determined by $alpha$), we fail to reject $H_0$.
+
+The p-value is the probability under the null hypothesis of obtaining evidence as or more extreme than your z-score or test statistic (obtained from your observed data) in the direction of the alternative hypothesis.
+So if the p-value (probability of seeing your test statistic) is small, then one of two things happens. EITHER $H_0$ is true and you have observed a rare event (in this unusual test statistic) OR $H_0$ is false.
+
+The p-value is as an attained significance level, ie. the smallest value of alpha at which you will reject the null hypothesis.
+
+-->
+<!--
+Sources 
+http://statstutorstl.blogspot.fr/search/label/inferential%20statistics
+http://fr.slideshare.net/eugeneyan/statistical-inference-3
+http://www.stat.yale.edu/Courses/1997-98/101/confint.htm
+-->
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+    
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="./variance-inflation.html">R : Variance Inflation</a></li>
+        <li><a href="./experimentation-of-clt.html">R: Experimentation of the Cental Limit Theorem</a></li>
+        <li><a href="./last_earthquakes.html">R: Earthquakes from the past 30 days</a></li>
+        <li><a href="./weather_event_impact.html">R: Analysis of weather events impact on population health and economy.</a></li>
+    </ul>
+</section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+        <ul class="list-group" id="links">
+            <img width="100%" class="img-thumbnail" src="/images/post_1246903_635089122565391744.jpg"/>
+        </ul>
+    </li>
+            <li class="list-group-item"><h4><i class="fa fa-crosshairs"></i><span class="icon-label">Table of Contents</span></h4>
+            <div class="toc">
+<ul>
+<li><a href="#clt-central-limit-theorem">CLT : Central Limit Theorem</a></li>
+<li><a href="#confidence-interval">Confidence Interval</a></li>
+<li><a href="#required-sample-size-for-margin-of-error">Required sample size for margin of error</a></li>
+<li><a href="#hypothesis-testing">Hypothesis testing</a></li>
+<li><a href="#p-value">P-value</a></li>
+<li><a href="#interpreting-the-p-value">Interpreting the p-value</a></li>
+<li><a href="#two-sided-hypothesis-testing">Two-sided Hypothesis testing</a></li>
+<li><a href="#decision-rule">Decision rule</a></li>
+<li><a href="#hypothesis-tests-and-confidence-intervals">Hypothesis tests and Confidence Intervals</a></li>
+<li><a href="#type-ii-error">Type II error</a></li>
+<li><a href="#the-t-distribution">The t distribution</a></li>
+<li><a href="#independent-and-dependent-t-tests">Independent and dependent t-tests</a></li>
+<li><a href="#test-comparisons">Test Comparisons</a></li>
+<li><a href="#using-the-r-ttest-function">Using the R t.test function</a><ul>
+<li><a href="#mean-of-difference">Mean of difference</a></li>
+<li><a href="#difference-in-means">Difference in means</a></li>
+</ul>
+</li>
+</ul>
+</div>
+             <hr />
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="https://fr.linkedin.com/pub/stephanie-werli/26/b69/a0b"><i class="fa fa-linkedin-square fa-lg"></i> linkedin</a></li>
+                <li class="list-group-item"><a href="http://github.com/stephanie-w"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+              </ul>
+            </li>
+
+
+
+
+
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2015 Stephanie W
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="./theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="./theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="./theme/js/respond.min.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Git Workflows vs "All to Master" - Brain Scribble</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="./images/post_1246903_635089122565391744.jpg" rel="icon">
+
+<link rel="canonical" href="./git-workflows.html">
+
+        <meta name="author" content="Stephanie W" />
+        <meta name="description" content="A basic git workflow is the feature branch workflow. All feature (or task, or story) developments are taken place in a dedicated branch (the feature branch). The stories/features branch exist as long as the feature is in development. At the end of the development, the branch is usually submitted ..." />
+
+        <meta property="og:site_name" content="Brain Scribble" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Git Workflows vs &#34;All to Master&#34;"/>
+        <meta property="og:url" content="./git-workflows.html"/>
+        <meta property="og:description" content="A basic git workflow is the feature branch workflow. All feature (or task, or story) developments are taken place in a dedicated branch (the feature branch). The stories/features branch exist as long as the feature is in development. At the end of the development, the branch is usually submitted ..."/>
+        <meta property="article:published_time" content="2015-08-05" />
+            <meta property="article:section" content="ProjectManagement" />
+            <meta property="article:author" content="Stephanie W" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="./theme/css/bootstrap.lumen.min.css" type="text/css"/>
+    <link href="./theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="./theme/css/pygments/monokai.css" rel="stylesheet">
+    <link rel="stylesheet" href="./theme/css/style.css" type="text/css"/>
+
+        <link href="./feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Brain Scribble ATOM Feed"/>
+
+
+
+        <link href="./feeds/projectmanagement.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Brain Scribble ProjectManagement ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="./" class="navbar-brand">
+Brain Scribble            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="./category/dataanalysis.html">Dataanalysis</a>
+                        </li>
+                        <li >
+                            <a href="./category/games.html">Games</a>
+                        </li>
+                        <li class="active">
+                            <a href="./category/projectmanagement.html">Projectmanagement</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="./archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="./git-workflows.html"
+                       rel="bookmark"
+                       title="Permalink to Git Workflows vs "All to Master"">
+                        Git Workflows vs "All to Master"
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2015-08-05T15:32:27.031697+02:00"> 05/August/2015</time>
+    </span>
+
+
+
+
+
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <hr />
+<p>A basic git workflow is the feature branch workflow. All feature (or task, or story) developments are taken place in a dedicated branch (the feature branch).<br />
+The stories/features branch exist as long as the feature is in development.<br />
+At the end of the development, the branch is usually submitted for review (pull request) and merged to master.</p>
+<p><img alt="Feature Branch Flow" src="/figure/gitflow-1.png" /></p>
+<p>Some layers can be added to this model:</p>
+<p>The integration/dev branch : It hold all feature branches commits, allow to check all pieces of dev work together.</p>
+<p><img alt="Dev Branch Flow" src="/figure/gitflow-2.png" /></p>
+<p>There could be variations on how and when to merge:</p>
+<ul>
+<li>merge to dev branch while the story is still in progress and merge dev branch to master when the story is complete </li>
+<li>merge the dev branch to master each time it pass the CI test successfully</li>
+<li>merge the dev branch to master when the product owner accept the user story implementation</li>
+</ul>
+<p>The hotfix branch: It hold commits for severe bugs (ie. production bugs) and are merged to master and to the branches "above" (dev/integration and stories/features branches).  </p>
+<p>The release branch : It support preparation for a new production release. The dev/integration is merged to the release branch. Commits after a merge concern bugfixes of stories/features. These commits are also merged to the branches above.</p>
+<p>See <a href="https://www.atlassian.com/git/tutorials/comparing-workflows">Gitworklow Comparisons</a> for more information.</p>
+<p>Git workflows works well when interconnected code and infrastructure dependencies need to be managed and released in tandem.</p>
+<p>In Continuous deployment/delivery, the latest code is integrated and deployed automatically to any production environment.<br />
+This usually mean submitting all pull requests to master.<br />
+Each commit is a potential release candidate and is then subject to a series of test and verification steps to vheck it is ready to deploy.<br />
+The challenge in continuous deployment is determining what needs to be released together without manual intervention.</p>
+<p>Gitflow branching model vs "All to master":</p>
+<p>Gitflow pros:</p>
+<ul>
+<li>High degree of control of release content</li>
+<li>Handle projects with many layers of complexity</li>
+</ul>
+<p>Gitflow cons:</p>
+<ul>
+<li>Complex rollback of individual feature once it is released</li>
+<li>Large merge into master making it difficult to visualize changing over time</li>
+</ul>
+<p>All to master pros:</p>
+<ul>
+<li>Simplicity of individual feature rollback</li>
+<li>Immediate release of newly developed and approved features</li>
+</ul>
+<p>All to master cons:</p>
+<ul>
+<li>Master is a living entity on a software project and can be changed at any time; release tags are immutable.</li>
+<li>Difficult to coordinate simultaneous release of dependent code or infrastructure changes.</li>
+</ul>
+<p>See <a href="continuous-development.html">Continuous Development</a> for more on continuous development. </p>
+<p>Sources : 
+https://bocoup.com/weblog/git-workflows-for-successful-deployment/<br />
+http://blogs.wandisco.com/2013/07/24/git-workflows-and-continuous-delivery-using-multisite-replication-to-facilitate-a-global-mainline/<br />
+https://www.atlassian.com/git/tutorials/comparing-workflows</p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+        <ul class="list-group" id="links">
+            <img width="100%" class="img-thumbnail" src="/images/post_1246903_635089122565391744.jpg"/>
+        </ul>
+    </li>
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="https://fr.linkedin.com/pub/stephanie-werli/26/b69/a0b"><i class="fa fa-linkedin-square fa-lg"></i> linkedin</a></li>
+                <li class="list-group-item"><a href="http://github.com/stephanie-w"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+              </ul>
+            </li>
+
+
+
+
+
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2015 Stephanie W
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="./theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="./theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="./theme/js/respond.min.js"></script>
+
+
+</body>
+</html>

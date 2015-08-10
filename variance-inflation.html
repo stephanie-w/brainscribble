@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>R : Variance Inflation - Brain Scribble</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="./images/post_1246903_635089122565391744.jpg" rel="icon">
+
+<link rel="canonical" href="./variance-inflation.html">
+
+        <meta name="author" content="Stephanie W" />
+        <meta name="keywords" content="R,stats,regression" />
+        <meta name="description" content="A variance inflation factor (VIF) is a ratio of estimated variances, the variance due to including the ith regressor, divided by that due to including a corresponding ideal regressor which is uncorrelated with the others. VIF is the square of standard error inflation." />
+
+        <meta property="og:site_name" content="Brain Scribble" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="R : Variance Inflation"/>
+        <meta property="og:url" content="./variance-inflation.html"/>
+        <meta property="og:description" content="A variance inflation factor (VIF) is a ratio of estimated variances, the variance due to including the ith regressor, divided by that due to including a corresponding ideal regressor which is uncorrelated with the others. VIF is the square of standard error inflation."/>
+        <meta property="article:published_time" content="2015-08-06" />
+            <meta property="article:section" content="DataAnalysis" />
+            <meta property="article:tag" content="R" />
+            <meta property="article:tag" content="stats" />
+            <meta property="article:tag" content="regression" />
+            <meta property="article:author" content="Stephanie W" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="./theme/css/bootstrap.lumen.min.css" type="text/css"/>
+    <link href="./theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="./theme/css/pygments/monokai.css" rel="stylesheet">
+    <link rel="stylesheet" href="./theme/css/style.css" type="text/css"/>
+
+        <link href="./feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Brain Scribble ATOM Feed"/>
+
+
+
+        <link href="./feeds/dataanalysis.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Brain Scribble DataAnalysis ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="./" class="navbar-brand">
+Brain Scribble            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="./category/dataanalysis.html">Dataanalysis</a>
+                        </li>
+                        <li >
+                            <a href="./category/games.html">Games</a>
+                        </li>
+                        <li >
+                            <a href="./category/projectmanagement.html">Projectmanagement</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="./archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="./variance-inflation.html"
+                       rel="bookmark"
+                       title="Permalink to R : Variance Inflation">
+                        R : Variance Inflation
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2015-08-06T00:17:21.249164+02:00"> 06/August/2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="./tag/r.html">R</a>
+        /
+	<a href="./tag/stats.html">stats</a>
+        /
+	<a href="./tag/regression.html">regression</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <hr />
+<p>This is my note on swirl course Regression Model : Overfitting and Underfitting.</p>
+<h2 id="definition">Definition</h2>
+<p>
+A variance inflation factor (VIF) is a ratio of estimated variances, the variance due to including the ith regressor, divided by that due to including a corresponding ideal regressor which is uncorrelated with the others.
+VIF is the square of standard error inflation.</p>
+
+
+<p>More simply, it estimates how much the variance of a coefficient is "inflated" because of linear dependence with other predictors. Thus, a VIF of 1.8 tells us that the variance of a particular coefficient is 80% larger than it would be if that predictor was completely uncorrelated with all the other predictors.<br />
+The VIF has a lower bound of 1 but no upper bound. </p>
+<h2 id="examples-with-the-swiss-dataset">Examples with the swiss dataset</h2>
+<p>To explore VIF, we'll use the Swiss Fertility and Socioeconomic Indicators (1888) dataset which reports standardized fertility measure and socio-economic indicators for each of 47 French-speaking provinces of Switzerland at about 1888. </p>
+<div class="highlight"><pre><span class="code-line">data<span class="p">(</span>swiss<span class="p">)</span></span>
+<span class="code-line"><span class="kp">head</span><span class="p">(</span>swiss<span class="p">)</span></span>
+</pre></div>
+
+
+<p>We fit a model with Fertility as outcome and use the R's function vif (from the car package) to compute variance inflations:</p>
+<div class="highlight"><pre><span class="code-line">data<span class="p">(</span>swiss<span class="p">)</span></span>
+<span class="code-line"><span class="kp">head</span><span class="p">(</span>swiss<span class="p">)</span></span>
+<span class="code-line">mdl <span class="o">&lt;-</span> lm<span class="p">(</span>Fertility <span class="o">~</span> <span class="m">.</span><span class="p">,</span> data <span class="o">=</span> swiss<span class="p">)</span></span>
+<span class="code-line"><span class="kn">library</span><span class="p">(</span>car<span class="p">)</span></span>
+<span class="code-line">vif<span class="p">(</span>mdl<span class="p">)</span></span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="code-line">##      Agriculture      Examination        Education         Catholic Infant.Mortality </span>
+<span class="code-line">##         2.284129         3.675420         2.774943         1.937160         1.107542</span>
+</pre></div>
+
+
+<p>For each regression coefficient, the variance inflation due to including all the others.<br />
+For instance, the variance in the estimated coefficient of Education is 2.774943 times what it might have been if Education were not correlated with the other regressors.<br />
+We can guess that Examination and Education are likely to be correlated, so most of the variance inflation for Education is due to including Examination.</p>
+<div class="highlight"><pre><span class="code-line">mdl2 <span class="o">&lt;-</span> lm<span class="p">(</span>Fertility <span class="o">~</span> <span class="m">.</span> <span class="o">-</span> Examination<span class="p">,</span> swiss<span class="p">)</span></span>
+<span class="code-line">vif<span class="p">(</span>mdl2<span class="p">)</span></span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="code-line">##      Agriculture        Education         Catholic Infant.Mortality </span>
+<span class="code-line">##         2.147153         1.816361         1.299916         1.107528</span>
+</pre></div>
+
+
+<p>As expected, omitting Examination in the model decreased the VIF for Education, from 2.774943 to 1.816361. Notice it has almost no effect on the VIF for Infant Mortality.</p>
+<p>Including new variables to a model will increase standard errors of coefficient estimates of other correlated refressors. On the other hand, omitting varaibles results can bias in coefficients of regressors which are correlated with the omitted one.</p>
+<p>Analysis of variance (ANOVA) is a useful way to quantify the significance of additional regressors.</p>
+<div class="highlight"><pre><span class="code-line">fit1 <span class="o">&lt;-</span> lm<span class="p">(</span>Fertility <span class="o">~</span> Agriculture<span class="p">,</span> data <span class="o">=</span> swiss<span class="p">)</span></span>
+<span class="code-line">fit3 <span class="o">&lt;-</span> lm<span class="p">(</span>Fertility <span class="o">~</span> Agriculture <span class="o">+</span> Examination <span class="o">+</span> Education<span class="p">,</span> data <span class="o">=</span> swiss<span class="p">)</span></span>
+<span class="code-line">anova<span class="p">(</span>fit1<span class="p">,</span> fit3<span class="p">)</span></span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="code-line">## Analysis of Variance Table</span>
+<span class="code-line">## </span>
+<span class="code-line">## Model 1: Fertility ~ Agriculture</span>
+<span class="code-line">## Model 2: Fertility ~ Agriculture + Examination + Education</span>
+<span class="code-line">##   Res.Df    RSS Df Sum of Sq      F    Pr(&gt;F)    </span>
+<span class="code-line">## 1     45 6283.1                                  </span>
+<span class="code-line">## 2     43 3180.9  2    3102.2 20.968 4.407e-07 ***</span>
+<span class="code-line">## ---</span>
+<span class="code-line">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span>
+</pre></div>
+
+
+<p>The null hypothesis is rejected at the 0.001 level based on a right-tailed F test (F value=20.968).  </p>
+<p>RSS (Residual sum of squares) are 6283.1 and 3180.9.<br />
+We can check the results with the R's deviance function, which calculate the residual sum of squares:</p>
+<div class="highlight"><pre><span class="code-line">deviance<span class="p">(</span>fit1<span class="p">)</span></span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="code-line">## [1] 6283.116</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="code-line">deviance<span class="p">(</span>fit3<span class="p">)</span></span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="code-line">## [1] 3180.925</span>
+</pre></div>
+
+
+<p>The F statistic is the ratio of the two sums of squares divided by their respective degrees of freedom.<br />
+For the F value computing, this is the ratio of the difference of deviance divided by the difference in the residual degrees of freedom of fit1 and fit3 (2) and the fit3's residual sum of squares divided by its degrees of freedom. fit3 has 43 residual degrees of freedom (47 number of samples - 4 predictors (the 3 named and the intercept)):</p>
+<div class="highlight"><pre><span class="code-line">n <span class="o">&lt;-</span> <span class="p">(</span>deviance<span class="p">(</span>fit1<span class="p">)</span> <span class="o">-</span> deviance<span class="p">(</span>fit3<span class="p">))</span><span class="o">/</span><span class="m">2</span></span>
+<span class="code-line">d <span class="o">&lt;-</span> deviance<span class="p">(</span>fit3<span class="p">)</span><span class="o">/</span><span class="m">43</span></span>
+<span class="code-line">n<span class="o">/</span>d</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="code-line">## [1] 20.96783</span>
+</pre></div>
+
+
+<p>If the two scaled sums are independent and centrally chi-squared distributed with the same variance, the statistic will have an F distribution with parameters given by the two degrees of freedom.</p>
+<p>For the p-value is the probability that a value of n/d or larger would be drawn from an F distribution which has parameters 2 and 43. The p-value is 4.407e-07, a very unlikely value if the null hypothesis vwere true.</p>
+<p>The p-value can be computed with the R's pf function:</p>
+<div class="highlight"><pre><span class="code-line">pf<span class="p">(</span>n<span class="o">/</span>d<span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">43</span><span class="p">,</span> lower.tail <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span></span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="code-line">## [1] 4.406913e-07</span>
+</pre></div>
+
+
+<p>Based on the calculated p-value, a false rejection of the null hypothesis is extremely unlikely. We are confident that fit3 is significantly better than fit1, with one caveat: analysis of variance is sensitive to its assumption that model residuals are approximately normal.<br />
+If they are not, we could get a small p-value for that reason.<br />
+It is thus worth testing residuals for normality. The Shapiro-Wilk test tests the residual of fit 3. Normality is its null hypothesis.</p>
+<div class="highlight"><pre><span class="code-line">shapiro.test<span class="p">(</span>fit3<span class="o">$</span>residuals<span class="p">)</span></span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="code-line"><span class="cp">##</span><span class="c"> </span><span class="x"></span></span>
+<span class="code-line"><span class="cp">##</span><span class="c">  Shapiro-Wilk normality test</span><span class="x"></span></span>
+<span class="code-line"><span class="cp">##</span><span class="c"> </span><span class="x"></span></span>
+<span class="code-line"><span class="cp">##</span><span class="c"> data:  fit3$residuals</span><span class="x"></span></span>
+<span class="code-line"><span class="cp">##</span><span class="c"> W = 0.97276, p-value = 0.336</span><span class="x"></span></span>
+</pre></div>
+
+
+<p>The Shapiro-Wilk p-value of 0.336 fails to reject normality, supporting confidence in the analysis of variance.</p>
+<p>We can go on with ANOVA and other variables:</p>
+<div class="highlight"><pre><span class="code-line">fit5 <span class="o">&lt;-</span> lm<span class="p">(</span>Fertility <span class="o">~</span> Agriculture <span class="o">+</span> Examination <span class="o">+</span> Education <span class="o">+</span> Catholic<span class="p">,</span> data <span class="o">=</span> swiss<span class="p">)</span></span>
+<span class="code-line">fit6 <span class="o">&lt;-</span> lm<span class="p">(</span>Fertility <span class="o">~</span> Agriculture <span class="o">+</span> Examination <span class="o">+</span> Education <span class="o">+</span> Catholic <span class="o">+</span> Infant.Mortality<span class="p">,</span> data <span class="o">=</span> swiss<span class="p">)</span></span>
+<span class="code-line">anova<span class="p">(</span>fit1<span class="p">,</span> fit3<span class="p">,</span> fit5<span class="p">,</span> fit6<span class="p">)</span></span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="code-line">## Analysis of Variance Table</span>
+<span class="code-line">## </span>
+<span class="code-line">## Model 1: Fertility ~ Agriculture</span>
+<span class="code-line">## Model 2: Fertility ~ Agriculture + Examination + Education</span>
+<span class="code-line">## Model 3: Fertility ~ Agriculture + Examination + Education + Catholic</span>
+<span class="code-line">## Model 4: Fertility ~ Agriculture + Examination + Education + Catholic + </span>
+<span class="code-line">##     Infant.Mortality</span>
+<span class="code-line">##   Res.Df    RSS Df Sum of Sq       F    Pr(&gt;F)    </span>
+<span class="code-line">## 1     45 6283.1                                   </span>
+<span class="code-line">## 2     43 3180.9  2   3102.19 30.2107 8.638e-09 ***</span>
+<span class="code-line">## 3     42 2513.8  1    667.13 12.9937 0.0008387 ***</span>
+<span class="code-line">## 4     41 2105.0  1    408.75  7.9612 0.0073357 ** </span>
+<span class="code-line">## ---</span>
+<span class="code-line">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span>
+</pre></div>
+
+
+<p>It appears that each model is a significant improvement on its predecessor.</p>
+<!-- 
+## Experimenting VIF high values
+
+Regardless of your criterion for what constitutes a high VIF, there are at least three situations in which a high VIF is not a problem and can be safely ignored:
+
+2. The high VIFs are caused by the inclusion of powers or products of other variables.
+
+Sources
+http://statisticalhorizons.com/multicollinearity
+-->
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="./statinf2.html">Notes on Statistical Inference : Hypothesis Testing and t-tests</a></li>
+        <li><a href="./experimentation-of-clt.html">R: Experimentation of the Cental Limit Theorem</a></li>
+        <li><a href="./last_earthquakes.html">R: Earthquakes from the past 30 days</a></li>
+        <li><a href="./weather_event_impact.html">R: Analysis of weather events impact on population health and economy.</a></li>
+    </ul>
+</section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+        <ul class="list-group" id="links">
+            <img width="100%" class="img-thumbnail" src="/images/post_1246903_635089122565391744.jpg"/>
+        </ul>
+    </li>
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="https://fr.linkedin.com/pub/stephanie-werli/26/b69/a0b"><i class="fa fa-linkedin-square fa-lg"></i> linkedin</a></li>
+                <li class="list-group-item"><a href="http://github.com/stephanie-w"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+              </ul>
+            </li>
+
+
+
+
+
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2015 Stephanie W
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="./theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="./theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="./theme/js/respond.min.js"></script>
+
+
+</body>
+</html>

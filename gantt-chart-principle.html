@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Gantt Chart Principle - Brain Scribble</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="./images/post_1246903_635089122565391744.jpg" rel="icon">
+
+<link rel="canonical" href="./gantt-chart-principle.html">
+
+        <meta name="author" content="Stephanie W" />
+        <meta name="description" content="A Gantt Chart illustrates a project schedule by presenting scheduling and dependencies information about the activities involved in implementing a project." />
+
+        <meta property="og:site_name" content="Brain Scribble" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Gantt Chart Principle"/>
+        <meta property="og:url" content="./gantt-chart-principle.html"/>
+        <meta property="og:description" content="A Gantt Chart illustrates a project schedule by presenting scheduling and dependencies information about the activities involved in implementing a project."/>
+        <meta property="article:published_time" content="2015-08-05" />
+            <meta property="article:section" content="ProjectManagement" />
+            <meta property="article:author" content="Stephanie W" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="./theme/css/bootstrap.lumen.min.css" type="text/css"/>
+    <link href="./theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="./theme/css/pygments/monokai.css" rel="stylesheet">
+    <link rel="stylesheet" href="./theme/css/style.css" type="text/css"/>
+
+        <link href="./feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Brain Scribble ATOM Feed"/>
+
+
+
+        <link href="./feeds/projectmanagement.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Brain Scribble ProjectManagement ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="./" class="navbar-brand">
+Brain Scribble            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="./category/dataanalysis.html">Dataanalysis</a>
+                        </li>
+                        <li >
+                            <a href="./category/games.html">Games</a>
+                        </li>
+                        <li class="active">
+                            <a href="./category/projectmanagement.html">Projectmanagement</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="./archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="./gantt-chart-principle.html"
+                       rel="bookmark"
+                       title="Permalink to Gantt Chart Principle">
+                        Gantt Chart Principle
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2015-08-05T13:32:04.447975+02:00"> 05/August/2015</time>
+    </span>
+
+
+
+
+
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <hr />
+<p>A Gantt Chart illustrates a project schedule by presenting scheduling and dependencies information about the activities involved in implementing a project.</p>
+<p><img alt="" src="http://www.technologyuk.net/computing/project_management/images/ganttproject02.gif" /></p>
+<p>The horizontal (x) axis of the chart shows the timescale over which the project work is carried out, and is divided into appropriate time units (the units of time used will depend on the overall timescale for the project). <br />
+The vertical (y) axis identifies the various tasks that must be carried out.<br />
+Each task is represented by a horizontal bar, occupying its own row on the y-axis.<br />
+The left-hand end of the bar is positioned on the x-axis in such a way that it represents the start date for the task, while the right hand end of the bar represents the finish date. The length of the bar therefore represents the duration of the task by definition.<br />
+Task dependencies may also be indicated using an arrow that links the end of one task to the beginning of the next. </p>
+<p>To illustrate the principle of a Gantt Chart building, let's take the opening of a store abroad as project.<br />
+The first step is listing the tasks:</p>
+<ul>
+<li>Choose a country</li>
+<li>Recruit a manager</li>
+<li>Find a site</li>
+<li>Purchase the site</li>
+<li>Get a permit</li>
+<li>Recruit the staff</li>
+<li>Modify the building</li>
+<li>Buy furniture</li>
+<li>Install furniture</li>
+<li>Open</li>
+</ul>
+<p>Next step is drawing a network diagram (or the activity-on-arrow diagram or PERT Chart) to organize tasks according to dependencies. To each task is assigned a duration estimation.</p>
+<p><img alt="PERT Chart" src="/figure/pertchart.png" /></p>
+<p>The longest path of planned activities to logical end points or to the end of the project is in red. The sequence of project network activities which add up to the longest overall duration. This determines the shortest time possible to complete the project.</p>
+<p>We use this path to begin the Gantt Chart.<br />
+Then we position the other task according to the task they depend on.  </p>
+<p>The "find a site" is a floating task depending on "choose a country" task. The "find a site" task must occur before the "purchase a site" task.<br />
+The "manager" and the buy a furniture are sharing float tasks, coming after "choose a country" task and before "install furniture" task.<br />
+The best obvious idea in the project is to set the "recruit a manager" task as early as possible in this large floating space since it can help on other tasks and the "buy furniture" quite late before the installation.<br />
+The "recruit staff" task comes after the "recruit a manager" task and before the "open" task. Since it has a cost, the better idea is to set the "staff" task as late as possible. The "recruit staff" is a floating task depending on an other floating task. If the "recruit a manager" task takes longer or starts later, there will be less float space for the "recruit a staff" task. </p>
+<p><img alt="Gantt Chart" src="/figure/gantt-chart.png" /></p>
+<!--
+Sources:
+http://www.oracle.com/webfolder/ux/middleware/richclient/index.html?/webfolder/ux/middleware/richclient/guidelines5/gantt.html
+-->
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+        <ul class="list-group" id="links">
+            <img width="100%" class="img-thumbnail" src="/images/post_1246903_635089122565391744.jpg"/>
+        </ul>
+    </li>
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="https://fr.linkedin.com/pub/stephanie-werli/26/b69/a0b"><i class="fa fa-linkedin-square fa-lg"></i> linkedin</a></li>
+                <li class="list-group-item"><a href="http://github.com/stephanie-w"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+              </ul>
+            </li>
+
+
+
+
+
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2015 Stephanie W
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="./theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="./theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="./theme/js/respond.min.js"></script>
+
+
+</body>
+</html>

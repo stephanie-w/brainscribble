@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Brain Scribble</title><link href="http://stephanie-w.github.io/" rel="alternate"></link><link href="http://stephanie-w.github.io/feeds/projectmanagement.atom.xml" rel="self"></link><id>http://stephanie-w.github.io/</id><updated>2015-08-09T11:46:49+02:00</updated><entry><title>Kanban Practices</title><link href="http://stephanie-w.github.io/kanban.html" rel="alternate"></link><updated>2015-08-09T11:46:49+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-09:kanban.html</id><summary type="html">
+&lt;hr/&gt;
+&lt;!--BEGIN_SUMMARY--&gt;
+&lt;p&gt;Kanban in the context of software development mean a visual process-management system that tells what to produce, when to produce it, and how much to produce - inspired by the Toyota Production System and by Lean manufacturing.&lt;/p&gt;
+&lt;!--END_SUMMARY--&gt;
+&lt;p&gt;A Kanban board must be visual, tactile, collaborative.  &lt;/p&gt;
+&lt;h2 id="kanban-composants"&gt;Kanban Composants&lt;/h2&gt;
+&lt;p&gt;The Kanban composants are :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Kanban cards representing pieces of work. The cards can support various information as :&lt;ul&gt;
+&lt;li&gt;assignee&lt;/li&gt;
+&lt;li&gt;start time&lt;/li&gt;
+&lt;li&gt;end time&lt;/li&gt;
+&lt;li&gt;type of task (eg. bug vs feature vs tech debt (usually code enhancements))&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Labeled containers for the cards representing the different stages of a workflow, the life-cycle of a task/story&lt;/li&gt;
+&lt;li&gt;Constraints&lt;ul&gt;
+&lt;li&gt;information on the exact product or component specifications that are needed for the subsequent process step, ie. to pull task/story from column to column&lt;/li&gt;
+&lt;li&gt;max number of cards a column can contain&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Examples:
+A minimal Kanban board is a board with columns "To Do", "Doing", "Done":&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://leankit.com/kanban/what-is-kanban/kanban-board-e60650d1.jpg"/&gt;&lt;/p&gt;
+&lt;p&gt;The most popular example of kanban board for agile or lean software development consists of: Backlog, Ready, Coding, Testing, Approval and Done columns. It is also a common practice to name columns in a different way, for example: Next, In Development, Done, Customer Acceptance, Live.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://i1.wp.com/www.everydaykanban.com/wp-content/uploads/2012/03/kanban-board.png"/&gt;
+&lt;img alt="" src="http://brodzinski.com/wp-content/uploads/workflow-cfd.jpg"/&gt;&lt;/p&gt;
+&lt;h2 id="core-kanban-principles"&gt;Core Kanban Principles&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Visualize the workflow, showing the work in progress, the work remaining and showing the flow of work through the Kanban system&lt;/li&gt;
+&lt;li&gt;Limit the Work in Progress (WiP), and then reduce the time it takes an item to travel through the Kanban system&lt;/li&gt;
+&lt;li&gt;Manage the Flow&lt;ul&gt;
+&lt;li&gt;Visualize blocked items, long queues, empty spaces&lt;/li&gt;
+&lt;li&gt;Deal with indicators of problems&lt;/li&gt;
+&lt;li&gt;Analyze the flow with metrics&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Implement Feedback Loops&lt;/li&gt;
+&lt;li&gt;Make Process Policies Explicit&lt;/li&gt;
+&lt;li&gt;Improve Collaboratively&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The Kanban method starts with existing roles and process and stimulates continuous, incremental and evolutionary change in the system by monitoring, adapting and improving the workflow, by measuring effectiveness by tracking flow, quality, throughput, lead times.&lt;/p&gt;
+&lt;h2 id="kanban-metrics"&gt;Kanban Metrics&lt;/h2&gt;
+&lt;p&gt;First some definitions to understand Kanban Metrics.&lt;br/&gt;
+Lead Time : The time it takes a work to get from step A to step B.&lt;br/&gt;
+&lt;img alt="" src="http://leankit.com/kanban/lean-flow-metrics/images/Lead-Time-4d568f72.png"/&gt;
+There can be several lead times (e.g., customer lead time, development lead time, QA lead time, etc.) and specially the End to end Lead Time : The time in which a card goes from being created to being closed.&lt;br/&gt;
+This metric say about how the whole organization or product team (not only a development team) reacts to customer's needs.&lt;/p&gt;
+&lt;p&gt;Delivery/Cycle Lead Time : The time a card spend out of the backlog, ie. the elapsed time from the moment the team  starts actively working on a task till the moment they are done.&lt;br/&gt;
+This metric basically say about how responsive the team is or how fast they can deliver something when priorities change.
+&lt;img alt="" src="http://leankit.com/kanban/lean-flow-metrics/images/Cycle-Time-e537190e.png"/&gt;
+Different teams will use different definitions for start and done ("accepted by the product owner" vs "delivered to production").&lt;/p&gt;
+&lt;h3 id="cumulative-flow-diagrams"&gt;Cumulative Flow Diagrams&lt;/h3&gt;
+&lt;p&gt;This report represents the relative amount of work for each stage of project over the time.
+The key data points of the CFD are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The vertical distance between each area represents the amount of work in progress on the respective stage in a specific date&lt;/li&gt;
+&lt;li&gt;The horizontal distance between the areas in the chart corresponds to the average lead time of the requests that arrived on a specific date&lt;/li&gt;
+&lt;li&gt;The mean delivery rate, represented by the slope of the closed items area, corresponds to the trend in the delivery of the work.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This metric help understand the state of current work  and what might need to be done to speed up the pace of delivery.&lt;br/&gt;
+The diagram should run smoothly. Large steps and flat horizontal lines indicate impediments to flow or lack of flow. Variations in the gap or bands stand for bottleneck situations, which usually occur due to irrelevant work in progress limits.
+&lt;img alt="" src="http://brodzinski.com/wp-content/uploads/cfd-03.jpg"/&gt;&lt;/p&gt;
+&lt;h3 id="lead-time-average"&gt;Lead Time Average&lt;/h3&gt;
+&lt;p&gt;This report shows a trend of the average number of days a task took to be completed, from start to finish. It is categorized by work item type so teams can see the how the system is performing over time, broken down by work item type. &lt;/p&gt;
+&lt;h3 id="flow-efficiency"&gt;Flow Efficiency&lt;/h3&gt;
+&lt;p&gt;This report shows the average percentage of lead time that a developer spent working on a task (touch time). This shows the potential for process improvements. &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://jazz.net/library/content/articles/insight/1.1.1.1/kanban-metrics/images/3.jpg"/&gt;&lt;/p&gt;
+&lt;h3 id="cycle-time-diagram"&gt;Cycle time diagram&lt;/h3&gt;
+&lt;p&gt;Stacked bar chart representing how much time a task has spent in a given state through is life-cycle, allowing the detection of tasks that are taking too long.
+&lt;img alt="" src="http://blog.kanbanize.com/wp-content/uploads/2014/01/cycle-time-no-done-column.png"/&gt;&lt;/p&gt;
+&lt;h3 id="due-date-performance"&gt;Due Date Performance&lt;/h3&gt;
+&lt;p&gt;This report shows the percentage of items that were delivered on time and the average percentage delivery rate over time. This is useful for illustrating how predictable the system is. Due date performance with a low percentage provides evidence that there is an abundance of variability in the flow. The team should take corrective action or they will not be able to establish reasonable service agreements. &lt;/p&gt;
+&lt;h3 id="bugs-per-story"&gt;Bugs per Story&lt;/h3&gt;
+&lt;p&gt;This report shows a trend of the average number of defects opened against a Story. Attaining predictability is a fundamental aspect in the Kanban system, however, that will be ineffective if the software is delivered with low quality. This chart is also useful when implementing Kanban to help teams establish goals in the quality area. &lt;/p&gt;
+&lt;h3 id="lead-time-distribution"&gt;Lead Time Distribution&lt;/h3&gt;
+&lt;p&gt;This report is a statistical distribution that shows the number of occurrences by lead time. It is an effective way to identify discrepancies in the process and boosts the confidence of teams in the definition of service level agreements, based on real life data. &lt;/p&gt;
+&lt;h3 id="throughput-trend"&gt;Throughput Trend&lt;/h3&gt;
+&lt;p&gt;This report shows the number of items that were delivered in a given time period (eg monthly). It can be used to identify a trend of how well the system has been performing. As teams work on process improvements, the throughput trend will show a more consistent slope in the chart. &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://jazz.net/library/content/articles/insight/1.1.1.1/kanban-metrics/images/4.jpg"/&gt;&lt;/p&gt;
+&lt;!--
+##Kanban Strategies:
+a kanban by project?
+a kanban by team? a kanban by team seems more as one of the goal is to improve collaborative work.  
+Team kanban can be combined with techniques like user map stories which allow to visualize project big pictures.
+
+## Building a kanban
+
+Methodologies to validate the model:
+
+* Produce a sketch from your top-down or bottom-up model.
+* Make sure that actual work items map to your sketch or top-down model, then use the "what does this item need?" questions.
+* Consider whether it would be helpful to group, consolidate, or break down categories.
+
+
+Links:
+
+* Explain Kanban practices with a game [Kanban Pizza Game](http://www.agile42.com/en/training/kanban-pizza-game/)
+* Kanban Board App [Trello](http://trello.com)
+* Kanban Board App [Restyaboard](http://restya.com/board/)
+
+### Six Rules for an Effective Kanban System
+
+To ensure a proper setup of Kanban in the workplace, Toyota has provided us with six rules for an effective Kanban system:  
+Customer (downstream) processes withdraw items in the precise amounts specified by the Kanban.  
+Supplier (upstream) produces items in the precise amounts and sequences specified by the Kanban.  
+No items are made or moved without a Kanban.  
+A Kanban should accompany each item, every time.  
+Defects and incorrect amounts are never sent to the next downstream process.  
+The number of Kanbans is reduced carefully to lower inventories and to reveal problems.  
+--&gt;
+&lt;p&gt;Sources:&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://positiveincline.com/index.php/2015/06/kanban-from-the-inside-20-model-workflow/"&gt;Kanban from the Inside: 20. Model workflow&lt;/a&gt;&lt;br/&gt;
+&lt;a href="http://blog.crisp.se/2009/06/26/henrikkniberg/1246053060000"&gt;Kanban Story&lt;/a&gt;&lt;br/&gt;
+&lt;a href="http://blog.assembla.com/AssemblaBlog/tabid/12618/bid/102123/Kanban-Metrics-Measure-Cycle-Time-To-Stay-Lean.aspx"&gt;Kanban Metrics: Measure Cycle Time To Stay Lean&lt;/a&gt;&lt;br/&gt;
+&lt;a href="http://leankit.com/kanban/lean-flow-metrics/"&gt;7 LEAN METRICS TO IMPROVE FLOW&lt;/a&gt;&lt;br/&gt;
+&lt;a href="https://jazz.net/library/article/1350"&gt;Improve predictability and efficiency with Kanban metrics using IBM Rational Insight&lt;/a&gt;&lt;br/&gt;
+&lt;a href="https://www.atlassian.com/agile/kanban"&gt;A brief introduction to kanban&lt;/a&gt;
+&lt;a href="http://brodzinski.com/2013/07/cumulative-flow-diagram.html"&gt;Cumulative Flow Diagram&lt;/a&gt;
+&lt;a href="http://pm.stackexchange.com/questions/10657/what-are-some-commonly-tracked-metrics-in-kanban"&gt;http://pm.stackexchange.com/questions/10657/what-are-some-commonly-tracked-metrics-in-kanban&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>Git Workflows vs "All to Master"</title><link href="http://stephanie-w.github.io/git-workflows.html" rel="alternate"></link><updated>2015-08-05T15:32:27+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-05:git-workflows.html</id><summary type="html">&lt;hr /&gt;
+&lt;p&gt;A basic git workflow is the feature branch workflow. All feature (or task, or story) developments are taken place in a dedicated branch (the feature branch).&lt;br /&gt;
+The stories/features branch exist as long as the feature is in development.&lt;br /&gt;
+At the end of the development, the branch is usually submitted for review (pull request) and merged to master.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Feature Branch Flow" src="/figure/gitflow-1.png" /&gt;&lt;/p&gt;
+&lt;p&gt;Some layers can be added to this model:&lt;/p&gt;
+&lt;p&gt;The integration/dev branch : It hold all feature branches commits, allow to check all pieces of dev work together.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Dev Branch Flow" src="/figure/gitflow-2.png" /&gt;&lt;/p&gt;
+&lt;p&gt;There could be variations on how and when to merge:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;merge to dev branch while the story is still in progress and merge dev branch to master when the story is complete &lt;/li&gt;
+&lt;li&gt;merge the dev branch to master each time it pass the CI test successfully&lt;/li&gt;
+&lt;li&gt;merge the dev branch to master when the product owner accept the user story implementation&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The hotfix branch: It hold commits for severe bugs (ie. production bugs) and are merged to master and to the branches "above" (dev/integration and stories/features branches).  &lt;/p&gt;
+&lt;p&gt;The release branch : It support preparation for a new production release. The dev/integration is merged to the release branch. Commits after a merge concern bugfixes of stories/features. These commits are also merged to the branches above.&lt;/p&gt;
+&lt;p&gt;See &lt;a href="https://www.atlassian.com/git/tutorials/comparing-workflows"&gt;Gitworklow Comparisons&lt;/a&gt; for more information.&lt;/p&gt;
+&lt;p&gt;Git workflows works well when interconnected code and infrastructure dependencies need to be managed and released in tandem.&lt;/p&gt;
+&lt;p&gt;In Continuous deployment/delivery, the latest code is integrated and deployed automatically to any production environment.&lt;br /&gt;
+This usually mean submitting all pull requests to master.&lt;br /&gt;
+Each commit is a potential release candidate and is then subject to a series of test and verification steps to vheck it is ready to deploy.&lt;br /&gt;
+The challenge in continuous deployment is determining what needs to be released together without manual intervention.&lt;/p&gt;
+&lt;p&gt;Gitflow branching model vs "All to master":&lt;/p&gt;
+&lt;p&gt;Gitflow pros:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;High degree of control of release content&lt;/li&gt;
+&lt;li&gt;Handle projects with many layers of complexity&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Gitflow cons:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Complex rollback of individual feature once it is released&lt;/li&gt;
+&lt;li&gt;Large merge into master making it difficult to visualize changing over time&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All to master pros:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Simplicity of individual feature rollback&lt;/li&gt;
+&lt;li&gt;Immediate release of newly developed and approved features&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All to master cons:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Master is a living entity on a software project and can be changed at any time; release tags are immutable.&lt;/li&gt;
+&lt;li&gt;Difficult to coordinate simultaneous release of dependent code or infrastructure changes.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;See &lt;a href="continuous-development.html"&gt;Continuous Development&lt;/a&gt; for more on continuous development. &lt;/p&gt;
+&lt;p&gt;Sources : 
+https://bocoup.com/weblog/git-workflows-for-successful-deployment/&lt;br /&gt;
+http://blogs.wandisco.com/2013/07/24/git-workflows-and-continuous-delivery-using-multisite-replication-to-facilitate-a-global-mainline/&lt;br /&gt;
+https://www.atlassian.com/git/tutorials/comparing-workflows&lt;/p&gt;</summary></entry><entry><title>The priority pyramid</title><link href="http://stephanie-w.github.io/priority-pyramid.html" rel="alternate"></link><updated>2015-08-05T15:31:54+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-05:priority-pyramid.html</id><summary type="html">&lt;hr /&gt;
+&lt;p&gt;The priority pyramid is a visualized backlog with a prioritization process.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Priority Pyramid" src="/figure/priority_pyramid.png" title="=600x500" /&gt;&lt;/p&gt;
+&lt;p&gt;The pyramid has four level:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Priority One : The top of the pyramid which contains tasks/user stories with highest priority.&lt;/li&gt;
+&lt;li&gt;Priority Two : The middle of the pyramid which contains tasks/user stories that will be started as soon as resources will be available.&lt;/li&gt;
+&lt;li&gt;Priority Three : The bottom of the pyramid which contains tasks/user stories that will be worked on soon.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Then the rest of the backlog below the pyramid.&lt;/p&gt;
+&lt;p&gt;To each pyramid level is associated a maximum number of tasks/user stories a level can contain, the WIP-limit (Work-in-Process limitations).&lt;/p&gt;
+&lt;p&gt;How to operate with the priority pyramid:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Priority Pyramid" src="/figure/priority_pyramid_process.png" /&gt;&lt;/p&gt;
+&lt;!--
+Sources
+http://jaxenter.com/agile-tips-the-priority-pyramid-116292.html
+--&gt;</summary></entry><entry><title>User stories</title><link href="http://stephanie-w.github.io/user_stories.html" rel="alternate"></link><updated>2015-08-05T13:32:04+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-05:user_stories.html</id><summary type="html">&lt;hr /&gt;
+
+
+&lt;p&gt;A user story is a tool used in Agile software development to capture a description of a software feature from an end-user perspective. The user story describes the type of user, what they want and why. A user story helps to create a simplified description of a requirement.&lt;/p&gt;
+
+
+&lt;p&gt;A user story typically follow a simple template:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;As a &amp;lt;type of user&amp;gt;, I want &amp;lt;some goal&amp;gt; so that &amp;lt;some reason&amp;gt;.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;User stories can be written on cards or sticky notes, stores on walls or tables to facilitate planning and discussion.&lt;/p&gt;
+&lt;p&gt;They can be written at varying levels of detail from a high-level strategic viewpoint (typically at Feasibility) through to a more detailed, implementable level (typically during Exploration and Engineering). The large user stories are generally known as epics.
+The epic is usually split into smaller user stories independent from one another so the team can worked on.&lt;/p&gt;
+&lt;h2 id="priorization-techniques"&gt;Priorization Techniques&lt;/h2&gt;
+&lt;h3 id="classification"&gt;Classification&lt;/h3&gt;
+&lt;p&gt;They can be estimated/prioritized with:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;* Sequence numbers (simple, Fibonacci)&lt;/span&gt;
+&lt;span class="code-line"&gt;* T-shirt sizes (e.g. S, M, L, XL)&lt;/span&gt;
+&lt;span class="code-line"&gt;* Traffic lights (green, yellow, red)&lt;/span&gt;
+&lt;span class="code-line"&gt;* Starbucks drink sizes (demi, short, tall, grande, venti, trenta)&lt;/span&gt;
+&lt;span class="code-line"&gt;* A Moscow categorization : MoSCoW stands for: &lt;/span&gt;
+&lt;span class="code-line"&gt;   * Must have (or Minimum Usable Subset)&lt;/span&gt;
+&lt;span class="code-line"&gt;   * Should have (not critical but important)&lt;/span&gt;
+&lt;span class="code-line"&gt;   * Could have (wanted or desirable but less important)&lt;/span&gt;
+&lt;span class="code-line"&gt;   * Won’t have this time (explicitly excluded from scope for the planned duration but Would like in future)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3 id="context-evaluation"&gt;Context Evaluation&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;Story Maps&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;User story mapping is a technique allowing to see the big picture of the baglog and helping making decisisons about grooming ans prioritizing the backlog, managing scopes.&lt;br /&gt;
+See &lt;a href="http://winnipegagilist.blogspot.fr/2012/03/how-to-create-user-story-map.html"&gt;How to create a User Story Map&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://image.slidesharecdn.com/prioritizationtechniques-tarangbaxichiragdoshi-130304041346-phpapp01/95/prioritization-techniques-for-agile-teams-25-638.jpg?cb=1389711411" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://3.bp.blogspot.com/-Qmue5-IotbA/VTZsZUsecxI/AAAAAAAAAO0/J34ZMd_WdJE/s1600/UserStoryMapDefinitions.png" /&gt;
+The high level user stories (blue post-its) called "User Tasks" which forms the "walking skeleton" of the map.&lt;br /&gt;
+The grouping of these higher levels are the "User activities" (ornage post-its).&lt;br /&gt;
+The user stories (yellow post-its) are organized under each User Task in order of highest to lowest priority for that User Task.&lt;br /&gt;
+The chronological order of how users will typically use the application goes left to right (Time).  &lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Product Tree&lt;/em&gt;
+&lt;img alt="" src="http://image.slidesharecdn.com/prioritizationtechniques-tarangbaxichiragdoshi-130304041346-phpapp01/95/prioritization-techniques-for-agile-teams-26-638.jpg?cb=1389711411" /&gt;&lt;/p&gt;
+&lt;h2 id="persona-and-user-needs"&gt;Persona and user needs&lt;/h2&gt;
+&lt;p&gt;Even before writing the first user story, the product team had to work on a profile for typical product users. Such a profile looks like a short biography ; it explains the motivations guiding the user's actions and it's called a Persona. 
+During the same product definition phase, the product team listed the needs of each of the personas. They selected the needs to be addressed by the product, and left the other needs aside.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Personas" src="http://image.slidesharecdn.com/fromideatoproduct-150608153131-lva1-app6892/95/from-idea-to-product-14-638.jpg?cb=1433777781" /&gt;&lt;/p&gt;
+&lt;!--
+Sources :
+http://www.agilemodeling.com/artifacts/userStory.htm
+http://winnipegagilist.blogspot.fr/2012/03/how-to-create-user-story-map.html
+http://fr.slideshare.net/mikecohn/prioritizing-your-product-backlog-22870228?related=1
+http://www.mountaingoatsoftware.com/blog/visualizing-a-large-product-backlog-with-a-treemap
+--&gt;</summary></entry><entry><title>Gantt Chart Principle</title><link href="http://stephanie-w.github.io/gantt-chart-principle.html" rel="alternate"></link><updated>2015-08-05T13:32:04+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-05:gantt-chart-principle.html</id><summary type="html">&lt;hr /&gt;
+&lt;p&gt;A Gantt Chart illustrates a project schedule by presenting scheduling and dependencies information about the activities involved in implementing a project.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.technologyuk.net/computing/project_management/images/ganttproject02.gif" /&gt;&lt;/p&gt;
+&lt;p&gt;The horizontal (x) axis of the chart shows the timescale over which the project work is carried out, and is divided into appropriate time units (the units of time used will depend on the overall timescale for the project). &lt;br /&gt;
+The vertical (y) axis identifies the various tasks that must be carried out.&lt;br /&gt;
+Each task is represented by a horizontal bar, occupying its own row on the y-axis.&lt;br /&gt;
+The left-hand end of the bar is positioned on the x-axis in such a way that it represents the start date for the task, while the right hand end of the bar represents the finish date. The length of the bar therefore represents the duration of the task by definition.&lt;br /&gt;
+Task dependencies may also be indicated using an arrow that links the end of one task to the beginning of the next. &lt;/p&gt;
+&lt;p&gt;To illustrate the principle of a Gantt Chart building, let's take the opening of a store abroad as project.&lt;br /&gt;
+The first step is listing the tasks:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Choose a country&lt;/li&gt;
+&lt;li&gt;Recruit a manager&lt;/li&gt;
+&lt;li&gt;Find a site&lt;/li&gt;
+&lt;li&gt;Purchase the site&lt;/li&gt;
+&lt;li&gt;Get a permit&lt;/li&gt;
+&lt;li&gt;Recruit the staff&lt;/li&gt;
+&lt;li&gt;Modify the building&lt;/li&gt;
+&lt;li&gt;Buy furniture&lt;/li&gt;
+&lt;li&gt;Install furniture&lt;/li&gt;
+&lt;li&gt;Open&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Next step is drawing a network diagram (or the activity-on-arrow diagram or PERT Chart) to organize tasks according to dependencies. To each task is assigned a duration estimation.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="PERT Chart" src="/figure/pertchart.png" /&gt;&lt;/p&gt;
+&lt;p&gt;The longest path of planned activities to logical end points or to the end of the project is in red. The sequence of project network activities which add up to the longest overall duration. This determines the shortest time possible to complete the project.&lt;/p&gt;
+&lt;p&gt;We use this path to begin the Gantt Chart.&lt;br /&gt;
+Then we position the other task according to the task they depend on.  &lt;/p&gt;
+&lt;p&gt;The "find a site" is a floating task depending on "choose a country" task. The "find a site" task must occur before the "purchase a site" task.&lt;br /&gt;
+The "manager" and the buy a furniture are sharing float tasks, coming after "choose a country" task and before "install furniture" task.&lt;br /&gt;
+The best obvious idea in the project is to set the "recruit a manager" task as early as possible in this large floating space since it can help on other tasks and the "buy furniture" quite late before the installation.&lt;br /&gt;
+The "recruit staff" task comes after the "recruit a manager" task and before the "open" task. Since it has a cost, the better idea is to set the "staff" task as late as possible. The "recruit staff" is a floating task depending on an other floating task. If the "recruit a manager" task takes longer or starts later, there will be less float space for the "recruit a staff" task. &lt;/p&gt;
+&lt;p&gt;&lt;img alt="Gantt Chart" src="/figure/gantt-chart.png" /&gt;&lt;/p&gt;
+&lt;!--
+Sources:
+http://www.oracle.com/webfolder/ux/middleware/richclient/index.html?/webfolder/ux/middleware/richclient/guidelines5/gantt.html
+--&gt;</summary></entry></feed>
