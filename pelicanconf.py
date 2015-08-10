@@ -4,9 +4,9 @@ from __future__ import unicode_literals
 
 AUTHOR = u'Stephanie W'
 SITENAME = u'Brain Scribble'
-SITEURL = 'http://stephanie-w.github.io'
+SITEURL = ''
 
-PATH = 'content/'
+PATH ='content/'
 OUTPUT_PATH = 'output/'
 SLUGIFY_SOURCE = 'basename'
 DELETE_OUTPUT_DIRECTORY = True
