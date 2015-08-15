@@ -1,8 +1,11 @@
 body {
     padding-top: 70px;
+    font-size: 16px;
 }
 
-
+aside {
+    min-width: 200px;
+}
 .h1{
     font-size:36px
 }
@@ -19,7 +22,8 @@ h5,.h5{
     font-size:18px
 }
 h6,.h6{
-    font-size:14px
+    font-size:14px;
+    font-weight: bold;
 }
 
 /* Tables */
@@ -137,7 +141,6 @@ a, a:hover {
     display: block;
     margin: 0 auto 0 auto;
     max-width: 800px;
-    width: 500px;
     height: auto;
 }
 
