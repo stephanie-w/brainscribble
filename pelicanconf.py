@@ -9,7 +9,6 @@ SITEURL = ''
 PATH ='content/'
 OUTPUT_PATH = 'output/'
 SLUGIFY_SOURCE = 'basename'
-DELETE_OUTPUT_DIRECTORY = True
 USE_FOLDER_AS_CATEGORY = True
 
 TIMEZONE = 'Europe/Paris'
