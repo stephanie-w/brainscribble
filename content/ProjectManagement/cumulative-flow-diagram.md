@@ -15,7 +15,7 @@ The key data points of the CFD are:
 * The horizontal distance between the areas in the chart corresponds to the average lead time of the requests that arrived on a specific date
 * The mean delivery rate, represented by the slope of the closed items area, corresponds to the trend in the delivery of the work.
 
-
+![](figure/CFD.PNG)
 
 Little's law says the long-term average number of customers in a stable system $L$ is equal to the long-term average effective arrival rate, $\gamma$, multiplied by the (Palm‑)average time a customer spends in the system, $W$, or expressed algebraically: 
 $L = $\gammaW$  
@@ -28,17 +28,16 @@ $WIP$ = average number of items in process = $L$
 $Throughput$ = average departure rate = $\gamma$, .ie average number of work items (exiting) the workflow per some unit time
 $LeadTime$ = average time an item spends in the system = $W$, .ie the average time it takes a work item to move through the workflow from start to delivery 
 
-<!--
 The power of Little’s Law to Kanban teams is not its ability to predict WIP, Thoughput or Leadtime. The true power lies in its ability to influence team behavior with its underlying assumptions. 
 
 In other words, if you want to:
 * increase Throughput then limit WIP
 * speed up the process, i.e. reduce Lead Time, then once again limit the WIP
--->
 
-
-
-![](https://jazz.net/library/content/articles/insight/1.1.1.1/kanban-metrics/images/2.jpg)
-![](http://static.kanbantool.com/seo-landing-page/kanban-presentation/cumulative-flow-chart7.png)
-![](http://static.kanbantool.com/seo-landing-page/kanban-analytics-and-metrics/lead-cycle-time-diagram-kanban-tool-10.jpg)
+<!--
+Sources
+[](https://jazz.net/library/content/articles/insight/1.1.1.1/kanban-metrics/images/2.jpg)
+[](http://static.kanbantool.com/seo-landing-page/kanban-presentation/cumulative-flow-chart7.png)
+[](http://static.kanbantool.com/seo-landing-page/kanban-analytics-and-metrics/lead-cycle-time-diagram-kanban-tool-10.jpg)
+[Agile Rambling - Tag Archives: metrics](http://agileramblings.com/tag/metrics-2/)
 -->

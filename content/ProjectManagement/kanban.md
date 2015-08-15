@@ -28,13 +28,22 @@ The Kanban composants are :
 Examples:
 A minimal Kanban board is a board with columns "To Do", "Doing", "Done":
 
-![](http://leankit.com/kanban/what-is-kanban/kanban-board-e60650d1.jpg)
+![](figure/kanban-board-1.png)
 
 The most popular example of kanban board for agile or lean software development consists of: Backlog, Ready, Coding, Testing, Approval and Done columns. It is also a common practice to name columns in a different way, for example: Next, In Development, Done, Customer Acceptance, Live.
 
-![](http://i1.wp.com/www.everydaykanban.com/wp-content/uploads/2012/03/kanban-board.png)
-![](http://brodzinski.com/wp-content/uploads/workflow-cfd.jpg)
+An other common one is:
 
+![](figure/kanban-board-2.png)
+
+Possible workflow step could be chosen among the following steps:
+* Backlog
+* Ready/Selected
+* Coding/Development
+* Testing
+* Acceptance/Approval
+* Deployment
+* Done/Live
 
 ## Core Kanban Principles
 
@@ -55,13 +64,17 @@ The Kanban method starts with existing roles and process and stimulates continuo
 
 First some definitions to understand Kanban Metrics.  
 Lead Time : The time it takes a work to get from step A to step B.  
-![](http://leankit.com/kanban/lean-flow-metrics/images/Lead-Time-4d568f72.png)
+
+![](figure/Lead-Time.png)
+
 There can be several lead times (e.g., customer lead time, development lead time, QA lead time, etc.) and specially the End to end Lead Time : The time in which a card goes from being created to being closed.  
 This metric say about how the whole organization or product team (not only a development team) reacts to customer's needs.
 
 Delivery/Cycle Lead Time : The time a card spend out of the backlog, ie. the elapsed time from the moment the team  starts actively working on a task till the moment they are done.  
 This metric basically say about how responsive the team is or how fast they can deliver something when priorities change.
-![](http://leankit.com/kanban/lean-flow-metrics/images/Cycle-Time-e537190e.png)
+
+![](figure/Cycle-Time.png)
+
 Different teams will use different definitions for start and done ("accepted by the product owner" vs "delivered to production").
 
 
@@ -77,7 +90,8 @@ The key data points of the CFD are:
 
 This metric help understand the state of current work  and what might need to be done to speed up the pace of delivery.  
 The diagram should run smoothly. Large steps and flat horizontal lines indicate impediments to flow or lack of flow. Variations in the gap or bands stand for bottleneck situations, which usually occur due to irrelevant work in progress limits.
-![](http://brodzinski.com/wp-content/uploads/cfd-03.jpg)
+
+![](figure/CFD.PNG)
 
 ### Lead Time Average
 
@@ -88,11 +102,10 @@ This report shows a trend of the average number of days a task took to be comple
 This report shows the average percentage of lead time that a developer spent working on a task (touch time). This shows the potential for process improvements. 
 
 
-![](https://jazz.net/library/content/articles/insight/1.1.1.1/kanban-metrics/images/3.jpg)
-
 ### Cycle time diagram
 Stacked bar chart representing how much time a task has spent in a given state through is life-cycle, allowing the detection of tasks that are taking too long.
-![](http://blog.kanbanize.com/wp-content/uploads/2014/01/cycle-time-no-done-column.png)
+
+![](figure/cycle-time-column.png)
 
 ### Due Date Performance 
 
@@ -111,7 +124,7 @@ This report shows a trend of the average number of defects opened against a Stor
 
    This report shows the number of items that were delivered in a given time period (eg monthly). It can be used to identify a trend of how well the system has been performing. As teams work on process improvements, the throughput trend will show a more consistent slope in the chart. 
 
-![](https://jazz.net/library/content/articles/insight/1.1.1.1/kanban-metrics/images/4.jpg)
+![](figure/TroughputTrend.PNG)
 
 
 <!--
@@ -155,4 +168,6 @@ Sources:
 [Improve predictability and efficiency with Kanban metrics using IBM Rational Insight](https://jazz.net/library/article/1350)  
 [A brief introduction to kanban](https://www.atlassian.com/agile/kanban)
 [Cumulative Flow Diagram](http://brodzinski.com/2013/07/cumulative-flow-diagram.html)
-[http://pm.stackexchange.com/questions/10657/what-are-some-commonly-tracked-metrics-in-kanban](http://pm.stackexchange.com/questions/10657/what-are-some-commonly-tracked-metrics-in-kanban)
+[Stack Exchange : What are commonly tracked metrics in kanban?](http://pm.stackexchange.com/questions/10657/what-are-some-commonly-tracked-metrics-in-kanban)
+[Kanban Analytics part II: Cycle Time](http://blog.kanbanize.com/kanban-analytics-part-ii-cycle-time/)
+[Agile Rambling - Tag Archives: metrics](http://agileramblings.com/tag/metrics-2/)
