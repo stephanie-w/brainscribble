@@ -1,5 +1,6 @@
 ---
 title: R: Multivariable Regression
+tags: R
 
 ---
 <!-- BEGIN_SUMMARY -->
@@ -129,7 +130,7 @@ lines(hunger$Year[hunger$Sex == "Male"], lmM$fitted, col = "blue", lwd = 3)
 lines(hunger$Year[hunger$Sex == "Female"], lmF$fitted, col = "red", lwd = 3)
 ```
 
-<div class="rimage center"><img src="fig/unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /></div>
+<div class="rimage center"><img src="figure/multivariable-regression-4-1.png"/></div>
 
 We can see from the plot that the lines are not exactly parallel. On the right side of the graph (around the year 2010) they are closer together than on the left side (around 1970). Slopes are -0.29340 for femals, -0.32340 for males.
 
@@ -177,7 +178,8 @@ abline(c(lmBoth$coeff[1], lmBoth$coeff[2]), col = "red", lwd = 3)
 abline(c(lmBoth$coeff[1] + lmBoth$coeff[3], lmBoth$coeff[2]), col = "blue", lwd = 3)
 ```
 
-<div class="rimage center"><img src="fig/unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" class="plot" /></div>
+<div class="rimage center"><img src="figure/multivariable-regression-6-1.png"/></div>
+
 The lines are parallels (since, they have the same slope lmBoth$coeff[2]).
 
 Now we'll consider the interaction between year and gender to see how that affects changes in rates of hunger:
@@ -223,7 +225,7 @@ abline(c(lmInter$coeff[1], lmInter$coeff[2]), col = "red", lwd = 3)
 abline(c(lmInter$coeff[1] + lmInter$coeff[3], lmInter$coeff[2] + lmInter$coeff[4]), col = "blue", lwd = 3)
 ```
 
-<div class="rimage center"><img src="fig/unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" class="plot" /></div>
+<div class="rimage center"><img src="figure/multivariable-regression-8-1.png"/></div>
 
 The lines are not parallel and will eventually intersect. The Male blue line indicates a faster rate of change.
 
