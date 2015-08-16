@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>R : Exploring Data for Machine Learning Modeling - Brain Scribble</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="http://stephanie-w.github.io/blog/images/post_1246903_635089122565391744.jpg" rel="icon">
+
+<link rel="canonical" href="http://stephanie-w.github.io/blog/exploring-data-for-marchine-learning.html">
+
+        <meta name="author" content="Stephanie W" />
+        <meta name="keywords" content="R" />
+        <meta name="description" content="These are my notes on the Practical Machine Learning course (Week2: Plotting Predictors - Tutorial)." />
+
+        <meta property="og:site_name" content="Brain Scribble" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="R : Exploring Data for Machine Learning Modeling"/>
+        <meta property="og:url" content="http://stephanie-w.github.io/blog/exploring-data-for-marchine-learning.html"/>
+        <meta property="og:description" content="These are my notes on the Practical Machine Learning course (Week2: Plotting Predictors - Tutorial)."/>
+        <meta property="article:published_time" content="2015-08-16" />
+            <meta property="article:section" content="DataAnalysis" />
+            <meta property="article:tag" content="R" />
+            <meta property="article:author" content="Stephanie W" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://stephanie-w.github.io/blog/theme/css/bootstrap.lumen.min.css" type="text/css"/>
+    <link href="http://stephanie-w.github.io/blog/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://stephanie-w.github.io/blog/theme/css/pygments/monokai.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://stephanie-w.github.io/blog/theme/css/style.css" type="text/css"/>
+
+        <link href="http://stephanie-w.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Brain Scribble ATOM Feed"/>
+
+
+
+        <link href="http://stephanie-w.github.io/blog/feeds/dataanalysis.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Brain Scribble DataAnalysis ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://stephanie-w.github.io/blog/" class="navbar-brand">
+Brain Scribble            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="http://stephanie-w.github.io/blog/category/dataanalysis.html">Dataanalysis</a>
+                        </li>
+                        <li >
+                            <a href="http://stephanie-w.github.io/blog/category/games.html">Games</a>
+                        </li>
+                        <li >
+                            <a href="http://stephanie-w.github.io/blog/category/projectmanagement.html">Projectmanagement</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="http://stephanie-w.github.io/blog/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="http://stephanie-w.github.io/blog/exploring-data-for-marchine-learning.html"
+                       rel="bookmark"
+                       title="Permalink to R : Exploring Data for Machine Learning Modeling">
+                        R : Exploring Data for Machine Learning Modeling
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2015-08-16T01:02:29.157339+02:00"> 16/August/2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="http://stephanie-w.github.io/blog/tag/r.html">R</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                
+<hr/>
+
+<p>These are my notes on the Practical Machine Learning course (Week2: Plotting Predictors - Tutorial).</p>
+
+<p>When exploring data for Machine Learning, we're looking for:</p>
+<ul>
+<li>imbalance outcomes/predictors</li>
+<li>outliners</li>
+<li>groups of outcome points not explained by any of the predictors</li>
+<li>skewed variables (that needs to be transformed)</li>
+</ul>
+<p>We'll use the Wage dataset from the ISLR package.<br/>
+This dataset reports wage and other data (age, education, jobclass, etc.) for a group of 3000 male workers in the Mid-Atlantic region.</p>
+<div class="highlight"><pre><span class="code-line"><span class="kn">library</span><span class="p">(</span>ISLR<span class="p">)</span></span>
+<span class="code-line">data<span class="p">(</span>Wage<span class="p">)</span></span>
+<span class="code-line"><span class="kp">summary</span><span class="p">(</span>Wage<span class="p">)</span></span>
+</pre></div>
+<div class="highlight"><pre><span class="code-line">##       year           age               sex                    maritl           race     </span>
+<span class="code-line">##  Min.   :2003   Min.   :18.00   1. Male  :3000   1. Never Married: 648   1. White:2480  </span>
+<span class="code-line">##  1st Qu.:2004   1st Qu.:33.75   2. Female:   0   2. Married      :2074   2. Black: 293  </span>
+<span class="code-line">##  Median :2006   Median :42.00                    3. Widowed      :  19   3. Asian: 190  </span>
+<span class="code-line">##  Mean   :2006   Mean   :42.41                    4. Divorced     : 204   4. Other:  37  </span>
+<span class="code-line">##  3rd Qu.:2008   3rd Qu.:51.00                    5. Separated    :  55                  </span>
+<span class="code-line">##  Max.   :2009   Max.   :80.00                                                           </span>
+<span class="code-line">##                                                                                         </span>
+<span class="code-line">##               education                     region               jobclass               health    </span>
+<span class="code-line">##  1. &lt; HS Grad      :268   2. Middle Atlantic   :3000   1. Industrial :1544   1. &lt;=Good     : 858  </span>
+<span class="code-line">##  2. HS Grad        :971   1. New England       :   0   2. Information:1456   2. &gt;=Very Good:2142  </span>
+<span class="code-line">##  3. Some College   :650   3. East North Central:   0                                              </span>
+<span class="code-line">##  4. College Grad   :685   4. West North Central:   0                                              </span>
+<span class="code-line">##  5. Advanced Degree:426   5. South Atlantic    :   0                                              </span>
+<span class="code-line">##                           6. East South Central:   0                                              </span>
+<span class="code-line">##                           (Other)              :   0                                              </span>
+<span class="code-line">##   health_ins      logwage           wage       </span>
+<span class="code-line">##  1. Yes:2083   Min.   :3.000   Min.   : 20.09  </span>
+<span class="code-line">##  2. No : 917   1st Qu.:4.447   1st Qu.: 85.38  </span>
+<span class="code-line">##                Median :4.653   Median :104.92  </span>
+<span class="code-line">##                Mean   :4.654   Mean   :111.70  </span>
+<span class="code-line">##                3rd Qu.:4.857   3rd Qu.:128.68  </span>
+<span class="code-line">##                Max.   :5.763   Max.   :318.34  </span>
+<span class="code-line">## </span>
+</pre></div>
+<p>Building training and testing sets (50% of the dataset each):</p>
+<div class="highlight"><pre><span class="code-line"><span class="kn">library</span><span class="p">(</span>caret<span class="p">)</span></span>
+<span class="code-line">intrain <span class="o">&lt;-</span> createDataPartition<span class="p">(</span>y <span class="o">=</span> Wage<span class="o">$</span>wage<span class="p">,</span> p <span class="o">=</span> <span class="m">0.5</span><span class="p">,</span> <span class="kt">list</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span></span>
+<span class="code-line">training <span class="o">=</span> Wage<span class="p">[</span>intrain<span class="p">,</span> <span class="p">]</span></span>
+<span class="code-line">testing <span class="o">=</span> Wage<span class="p">[</span><span class="o">-</span>intrain<span class="p">,</span> <span class="p">]</span></span>
+</pre></div>
+<p>The exploration is always done on the training set.</p>
+<h2 id="plotting-predictors-against-outcome">Plotting predictors against outcome</h2>
+<p>Plotting wage versus age, education and jobclass using the R featurePlot function (from the caret package):</p>
+<div class="highlight"><pre><span class="code-line">featurePlot<span class="p">(</span>x <span class="o">=</span> training<span class="p">[,</span> <span class="kt">c</span><span class="p">(</span><span class="s">"age"</span><span class="p">,</span> <span class="s">"education"</span><span class="p">,</span> <span class="s">"jobclass"</span><span class="p">)],</span> y <span class="o">=</span> training<span class="o">$</span>wage<span class="p">,</span> plot <span class="o">=</span> <span class="s">"pairs"</span><span class="p">)</span></span>
+</pre></div>
+<div class="rimage center"><img src="figure/exploring-data-for-marchine-learning-3-1.png"/></div>
+<p>The graph shows some patterns: a trend in wages comparing to ages and two distinct groups of observations (below and above 250 dollars raw wage).</p>
+<p>Plotting wage versus age:</p>
+<div class="highlight"><pre><span class="code-line"><span class="kn">library</span><span class="p">(</span>ggplot2<span class="p">)</span></span>
+<span class="code-line">qplot<span class="p">(</span>age<span class="p">,</span> wage<span class="p">,</span> data <span class="o">=</span> training<span class="p">)</span></span>
+</pre></div>
+<div class="rimage center"><img src="figure/exploring-data-for-marchine-learning-4-2.png"/></div>
+<p>Plotting wage versus age, grouping by jobclass:</p>
+<div class="highlight"><pre><span class="code-line"><span class="kn">library</span><span class="p">(</span>ggplot2<span class="p">)</span></span>
+</pre></div>
+<div class="rimage center"><img src="figure/exploring-data-for-marchine-learning-4-1.png"/></div>
+<p>The jobclass difference could explain the two distincts groups.</p>
+<p>Plotting wage versus age, grouping by education, adding regression smoothers:</p>
+<div class="highlight"><pre><span class="code-line">qq <span class="o">&lt;-</span> qplot<span class="p">(</span>age<span class="p">,</span> wage<span class="p">,</span> color <span class="o">=</span> education<span class="p">,</span> data <span class="o">=</span> training<span class="p">)</span></span>
+<span class="code-line">qq <span class="o">+</span> geom_smooth<span class="p">(</span>method <span class="o">=</span> <span class="s">"lm"</span><span class="p">,</span> formula <span class="o">=</span> y <span class="o">~</span> x<span class="p">)</span></span>
+</pre></div>
+<div class="rimage center"><img src="figure/exploring-data-for-marchine-learning-5-1.png"/></div>
+<h2 id="data-repartition">Data Repartition</h2>
+<p>Breaking up the wage variable into three groups (factors actually) with the R cut2 function (from the Hmisc package):</p>
+<div class="highlight"><pre><span class="code-line"><span class="kn">library</span><span class="p">(</span>Hmisc<span class="p">)</span></span>
+<span class="code-line">cutWage <span class="o">&lt;-</span> cut2<span class="p">(</span>training<span class="o">$</span>wage<span class="p">,</span> g <span class="o">=</span> <span class="m">3</span><span class="p">)</span></span>
+<span class="code-line"><span class="kp">table</span><span class="p">(</span>cutWage<span class="p">)</span></span>
+</pre></div>
+<div class="highlight"><pre><span class="code-line">## cutWage</span>
+<span class="code-line">## [ 20.1, 91.7) [ 91.7,118.9) [118.9,314.3] </span>
+<span class="code-line">##           506           519           476</span>
+</pre></div>
+<p>Looling at the repartition, we can see that there are more industrial jobs that there are information jobs with lower wage. Then the trend reverses itself.</p>
+<p>Plotting a boxplot of the wage groups created above:</p>
+<div class="highlight"><pre><span class="code-line">qplot<span class="p">(</span>cutWage<span class="p">,</span> age<span class="p">,</span> data <span class="o">=</span> training<span class="p">,</span> fill <span class="o">=</span> cutWage<span class="p">,</span> geom <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">"boxplot"</span><span class="p">))</span></span>
+</pre></div>
+<div class="rimage center"><img src="figure/exploring-data-for-marchine-learning-7-1.png"/></div>
+<p>Exploring the repartition of jobclass across wage groups:</p>
+<div class="highlight"><pre><span class="code-line">t1 <span class="o">&lt;-</span> <span class="kp">table</span><span class="p">(</span>cutWage<span class="p">,</span> training<span class="o">$</span>jobclass<span class="p">)</span></span>
+<span class="code-line">t1</span>
+</pre></div>
+<div class="highlight"><pre><span class="code-line">##                </span>
+<span class="code-line">## cutWage         1. Industrial 2. Information</span>
+<span class="code-line">##   [ 20.1, 91.7)           313            193</span>
+<span class="code-line">##   [ 91.7,118.9)           262            257</span>
+<span class="code-line">##   [118.9,314.3]           190            286</span>
+</pre></div>
+<p>Using the prop function to get the proportion of jobclass (in each row) for each groups:</p>
+<div class="highlight"><pre><span class="code-line"><span class="kp">prop.table</span><span class="p">(</span>t1<span class="p">,</span> <span class="m">1</span><span class="p">)</span></span>
+</pre></div>
+<div class="highlight"><pre><span class="code-line">##                </span>
+<span class="code-line">## cutWage         1. Industrial 2. Information</span>
+<span class="code-line">##   [ 20.1, 91.7)     0.6185771      0.3814229</span>
+<span class="code-line">##   [ 91.7,118.9)     0.5048170      0.4951830</span>
+<span class="code-line">##   [118.9,314.3]     0.3991597      0.6008403</span>
+</pre></div>
+<p>62% of the low wage job correponds to industrial jobs, 38% to information jobs.</p>
+<h2 id="density-plots">Density Plots</h2>
+<p>Density plot can be a much more effective way to view the distribution of a variable than boxplots.</p>
+<p>Ploting a density plot of the values of wages, grouping by education:</p>
+<div class="highlight"><pre><span class="code-line">qplot<span class="p">(</span>wage<span class="p">,</span> color <span class="o">=</span> education<span class="p">,</span> data <span class="o">=</span> training<span class="p">,</span> geom <span class="o">=</span> <span class="s">"density"</span><span class="p">)</span></span>
+</pre></div>
+<div class="rimage center"><img src="figure/exploring-data-for-marchine-learning-10-1.png"/></div>
+<p>The "&lt;HS grad" workers tend to have more values in the lower part of the range of wage. There is an outgroup of Advanced Degree and College Grad workers with higher wage.</p>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="http://stephanie-w.github.io/blog/statinf2.html">Notes on Statistical Inference : Hypothesis Testing and t-tests</a></li>
+        <li><a href="http://stephanie-w.github.io/blog/multivariable-regression.html">R: Multivariable Regression</a></li>
+        <li><a href="http://stephanie-w.github.io/blog/variance-inflation.html">R : Variance Inflation</a></li>
+        <li><a href="http://stephanie-w.github.io/blog/last_earthquakes.html">R: Earthquakes from the past 30 days</a></li>
+        <li><a href="http://stephanie-w.github.io/blog/experimentation-of-clt.html">R: Experimentation of the Cental Limit Theorem</a></li>
+    </ul>
+</section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+        <ul class="list-group" id="links">
+            <img width="100%" class="img-thumbnail" src="http://stephanie-w.github.io/blog/images/post_1246903_635089122565391744.jpg"/>
+        </ul>
+    </li>
+            <li class="list-group-item"><h4><i class="fa fa-crosshairs"></i><span class="icon-label">Table of Contents</span></h4>
+            <div class="toc">
+<ul>
+<li><a href="#plotting-predictors-against-outcome">Plotting predictors against outcome</a></li>
+<li><a href="#data-repartition">Data Repartition</a></li>
+<li><a href="#density-plots">Density Plots</a></li>
+</ul>
+</div>
+             <hr />
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="https://fr.linkedin.com/pub/stephanie-werli/26/b69/a0b"><i class="fa fa-linkedin-square fa-lg"></i> linkedin</a></li>
+                <li class="list-group-item"><a href="http://github.com/stephanie-w"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+              </ul>
+            </li>
+
+
+
+
+
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2015 Stephanie W
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://stephanie-w.github.io/blog/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://stephanie-w.github.io/blog/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://stephanie-w.github.io/blog/theme/js/respond.min.js"></script>
+
+
+</body>
+</html>

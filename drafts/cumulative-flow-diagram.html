@@ -20,7 +20,7 @@
         <meta property="og:title" content="Cumulative Flow Diagram"/>
         <meta property="og:url" content="http://stephanie-w.github.io/blog/drafts/cumulative-flow-diagram.html"/>
         <meta property="og:description" content="The Cumulative Flow Diagram report represents the relative amount of work for each stage of project over the time."/>
-        <meta property="article:published_time" content="2015-08-10" />
+        <meta property="article:published_time" content="2015-08-16" />
             <meta property="article:section" content="ProjectManagement" />
             <meta property="article:author" content="Stephanie W" />
 
@@ -96,7 +96,7 @@ Brain Scribble            </a>
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2015-08-10T16:09:14.779819+02:00"> 10/August/2015</time>
+        <i class="fa fa-calendar"></i><time datetime="2015-08-16T00:45:05.280933+02:00"> 16/August/2015</time>
     </span>
 
 
@@ -117,6 +117,7 @@ Brain Scribble            </a>
 <li>The horizontal distance between the areas in the chart corresponds to the average lead time of the requests that arrived on a specific date</li>
 <li>The mean delivery rate, represented by the slope of the closed items area, corresponds to the trend in the delivery of the work.</li>
 </ul>
+<p><img alt="" src="figure/CFD.PNG" /></p>
 <p>Little's law says the long-term average number of customers in a stable system <span class="math">\(L\)</span> is equal to the long-term average effective arrival rate, <span class="math">\(\gamma\)</span>, multiplied by the (Palm‑)average time a customer spends in the system, <span class="math">\(W\)</span>, or expressed algebraically: 
 <span class="math">\(L = $\gammaW\)</span><br />
 If you have the mean number n a system and the throughput, the Little's Law gives the average response time like so:<br />
@@ -126,18 +127,18 @@ If you have the mean number n a system and the throughput, the Little's Law give
 <span class="math">\(WIP\)</span> = average number of items in process = <span class="math">\(L\)</span>
 <span class="math">\(Throughput\)</span> = average departure rate = <span class="math">\(\gamma\)</span>, .ie average number of work items (exiting) the workflow per some unit time
 <span class="math">\(LeadTime\)</span> = average time an item spends in the system = <span class="math">\(W\)</span>, .ie the average time it takes a work item to move through the workflow from start to delivery </p>
+<p>The power of Little’s Law to Kanban teams is not its ability to predict WIP, Thoughput or Leadtime. The true power lies in its ability to influence team behavior with its underlying assumptions. </p>
+<p>In other words, if you want to:
+<em> increase Throughput then limit WIP
+</em> speed up the process, i.e. reduce Lead Time, then once again limit the WIP</p>
 <!--
-The power of Little’s Law to Kanban teams is not its ability to predict WIP, Thoughput or Leadtime. The true power lies in its ability to influence team behavior with its underlying assumptions.
-
-In other words, if you want to:
-* increase Throughput then limit WIP
-* speed up the process, i.e. reduce Lead Time, then once again limit the WIP
+Sources
+[](https://jazz.net/library/content/articles/insight/1.1.1.1/kanban-metrics/images/2.jpg)
+[](http://static.kanbantool.com/seo-landing-page/kanban-presentation/cumulative-flow-chart7.png)
+[](http://static.kanbantool.com/seo-landing-page/kanban-analytics-and-metrics/lead-cycle-time-diagram-kanban-tool-10.jpg)
+[Agile Rambling - Tag Archives: metrics](http://agileramblings.com/tag/metrics-2/)
 -->
 
-<p><img alt="" src="https://jazz.net/library/content/articles/insight/1.1.1.1/kanban-metrics/images/2.jpg" />
-<img alt="" src="http://static.kanbantool.com/seo-landing-page/kanban-presentation/cumulative-flow-chart7.png" />
-<img alt="" src="http://static.kanbantool.com/seo-landing-page/kanban-analytics-and-metrics/lead-cycle-time-diagram-kanban-tool-10.jpg" />
---&gt;</p>
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var align = "center",
         indent = "0em",

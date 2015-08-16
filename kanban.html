@@ -20,7 +20,7 @@
         <meta property="og:title" content="Kanban Practices"/>
         <meta property="og:url" content="http://stephanie-w.github.io/blog/kanban.html"/>
         <meta property="og:description" content="Kanban in the context of software development mean a visual process-management system that tells what to produce, when to produce it, and how much to produce - inspired by the Toyota Production System and by Lean manufacturing."/>
-        <meta property="article:published_time" content="2015-08-10" />
+        <meta property="article:published_time" content="2015-08-16" />
             <meta property="article:section" content="ProjectManagement" />
             <meta property="article:author" content="Stephanie W" />
 
@@ -96,7 +96,7 @@ Brain Scribble            </a>
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2015-08-10T16:09:14.779819+02:00"> 10/August/2015</time>
+        <i class="fa fa-calendar"></i><time datetime="2015-08-16T00:45:05.280933+02:00"> 16/August/2015</time>
     </span>
 
 
@@ -131,10 +131,18 @@ Brain Scribble            </a>
 </ul>
 <p>Examples:
 A minimal Kanban board is a board with columns "To Do", "Doing", "Done":</p>
-<p><img alt="" src="http://leankit.com/kanban/what-is-kanban/kanban-board-e60650d1.jpg"/></p>
+<p><img alt="" src="figure/kanban-board-1.png"/></p>
 <p>The most popular example of kanban board for agile or lean software development consists of: Backlog, Ready, Coding, Testing, Approval and Done columns. It is also a common practice to name columns in a different way, for example: Next, In Development, Done, Customer Acceptance, Live.</p>
-<p><img alt="" src="http://i1.wp.com/www.everydaykanban.com/wp-content/uploads/2012/03/kanban-board.png"/>
-<img alt="" src="http://brodzinski.com/wp-content/uploads/workflow-cfd.jpg"/></p>
+<p>An other common one is:</p>
+<p><img alt="" src="figure/kanban-board-2.png"/></p>
+<p>Possible workflow step could be chosen among the following steps:
+<em> Backlog
+</em> Ready/Selected
+<em> Coding/Development
+</em> Testing
+<em> Acceptance/Approval
+</em> Deployment
+* Done/Live</p>
 <h2 id="core-kanban-principles">Core Kanban Principles</h2>
 <ul>
 <li>Visualize the workflow, showing the work in progress, the work remaining and showing the flow of work through the Kanban system</li>
@@ -152,14 +160,14 @@ A minimal Kanban board is a board with columns "To Do", "Doing", "Done":</p>
 <p>The Kanban method starts with existing roles and process and stimulates continuous, incremental and evolutionary change in the system by monitoring, adapting and improving the workflow, by measuring effectiveness by tracking flow, quality, throughput, lead times.</p>
 <h2 id="kanban-metrics">Kanban Metrics</h2>
 <p>First some definitions to understand Kanban Metrics.<br/>
-Lead Time : The time it takes a work to get from step A to step B.<br/>
-<img alt="" src="http://leankit.com/kanban/lean-flow-metrics/images/Lead-Time-4d568f72.png"/>
-There can be several lead times (e.g., customer lead time, development lead time, QA lead time, etc.) and specially the End to end Lead Time : The time in which a card goes from being created to being closed.<br/>
+Lead Time : The time it takes a work to get from step A to step B.  </p>
+<p><img alt="" src="figure/Lead-Time.png"/></p>
+<p>There can be several lead times (e.g., customer lead time, development lead time, QA lead time, etc.) and specially the End to end Lead Time : The time in which a card goes from being created to being closed.<br/>
 This metric say about how the whole organization or product team (not only a development team) reacts to customer's needs.</p>
 <p>Delivery/Cycle Lead Time : The time a card spend out of the backlog, ie. the elapsed time from the moment the team  starts actively working on a task till the moment they are done.<br/>
-This metric basically say about how responsive the team is or how fast they can deliver something when priorities change.
-<img alt="" src="http://leankit.com/kanban/lean-flow-metrics/images/Cycle-Time-e537190e.png"/>
-Different teams will use different definitions for start and done ("accepted by the product owner" vs "delivered to production").</p>
+This metric basically say about how responsive the team is or how fast they can deliver something when priorities change.</p>
+<p><img alt="" src="figure/Cycle-Time.png"/></p>
+<p>Different teams will use different definitions for start and done ("accepted by the product owner" vs "delivered to production").</p>
 <h3 id="cumulative-flow-diagrams">Cumulative Flow Diagrams</h3>
 <p>This report represents the relative amount of work for each stage of project over the time.
 The key data points of the CFD are:</p>
@@ -169,16 +177,15 @@ The key data points of the CFD are:</p>
 <li>The mean delivery rate, represented by the slope of the closed items area, corresponds to the trend in the delivery of the work.</li>
 </ul>
 <p>This metric help understand the state of current work  and what might need to be done to speed up the pace of delivery.<br/>
-The diagram should run smoothly. Large steps and flat horizontal lines indicate impediments to flow or lack of flow. Variations in the gap or bands stand for bottleneck situations, which usually occur due to irrelevant work in progress limits.
-<img alt="" src="http://brodzinski.com/wp-content/uploads/cfd-03.jpg"/></p>
+The diagram should run smoothly. Large steps and flat horizontal lines indicate impediments to flow or lack of flow. Variations in the gap or bands stand for bottleneck situations, which usually occur due to irrelevant work in progress limits.</p>
+<p><img alt="" src="figure/CFD.PNG"/></p>
 <h3 id="lead-time-average">Lead Time Average</h3>
 <p>This report shows a trend of the average number of days a task took to be completed, from start to finish. It is categorized by work item type so teams can see the how the system is performing over time, broken down by work item type. </p>
 <h3 id="flow-efficiency">Flow Efficiency</h3>
 <p>This report shows the average percentage of lead time that a developer spent working on a task (touch time). This shows the potential for process improvements. </p>
-<p><img alt="" src="https://jazz.net/library/content/articles/insight/1.1.1.1/kanban-metrics/images/3.jpg"/></p>
 <h3 id="cycle-time-diagram">Cycle time diagram</h3>
-<p>Stacked bar chart representing how much time a task has spent in a given state through is life-cycle, allowing the detection of tasks that are taking too long.
-<img alt="" src="http://blog.kanbanize.com/wp-content/uploads/2014/01/cycle-time-no-done-column.png"/></p>
+<p>Stacked bar chart representing how much time a task has spent in a given state through is life-cycle, allowing the detection of tasks that are taking too long.</p>
+<p><img alt="" src="figure/cycle-time-column.png"/></p>
 <h3 id="due-date-performance">Due Date Performance</h3>
 <p>This report shows the percentage of items that were delivered on time and the average percentage delivery rate over time. This is useful for illustrating how predictable the system is. Due date performance with a low percentage provides evidence that there is an abundance of variability in the flow. The team should take corrective action or they will not be able to establish reasonable service agreements. </p>
 <h3 id="bugs-per-story">Bugs per Story</h3>
@@ -187,7 +194,7 @@ The diagram should run smoothly. Large steps and flat horizontal lines indicate 
 <p>This report is a statistical distribution that shows the number of occurrences by lead time. It is an effective way to identify discrepancies in the process and boosts the confidence of teams in the definition of service level agreements, based on real life data. </p>
 <h3 id="throughput-trend">Throughput Trend</h3>
 <p>This report shows the number of items that were delivered in a given time period (eg monthly). It can be used to identify a trend of how well the system has been performing. As teams work on process improvements, the throughput trend will show a more consistent slope in the chart. </p>
-<p><img alt="" src="https://jazz.net/library/content/articles/insight/1.1.1.1/kanban-metrics/images/4.jpg"/></p>
+<p><img alt="" src="figure/TroughputTrend.PNG"/></p>
 <!--
 ##Kanban Strategies:
 a kanban by project?
@@ -227,7 +234,9 @@ The number of Kanbans is reduced carefully to lower inventories and to reveal pr
 <a href="https://jazz.net/library/article/1350">Improve predictability and efficiency with Kanban metrics using IBM Rational Insight</a><br/>
 <a href="https://www.atlassian.com/agile/kanban">A brief introduction to kanban</a>
 <a href="http://brodzinski.com/2013/07/cumulative-flow-diagram.html">Cumulative Flow Diagram</a>
-<a href="http://pm.stackexchange.com/questions/10657/what-are-some-commonly-tracked-metrics-in-kanban">http://pm.stackexchange.com/questions/10657/what-are-some-commonly-tracked-metrics-in-kanban</a></p>
+<a href="http://pm.stackexchange.com/questions/10657/what-are-some-commonly-tracked-metrics-in-kanban">Stack Exchange : What are commonly tracked metrics in kanban?</a>
+<a href="http://blog.kanbanize.com/kanban-analytics-part-ii-cycle-time/">Kanban Analytics part II: Cycle Time</a>
+<a href="http://agileramblings.com/tag/metrics-2/">Agile Rambling - Tag Archives: metrics</a></p>
             </div>
             <!-- /.entry-content -->
         </article>

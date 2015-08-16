@@ -13,6 +13,7 @@
 <link rel="canonical" href="http://stephanie-w.github.io/blog/multivariable-regression.html">
 
         <meta name="author" content="Stephanie W" />
+        <meta name="keywords" content="R" />
         <meta name="description" content="" />
 
         <meta property="og:site_name" content="Brain Scribble" />
@@ -20,8 +21,9 @@
         <meta property="og:title" content="R: Multivariable Regression"/>
         <meta property="og:url" content="http://stephanie-w.github.io/blog/multivariable-regression.html"/>
         <meta property="og:description" content=""/>
-        <meta property="article:published_time" content="2015-08-10" />
+        <meta property="article:published_time" content="2015-08-16" />
             <meta property="article:section" content="DataAnalysis" />
+            <meta property="article:tag" content="R" />
             <meta property="article:author" content="Stephanie W" />
 
 
@@ -96,13 +98,15 @@ Brain Scribble            </a>
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2015-08-10T16:09:14.759820+02:00"> 10/August/2015</time>
+        <i class="fa fa-calendar"></i><time datetime="2015-08-16T01:01:47.718669+02:00"> 16/August/2015</time>
     </span>
 
 
 
 
 
+<span class="label label-default">Tags</span>
+	<a href="http://stephanie-w.github.io/blog/tag/r.html">R</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
@@ -228,7 +232,7 @@ The intercept of the model represents the percentage of hungry children at year 
 </pre></div>
 
 
-<div class="rimage center"><img src="fig/unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /></div>
+<div class="rimage center"><img src="figure/multivariable-regression-4-1.png"/></div>
 
 <p>We can see from the plot that the lines are not exactly parallel. On the right side of the graph (around the year 2010) they are closer together than on the left side (around 1970). Slopes are -0.29340 for femals, -0.32340 for males.</p>
 <p>Now instead of separating the data by subsetting the samples by gender, we'll use gender as another predictor to create the linear model:</p>
@@ -271,7 +275,7 @@ The estimate for hunger$Year represents the annual decrease in percentage of bot
 </pre></div>
 
 
-<div class="rimage center"><img src="fig/unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" class="plot" /></div>
+<div class="rimage center"><img src="figure/multivariable-regression-6-1.png"/></div>
 
 <p>The lines are parallels (since, they have the same slope lmBoth$coeff[2]).</p>
 <p>Now we'll consider the interaction between year and gender to see how that affects changes in rates of hunger:</p>
@@ -315,7 +319,7 @@ The annual change in percentage of hungry males is -0.32340 (-0.29340 - 0.03000)
 </pre></div>
 
 
-<div class="rimage center"><img src="fig/unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" class="plot" /></div>
+<div class="rimage center"><img src="figure/multivariable-regression-8-1.png"/></div>
 
 <p>The lines are not parallel and will eventually intersect. The Male blue line indicates a faster rate of change.</p>
 <p>Here we're dealing with an interaction between factors.</p>
@@ -379,6 +383,16 @@ If I is fixed at a value, 5 and Y varies, <span class="math">\(b_2 + b3*5\)</spa
 </script>
             </div>
             <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="http://stephanie-w.github.io/blog/statinf2.html">Notes on Statistical Inference : Hypothesis Testing and t-tests</a></li>
+        <li><a href="http://stephanie-w.github.io/blog/exploring-data-for-marchine-learning.html">R : Exploring Data for Machine Learning Modeling</a></li>
+        <li><a href="http://stephanie-w.github.io/blog/variance-inflation.html">R : Variance Inflation</a></li>
+        <li><a href="http://stephanie-w.github.io/blog/last_earthquakes.html">R: Earthquakes from the past 30 days</a></li>
+        <li><a href="http://stephanie-w.github.io/blog/experimentation-of-clt.html">R: Experimentation of the Cental Limit Theorem</a></li>
+    </ul>
+</section>
         </article>
     </section>
 

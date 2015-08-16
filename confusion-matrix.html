@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Confusion Matrix - Brain Scribble</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="http://stephanie-w.github.io/blog/images/post_1246903_635089122565391744.jpg" rel="icon">
+
+<link rel="canonical" href="http://stephanie-w.github.io/blog/confusion-matrix.html">
+
+        <meta name="author" content="Stephanie W" />
+        <meta name="description" content="A confusion matrix, also known as a contingency table or an error matrix or tavle of confusion, is a specific table layout that allows visualization of the performance of an algorithm, typically a supervised learning one (in unsupervised learning it is usually called a matching matrix)." />
+
+        <meta property="og:site_name" content="Brain Scribble" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Confusion Matrix"/>
+        <meta property="og:url" content="http://stephanie-w.github.io/blog/confusion-matrix.html"/>
+        <meta property="og:description" content="A confusion matrix, also known as a contingency table or an error matrix or tavle of confusion, is a specific table layout that allows visualization of the performance of an algorithm, typically a supervised learning one (in unsupervised learning it is usually called a matching matrix)."/>
+        <meta property="article:published_time" content="2015-08-16" />
+            <meta property="article:section" content="DataAnalysis" />
+            <meta property="article:author" content="Stephanie W" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://stephanie-w.github.io/blog/theme/css/bootstrap.lumen.min.css" type="text/css"/>
+    <link href="http://stephanie-w.github.io/blog/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://stephanie-w.github.io/blog/theme/css/pygments/monokai.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://stephanie-w.github.io/blog/theme/css/style.css" type="text/css"/>
+
+        <link href="http://stephanie-w.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Brain Scribble ATOM Feed"/>
+
+
+
+        <link href="http://stephanie-w.github.io/blog/feeds/dataanalysis.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Brain Scribble DataAnalysis ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://stephanie-w.github.io/blog/" class="navbar-brand">
+Brain Scribble            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="http://stephanie-w.github.io/blog/category/dataanalysis.html">Dataanalysis</a>
+                        </li>
+                        <li >
+                            <a href="http://stephanie-w.github.io/blog/category/games.html">Games</a>
+                        </li>
+                        <li >
+                            <a href="http://stephanie-w.github.io/blog/category/projectmanagement.html">Projectmanagement</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="http://stephanie-w.github.io/blog/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="http://stephanie-w.github.io/blog/confusion-matrix.html"
+                       rel="bookmark"
+                       title="Permalink to Confusion Matrix">
+                        Confusion Matrix
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2015-08-16T01:02:15.067791+02:00"> 16/August/2015</time>
+    </span>
+
+
+
+
+
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <hr />
+
+
+<p>A confusion matrix, also known as a contingency table or an error matrix or tavle of confusion, is a specific table layout that allows visualization of the performance of an algorithm, typically a supervised learning one (in unsupervised learning it is usually called a matching matrix).</p>
+
+
+<p>It is a table with two rows and two columns that reports the number of false positives, false negatives, true positives, and true negatives.</p>
+<p>For example, for a test that screens people for a given disease, the confusion matrix will be:</p>
+<div class="highlight"><pre><span class="code-line">                         Disease</span>
+<span class="code-line"></span>
+<span class="code-line">                 +         |        -</span>
+<span class="code-line">         ------------------|------------------</span>
+<span class="code-line">Test  +  x true positives  |  z false positives</span>
+<span class="code-line">      -  y false negatives |  t true negatives</span>
+</pre></div>
+
+
+<p>with
+x true positives (TP) : the number of sick people correctly identified as sick
+z false positives (FP) : the number of healthy people incorrectly identified as sick
+t true negatives (TN) : the number of healthy people correctly identified as healthy
+y false negatives (FN) : the number of sick people incorrectly identified as healthy</p>
+<p>The following probabilities are associated with the confusion matrix:<br />
+Sensitivity -&gt; <span class="math">\(Pr\left(positive test | disease\right)\)</span><br />
+Specificity -&gt; <span class="math">\(Pr\left(negative test | no disease\right)\)</span><br />
+Positive Predictive Value -&gt; <span class="math">\(Pr\left(disease| positive test\right)\)</span><br />
+Negative Predictive Value -&gt; <span class="math">\(Pr\left(no disease| negative test\right)\)</span><br />
+Accuracy -&gt; <span class="math">\(Pr\left(correct outcome\right)\)</span> ie. Sensitivity + Specificity  </p>
+<p>Sensitivity -&gt; <span class="math">\(\frac{TP}{TP+FN}\)</span><br />
+Specificity -&gt; <span class="math">\(\frac{TN}{FP+TN}\)</span><br />
+Positive Predictive Value -&gt; <span class="math">\(\frac{TP}{TP+FP}\)</span><br />
+Negative Predictive Value -&gt; <span class="math">\(\frac{TN}{FN+TN}\)</span><br />
+Accuracy -&gt; <span class="math">\(\frac{TP+TN}{TP+FP+FN+TN}\)</span>  </p>
+<h2 id="examples">Examples</h2>
+<p>A diagnostic test with sensitivity 67% and specificity 91% is applied to 2030 people to look for a disorder with a population prevalence of 1.48%.</p>
+<p>Let's build the associated 2×2 contingency table:</p>
+<p><img alt="" src="figure/confusion-matrix-1.png" /></p>
+<p><img alt="" src="figure/confusion-matrix-2.png" /></p>
+<p>Suppose that we have created a machine learning algorithm that predicts whether a link will be clicked with 99% sensitivity and 99% specificity. The rate the link is clicked is 1/1000 of visits to a website. If we predict the link will be clicked on a specific visit, what is the probability it will actually be clicked?</p>
+<p>Let's be 100000 the number of visits:</p>
+<p><img alt="" src="figure/confusion-matrix-3.png" /></p>
+<p>According to the confusion matrix above, the probability that the link will be actually clicked is 9%.</p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+    
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+        <ul class="list-group" id="links">
+            <img width="100%" class="img-thumbnail" src="http://stephanie-w.github.io/blog/images/post_1246903_635089122565391744.jpg"/>
+        </ul>
+    </li>
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="https://fr.linkedin.com/pub/stephanie-werli/26/b69/a0b"><i class="fa fa-linkedin-square fa-lg"></i> linkedin</a></li>
+                <li class="list-group-item"><a href="http://github.com/stephanie-w"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+              </ul>
+            </li>
+
+
+
+
+
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2015 Stephanie W
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://stephanie-w.github.io/blog/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://stephanie-w.github.io/blog/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://stephanie-w.github.io/blog/theme/js/respond.min.js"></script>
+
+
+</body>
+</html>

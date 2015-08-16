@@ -1,5 +1,482 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Brain Scribble</title><link href="http://stephanie-w.github.io/blog/" rel="alternate"></link><link href="http://stephanie-w.github.io/blog/feeds/dataanalysis.atom.xml" rel="self"></link><id>http://stephanie-w.github.io/blog/</id><updated>2015-08-10T16:09:14+02:00</updated><entry><title>Notes on Statistical Inference : Hypothesis Testing and t-tests</title><link href="http://stephanie-w.github.io/blog/statinf2.html" rel="alternate"></link><updated>2015-08-10T16:09:14+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/statinf2.html</id><summary type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Brain Scribble</title><link href="http://stephanie-w.github.io/blog/" rel="alternate"></link><link href="http://stephanie-w.github.io/blog/feeds/dataanalysis.atom.xml" rel="self"></link><id>http://stephanie-w.github.io/blog/</id><updated>2015-08-16T01:02:29+02:00</updated><entry><title>R : Exploring Data for Machine Learning Modeling</title><link href="http://stephanie-w.github.io/blog/exploring-data-for-marchine-learning.html" rel="alternate"></link><updated>2015-08-16T01:02:29+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-16:blog/exploring-data-for-marchine-learning.html</id><summary type="html">
+&lt;hr/&gt;
+
+&lt;p&gt;These are my notes on the Practical Machine Learning course (Week2: Plotting Predictors - Tutorial).&lt;/p&gt;
+
+&lt;p&gt;When exploring data for Machine Learning, we're looking for:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;imbalance outcomes/predictors&lt;/li&gt;
+&lt;li&gt;outliners&lt;/li&gt;
+&lt;li&gt;groups of outcome points not explained by any of the predictors&lt;/li&gt;
+&lt;li&gt;skewed variables (that needs to be transformed)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We'll use the Wage dataset from the ISLR package.&lt;br/&gt;
+This dataset reports wage and other data (age, education, jobclass, etc.) for a group of 3000 male workers in the Mid-Atlantic region.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span class="kn"&gt;library&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;ISLR&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;data&lt;span class="p"&gt;(&lt;/span&gt;Wage&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="kp"&gt;summary&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;Wage&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;##       year           age               sex                    maritl           race     &lt;/span&gt;
+&lt;span class="code-line"&gt;##  Min.   :2003   Min.   :18.00   1. Male  :3000   1. Never Married: 648   1. White:2480  &lt;/span&gt;
+&lt;span class="code-line"&gt;##  1st Qu.:2004   1st Qu.:33.75   2. Female:   0   2. Married      :2074   2. Black: 293  &lt;/span&gt;
+&lt;span class="code-line"&gt;##  Median :2006   Median :42.00                    3. Widowed      :  19   3. Asian: 190  &lt;/span&gt;
+&lt;span class="code-line"&gt;##  Mean   :2006   Mean   :42.41                    4. Divorced     : 204   4. Other:  37  &lt;/span&gt;
+&lt;span class="code-line"&gt;##  3rd Qu.:2008   3rd Qu.:51.00                    5. Separated    :  55                  &lt;/span&gt;
+&lt;span class="code-line"&gt;##  Max.   :2009   Max.   :80.00                                                           &lt;/span&gt;
+&lt;span class="code-line"&gt;##                                                                                         &lt;/span&gt;
+&lt;span class="code-line"&gt;##               education                     region               jobclass               health    &lt;/span&gt;
+&lt;span class="code-line"&gt;##  1. &amp;lt; HS Grad      :268   2. Middle Atlantic   :3000   1. Industrial :1544   1. &amp;lt;=Good     : 858  &lt;/span&gt;
+&lt;span class="code-line"&gt;##  2. HS Grad        :971   1. New England       :   0   2. Information:1456   2. &amp;gt;=Very Good:2142  &lt;/span&gt;
+&lt;span class="code-line"&gt;##  3. Some College   :650   3. East North Central:   0                                              &lt;/span&gt;
+&lt;span class="code-line"&gt;##  4. College Grad   :685   4. West North Central:   0                                              &lt;/span&gt;
+&lt;span class="code-line"&gt;##  5. Advanced Degree:426   5. South Atlantic    :   0                                              &lt;/span&gt;
+&lt;span class="code-line"&gt;##                           6. East South Central:   0                                              &lt;/span&gt;
+&lt;span class="code-line"&gt;##                           (Other)              :   0                                              &lt;/span&gt;
+&lt;span class="code-line"&gt;##   health_ins      logwage           wage       &lt;/span&gt;
+&lt;span class="code-line"&gt;##  1. Yes:2083   Min.   :3.000   Min.   : 20.09  &lt;/span&gt;
+&lt;span class="code-line"&gt;##  2. No : 917   1st Qu.:4.447   1st Qu.: 85.38  &lt;/span&gt;
+&lt;span class="code-line"&gt;##                Median :4.653   Median :104.92  &lt;/span&gt;
+&lt;span class="code-line"&gt;##                Mean   :4.654   Mean   :111.70  &lt;/span&gt;
+&lt;span class="code-line"&gt;##                3rd Qu.:4.857   3rd Qu.:128.68  &lt;/span&gt;
+&lt;span class="code-line"&gt;##                Max.   :5.763   Max.   :318.34  &lt;/span&gt;
+&lt;span class="code-line"&gt;## &lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Building training and testing sets (50% of the dataset each):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span class="kn"&gt;library&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;caret&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;intrain &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; createDataPartition&lt;span class="p"&gt;(&lt;/span&gt;y &lt;span class="o"&gt;=&lt;/span&gt; Wage&lt;span class="o"&gt;$&lt;/span&gt;wage&lt;span class="p"&gt;,&lt;/span&gt; p &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0.5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;list&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;F&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;training &lt;span class="o"&gt;=&lt;/span&gt; Wage&lt;span class="p"&gt;[&lt;/span&gt;intrain&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;]&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;testing &lt;span class="o"&gt;=&lt;/span&gt; Wage&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;intrain&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;]&lt;/span&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The exploration is always done on the training set.&lt;/p&gt;
+&lt;h2 id="plotting-predictors-against-outcome"&gt;Plotting predictors against outcome&lt;/h2&gt;
+&lt;p&gt;Plotting wage versus age, education and jobclass using the R featurePlot function (from the caret package):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;featurePlot&lt;span class="p"&gt;(&lt;/span&gt;x &lt;span class="o"&gt;=&lt;/span&gt; training&lt;span class="p"&gt;[,&lt;/span&gt; &lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"age"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;"education"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;"jobclass"&lt;/span&gt;&lt;span class="p"&gt;)],&lt;/span&gt; y &lt;span class="o"&gt;=&lt;/span&gt; training&lt;span class="o"&gt;$&lt;/span&gt;wage&lt;span class="p"&gt;,&lt;/span&gt; plot &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"pairs"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="rimage center"&gt;&lt;img src="figure/exploring-data-for-marchine-learning-3-1.png"/&gt;&lt;/div&gt;
+&lt;p&gt;The graph shows some patterns: a trend in wages comparing to ages and two distinct groups of observations (below and above 250 dollars raw wage).&lt;/p&gt;
+&lt;p&gt;Plotting wage versus age:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span class="kn"&gt;library&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;ggplot2&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;qplot&lt;span class="p"&gt;(&lt;/span&gt;age&lt;span class="p"&gt;,&lt;/span&gt; wage&lt;span class="p"&gt;,&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; training&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="rimage center"&gt;&lt;img src="figure/exploring-data-for-marchine-learning-4-2.png"/&gt;&lt;/div&gt;
+&lt;p&gt;Plotting wage versus age, grouping by jobclass:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span class="kn"&gt;library&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;ggplot2&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="rimage center"&gt;&lt;img src="figure/exploring-data-for-marchine-learning-4-1.png"/&gt;&lt;/div&gt;
+&lt;p&gt;The jobclass difference could explain the two distincts groups.&lt;/p&gt;
+&lt;p&gt;Plotting wage versus age, grouping by education, adding regression smoothers:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;qq &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; qplot&lt;span class="p"&gt;(&lt;/span&gt;age&lt;span class="p"&gt;,&lt;/span&gt; wage&lt;span class="p"&gt;,&lt;/span&gt; color &lt;span class="o"&gt;=&lt;/span&gt; education&lt;span class="p"&gt;,&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; training&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;qq &lt;span class="o"&gt;+&lt;/span&gt; geom_smooth&lt;span class="p"&gt;(&lt;/span&gt;method &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"lm"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; formula &lt;span class="o"&gt;=&lt;/span&gt; y &lt;span class="o"&gt;~&lt;/span&gt; x&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="rimage center"&gt;&lt;img src="figure/exploring-data-for-marchine-learning-5-1.png"/&gt;&lt;/div&gt;
+&lt;h2 id="data-repartition"&gt;Data Repartition&lt;/h2&gt;
+&lt;p&gt;Breaking up the wage variable into three groups (factors actually) with the R cut2 function (from the Hmisc package):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span class="kn"&gt;library&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;Hmisc&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;cutWage &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; cut2&lt;span class="p"&gt;(&lt;/span&gt;training&lt;span class="o"&gt;$&lt;/span&gt;wage&lt;span class="p"&gt;,&lt;/span&gt; g &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="kp"&gt;table&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;cutWage&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;## cutWage&lt;/span&gt;
+&lt;span class="code-line"&gt;## [ 20.1, 91.7) [ 91.7,118.9) [118.9,314.3] &lt;/span&gt;
+&lt;span class="code-line"&gt;##           506           519           476&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Looling at the repartition, we can see that there are more industrial jobs that there are information jobs with lower wage. Then the trend reverses itself.&lt;/p&gt;
+&lt;p&gt;Plotting a boxplot of the wage groups created above:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;qplot&lt;span class="p"&gt;(&lt;/span&gt;cutWage&lt;span class="p"&gt;,&lt;/span&gt; age&lt;span class="p"&gt;,&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; training&lt;span class="p"&gt;,&lt;/span&gt; fill &lt;span class="o"&gt;=&lt;/span&gt; cutWage&lt;span class="p"&gt;,&lt;/span&gt; geom &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"boxplot"&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="rimage center"&gt;&lt;img src="figure/exploring-data-for-marchine-learning-7-1.png"/&gt;&lt;/div&gt;
+&lt;p&gt;Exploring the repartition of jobclass across wage groups:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;t1 &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;table&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;cutWage&lt;span class="p"&gt;,&lt;/span&gt; training&lt;span class="o"&gt;$&lt;/span&gt;jobclass&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;t1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;##                &lt;/span&gt;
+&lt;span class="code-line"&gt;## cutWage         1. Industrial 2. Information&lt;/span&gt;
+&lt;span class="code-line"&gt;##   [ 20.1, 91.7)           313            193&lt;/span&gt;
+&lt;span class="code-line"&gt;##   [ 91.7,118.9)           262            257&lt;/span&gt;
+&lt;span class="code-line"&gt;##   [118.9,314.3]           190            286&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Using the prop function to get the proportion of jobclass (in each row) for each groups:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span class="kp"&gt;prop.table&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;t1&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;##                &lt;/span&gt;
+&lt;span class="code-line"&gt;## cutWage         1. Industrial 2. Information&lt;/span&gt;
+&lt;span class="code-line"&gt;##   [ 20.1, 91.7)     0.6185771      0.3814229&lt;/span&gt;
+&lt;span class="code-line"&gt;##   [ 91.7,118.9)     0.5048170      0.4951830&lt;/span&gt;
+&lt;span class="code-line"&gt;##   [118.9,314.3]     0.3991597      0.6008403&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;62% of the low wage job correponds to industrial jobs, 38% to information jobs.&lt;/p&gt;
+&lt;h2 id="density-plots"&gt;Density Plots&lt;/h2&gt;
+&lt;p&gt;Density plot can be a much more effective way to view the distribution of a variable than boxplots.&lt;/p&gt;
+&lt;p&gt;Ploting a density plot of the values of wages, grouping by education:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;qplot&lt;span class="p"&gt;(&lt;/span&gt;wage&lt;span class="p"&gt;,&lt;/span&gt; color &lt;span class="o"&gt;=&lt;/span&gt; education&lt;span class="p"&gt;,&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; training&lt;span class="p"&gt;,&lt;/span&gt; geom &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"density"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="rimage center"&gt;&lt;img src="figure/exploring-data-for-marchine-learning-10-1.png"/&gt;&lt;/div&gt;
+&lt;p&gt;The "&amp;lt;HS grad" workers tend to have more values in the lower part of the range of wage. There is an outgroup of Advanced Degree and College Grad workers with higher wage.&lt;/p&gt;</summary><category term="R"></category></entry><entry><title>Confusion Matrix</title><link href="http://stephanie-w.github.io/blog/confusion-matrix.html" rel="alternate"></link><updated>2015-08-16T01:02:15+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-16:blog/confusion-matrix.html</id><summary type="html">&lt;hr /&gt;
+
+
+&lt;p&gt;A confusion matrix, also known as a contingency table or an error matrix or tavle of confusion, is a specific table layout that allows visualization of the performance of an algorithm, typically a supervised learning one (in unsupervised learning it is usually called a matching matrix).&lt;/p&gt;
+
+
+&lt;p&gt;It is a table with two rows and two columns that reports the number of false positives, false negatives, true positives, and true negatives.&lt;/p&gt;
+&lt;p&gt;For example, for a test that screens people for a given disease, the confusion matrix will be:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;                         Disease&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;                 +         |        -&lt;/span&gt;
+&lt;span class="code-line"&gt;         ------------------|------------------&lt;/span&gt;
+&lt;span class="code-line"&gt;Test  +  x true positives  |  z false positives&lt;/span&gt;
+&lt;span class="code-line"&gt;      -  y false negatives |  t true negatives&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;with
+x true positives (TP) : the number of sick people correctly identified as sick
+z false positives (FP) : the number of healthy people incorrectly identified as sick
+t true negatives (TN) : the number of healthy people correctly identified as healthy
+y false negatives (FN) : the number of sick people incorrectly identified as healthy&lt;/p&gt;
+&lt;p&gt;The following probabilities are associated with the confusion matrix:&lt;br /&gt;
+Sensitivity -&amp;gt; &lt;span class="math"&gt;\(Pr\left(positive test | disease\right)\)&lt;/span&gt;&lt;br /&gt;
+Specificity -&amp;gt; &lt;span class="math"&gt;\(Pr\left(negative test | no disease\right)\)&lt;/span&gt;&lt;br /&gt;
+Positive Predictive Value -&amp;gt; &lt;span class="math"&gt;\(Pr\left(disease| positive test\right)\)&lt;/span&gt;&lt;br /&gt;
+Negative Predictive Value -&amp;gt; &lt;span class="math"&gt;\(Pr\left(no disease| negative test\right)\)&lt;/span&gt;&lt;br /&gt;
+Accuracy -&amp;gt; &lt;span class="math"&gt;\(Pr\left(correct outcome\right)\)&lt;/span&gt; ie. Sensitivity + Specificity  &lt;/p&gt;
+&lt;p&gt;Sensitivity -&amp;gt; &lt;span class="math"&gt;\(\frac{TP}{TP+FN}\)&lt;/span&gt;&lt;br /&gt;
+Specificity -&amp;gt; &lt;span class="math"&gt;\(\frac{TN}{FP+TN}\)&lt;/span&gt;&lt;br /&gt;
+Positive Predictive Value -&amp;gt; &lt;span class="math"&gt;\(\frac{TP}{TP+FP}\)&lt;/span&gt;&lt;br /&gt;
+Negative Predictive Value -&amp;gt; &lt;span class="math"&gt;\(\frac{TN}{FN+TN}\)&lt;/span&gt;&lt;br /&gt;
+Accuracy -&amp;gt; &lt;span class="math"&gt;\(\frac{TP+TN}{TP+FP+FN+TN}\)&lt;/span&gt;  &lt;/p&gt;
+&lt;h2 id="examples"&gt;Examples&lt;/h2&gt;
+&lt;p&gt;A diagnostic test with sensitivity 67% and specificity 91% is applied to 2030 people to look for a disorder with a population prevalence of 1.48%.&lt;/p&gt;
+&lt;p&gt;Let's build the associated 2×2 contingency table:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="figure/confusion-matrix-1.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="figure/confusion-matrix-2.png" /&gt;&lt;/p&gt;
+&lt;p&gt;Suppose that we have created a machine learning algorithm that predicts whether a link will be clicked with 99% sensitivity and 99% specificity. The rate the link is clicked is 1/1000 of visits to a website. If we predict the link will be clicked on a specific visit, what is the probability it will actually be clicked?&lt;/p&gt;
+&lt;p&gt;Let's be 100000 the number of visits:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="figure/confusion-matrix-3.png" /&gt;&lt;/p&gt;
+&lt;p&gt;According to the confusion matrix above, the probability that the link will be actually clicked is 9%.&lt;/p&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+    
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</summary></entry><entry><title>R: Multivariable Regression</title><link href="http://stephanie-w.github.io/blog/multivariable-regression.html" rel="alternate"></link><updated>2015-08-16T01:01:47+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-16:blog/multivariable-regression.html</id><summary type="html">&lt;hr /&gt;
+&lt;p&gt;
+
+This is my note on swirl course Regression Model : Multivariable Examples 3. &lt;/p&gt;
+&lt;p&gt;We'll use the hunger dataset from the course:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;download.file&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;https://raw.githubusercontent.com/swirldev/swirl_courses/master/Regression_Models/MultiVar_Examples3/hunger.csv&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;/span&gt;
+&lt;span class="code-line"&gt;    &lt;span class="s"&gt;&amp;quot;hunger.csv&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; method &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;curl&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; quiet &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;T&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;hunger &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; read.csv&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;hunger.csv&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="kp"&gt;head&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;hunger&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;##    X                              Indicator Data.Source PUBLISH.STATES Year WHO.region  Country&lt;/span&gt;
+&lt;span class="code-line"&gt;## 1  8 Children aged &amp;lt;5 years underweight (%) NLIS_310044      Published 1986     Africa  Senegal&lt;/span&gt;
+&lt;span class="code-line"&gt;## 2 11 Children aged &amp;lt;5 years underweight (%) NLIS_310095      Published 1989     Africa   Uganda&lt;/span&gt;
+&lt;span class="code-line"&gt;## 3 13 Children aged &amp;lt;5 years underweight (%) NLIS_310138      Published 1988     Africa Zimbabwe&lt;/span&gt;
+&lt;span class="code-line"&gt;## 4 16 Children aged &amp;lt;5 years underweight (%) NLIS_310044      Published 1986     Africa  Senegal&lt;/span&gt;
+&lt;span class="code-line"&gt;## 5 18 Children aged &amp;lt;5 years underweight (%) NLIS_310095      Published 1989     Africa   Uganda&lt;/span&gt;
+&lt;span class="code-line"&gt;## 6 21 Children aged &amp;lt;5 years underweight (%) NLIS_310138      Published 1988     Africa Zimbabwe&lt;/span&gt;
+&lt;span class="code-line"&gt;##      Sex Display.Value Numeric Low High Comments&lt;/span&gt;
+&lt;span class="code-line"&gt;## 1   Male          19.3    19.3  NA   NA       NA&lt;/span&gt;
+&lt;span class="code-line"&gt;## 2 Female          19.1    19.1  NA   NA       NA&lt;/span&gt;
+&lt;span class="code-line"&gt;## 3 Female           7.2     7.2  NA   NA       NA&lt;/span&gt;
+&lt;span class="code-line"&gt;## 4 Female          15.3    15.3  NA   NA       NA&lt;/span&gt;
+&lt;span class="code-line"&gt;## 5   Male          20.4    20.4  NA   NA       NA&lt;/span&gt;
+&lt;span class="code-line"&gt;## 6   Male           8.7     8.7  NA   NA       NA&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The Numeric column gives the percentage of children under age 5 who were underweight when that sample was taken.&lt;br /&gt;
+We fit a simple linear regression for Numeric (outcome) on Year:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;fit &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; lm&lt;span class="p"&gt;(&lt;/span&gt;Numeric &lt;span class="o"&gt;~&lt;/span&gt; Year&lt;span class="p"&gt;,&lt;/span&gt; hunger&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="kp"&gt;summary&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;fit&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;## &lt;/span&gt;
+&lt;span class="code-line"&gt;## Call:&lt;/span&gt;
+&lt;span class="code-line"&gt;## lm(formula = Numeric ~ Year, data = hunger)&lt;/span&gt;
+&lt;span class="code-line"&gt;## &lt;/span&gt;
+&lt;span class="code-line"&gt;## Residuals:&lt;/span&gt;
+&lt;span class="code-line"&gt;##     Min      1Q  Median      3Q     Max &lt;/span&gt;
+&lt;span class="code-line"&gt;## -24.621 -11.196  -1.994   7.085  45.039 &lt;/span&gt;
+&lt;span class="code-line"&gt;## &lt;/span&gt;
+&lt;span class="code-line"&gt;## Coefficients:&lt;/span&gt;
+&lt;span class="code-line"&gt;##              Estimate Std. Error t value Pr(&amp;gt;|t|)    &lt;/span&gt;
+&lt;span class="code-line"&gt;## (Intercept) 634.47966  121.14460   5.237 2.01e-07 ***&lt;/span&gt;
+&lt;span class="code-line"&gt;## Year         -0.30840    0.06053  -5.095 4.21e-07 ***&lt;/span&gt;
+&lt;span class="code-line"&gt;## ---&lt;/span&gt;
+&lt;span class="code-line"&gt;## Signif. codes:  0 &amp;#39;***&amp;#39; 0.001 &amp;#39;**&amp;#39; 0.01 &amp;#39;*&amp;#39; 0.05 &amp;#39;.&amp;#39; 0.1 &amp;#39; &amp;#39; 1&lt;/span&gt;
+&lt;span class="code-line"&gt;## &lt;/span&gt;
+&lt;span class="code-line"&gt;## Residual standard error: 13.23 on 946 degrees of freedom&lt;/span&gt;
+&lt;span class="code-line"&gt;## Multiple R-squared:  0.02671,    Adjusted R-squared:  0.02568 &lt;/span&gt;
+&lt;span class="code-line"&gt;## F-statistic: 25.96 on 1 and 946 DF,  p-value: 4.209e-07&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;As time goes on, the rate of hunger decreases.&lt;br /&gt;
+The intercept of the model represents the percentage of hungry children at year 0.  &lt;/p&gt;
+&lt;p&gt;Let's look at the rates of hunger for the different genders to see how, or even if, they differ:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;lmF &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; lm&lt;span class="p"&gt;(&lt;/span&gt;Numeric&lt;span class="p"&gt;[&lt;/span&gt;hunger&lt;span class="o"&gt;$&lt;/span&gt;Sex &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Female&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;~&lt;/span&gt; Year&lt;span class="p"&gt;[&lt;/span&gt;hunger&lt;span class="o"&gt;$&lt;/span&gt;Sex &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Female&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; hunger&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="kp"&gt;summary&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;lmF&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; &lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; Call:&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; lm(formula = Numeric[hunger$Sex == &amp;quot;Female&amp;quot;] ~ Year[hunger$Sex == &lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt;     &amp;quot;Female&amp;quot;], data = hunger)&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; &lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; Residuals:&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt;     Min      1Q  Median      3Q     Max &lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; -23.228 -10.638  -1.959   6.859  46.146 &lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; &lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; Coefficients:&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt;                               Estimate Std. Error t value Pr(&amp;gt;|t|)    &lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; (Intercept)                  603.50580  167.53201   3.602 0.000349 ***&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; Year[hunger$Sex == &amp;quot;Female&amp;quot;]  -0.29340    0.08371  -3.505 0.000500 ***&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; ---&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; Signif. codes:  0 &amp;#39;***&amp;#39; 0.001 &amp;#39;**&amp;#39; 0.01 &amp;#39;*&amp;#39; 0.05 &amp;#39;.&amp;#39; 0.1 &amp;#39; &amp;#39; 1&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; &lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; Residual standard error: 12.94 on 472 degrees of freedom&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; Multiple R-squared:  0.02537,    Adjusted R-squared:  0.0233 &lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; F-statistic: 12.29 on 1 and 472 DF,  p-value: 5e-04&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;lmM &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; lm&lt;span class="p"&gt;(&lt;/span&gt;Numeric&lt;span class="p"&gt;[&lt;/span&gt;hunger&lt;span class="o"&gt;$&lt;/span&gt;Sex &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Male&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;~&lt;/span&gt; Year&lt;span class="p"&gt;[&lt;/span&gt;hunger&lt;span class="o"&gt;$&lt;/span&gt;Sex &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Male&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; hunger&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="kp"&gt;summary&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;lmM&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; &lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; Call:&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; lm(formula = Numeric[hunger$Sex == &amp;quot;Male&amp;quot;] ~ Year[hunger$Sex == &lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt;     &amp;quot;Male&amp;quot;], data = hunger)&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; &lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; Residuals:&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt;     Min      1Q  Median      3Q     Max &lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; -25.913 -11.741  -1.832   7.399  42.255 &lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; &lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; Coefficients:&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt;                             Estimate Std. Error t value Pr(&amp;gt;|t|)    &lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; (Intercept)                665.45352  174.50726   3.813 0.000155 ***&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; Year[hunger$Sex == &amp;quot;Male&amp;quot;]  -0.32340    0.08719  -3.709 0.000233 ***&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; ---&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; Signif. codes:  0 &amp;#39;***&amp;#39; 0.001 &amp;#39;**&amp;#39; 0.01 &amp;#39;*&amp;#39; 0.05 &amp;#39;.&amp;#39; 0.1 &amp;#39; &amp;#39; 1&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; &lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; Residual standard error: 13.48 on 472 degrees of freedom&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; Multiple R-squared:  0.02832,    Adjusted R-squared:  0.02626 &lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; F-statistic: 13.76 on 1 and 472 DF,  p-value: 0.0002328&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;We plot the data points and fitted lines using different colors to distinguish between males (blue) and females (pink).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;plot&lt;span class="p"&gt;(&lt;/span&gt;hunger&lt;span class="o"&gt;$&lt;/span&gt;Year&lt;span class="p"&gt;,&lt;/span&gt; hunger&lt;span class="o"&gt;$&lt;/span&gt;Numeric&lt;span class="p"&gt;,&lt;/span&gt; type &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;n&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;points&lt;span class="p"&gt;(&lt;/span&gt;hunger&lt;span class="o"&gt;$&lt;/span&gt;Year&lt;span class="p"&gt;,&lt;/span&gt; hunger&lt;span class="o"&gt;$&lt;/span&gt;Numeric&lt;span class="p"&gt;,&lt;/span&gt; pch &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;19&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; col &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;hunger&lt;span class="o"&gt;$&lt;/span&gt;Sex &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Female&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="m"&gt;125&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;lines&lt;span class="p"&gt;(&lt;/span&gt;hunger&lt;span class="o"&gt;$&lt;/span&gt;Year&lt;span class="p"&gt;[&lt;/span&gt;hunger&lt;span class="o"&gt;$&lt;/span&gt;Sex &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Male&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; lmM&lt;span class="o"&gt;$&lt;/span&gt;fitted&lt;span class="p"&gt;,&lt;/span&gt; col &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;blue&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; lwd &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;lines&lt;span class="p"&gt;(&lt;/span&gt;hunger&lt;span class="o"&gt;$&lt;/span&gt;Year&lt;span class="p"&gt;[&lt;/span&gt;hunger&lt;span class="o"&gt;$&lt;/span&gt;Sex &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Female&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; lmF&lt;span class="o"&gt;$&lt;/span&gt;fitted&lt;span class="p"&gt;,&lt;/span&gt; col &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;red&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; lwd &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="rimage center"&gt;&lt;img src="figure/multivariable-regression-4-1.png"/&gt;&lt;/div&gt;
+
+&lt;p&gt;We can see from the plot that the lines are not exactly parallel. On the right side of the graph (around the year 2010) they are closer together than on the left side (around 1970). Slopes are -0.29340 for femals, -0.32340 for males.&lt;/p&gt;
+&lt;p&gt;Now instead of separating the data by subsetting the samples by gender, we'll use gender as another predictor to create the linear model:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;lmBoth &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; lm&lt;span class="p"&gt;(&lt;/span&gt;Numeric &lt;span class="o"&gt;~&lt;/span&gt; Year &lt;span class="o"&gt;+&lt;/span&gt; Sex&lt;span class="p"&gt;,&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; hunger&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="kp"&gt;summary&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;lmBoth&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;## &lt;/span&gt;
+&lt;span class="code-line"&gt;## Call:&lt;/span&gt;
+&lt;span class="code-line"&gt;## lm(formula = Numeric ~ Year + Sex, data = hunger)&lt;/span&gt;
+&lt;span class="code-line"&gt;## &lt;/span&gt;
+&lt;span class="code-line"&gt;## Residuals:&lt;/span&gt;
+&lt;span class="code-line"&gt;##     Min      1Q  Median      3Q     Max &lt;/span&gt;
+&lt;span class="code-line"&gt;## -25.472 -11.297  -1.848   7.058  45.990 &lt;/span&gt;
+&lt;span class="code-line"&gt;## &lt;/span&gt;
+&lt;span class="code-line"&gt;## Coefficients:&lt;/span&gt;
+&lt;span class="code-line"&gt;##             Estimate Std. Error t value Pr(&amp;gt;|t|)    &lt;/span&gt;
+&lt;span class="code-line"&gt;## (Intercept) 633.5283   120.8950   5.240 1.98e-07 ***&lt;/span&gt;
+&lt;span class="code-line"&gt;## Year         -0.3084     0.0604  -5.106 3.99e-07 ***&lt;/span&gt;
+&lt;span class="code-line"&gt;## SexMale       1.9027     0.8576   2.219   0.0267 *  &lt;/span&gt;
+&lt;span class="code-line"&gt;## ---&lt;/span&gt;
+&lt;span class="code-line"&gt;## Signif. codes:  0 &amp;#39;***&amp;#39; 0.001 &amp;#39;**&amp;#39; 0.01 &amp;#39;*&amp;#39; 0.05 &amp;#39;.&amp;#39; 0.1 &amp;#39; &amp;#39; 1&lt;/span&gt;
+&lt;span class="code-line"&gt;## &lt;/span&gt;
+&lt;span class="code-line"&gt;## Residual standard error: 13.2 on 945 degrees of freedom&lt;/span&gt;
+&lt;span class="code-line"&gt;## Multiple R-squared:  0.03175,    Adjusted R-squared:  0.0297 &lt;/span&gt;
+&lt;span class="code-line"&gt;## F-statistic: 15.49 on 2 and 945 DF,  p-value: 2.392e-07&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Notice that Male and Female are factors (factors are treated in alphabetic order, so reference, here, is the Female group).&lt;br /&gt;
+The intercept represents the percentage of hungry females at year 0.&lt;br /&gt;
+The estimate for the factor Male 1.9027 is a distance from the intercept (the estimate of the reference group Female). So the percentage of hungry males at year 0 is the sum of the intercept and the male estimate, ie. 633.5283 + 1.9027 = 635.431&lt;br /&gt;
+The estimate for hunger$Year represents the annual decrease in percentage of both gender.&lt;/p&gt;
+&lt;p&gt;In the plot, the red line will have the female intercept and the  blue line will have the male intercept:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;plot&lt;span class="p"&gt;(&lt;/span&gt;hunger&lt;span class="o"&gt;$&lt;/span&gt;Year&lt;span class="p"&gt;,&lt;/span&gt; hunger&lt;span class="o"&gt;$&lt;/span&gt;Numeric&lt;span class="p"&gt;,&lt;/span&gt; pch &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;19&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;points&lt;span class="p"&gt;(&lt;/span&gt;hunger&lt;span class="o"&gt;$&lt;/span&gt;Year&lt;span class="p"&gt;,&lt;/span&gt; hunger&lt;span class="o"&gt;$&lt;/span&gt;Numeric&lt;span class="p"&gt;,&lt;/span&gt; pch &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;19&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; col &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;hunger&lt;span class="o"&gt;$&lt;/span&gt;Sex &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Female&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="m"&gt;125&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;abline&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;lmBoth&lt;span class="o"&gt;$&lt;/span&gt;coeff&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; lmBoth&lt;span class="o"&gt;$&lt;/span&gt;coeff&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]),&lt;/span&gt; col &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;red&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; lwd &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;abline&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;lmBoth&lt;span class="o"&gt;$&lt;/span&gt;coeff&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; lmBoth&lt;span class="o"&gt;$&lt;/span&gt;coeff&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; lmBoth&lt;span class="o"&gt;$&lt;/span&gt;coeff&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]),&lt;/span&gt; col &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;blue&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; lwd &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="rimage center"&gt;&lt;img src="figure/multivariable-regression-6-1.png"/&gt;&lt;/div&gt;
+
+&lt;p&gt;The lines are parallels (since, they have the same slope lmBoth$coeff[2]).&lt;/p&gt;
+&lt;p&gt;Now we'll consider the interaction between year and gender to see how that affects changes in rates of hunger:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;lmInter &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; lm&lt;span class="p"&gt;(&lt;/span&gt;Numeric &lt;span class="o"&gt;~&lt;/span&gt; Year &lt;span class="o"&gt;+&lt;/span&gt; Sex &lt;span class="o"&gt;+&lt;/span&gt; Sex &lt;span class="o"&gt;*&lt;/span&gt; Year&lt;span class="p"&gt;,&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; hunger&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="kp"&gt;summary&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;lmInter&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;## &lt;/span&gt;
+&lt;span class="code-line"&gt;## Call:&lt;/span&gt;
+&lt;span class="code-line"&gt;## lm(formula = Numeric ~ Year + Sex + Sex * Year, data = hunger)&lt;/span&gt;
+&lt;span class="code-line"&gt;## &lt;/span&gt;
+&lt;span class="code-line"&gt;## Residuals:&lt;/span&gt;
+&lt;span class="code-line"&gt;##     Min      1Q  Median      3Q     Max &lt;/span&gt;
+&lt;span class="code-line"&gt;## -25.913 -11.248  -1.853   7.087  46.146 &lt;/span&gt;
+&lt;span class="code-line"&gt;## &lt;/span&gt;
+&lt;span class="code-line"&gt;## Coefficients:&lt;/span&gt;
+&lt;span class="code-line"&gt;##               Estimate Std. Error t value Pr(&amp;gt;|t|)    &lt;/span&gt;
+&lt;span class="code-line"&gt;## (Intercept)  603.50580  171.05519   3.528 0.000439 ***&lt;/span&gt;
+&lt;span class="code-line"&gt;## Year          -0.29340    0.08547  -3.433 0.000623 ***&lt;/span&gt;
+&lt;span class="code-line"&gt;## SexMale       61.94772  241.90858   0.256 0.797946    &lt;/span&gt;
+&lt;span class="code-line"&gt;## Year:SexMale  -0.03000    0.12087  -0.248 0.804022    &lt;/span&gt;
+&lt;span class="code-line"&gt;## ---&lt;/span&gt;
+&lt;span class="code-line"&gt;## Signif. codes:  0 &amp;#39;***&amp;#39; 0.001 &amp;#39;**&amp;#39; 0.01 &amp;#39;*&amp;#39; 0.05 &amp;#39;.&amp;#39; 0.1 &amp;#39; &amp;#39; 1&lt;/span&gt;
+&lt;span class="code-line"&gt;## &lt;/span&gt;
+&lt;span class="code-line"&gt;## Residual standard error: 13.21 on 944 degrees of freedom&lt;/span&gt;
+&lt;span class="code-line"&gt;## Multiple R-squared:  0.03181,    Adjusted R-squared:  0.02874 &lt;/span&gt;
+&lt;span class="code-line"&gt;## F-statistic: 10.34 on 3 and 944 DF,  p-value: 1.064e-06&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The percentage of hungry females at year 0 is 603.5058.&lt;br /&gt;
+The percentage of hungry males at year 0 is 665.4535 (603.50580  + 61.94772).&lt;br /&gt;
+The annual change (decrease) in percentage of hungry females is 0.29340.&lt;br /&gt;
+The estimate associated with Year:SexMale represents the distance of the annual change in percent of males from that of females.
+The annual change in percentage of hungry males is -0.32340 (-0.29340 - 0.03000).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;plot&lt;span class="p"&gt;(&lt;/span&gt;hunger&lt;span class="o"&gt;$&lt;/span&gt;Year&lt;span class="p"&gt;,&lt;/span&gt; hunger&lt;span class="o"&gt;$&lt;/span&gt;Numeric&lt;span class="p"&gt;,&lt;/span&gt; pch &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;19&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;points&lt;span class="p"&gt;(&lt;/span&gt;hunger&lt;span class="o"&gt;$&lt;/span&gt;Year&lt;span class="p"&gt;,&lt;/span&gt; hunger&lt;span class="o"&gt;$&lt;/span&gt;Numeric&lt;span class="p"&gt;,&lt;/span&gt; pch &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;19&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; col &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;hunger&lt;span class="o"&gt;$&lt;/span&gt;Sex &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Male&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="m"&gt;125&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;abline&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;lmInter&lt;span class="o"&gt;$&lt;/span&gt;coeff&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; lmInter&lt;span class="o"&gt;$&lt;/span&gt;coeff&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]),&lt;/span&gt; col &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;red&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; lwd &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;abline&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;lmInter&lt;span class="o"&gt;$&lt;/span&gt;coeff&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; lmInter&lt;span class="o"&gt;$&lt;/span&gt;coeff&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; lmInter&lt;span class="o"&gt;$&lt;/span&gt;coeff&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; lmInter&lt;span class="o"&gt;$&lt;/span&gt;coeff&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="p"&gt;]),&lt;/span&gt; col &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;blue&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; lwd &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="rimage center"&gt;&lt;img src="figure/multivariable-regression-8-1.png"/&gt;&lt;/div&gt;
+
+&lt;p&gt;The lines are not parallel and will eventually intersect. The Male blue line indicates a faster rate of change.&lt;/p&gt;
+&lt;p&gt;Here we're dealing with an interaction between factors.&lt;/p&gt;
+&lt;p&gt;Suppose we have two interacting predictors and one of them is held constant.&lt;br /&gt;
+The expected change in the outcome for a unit change in the other predictor is the coefficient of that changing predictor  + the coefficient of the interaction * the value of the predictor held constant.&lt;/p&gt;
+&lt;p&gt;For example, let's the model be : &lt;span class="math"&gt;\(H_i = b_0 + (b_1*I_i) + (b_2*Y_i)+ (b_3*I_i*Y_i)\)&lt;/span&gt; with H the outcomes, I's and Y's the predictors and b's the estimated coefficients of the predictors.&lt;br /&gt;
+If I is fixed at a value, 5 and Y varies, &lt;span class="math"&gt;\(b_2 + b3*5\)&lt;/span&gt; represents the change in H per unit change in Y given that I is fixed at 5.&lt;/p&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+    
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</summary><category term="R"></category></entry><entry><title>Notes on Statistical Inference : Hypothesis Testing and t-tests</title><link href="http://stephanie-w.github.io/blog/statinf2.html" rel="alternate"></link><updated>2015-08-10T16:19:08+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/statinf2.html</id><summary type="html">
 &lt;hr/&gt;
 &lt;p&gt;
 These are  my notes on the Statistical Inference course (2th part) : Hypothesis Testing and t-tests&lt;/p&gt;
@@ -451,7 +928,7 @@ http://www.stat.yale.edu/Courses/1997-98/101/confint.htm
         "}";
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</summary><category term="R"></category><category term="stats"></category></entry><entry><title>R : Variance Inflation</title><link href="http://stephanie-w.github.io/blog/variance-inflation.html" rel="alternate"></link><updated>2015-08-10T16:09:14+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/variance-inflation.html</id><summary type="html">&lt;hr /&gt;
+&lt;/script&gt;</summary><category term="R"></category><category term="stats"></category></entry><entry><title>R : Variance Inflation</title><link href="http://stephanie-w.github.io/blog/variance-inflation.html" rel="alternate"></link><updated>2015-08-10T16:19:08+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/variance-inflation.html</id><summary type="html">&lt;hr /&gt;
 &lt;p&gt;This is my note on swirl course Regression Model : Overfitting and Underfitting.&lt;/p&gt;
 &lt;h2 id="definition"&gt;Definition&lt;/h2&gt;
 &lt;p&gt;
@@ -608,7 +1085,7 @@ Regardless of your criterion for what constitutes a high VIF, there are at least
 
 Sources
 http://statisticalhorizons.com/multicollinearity
---&gt;</summary><category term="R"></category><category term="stats"></category><category term="regression"></category></entry><entry><title>R: Analysis of weather events impact on population health and economy.</title><link href="http://stephanie-w.github.io/blog/weather_event_impact.html" rel="alternate"></link><updated>2015-08-10T16:09:14+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/weather_event_impact.html</id><summary type="html">&lt;hr /&gt;
+--&gt;</summary><category term="R"></category><category term="stats"></category><category term="regression"></category></entry><entry><title>R: Analysis of weather events impact on population health and economy.</title><link href="http://stephanie-w.github.io/blog/weather_event_impact.html" rel="alternate"></link><updated>2015-08-10T16:19:08+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/weather_event_impact.html</id><summary type="html">&lt;hr /&gt;
 &lt;h2 id="synopsis"&gt;Synopsis&lt;/h2&gt;
 &lt;p&gt;This analysis involves exploring the U.S. National Oceanic and Atmospheric Administration's (NOAA) storm database. &lt;/p&gt;
 &lt;p&gt;This database tracks characteristics of major storms and weather events in the United States, including when and where they occur, as well as estimates of any fatalities, injuries, and property damage.&lt;/p&gt;
@@ -1965,7 +2442,7 @@ Our analysys shows that since 1996:&lt;/p&gt;
 &lt;li&gt;The "TSTM Wind" event is the most frequent event regarding events causing property damages&lt;/li&gt;
 &lt;li&gt;The "Drought" and "Hurricane" events have a very high crop damages ratio&lt;/li&gt;
 &lt;li&gt;The "Flood" and "Tropical storm" events have a very high property damages ratio&lt;/li&gt;
-&lt;/ul&gt;</summary><category term="R"></category></entry><entry><title>Hadoop: Word Count Code explained</title><link href="http://stephanie-w.github.io/blog/word-count-explained.html" rel="alternate"></link><updated>2015-08-10T16:09:14+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/word-count-explained.html</id><summary type="html">&lt;hr /&gt;
+&lt;/ul&gt;</summary><category term="R"></category></entry><entry><title>Hadoop: Word Count Code explained</title><link href="http://stephanie-w.github.io/blog/word-count-explained.html" rel="alternate"></link><updated>2015-08-10T16:19:08+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/word-count-explained.html</id><summary type="html">&lt;hr /&gt;
 
 
 
@@ -2198,7 +2675,7 @@ iThe instances of OutputFormat provided by Hadoop write to files on the local di
 &lt;!--
 Sources:
 developpper.yahoo.com/hadoop/tutorial/module4.html
---&gt;</summary><category term="hadoop"></category></entry><entry><title>R: Experimentation of the Cental Limit Theorem</title><link href="http://stephanie-w.github.io/blog/experimentation-of-clt.html" rel="alternate"></link><updated>2015-08-10T16:09:14+02:00</updated><author><name>"Stephanie W"</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/experimentation-of-clt.html</id><summary type="html">&lt;hr /&gt;
+--&gt;</summary><category term="hadoop"></category></entry><entry><title>R: Experimentation of the Cental Limit Theorem</title><link href="http://stephanie-w.github.io/blog/experimentation-of-clt.html" rel="alternate"></link><updated>2015-08-10T16:19:08+02:00</updated><author><name>"Stephanie W"</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/experimentation-of-clt.html</id><summary type="html">&lt;hr /&gt;
 &lt;p&gt;The CLT Theorem: &lt;br /&gt;
 The distribution of sample statistics (e.g. mean) is approximatively normal, regardless of the underlying distribution, with mean = &lt;span class="math"&gt;\(\mu\)&lt;/span&gt; and variance = &lt;span class="math"&gt;\(\sigma^2\)&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;To experiment this theory, we've built a matrix with 40 exponentials (we take lambda=0.2) x 1000 and compute the mean of each row, storing the result in a &lt;code&gt;means&lt;/code&gt; vector:&lt;/p&gt;
@@ -2290,7 +2767,7 @@ The distribution of sample statistics (e.g. mean) is approximatively normal, reg
         "}";
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</summary><category term="R"></category><category term="stats"></category></entry><entry><title>R: Earthquakes from the past 30 days</title><link href="http://stephanie-w.github.io/blog/last_earthquakes.html" rel="alternate"></link><updated>2015-08-10T16:09:14+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/last_earthquakes.html</id><summary type="html">&lt;hr /&gt;
+&lt;/script&gt;</summary><category term="R"></category><category term="stats"></category></entry><entry><title>R: Earthquakes from the past 30 days</title><link href="http://stephanie-w.github.io/blog/last_earthquakes.html" rel="alternate"></link><updated>2015-08-10T16:19:08+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/last_earthquakes.html</id><summary type="html">&lt;hr /&gt;
 
 
 &lt;p&gt;Earthquakes of the last 30 months from &lt;a href="http://earthquake.usgs.gov/earthquakes/feed/v1.0/csv.php feed"&gt;the earthquake.usgs.gov feed&lt;/a&gt;.&lt;/p&gt;
@@ -2369,274 +2846,4 @@ The distribution of sample statistics (e.g. mean) is approximatively normal, reg
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;img alt="" src="figure/earthquakes_worldmap-1.png" /&gt;&lt;/p&gt;</summary><category term="R"></category></entry><entry><title>R: Multivariable Regression</title><link href="http://stephanie-w.github.io/blog/multivariable-regression.html" rel="alternate"></link><updated>2015-08-10T16:09:14+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-10:blog/multivariable-regression.html</id><summary type="html">&lt;hr /&gt;
-&lt;p&gt;
-
-This is my note on swirl course Regression Model : Multivariable Examples 3. &lt;/p&gt;
-&lt;p&gt;We'll use the hunger dataset from the course:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;download.file&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;https://raw.githubusercontent.com/swirldev/swirl_courses/master/Regression_Models/MultiVar_Examples3/hunger.csv&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;/span&gt;
-&lt;span class="code-line"&gt;    &lt;span class="s"&gt;&amp;quot;hunger.csv&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; method &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;curl&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; quiet &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;T&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;hunger &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; read.csv&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;hunger.csv&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="kp"&gt;head&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;hunger&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;##    X                              Indicator Data.Source PUBLISH.STATES Year WHO.region  Country&lt;/span&gt;
-&lt;span class="code-line"&gt;## 1  8 Children aged &amp;lt;5 years underweight (%) NLIS_310044      Published 1986     Africa  Senegal&lt;/span&gt;
-&lt;span class="code-line"&gt;## 2 11 Children aged &amp;lt;5 years underweight (%) NLIS_310095      Published 1989     Africa   Uganda&lt;/span&gt;
-&lt;span class="code-line"&gt;## 3 13 Children aged &amp;lt;5 years underweight (%) NLIS_310138      Published 1988     Africa Zimbabwe&lt;/span&gt;
-&lt;span class="code-line"&gt;## 4 16 Children aged &amp;lt;5 years underweight (%) NLIS_310044      Published 1986     Africa  Senegal&lt;/span&gt;
-&lt;span class="code-line"&gt;## 5 18 Children aged &amp;lt;5 years underweight (%) NLIS_310095      Published 1989     Africa   Uganda&lt;/span&gt;
-&lt;span class="code-line"&gt;## 6 21 Children aged &amp;lt;5 years underweight (%) NLIS_310138      Published 1988     Africa Zimbabwe&lt;/span&gt;
-&lt;span class="code-line"&gt;##      Sex Display.Value Numeric Low High Comments&lt;/span&gt;
-&lt;span class="code-line"&gt;## 1   Male          19.3    19.3  NA   NA       NA&lt;/span&gt;
-&lt;span class="code-line"&gt;## 2 Female          19.1    19.1  NA   NA       NA&lt;/span&gt;
-&lt;span class="code-line"&gt;## 3 Female           7.2     7.2  NA   NA       NA&lt;/span&gt;
-&lt;span class="code-line"&gt;## 4 Female          15.3    15.3  NA   NA       NA&lt;/span&gt;
-&lt;span class="code-line"&gt;## 5   Male          20.4    20.4  NA   NA       NA&lt;/span&gt;
-&lt;span class="code-line"&gt;## 6   Male           8.7     8.7  NA   NA       NA&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;The Numeric column gives the percentage of children under age 5 who were underweight when that sample was taken.&lt;br /&gt;
-We fit a simple linear regression for Numeric (outcome) on Year:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;fit &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; lm&lt;span class="p"&gt;(&lt;/span&gt;Numeric &lt;span class="o"&gt;~&lt;/span&gt; Year&lt;span class="p"&gt;,&lt;/span&gt; hunger&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="kp"&gt;summary&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;fit&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;## &lt;/span&gt;
-&lt;span class="code-line"&gt;## Call:&lt;/span&gt;
-&lt;span class="code-line"&gt;## lm(formula = Numeric ~ Year, data = hunger)&lt;/span&gt;
-&lt;span class="code-line"&gt;## &lt;/span&gt;
-&lt;span class="code-line"&gt;## Residuals:&lt;/span&gt;
-&lt;span class="code-line"&gt;##     Min      1Q  Median      3Q     Max &lt;/span&gt;
-&lt;span class="code-line"&gt;## -24.621 -11.196  -1.994   7.085  45.039 &lt;/span&gt;
-&lt;span class="code-line"&gt;## &lt;/span&gt;
-&lt;span class="code-line"&gt;## Coefficients:&lt;/span&gt;
-&lt;span class="code-line"&gt;##              Estimate Std. Error t value Pr(&amp;gt;|t|)    &lt;/span&gt;
-&lt;span class="code-line"&gt;## (Intercept) 634.47966  121.14460   5.237 2.01e-07 ***&lt;/span&gt;
-&lt;span class="code-line"&gt;## Year         -0.30840    0.06053  -5.095 4.21e-07 ***&lt;/span&gt;
-&lt;span class="code-line"&gt;## ---&lt;/span&gt;
-&lt;span class="code-line"&gt;## Signif. codes:  0 &amp;#39;***&amp;#39; 0.001 &amp;#39;**&amp;#39; 0.01 &amp;#39;*&amp;#39; 0.05 &amp;#39;.&amp;#39; 0.1 &amp;#39; &amp;#39; 1&lt;/span&gt;
-&lt;span class="code-line"&gt;## &lt;/span&gt;
-&lt;span class="code-line"&gt;## Residual standard error: 13.23 on 946 degrees of freedom&lt;/span&gt;
-&lt;span class="code-line"&gt;## Multiple R-squared:  0.02671,    Adjusted R-squared:  0.02568 &lt;/span&gt;
-&lt;span class="code-line"&gt;## F-statistic: 25.96 on 1 and 946 DF,  p-value: 4.209e-07&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;As time goes on, the rate of hunger decreases.&lt;br /&gt;
-The intercept of the model represents the percentage of hungry children at year 0.  &lt;/p&gt;
-&lt;p&gt;Let's look at the rates of hunger for the different genders to see how, or even if, they differ:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;lmF &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; lm&lt;span class="p"&gt;(&lt;/span&gt;Numeric&lt;span class="p"&gt;[&lt;/span&gt;hunger&lt;span class="o"&gt;$&lt;/span&gt;Sex &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Female&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;~&lt;/span&gt; Year&lt;span class="p"&gt;[&lt;/span&gt;hunger&lt;span class="o"&gt;$&lt;/span&gt;Sex &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Female&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; hunger&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="kp"&gt;summary&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;lmF&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; &lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; Call:&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; lm(formula = Numeric[hunger$Sex == &amp;quot;Female&amp;quot;] ~ Year[hunger$Sex == &lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt;     &amp;quot;Female&amp;quot;], data = hunger)&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; &lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; Residuals:&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt;     Min      1Q  Median      3Q     Max &lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; -23.228 -10.638  -1.959   6.859  46.146 &lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; &lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; Coefficients:&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt;                               Estimate Std. Error t value Pr(&amp;gt;|t|)    &lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; (Intercept)                  603.50580  167.53201   3.602 0.000349 ***&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; Year[hunger$Sex == &amp;quot;Female&amp;quot;]  -0.29340    0.08371  -3.505 0.000500 ***&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; ---&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; Signif. codes:  0 &amp;#39;***&amp;#39; 0.001 &amp;#39;**&amp;#39; 0.01 &amp;#39;*&amp;#39; 0.05 &amp;#39;.&amp;#39; 0.1 &amp;#39; &amp;#39; 1&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; &lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; Residual standard error: 12.94 on 472 degrees of freedom&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; Multiple R-squared:  0.02537,    Adjusted R-squared:  0.0233 &lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; F-statistic: 12.29 on 1 and 472 DF,  p-value: 5e-04&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;lmM &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; lm&lt;span class="p"&gt;(&lt;/span&gt;Numeric&lt;span class="p"&gt;[&lt;/span&gt;hunger&lt;span class="o"&gt;$&lt;/span&gt;Sex &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Male&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;~&lt;/span&gt; Year&lt;span class="p"&gt;[&lt;/span&gt;hunger&lt;span class="o"&gt;$&lt;/span&gt;Sex &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Male&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; hunger&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="kp"&gt;summary&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;lmM&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; &lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; Call:&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; lm(formula = Numeric[hunger$Sex == &amp;quot;Male&amp;quot;] ~ Year[hunger$Sex == &lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt;     &amp;quot;Male&amp;quot;], data = hunger)&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; &lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; Residuals:&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt;     Min      1Q  Median      3Q     Max &lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; -25.913 -11.741  -1.832   7.399  42.255 &lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; &lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; Coefficients:&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt;                             Estimate Std. Error t value Pr(&amp;gt;|t|)    &lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; (Intercept)                665.45352  174.50726   3.813 0.000155 ***&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; Year[hunger$Sex == &amp;quot;Male&amp;quot;]  -0.32340    0.08719  -3.709 0.000233 ***&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; ---&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; Signif. codes:  0 &amp;#39;***&amp;#39; 0.001 &amp;#39;**&amp;#39; 0.01 &amp;#39;*&amp;#39; 0.05 &amp;#39;.&amp;#39; 0.1 &amp;#39; &amp;#39; 1&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; &lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; Residual standard error: 13.48 on 472 degrees of freedom&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; Multiple R-squared:  0.02832,    Adjusted R-squared:  0.02626 &lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="cp"&gt;##&lt;/span&gt;&lt;span class="c"&gt; F-statistic: 13.76 on 1 and 472 DF,  p-value: 0.0002328&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;We plot the data points and fitted lines using different colors to distinguish between males (blue) and females (pink).&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;plot&lt;span class="p"&gt;(&lt;/span&gt;hunger&lt;span class="o"&gt;$&lt;/span&gt;Year&lt;span class="p"&gt;,&lt;/span&gt; hunger&lt;span class="o"&gt;$&lt;/span&gt;Numeric&lt;span class="p"&gt;,&lt;/span&gt; type &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;n&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;points&lt;span class="p"&gt;(&lt;/span&gt;hunger&lt;span class="o"&gt;$&lt;/span&gt;Year&lt;span class="p"&gt;,&lt;/span&gt; hunger&lt;span class="o"&gt;$&lt;/span&gt;Numeric&lt;span class="p"&gt;,&lt;/span&gt; pch &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;19&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; col &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;hunger&lt;span class="o"&gt;$&lt;/span&gt;Sex &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Female&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="m"&gt;125&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;lines&lt;span class="p"&gt;(&lt;/span&gt;hunger&lt;span class="o"&gt;$&lt;/span&gt;Year&lt;span class="p"&gt;[&lt;/span&gt;hunger&lt;span class="o"&gt;$&lt;/span&gt;Sex &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Male&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; lmM&lt;span class="o"&gt;$&lt;/span&gt;fitted&lt;span class="p"&gt;,&lt;/span&gt; col &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;blue&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; lwd &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;lines&lt;span class="p"&gt;(&lt;/span&gt;hunger&lt;span class="o"&gt;$&lt;/span&gt;Year&lt;span class="p"&gt;[&lt;/span&gt;hunger&lt;span class="o"&gt;$&lt;/span&gt;Sex &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Female&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; lmF&lt;span class="o"&gt;$&lt;/span&gt;fitted&lt;span class="p"&gt;,&lt;/span&gt; col &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;red&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; lwd &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;div class="rimage center"&gt;&lt;img src="fig/unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" class="plot" /&gt;&lt;/div&gt;
-
-&lt;p&gt;We can see from the plot that the lines are not exactly parallel. On the right side of the graph (around the year 2010) they are closer together than on the left side (around 1970). Slopes are -0.29340 for femals, -0.32340 for males.&lt;/p&gt;
-&lt;p&gt;Now instead of separating the data by subsetting the samples by gender, we'll use gender as another predictor to create the linear model:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;lmBoth &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; lm&lt;span class="p"&gt;(&lt;/span&gt;Numeric &lt;span class="o"&gt;~&lt;/span&gt; Year &lt;span class="o"&gt;+&lt;/span&gt; Sex&lt;span class="p"&gt;,&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; hunger&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="kp"&gt;summary&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;lmBoth&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;## &lt;/span&gt;
-&lt;span class="code-line"&gt;## Call:&lt;/span&gt;
-&lt;span class="code-line"&gt;## lm(formula = Numeric ~ Year + Sex, data = hunger)&lt;/span&gt;
-&lt;span class="code-line"&gt;## &lt;/span&gt;
-&lt;span class="code-line"&gt;## Residuals:&lt;/span&gt;
-&lt;span class="code-line"&gt;##     Min      1Q  Median      3Q     Max &lt;/span&gt;
-&lt;span class="code-line"&gt;## -25.472 -11.297  -1.848   7.058  45.990 &lt;/span&gt;
-&lt;span class="code-line"&gt;## &lt;/span&gt;
-&lt;span class="code-line"&gt;## Coefficients:&lt;/span&gt;
-&lt;span class="code-line"&gt;##             Estimate Std. Error t value Pr(&amp;gt;|t|)    &lt;/span&gt;
-&lt;span class="code-line"&gt;## (Intercept) 633.5283   120.8950   5.240 1.98e-07 ***&lt;/span&gt;
-&lt;span class="code-line"&gt;## Year         -0.3084     0.0604  -5.106 3.99e-07 ***&lt;/span&gt;
-&lt;span class="code-line"&gt;## SexMale       1.9027     0.8576   2.219   0.0267 *  &lt;/span&gt;
-&lt;span class="code-line"&gt;## ---&lt;/span&gt;
-&lt;span class="code-line"&gt;## Signif. codes:  0 &amp;#39;***&amp;#39; 0.001 &amp;#39;**&amp;#39; 0.01 &amp;#39;*&amp;#39; 0.05 &amp;#39;.&amp;#39; 0.1 &amp;#39; &amp;#39; 1&lt;/span&gt;
-&lt;span class="code-line"&gt;## &lt;/span&gt;
-&lt;span class="code-line"&gt;## Residual standard error: 13.2 on 945 degrees of freedom&lt;/span&gt;
-&lt;span class="code-line"&gt;## Multiple R-squared:  0.03175,    Adjusted R-squared:  0.0297 &lt;/span&gt;
-&lt;span class="code-line"&gt;## F-statistic: 15.49 on 2 and 945 DF,  p-value: 2.392e-07&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;Notice that Male and Female are factors (factors are treated in alphabetic order, so reference, here, is the Female group).&lt;br /&gt;
-The intercept represents the percentage of hungry females at year 0.&lt;br /&gt;
-The estimate for the factor Male 1.9027 is a distance from the intercept (the estimate of the reference group Female). So the percentage of hungry males at year 0 is the sum of the intercept and the male estimate, ie. 633.5283 + 1.9027 = 635.431&lt;br /&gt;
-The estimate for hunger$Year represents the annual decrease in percentage of both gender.&lt;/p&gt;
-&lt;p&gt;In the plot, the red line will have the female intercept and the  blue line will have the male intercept:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;plot&lt;span class="p"&gt;(&lt;/span&gt;hunger&lt;span class="o"&gt;$&lt;/span&gt;Year&lt;span class="p"&gt;,&lt;/span&gt; hunger&lt;span class="o"&gt;$&lt;/span&gt;Numeric&lt;span class="p"&gt;,&lt;/span&gt; pch &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;19&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;points&lt;span class="p"&gt;(&lt;/span&gt;hunger&lt;span class="o"&gt;$&lt;/span&gt;Year&lt;span class="p"&gt;,&lt;/span&gt; hunger&lt;span class="o"&gt;$&lt;/span&gt;Numeric&lt;span class="p"&gt;,&lt;/span&gt; pch &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;19&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; col &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;hunger&lt;span class="o"&gt;$&lt;/span&gt;Sex &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Female&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="m"&gt;125&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;abline&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;lmBoth&lt;span class="o"&gt;$&lt;/span&gt;coeff&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; lmBoth&lt;span class="o"&gt;$&lt;/span&gt;coeff&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]),&lt;/span&gt; col &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;red&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; lwd &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;abline&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;lmBoth&lt;span class="o"&gt;$&lt;/span&gt;coeff&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; lmBoth&lt;span class="o"&gt;$&lt;/span&gt;coeff&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; lmBoth&lt;span class="o"&gt;$&lt;/span&gt;coeff&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]),&lt;/span&gt; col &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;blue&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; lwd &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;div class="rimage center"&gt;&lt;img src="fig/unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" class="plot" /&gt;&lt;/div&gt;
-
-&lt;p&gt;The lines are parallels (since, they have the same slope lmBoth$coeff[2]).&lt;/p&gt;
-&lt;p&gt;Now we'll consider the interaction between year and gender to see how that affects changes in rates of hunger:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;lmInter &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; lm&lt;span class="p"&gt;(&lt;/span&gt;Numeric &lt;span class="o"&gt;~&lt;/span&gt; Year &lt;span class="o"&gt;+&lt;/span&gt; Sex &lt;span class="o"&gt;+&lt;/span&gt; Sex &lt;span class="o"&gt;*&lt;/span&gt; Year&lt;span class="p"&gt;,&lt;/span&gt; data &lt;span class="o"&gt;=&lt;/span&gt; hunger&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="kp"&gt;summary&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;lmInter&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;## &lt;/span&gt;
-&lt;span class="code-line"&gt;## Call:&lt;/span&gt;
-&lt;span class="code-line"&gt;## lm(formula = Numeric ~ Year + Sex + Sex * Year, data = hunger)&lt;/span&gt;
-&lt;span class="code-line"&gt;## &lt;/span&gt;
-&lt;span class="code-line"&gt;## Residuals:&lt;/span&gt;
-&lt;span class="code-line"&gt;##     Min      1Q  Median      3Q     Max &lt;/span&gt;
-&lt;span class="code-line"&gt;## -25.913 -11.248  -1.853   7.087  46.146 &lt;/span&gt;
-&lt;span class="code-line"&gt;## &lt;/span&gt;
-&lt;span class="code-line"&gt;## Coefficients:&lt;/span&gt;
-&lt;span class="code-line"&gt;##               Estimate Std. Error t value Pr(&amp;gt;|t|)    &lt;/span&gt;
-&lt;span class="code-line"&gt;## (Intercept)  603.50580  171.05519   3.528 0.000439 ***&lt;/span&gt;
-&lt;span class="code-line"&gt;## Year          -0.29340    0.08547  -3.433 0.000623 ***&lt;/span&gt;
-&lt;span class="code-line"&gt;## SexMale       61.94772  241.90858   0.256 0.797946    &lt;/span&gt;
-&lt;span class="code-line"&gt;## Year:SexMale  -0.03000    0.12087  -0.248 0.804022    &lt;/span&gt;
-&lt;span class="code-line"&gt;## ---&lt;/span&gt;
-&lt;span class="code-line"&gt;## Signif. codes:  0 &amp;#39;***&amp;#39; 0.001 &amp;#39;**&amp;#39; 0.01 &amp;#39;*&amp;#39; 0.05 &amp;#39;.&amp;#39; 0.1 &amp;#39; &amp;#39; 1&lt;/span&gt;
-&lt;span class="code-line"&gt;## &lt;/span&gt;
-&lt;span class="code-line"&gt;## Residual standard error: 13.21 on 944 degrees of freedom&lt;/span&gt;
-&lt;span class="code-line"&gt;## Multiple R-squared:  0.03181,    Adjusted R-squared:  0.02874 &lt;/span&gt;
-&lt;span class="code-line"&gt;## F-statistic: 10.34 on 3 and 944 DF,  p-value: 1.064e-06&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;The percentage of hungry females at year 0 is 603.5058.&lt;br /&gt;
-The percentage of hungry males at year 0 is 665.4535 (603.50580  + 61.94772).&lt;br /&gt;
-The annual change (decrease) in percentage of hungry females is 0.29340.&lt;br /&gt;
-The estimate associated with Year:SexMale represents the distance of the annual change in percent of males from that of females.
-The annual change in percentage of hungry males is -0.32340 (-0.29340 - 0.03000).&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;plot&lt;span class="p"&gt;(&lt;/span&gt;hunger&lt;span class="o"&gt;$&lt;/span&gt;Year&lt;span class="p"&gt;,&lt;/span&gt; hunger&lt;span class="o"&gt;$&lt;/span&gt;Numeric&lt;span class="p"&gt;,&lt;/span&gt; pch &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;19&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;points&lt;span class="p"&gt;(&lt;/span&gt;hunger&lt;span class="o"&gt;$&lt;/span&gt;Year&lt;span class="p"&gt;,&lt;/span&gt; hunger&lt;span class="o"&gt;$&lt;/span&gt;Numeric&lt;span class="p"&gt;,&lt;/span&gt; pch &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;19&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; col &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;hunger&lt;span class="o"&gt;$&lt;/span&gt;Sex &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Male&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="m"&gt;125&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;abline&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;lmInter&lt;span class="o"&gt;$&lt;/span&gt;coeff&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; lmInter&lt;span class="o"&gt;$&lt;/span&gt;coeff&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]),&lt;/span&gt; col &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;red&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; lwd &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;abline&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;lmInter&lt;span class="o"&gt;$&lt;/span&gt;coeff&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; lmInter&lt;span class="o"&gt;$&lt;/span&gt;coeff&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; lmInter&lt;span class="o"&gt;$&lt;/span&gt;coeff&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; lmInter&lt;span class="o"&gt;$&lt;/span&gt;coeff&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="p"&gt;]),&lt;/span&gt; col &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;blue&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; lwd &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;div class="rimage center"&gt;&lt;img src="fig/unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" class="plot" /&gt;&lt;/div&gt;
-
-&lt;p&gt;The lines are not parallel and will eventually intersect. The Male blue line indicates a faster rate of change.&lt;/p&gt;
-&lt;p&gt;Here we're dealing with an interaction between factors.&lt;/p&gt;
-&lt;p&gt;Suppose we have two interacting predictors and one of them is held constant.&lt;br /&gt;
-The expected change in the outcome for a unit change in the other predictor is the coefficient of that changing predictor  + the coefficient of the interaction * the value of the predictor held constant.&lt;/p&gt;
-&lt;p&gt;For example, let's the model be : &lt;span class="math"&gt;\(H_i = b_0 + (b_1*I_i) + (b_2*Y_i)+ (b_3*I_i*Y_i)\)&lt;/span&gt; with H the outcomes, I's and Y's the predictors and b's the estimated coefficients of the predictors.&lt;br /&gt;
-If I is fixed at a value, 5 and Y varies, &lt;span class="math"&gt;\(b_2 + b3*5\)&lt;/span&gt; represents the change in H per unit change in Y given that I is fixed at 5.&lt;/p&gt;
-&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "center",
-        indent = "0em",
-        linebreak = "false";
-
-    if (false) {
-        align = (screen.width &lt; 768) ? "left" : align;
-        indent = (screen.width &lt; 768) ? "0em" : indent;
-        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
-    }
-    
-    var mathjaxscript = document.createElement('script');
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
-    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
-        "    showMathMenu: true," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-&lt;/script&gt;</summary></entry></feed>
+&lt;p&gt;&lt;img alt="" src="figure/earthquakes_worldmap-1.png" /&gt;&lt;/p&gt;</summary><category term="R"></category></entry></feed>
