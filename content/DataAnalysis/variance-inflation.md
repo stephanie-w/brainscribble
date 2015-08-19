@@ -1,6 +1,6 @@
 ---
 title: R : Variance Inflation
-tags: R, stats, regression
+tags: R, stats
 date: 2015-07-18
 
 ---

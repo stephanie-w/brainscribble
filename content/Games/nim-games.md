@@ -1,6 +1,7 @@
 ---
 title: Nim Games
 date: 2015-08-15
+Image: figure/nim-graph.png
 
 [TOC]
 
@@ -15,7 +16,7 @@ We'll explore the normal play game here.
 
 For example, on a table, there is heaps of stones (or matches or coins) from various sizes. Each player takes one or several stones in a single heap. The winner is the one who can empty the table.
 
-![](figure/nim-game.jpg)
+![](figure/nim-game-ex.png)
 
 ## Game Graph
 
