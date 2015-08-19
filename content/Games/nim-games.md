@@ -2,6 +2,7 @@
 title: Nim Games
 date: 2015-08-15
 Image: figure/nim-graph.png
+Pin: True
 
 [TOC]
 
