@@ -1,6 +1,7 @@
 ---
 title: Notes on Statistical Inference : Hypothesis Testing and t-tests
 tags: R, stats
+date: 2015-07-23
 
 [TOC]
 
@@ -60,10 +61,10 @@ $\Phi(z) = P(Z \le z) = 1 - \tfrac{\alpha}{2} = 0.975$
 $\Phi(z)  = \Phi^{-1}(\Phi(z)) = \Phi^{-1}(0.975) = 1.96$
 
 
-![](http://upload.wikimedia.org/wikipedia/en/b/bf/NormalDist1.96.png)
+![](figure/NormalDist1.96.png)
 1.96 correspond to the 95% + 2.5% = 97.5% quantile of the normal distribution, according to the Z table (find 0.975 in the table and add the column header with the row header).
-![](http://cosstatistics.pbworks.com/f/1281154582/6368.png)
-![Standard deviation diagram](https://upload.wikimedia.org/wikipedia/commons/8/8c/Standard_deviation_diagram.svg)
+![](figure/6368.png)
+![Standard deviation diagram](figure/Standard_deviation_diagram.png)
 
 and
 
@@ -360,7 +361,7 @@ When df increases, the t distribution approaches the normal distribution.
 Normal distribution vs t distribution: if you're unsure which one to use, use the t distribution since it approximates to the normal distribution with large sample sizes.
 
 T table
-![](http://3.bp.blogspot.com/_5u1UHojRiJk/TEdJJc6of2I/AAAAAAAAAIE/Ai0MW5VgIhg/s1600/t-table.jpg)
+![](figure/t-table.jpg)
 
 
 
