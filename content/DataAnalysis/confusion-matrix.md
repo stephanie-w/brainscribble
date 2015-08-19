@@ -1,5 +1,6 @@
 ---
 title: Confusion Matrix
+date: 2015-08-12
 
 ---
 
@@ -11,31 +12,29 @@ It is a table with two rows and two columns that reports the number of false pos
 
 For example, for a test that screens people for a given disease, the confusion matrix will be:
 
-                             Disease
+![](figure/confusion-matrix-0.png)
 
-                     +         |        -
-             ------------------|------------------
-    Test  +  x true positives  |  z false positives
-          -  y false negatives |  t true negatives
-
-with
-x true positives (TP) : the number of sick people correctly identified as sick
-z false positives (FP) : the number of healthy people incorrectly identified as sick
-t true negatives (TN) : the number of healthy people correctly identified as healthy
-y false negatives (FN) : the number of sick people incorrectly identified as healthy
+with  
+x true positives (TP) : the number of sick people correctly identified as sick  
+z false positives (FP) : the number of healthy people incorrectly identified as sick  
+t true negatives (TN) : the number of healthy people correctly identified as healthy  
+y false negatives (FN) : the number of sick people incorrectly identified as healthy  
 
 The following probabilities are associated with the confusion matrix:  
-Sensitivity -> $Pr\left(positive test | disease\right)$  
-Specificity -> $Pr\left(negative test | no disease\right)$  
-Positive Predictive Value -> $Pr\left(disease| positive test\right)$  
-Negative Predictive Value -> $Pr\left(no disease| negative test\right)$  
-Accuracy -> $Pr\left(correct outcome\right)$ ie. Sensitivity + Specificity  
 
-Sensitivity -> $\frac{TP}{TP+FN}$  
-Specificity -> $\frac{TN}{FP+TN}$  
-Positive Predictive Value -> $\frac{TP}{TP+FP}$  
-Negative Predictive Value -> $\frac{TN}{FN+TN}$  
-Accuracy -> $\frac{TP+TN}{TP+FP+FN+TN}$  
+$Sensitivity = Pr\left(positive\ test\ |\ disease\right)$  
+$Specificity = Pr\left(negative\ test\ |\ no\ disease\right)$  
+$Positive\ Predictive\ Value = Pr\left(disease\ |\ positive\ test\right)$  
+$Negative\ Predictive\ Value =  Pr\left(no disease\ |\ negative\ test\right)$  
+$Accuracy = Pr\left(correct\ outcome\right)$
+
+which are computed the following way:
+
+$$Sensitivity = \frac{TP}{TP+FN}$$  
+$$Specificity = \frac{TN}{FP+TN}$$  
+$$Positive\ Predictive\ Value = \frac{TP}{TP+FP}$$  
+$$Negative\ Predictive\ Value = \frac{TN}{FN+TN}$$  
+$$Accuracy = \frac{TP+TN}{TP+FP+FN+TN}$$  
 
 ## Examples
 
