@@ -7,10 +7,13 @@ date: 2015-08-15
 ---
 
 <!-- BEGIN_SUMMARY -->
-Nim is a mathematical game of strategy in which two players take turns removing objects from distinct heaps. On each turn, a player must remove at least one object, and may remove any number of objects provided they all come from the same heap.
+Nim is a mathematical game of strategy in which two players take turns removing objects from distinct heaps. On each turn, a player must remove at least one object, and may remove any number of objects provided they all come from the same heap.  
+Nim can be played as a misère game, in which the player to take the last object loses or as a normal play game, in wich the person who makes the last move (i.e., who takes the last object) wins.
 
 <!-- END_SUMMARY -->
-On a table, there is heaps of stones (or matches or coins) from various sizes. Each player takes one or several stones in a single heap. The winner is the one who can empty the table.
+We'll explore the normal play game here.
+
+For example, on a table, there is heaps of stones (or matches or coins) from various sizes. Each player takes one or several stones in a single heap. The winner is the one who can empty the table.
 
 ![](figure/nim-game.jpg)
 
