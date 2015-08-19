@@ -20,6 +20,7 @@ DELETE_OUTPUT_DIRECTORY = True
 
 #template settings
 SHOW_ARTICLE_AUTHOR = False
+DISPLAY_ARTICLE_INFO_ON_INDEX = True
 
 
 # Following items are often useful when publishing
@@ -34,4 +35,4 @@ SIDEBAR_IMAGES = ["http://stephanie-w.github.io/blog/images/post_1246903_6350891
 FAVICON = "images/post_1246903_635089122565391744.jpg"
 BOOTSTRAP_NAVBAR_INVERSE = False
 
-PYGMENTS_STYLE = 'monokai'
+PYGMENTS_STYLE = 'solarized'

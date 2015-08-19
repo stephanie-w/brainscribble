@@ -28,19 +28,25 @@ TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
-DEFAULT_DATE_FORMAT = '%d/%B/%Y'
+DEFAULT_DATE_FORMAT = '%Y-%m-%d'
 DEFAULT_DATE = 'fs'
 IGNORE_FILES = ['*.Rmd']
 
 #Plugins
 PLUGIN_PATHS = ['/home/stephanie/git/pelican/pelican-plugins/']
-PLUGINS = ['code_include','extract_toc','series','related_posts','better_codeblock_line_numbering']
+PLUGINS = ['code_include','extract_toc','related_posts','better_codeblock_line_numbering']
 
 PLUGINS += ['render_math']
 
 PLUGINS += ['summary']
 SUMMARY_BEGIN_MARKER = '<!-- BEGIN_SUMMARY -->'
 SUMMARY_END_MARKER = '<!-- END_SUMMARY -->'
+
+PLUGINS += ['series']
+DISPLAY_SERIES_ON_SIDEBAR = True
+SHOW_SERIES = True
+
+PLUGINS += ['representative_image']
 
 from markdown.extensions.codehilite import CodeHiliteExtension
 from markdown.extensions.toc import TocExtension
