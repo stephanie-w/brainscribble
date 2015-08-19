@@ -1,5 +1,6 @@
 ---
 title: Kanban Practices
+date: 2015-07-02
 
 [TOC]
 
@@ -37,6 +38,7 @@ An other common one is:
 ![](figure/kanban-board-2.png)
 
 Possible workflow step could be chosen among the following steps:
+
 * Backlog
 * Ready/Selected
 * Coding/Development
@@ -105,7 +107,7 @@ This report shows the average percentage of lead time that a developer spent wor
 ### Cycle time diagram
 Stacked bar chart representing how much time a task has spent in a given state through is life-cycle, allowing the detection of tasks that are taking too long.
 
-![](figure/cycle-time-column.png)
+![](figure/cycle-time-column-2.png)
 
 ### Due Date Performance 
 
