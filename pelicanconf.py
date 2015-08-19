@@ -37,6 +37,9 @@ PLUGIN_PATHS = ['/home/stephanie/git/pelican/pelican-plugins/']
 PLUGINS = ['code_include','extract_toc','related_posts','better_codeblock_line_numbering']
 
 PLUGINS += ['render_math']
+MATH_JAX = {
+   'process_summary': True,
+}
 
 PLUGINS += ['summary']
 SUMMARY_BEGIN_MARKER = '<!-- BEGIN_SUMMARY -->'
@@ -47,6 +50,12 @@ DISPLAY_SERIES_ON_SIDEBAR = True
 SHOW_SERIES = True
 
 PLUGINS += ['representative_image']
+
+PLUGINS += ['clean_summary']
+CLEAN_SUMMARY_MAXIMUM = 0
+CLEAN_SUMMARY_MINIMUM_ONE = False
+
+PLUGINS += ['pin_to_top']
 
 from markdown.extensions.codehilite import CodeHiliteExtension
 from markdown.extensions.toc import TocExtension
