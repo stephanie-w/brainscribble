@@ -1,6 +1,7 @@
 ---
 title: Hadoop: Word Count Code explained
 tags: hadoop
+date: 2015-06-08
 
 
 ---

@@ -1,14 +1,17 @@
 ---
 title: R: Analysis of weather events impact on population health and economy.
 tags: R
+date: 2015-06-15
 
 ---
 
 
 ##Synopsis
 
+<!-- BEGIN_SUMMARY -->
 This analysis involves exploring the U.S. National Oceanic and Atmospheric Administration's (NOAA) storm database. 
 
+<!-- END_SUMMARY -->
 This database tracks characteristics of major storms and weather events in the United States, including when and where they occur, as well as estimates of any fatalities, injuries, and property damage.
 
 This analysis focuses on fatalities, injuries, property and crop damages to answer to the 2 following questions : 

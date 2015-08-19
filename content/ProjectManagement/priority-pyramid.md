@@ -1,6 +1,7 @@
 ---
 title: The priority pyramid
 summary: The priority pyramid is a visualized backlog with a prioritization process.
+date: 2015-06-13
 
 ---
 

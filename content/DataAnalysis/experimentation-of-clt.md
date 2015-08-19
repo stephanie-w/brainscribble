@@ -2,8 +2,12 @@
 title: R: Experimentation of the Cental Limit Theorem
 author: "Stephanie W"
 tags: R, stats
+date: 2015-06-11
+summary: Experimenting the Cental Limit Theorem with R
 
 ---
+<!-- BEGIN_SUMMARY -->
+<!-- END_SUMMARY -->
 
 The CLT Theorem:   
 The distribution of sample statistics (e.g. mean) is approximatively normal, regardless of the underlying distribution, with mean = $\mu$ and variance = $\sigma^2$

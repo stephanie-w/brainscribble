@@ -1,13 +1,14 @@
 ---
 title: R: Earthquakes from the past 30 days
 tags: R
+date: 2015-06-23
+Image: figure/earthquakes_worldmap-1.png
+summary: Plotting the earthquakes of the last 30 months with R and the earthquake.usgs.gov feed.
 
 ---
 
-<!-- BEGIN_SUMMARY -->
 Earthquakes of the last 30 months from [the earthquake.usgs.gov feed](http://earthquake.usgs.gov/earthquakes/feed/v1.0/csv.php feed).
 
-<!-- END_SUMMARY -->
 Below are the fields included in the spreadsheet output:
 <pre>
     time

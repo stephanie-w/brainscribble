@@ -1,6 +1,8 @@
 ---
 title: R: Multivariable Regression
 tags: R
+date: 2015-07-12
+summary: Exploring multivariable regression with the hunger dataset
 
 ---
 <!-- BEGIN_SUMMARY -->

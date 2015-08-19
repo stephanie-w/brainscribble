@@ -1,5 +1,6 @@
 ---
 title: User stories
+date: 2015-06-02
 
 ---
 
@@ -22,15 +23,15 @@ The epic is usually split into smaller user stories independent from one another
 ### Classification
 They can be estimated/prioritized with:
 
-    * Sequence numbers (simple, Fibonacci)
-    * T-shirt sizes (e.g. S, M, L, XL)
-    * Traffic lights (green, yellow, red)
-    * Starbucks drink sizes (demi, short, tall, grande, venti, trenta)
-    * A Moscow categorization : MoSCoW stands for: 
-       * Must have (or Minimum Usable Subset)
-       * Should have (not critical but important)
-       * Could have (wanted or desirable but less important)
-       * Won’t have this time (explicitly excluded from scope for the planned duration but Would like in future)
+* Sequence numbers (simple, Fibonacci)
+* T-shirt sizes (e.g. S, M, L, XL)
+* Traffic lights (green, yellow, red)
+* Starbucks drink sizes (demi, short, tall, grande, venti, trenta)
+* A Moscow categorization : MoSCoW stands for:
+    * Must have (or Minimum Usable Subset)
+    * Should have (not critical but important)
+    * Could have (wanted or desirable but less important)
+    * Won’t have this time (explicitly excluded from scope for the planned duration but Would like in future)
 
 ### Context Evaluation
 

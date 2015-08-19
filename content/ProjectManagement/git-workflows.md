@@ -1,5 +1,6 @@
 ---
 title: Git Workflows vs "All to Master"
+date: 2015-06-20
 
 ---
 
@@ -62,7 +63,7 @@ All to master cons:
 
 See [Continuous Development](continuous-development.html) for more on continuous development. 
 
-Sources : 
-https://bocoup.com/weblog/git-workflows-for-successful-deployment/  
-http://blogs.wandisco.com/2013/07/24/git-workflows-and-continuous-delivery-using-multisite-replication-to-facilitate-a-global-mainline/  
-https://www.atlassian.com/git/tutorials/comparing-workflows
+Sources :   
+[](https://bocoup.com/weblog/git-workflows-for-successful-deployment/)  
+[](http://blogs.wandisco.com/2013/07/24/git-workflows-and-continuous-delivery-using-multisite-replication-to-facilitate-a-global-mainline/)  
+[](https://www.atlassian.com/git/tutorials/comparing-workflows)  
