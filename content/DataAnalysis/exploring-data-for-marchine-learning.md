@@ -1,6 +1,9 @@
 ---
 title: R : Exploring Data for Machine Learning Modeling
 tags: R
+date: 2015-08-09
+series: Machine Learning Modeling
+Image: figure/exploring-data-for-marchine-learning-4-1.png
 
 [TOC]
 
@@ -52,13 +55,13 @@ summary(Wage)
 ##                Max.   :5.763   Max.   :318.34  
 ## 
 ```
-Building training and testing sets (50% of the dataset each):
+Building training and testing sets (50% of the Wage dataset each):
 
 ```r
 library(caret)
 intrain <- createDataPartition(y = Wage$wage, p = 0.5, list = F)
-training = Wage[intrain, ]
-testing = Wage[-intrain, ]
+training = Wage[intrain,]
+testing = Wage[-intrain,]
 ```
 
 The exploration is always done on the training set.
@@ -73,7 +76,6 @@ featurePlot(x = training[, c("age", "education", "jobclass")], y = training$wage
 
 <div class="rimage center"><img src="figure/exploring-data-for-marchine-learning-3-1.png" /></div>
 
-The graph shows some patterns: a trend in wages comparing to ages and two distinct groups of observations (below and above 250 dollars raw wage).
 
 Plotting wage versus age:
 
@@ -84,7 +86,7 @@ qplot(age, wage, data = training)
 
 <div class="rimage center"><img src="figure/exploring-data-for-marchine-learning-4-2.png" /></div>
 
-
+The graph shows some patterns: a trend in wages comparing to ages and a group of outlined observations (above 250 dollars raw wage).
 
 Plotting wage versus age, grouping by jobclass:
 
@@ -94,7 +96,8 @@ library(ggplot2)
 
 <div class="rimage center"><img src="figure/exploring-data-for-marchine-learning-4-1.png" /></div>
 
-The jobclass difference could explain the two distincts groups.
+The jobclass difference could explain the two distinct groups.  
+The jobclass variable might be able to predict at least a part of the variability that appears in the top of the plot.
 
 Plotting wage versus age, grouping by education, adding regression smoothers:
 
@@ -104,6 +107,8 @@ qq + geom_smooth(method = "lm", formula = y ~ x)
 ```
 
 <div class="rimage center"><img src="figure/exploring-data-for-marchine-learning-5-1.png" /></div>
+
+The "Advanced Degree" education seems to also explained a lot of the variation at the top.
 
 ## Data Repartition
 
@@ -121,7 +126,7 @@ table(cutWage)
 ##           506           519           476
 ```
 
-Looling at the repartition, we can see that there are more industrial jobs that there are information jobs with lower wage. Then the trend reverses itself.
+Looking at the repartition, we can see that there are more industrial jobs that there are information jobs with lower wage. Then the trend reverses itself.
 
 Plotting a boxplot of the wage groups created above:
 
@@ -165,7 +170,7 @@ prop.table(t1, 1)
  
 Density plot can be a much more effective way to view the distribution of a variable than boxplots.
 
-Ploting a density plot of the values of wages, grouping by education:
+Plotting a density plot of the values of wages, grouping by education:
 
 ```r
 qplot(wage, color = education, data = training, geom = "density")
@@ -174,3 +179,6 @@ qplot(wage, color = education, data = training, geom = "density")
 <div class="rimage center"><img src="figure/exploring-data-for-marchine-learning-10-1.png" /></div>
 
 The "<HS grad" workers tend to have more values in the lower part of the range of wage. There is an outgroup of Advanced Degree and College Grad workers with higher wage.
+
+
+In the [next post](linear-model-diagnosis-for-machine-learning.html), we'll fit a linear model with wage as outcome and age, jobclass and education as predictors and perform some diagnosis analysis.
