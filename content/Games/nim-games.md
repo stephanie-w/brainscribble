@@ -1,6 +1,6 @@
 ---
 title: Nim Games
-summary: Nim is a mathematical game of strategy in which two players take turns removing objects from distinct heaps. On each turn, a player must remove at least one object, and may remove any number of objects provided they all come from the same heap.
+date: 2015-08-15
 
 [TOC]
 
@@ -10,7 +10,9 @@ summary: Nim is a mathematical game of strategy in which two players take turns 
 Nim is a mathematical game of strategy in which two players take turns removing objects from distinct heaps. On each turn, a player must remove at least one object, and may remove any number of objects provided they all come from the same heap.
 
 <!-- END_SUMMARY -->
-On a table, there is heaps of stones (or matches) from various sizes. Each player takes one or several stones in a single heap. The winner is the one who can empty the table.
+On a table, there is heaps of stones (or matches or coins) from various sizes. Each player takes one or several stones in a single heap. The winner is the one who can empty the table.
+
+![](figure/nim-game.jpg)
 
 ## Game Graph
 
@@ -29,7 +31,7 @@ The nodes in red compose the graph core. The graph core has the following proper
 A game state or position (or option) can be inside or outside the core. The loosing position(s) is inside the core (from first property).  
 
 The first position can be inside or outside the core.  
-Let's say it is outside, there is a winning strategy for the first player: step in the core (possible, cause of the first property), the second player will step out from the core (from the second property). Then the first player will step in the core once again, etc. If the first position was inside the core, then the second player could adopt the wining strategy of step in, step out the core alternalively.
+Let's say it is outside, there is a winning strategy for the first player: step in the core (possible, cause of the first property), the second player will step out from the core (from the second property). Then the first player will step in the core once again, etc. If the first position was inside the core, then the second player could adopt the wining strategy of step in, step out the core alternatively.
 
 In the context of a finding a winning strategy, properties above can be rewritten as follow:
 
