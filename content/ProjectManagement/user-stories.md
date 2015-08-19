@@ -1,6 +1,7 @@
 ---
 title: User stories
 date: 2015-06-02
+Image: figure/story-map.png
 
 ---
 
@@ -18,9 +19,16 @@ User stories can be written on cards or sticky notes, stores on walls or tables 
 They can be written at varying levels of detail from a high-level strategic viewpoint (typically at Feasibility) through to a more detailed, implementable level (typically during Exploration and Engineering). The large user stories are generally known as epics.
 The epic is usually split into smaller user stories independent from one another so the team can worked on.
 
-## Priorization Techniques
 
-### Classification
+## Persona and user needs
+
+Since the user story involves a type of user, even before writing the first user story, the product team had to work on a profile for typical product users. Such a profile looks like a short biography ; it explains the motivations guiding the user's actions and it's called a Persona. 
+During the same product definition phase, the product team listed the needs of each of the personas. They selected the needs to be addressed by the product, and left the other needs aside.
+
+![Personas](figure/from-idea-to-product-14-638.jpg)
+
+## Priorization
+
 They can be estimated/prioritized with:
 
 * Sequence numbers (simple, Fibonacci)
@@ -33,38 +41,41 @@ They can be estimated/prioritized with:
     * Could have (wanted or desirable but less important)
     * Won’t have this time (explicitly excluded from scope for the planned duration but Would like in future)
 
-### Context Evaluation
 
-*Story Maps*
+## Using user stories to build a roadmap
 
-User story mapping is a technique allowing to see the big picture of the baglog and helping making decisisons about grooming ans prioritizing the backlog, managing scopes.  
+### Story Maps
+
+User story mapping is a technique allowing to see the big picture of the backlog and helping making decisions about grooming ans prioritizing the backlog, managing scopes.  
 See [How to create a User Story Map](http://winnipegagilist.blogspot.fr/2012/03/how-to-create-user-story-map.html)
 
-![](figure/prioritization-techniques-for-agile-teams-25-638.jpg)
+![](figure/story-map.png)
 
-![](figure/UserStoryMapDefinitions.png)
-The high level user stories (blue post-its) called "User Tasks" which forms the "walking skeleton" of the map.  
-The grouping of these higher levels are the "User activities" (ornage post-its).  
-The user stories (yellow post-its) are organized under each User Task in order of highest to lowest priority for that User Task.  
+The high level user stories (blue post-its) are the epics. They can be split into smaller user stories which forms the "walking skeleton" of the map.  
+The user stories (pink post-its) are organized under each epic in order of highest to lowest priority for that feature.  
 The chronological order of how users will typically use the application goes left to right (Time).  
 
-*Product Tree*
+### Product Tree
 
-![](figure/prioritization-techniques-for-agile-teams-26-638.jpg)
+The product tree is a game board representing a tree organizing features to help teams to collaboratively develop roadmaps and strategic plans with customers.  
+The product tree is build during a "Prune the Product Tree" game where players draw limbs and locate post-its (user stories) on them.    
+Leaves represents user stories.  
+The roots represents the requirements (dev team, infra, etc.).  
+Thick limbs represents major areas of functionality (or epics).Thin limbs can be drawn from thick limbs as guides to be more specificic (themes).
 
-## Persona and user needs
+The goal of the product tree is to build a well balanced tree by "pruning the tree" of unnecessary limbs or at the opposite adding new (missing) leaves.
 
-Even before writing the first user story, the product team had to work on a profile for typical product users. Such a profile looks like a short biography ; it explains the motivations guiding the user's actions and it's called a Persona. 
-During the same product definition phase, the product team listed the needs of each of the personas. They selected the needs to be addressed by the product, and left the other needs aside.
+### Other techniques of visualizations
 
-![Personas](figure/from-idea-to-product-14-638.jpg)
-
-
-
+[Visualizing a Large Product Backlog With a Treemap](https://www.mountaingoatsoftware.com/blog/visualizing-a-large-product-backlog-with-a-treemap)  
+[Stuck in the Details? Mind Map User Tasks](http://www.uxbooth.com/articles/stuck-in-the-details-mind-map-user-tasks/)
 <!--
 Sources :
 http://www.agilemodeling.com/artifacts/userStory.htm
 http://winnipegagilist.blogspot.fr/2012/03/how-to-create-user-story-map.html
 http://fr.slideshare.net/mikecohn/prioritizing-your-product-backlog-22870228?related=1
 http://www.mountaingoatsoftware.com/blog/visualizing-a-large-product-backlog-with-a-treemap
+http://www.innovationgames.com/prune-the-product-tree/
+http://www.scrumdesk.com/lets-grow-your-tree-of-requirements/
+http://jpattonassociates.com/the-new-backlog/
 -->
