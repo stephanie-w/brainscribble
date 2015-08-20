@@ -7,10 +7,11 @@ summary: Plotting the earthquakes of the last 30 months with R and the earthquak
 
 ---
 
-Earthquakes of the last 30 months from [the earthquake.usgs.gov feed](http://earthquake.usgs.gov/earthquakes/feed/v1.0/csv.php feed).
+Earthquakes of the last 30 months from the earthquake.usgs.gov feed : http://earthquake.usgs.gov/earthquakes/feed/v1.0/csv.php feed. 
+
 
 Below are the fields included in the spreadsheet output:
-<pre>
+
     time
     latitude
     longitude
@@ -25,66 +26,89 @@ Below are the fields included in the spreadsheet output:
     id
     updated
     place
-</pre>
 
-Plotting earthquakes frequency and location:
+Loading libraries and downloading the feed:
 
 ```r
 library(reshape2)
 library(ggplot2)
 library(ggmap)
 eq <- read.csv("http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv", as.is = T)
-head(eq[c("time", "longitude", "latitude", "mag")])
+head(eq[c("time", "longitude", "latitude", "place", "mag")])
 ```
 
 ```
-##                       time longitude latitude  mag
-## 1 2015-07-03T08:52:29.240Z -116.7768 33.27050 1.69
-## 2 2015-07-03T08:50:41.410Z -116.7822 33.27117 2.44
-## 3 2015-07-03T08:48:16.750Z -121.6347 37.24750 1.46
-## 4 2015-07-03T08:38:33.220Z  127.2178  1.20780 4.70
-## 5 2015-07-03T08:30:23.310Z -122.8367 38.80783 1.49
-## 6 2015-07-03T08:29:39.000Z -151.4705 62.43620 1.40
+##                       time longitude latitude
+## 1 2015-08-20T22:41:58.790Z -117.1827 34.00583
+## 2 2015-08-20T22:09:37.180Z -121.5903 36.76000
+## 3 2015-08-20T21:38:51.403Z -119.6169 41.87000
+## 4 2015-08-20T21:27:08.570Z  -98.1158 36.69730
+## 5 2015-08-20T21:24:43.900Z  -64.5836 19.71500
+## 6 2015-08-20T21:17:33.170Z -116.4987 33.49567
+##                                          place  mag
+## 1                6km S of Redlands, California 0.92
+## 2             7km ESE of Prunedale, California 1.43
+## 3                 69km ESE of Lakeview, Oregon 2.48
+## 4                  21km NE of Helena, Oklahoma 2.70
+## 5 143km N of Road Town, British Virgin Islands 3.40
+## 6                 18km ESE of Anza, California 0.58
 ```
+
+Preprocessing the data:
 
 ```r
 eq$area <- factor(sub("^[^,]+, ", "", eq$place))
 eq$date <- as.Date(strtrim(eq$time, 19), format = "%Y-%m-%dT%H:%M:%S")
-eqFreq1 <- table(eq$date, eq$mag, eq$area)
+```
+
+Building a new dataset with magnitude frequencies by day:
+
+```r
+eqFreq1 <- with(eq, table(date, mag))
 eqFreq2 <- melt(eqFreq1)
-names(eqFreq2) <- c("date", "M", "area", "freq")
-head(subset(eqFreq2, freq > 0 & M > 0))
+names(eqFreq2) <- c("date", "magnitude", "freq")
+head(subset(eqFreq2, freq > 0 & magnitude > 0))
 ```
 
 ```
-##             date   M        area freq
-## 10831 2015-06-14 4.1 Afghanistan    3
-## 10838 2015-06-21 4.1 Afghanistan    1
-## 10844 2015-06-27 4.1 Afghanistan    1
-## 10870 2015-06-22 4.2 Afghanistan    1
-## 10887 2015-06-08 4.3 Afghanistan    1
-## 10894 2015-06-15 4.3 Afghanistan    2
+##            date magnitude freq
+## 1149 2015-07-22      0.01    1
+## 1150 2015-07-23      0.01    1
+## 1155 2015-07-28      0.01    1
+## 1156 2015-07-29      0.01    1
+## 1168 2015-08-10      0.01    1
+## 1173 2015-08-15      0.01    1
 ```
 
-
+Plotting a stacked bars graph of earthquakes magnitude frequencies by day:
 
 ```r
-eqFreq2$M <- factor(round(eqFreq2$M))
-ggplot(eqFreq2, aes(date, weight = freq, fill = M)) + geom_bar(binwidth = 60 * 60 * 24) + labs(x = "Date", 
-    y = "Frequency", title = "Earthquakes Frequency from the past 30 days") + theme(axis.text.x = element_text(angle = 90, 
-    hjust = 1))
+eqFreq2$magnitude <- factor(round(eqFreq2$magnitude))
+ggplot(eqFreq2, aes(date, weight = freq, fill = magnitude)) +
+        geom_bar(binwidth = 60 * 60 * 24) +
+        labs(x = "Date", y = "Frequency", 
+             title = "Earthquakes Frequency from the past 30 days") +
+        theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+        scale_fill_brewer(palette="BuPu")
 ```
 
-![](figure/earthquakes_frequency-1.png)
+<div class="rimage center"><img src="figure/earthquakes_frequency-1.png" title="plot of chunk earthquakes_frequency" alt="plot of chunk earthquakes_frequency" class="plot" /></div>
+
+Using the original dataset to plot a map with the locations of the 100 biggest earthquakes:
 
 ```r
+BiggestMag <- tail(sort(eq$mag), n=100)
+#Plotting
 world_map <- map_data("world")
-p <- ggplot() + coord_fixed() + xlab("") + ylab("")
-base_world <- p + geom_polygon(data = world_map, aes(x = long, y = lat, group = group), colour = "light green", 
-    fill = "light green")
-
-base_world + geom_point(aes(x = longitude, y = latitude, size = mag), data = eq, colour = "Deep Pink", 
-    fill = "Pink", pch = 21, alpha = I(0.7))
+ggplot() + coord_fixed() + xlab("") + ylab("") +
+        geom_polygon(data = world_map, 
+                     aes(x = long, y = lat, group = group), 
+                     colour = "light green", fill = "light green") +
+        geom_point(aes(x = longitude, y = latitude, size = mag),
+                   data = eq[eq$mag %in% BiggestMag ,], 
+                   colour = "Deep Pink", fill = "Pink", 
+                   pch = 21, alpha = I(0.7)) +
+        labs(title="Biggest earthquakes from the past 30 days")
 ```
 
-![](figure/earthquakes_worldmap-1.png)
+<div class="rimage center"><img src="figure/earthquakes_worldmap-1.png" title="plot of chunk earthquakes_worldmap" alt="plot of chunk earthquakes_worldmap" class="plot" /></div>
