@@ -11,6 +11,9 @@ sys.path.append(os.curdir)
 from pelicanconf import *
 
 SITEURL = 'http://stephanie-w.github.io/blog'
+
+OUTPUT_PATH = 'output_prod/'
+
 RELATIVE_URLS = False
 
 FEED_ALL_ATOM = 'feeds/all.atom.xml'
@@ -31,8 +34,8 @@ DISPLAY_ARTICLE_INFO_ON_INDEX = True
 PROFILE_IMAGE_URL = "http://stephanie-w.github.io/blog/images/post_1246903_635089122565391744.jpg"
 BOOTSTRAP_THEME = "lumen"
 #SITELOGO = "images/post_1246903_635089122565391744.jpg"
-SIDEBAR_IMAGES = ["http://stephanie-w.github.io/blog/images/post_1246903_635089122565391744.jpg"]
-FAVICON = "images/post_1246903_635089122565391744.jpg"
+SIDEBAR_IMAGES = ["http://stephanie-w.github.io/blog/images/brain-scribble.jpg"]
+FAVICON = "images/brain-scribble.jpg"
 BOOTSTRAP_NAVBAR_INVERSE = False
 
 PYGMENTS_STYLE = 'solarized'
