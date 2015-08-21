@@ -4,10 +4,10 @@
 
 <section class="well well-sm">
     <ul class="list-group list-group-flush">
-        <a href="{{ SITEURL }}/" class="navbar-brand">
-        {% if not HIDE_SITENAME %}{{ SITENAME }}{% endif %}
+        <a href="{{ SITEURL }}/" class="home-url">
+            {% if not HIDE_SITENAME %}{{ SITENAME }}{% endif %}
+            {% include 'includes/sidebar-images.html' %}
         </a>
-        {% include 'includes/sidebar-images.html' %}
         {% if article and article.toc %}
             <li class="list-group-item"><h4><i class="fa fa-crosshairs"></i><span class="icon-label">Table of Contents</span></h4>
             {{ article.toc }}
