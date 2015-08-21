@@ -8,20 +8,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <link href="http://stephanie-w.github.io/blog/images/post_1246903_635089122565391744.jpg" rel="icon">
+    <link href="http://stephanie-w.github.io/blog/images/brain-scribble.jpg" rel="icon">
 
 <link rel="canonical" href="http://stephanie-w.github.io/blog/exploring-data-for-marchine-learning.html">
 
         <meta name="author" content="Stephanie W" />
         <meta name="keywords" content="R" />
-        <meta name="description" content="These are my notes on the Practical Machine Learning course (Week2: Plotting Predictors - Tutorial)." />
+        <meta name="description" content="These are my notes on the Practical Machine Learning course (Week2: Plotting Predictors - Tutorial). When exploring data for Machine Learning, we&#39;re looking for: imbalance outcomes/predictors outliners groups of outcome points not explained by any of the predictors skewed variables (that needs to be transformed) We&#39;ll use the ..." />
 
         <meta property="og:site_name" content="Brain Scribble" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="R : Exploring Data for Machine Learning Modeling"/>
         <meta property="og:url" content="http://stephanie-w.github.io/blog/exploring-data-for-marchine-learning.html"/>
-        <meta property="og:description" content="These are my notes on the Practical Machine Learning course (Week2: Plotting Predictors - Tutorial)."/>
-        <meta property="article:published_time" content="2015-08-16" />
+        <meta property="og:description" content="These are my notes on the Practical Machine Learning course (Week2: Plotting Predictors - Tutorial). When exploring data for Machine Learning, we&#39;re looking for: imbalance outcomes/predictors outliners groups of outcome points not explained by any of the predictors skewed variables (that needs to be transformed) We&#39;ll use the ..."/>
+        <meta property="article:published_time" content="2015-08-09" />
             <meta property="article:section" content="DataAnalysis" />
             <meta property="article:tag" content="R" />
             <meta property="article:author" content="Stephanie W" />
@@ -31,7 +31,7 @@
         <link rel="stylesheet" href="http://stephanie-w.github.io/blog/theme/css/bootstrap.lumen.min.css" type="text/css"/>
     <link href="http://stephanie-w.github.io/blog/theme/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="http://stephanie-w.github.io/blog/theme/css/pygments/monokai.css" rel="stylesheet">
+    <link href="http://stephanie-w.github.io/blog/theme/css/pygments/solarized.css" rel="stylesheet">
     <link rel="stylesheet" href="http://stephanie-w.github.io/blog/theme/css/style.css" type="text/css"/>
 
         <link href="http://stephanie-w.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
@@ -60,13 +60,13 @@ Brain Scribble            </a>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                         <li class="active">
-                            <a href="http://stephanie-w.github.io/blog/category/dataanalysis.html">Dataanalysis</a>
+                            <a href="http://stephanie-w.github.io/blog/category/dataanalysis.html">DataAnalysis</a>
                         </li>
                         <li >
                             <a href="http://stephanie-w.github.io/blog/category/games.html">Games</a>
                         </li>
                         <li >
-                            <a href="http://stephanie-w.github.io/blog/category/projectmanagement.html">Projectmanagement</a>
+                            <a href="http://stephanie-w.github.io/blog/category/projectmanagement.html">ProjectManagement</a>
                         </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -98,9 +98,11 @@ Brain Scribble            </a>
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2015-08-16T01:02:29.157339+02:00"> 16/August/2015</time>
+        <i class="fa fa-calendar"></i><time datetime="2015-08-09T00:00:00+02:00"> 2015-08-09</time>
     </span>
 
+            <span class="label label-default">Series</span>
+            Part 1 of Machine Learning Modeling
 
 
 
@@ -112,9 +114,9 @@ Brain Scribble            </a>
                 </div>
                 
 <hr/>
-
+<!-- BEGIN_SUMMARY -->
 <p>These are my notes on the Practical Machine Learning course (Week2: Plotting Predictors - Tutorial).</p>
-
+<!-- END_SUMMARY -->
 <p>When exploring data for Machine Learning, we're looking for:</p>
 <ul>
 <li>imbalance outcomes/predictors</li>
@@ -153,11 +155,11 @@ This dataset reports wage and other data (age, education, jobclass, etc.) for a 
 <span class="code-line">##                Max.   :5.763   Max.   :318.34  </span>
 <span class="code-line">## </span>
 </pre></div>
-<p>Building training and testing sets (50% of the dataset each):</p>
+<p>Building training and testing sets (50% of the Wage dataset each):</p>
 <div class="highlight"><pre><span class="code-line"><span class="kn">library</span><span class="p">(</span>caret<span class="p">)</span></span>
 <span class="code-line">intrain <span class="o">&lt;-</span> createDataPartition<span class="p">(</span>y <span class="o">=</span> Wage<span class="o">$</span>wage<span class="p">,</span> p <span class="o">=</span> <span class="m">0.5</span><span class="p">,</span> <span class="kt">list</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span></span>
-<span class="code-line">training <span class="o">=</span> Wage<span class="p">[</span>intrain<span class="p">,</span> <span class="p">]</span></span>
-<span class="code-line">testing <span class="o">=</span> Wage<span class="p">[</span><span class="o">-</span>intrain<span class="p">,</span> <span class="p">]</span></span>
+<span class="code-line">training <span class="o">=</span> Wage<span class="p">[</span>intrain<span class="p">,]</span></span>
+<span class="code-line">testing <span class="o">=</span> Wage<span class="p">[</span><span class="o">-</span>intrain<span class="p">,]</span></span>
 </pre></div>
 <p>The exploration is always done on the training set.</p>
 <h2 id="plotting-predictors-against-outcome">Plotting predictors against outcome</h2>
@@ -165,22 +167,24 @@ This dataset reports wage and other data (age, education, jobclass, etc.) for a 
 <div class="highlight"><pre><span class="code-line">featurePlot<span class="p">(</span>x <span class="o">=</span> training<span class="p">[,</span> <span class="kt">c</span><span class="p">(</span><span class="s">"age"</span><span class="p">,</span> <span class="s">"education"</span><span class="p">,</span> <span class="s">"jobclass"</span><span class="p">)],</span> y <span class="o">=</span> training<span class="o">$</span>wage<span class="p">,</span> plot <span class="o">=</span> <span class="s">"pairs"</span><span class="p">)</span></span>
 </pre></div>
 <div class="rimage center"><img src="figure/exploring-data-for-marchine-learning-3-1.png"/></div>
-<p>The graph shows some patterns: a trend in wages comparing to ages and two distinct groups of observations (below and above 250 dollars raw wage).</p>
 <p>Plotting wage versus age:</p>
 <div class="highlight"><pre><span class="code-line"><span class="kn">library</span><span class="p">(</span>ggplot2<span class="p">)</span></span>
 <span class="code-line">qplot<span class="p">(</span>age<span class="p">,</span> wage<span class="p">,</span> data <span class="o">=</span> training<span class="p">)</span></span>
 </pre></div>
 <div class="rimage center"><img src="figure/exploring-data-for-marchine-learning-4-2.png"/></div>
+<p>The graph shows some patterns: a trend in wages comparing to ages and a group of outlined observations (above 250 dollars raw wage).</p>
 <p>Plotting wage versus age, grouping by jobclass:</p>
 <div class="highlight"><pre><span class="code-line"><span class="kn">library</span><span class="p">(</span>ggplot2<span class="p">)</span></span>
 </pre></div>
 <div class="rimage center"><img src="figure/exploring-data-for-marchine-learning-4-1.png"/></div>
-<p>The jobclass difference could explain the two distincts groups.</p>
+<p>The jobclass difference could explain the two distinct groups.<br/>
+The jobclass variable might be able to predict at least a part of the variability that appears in the top of the plot.</p>
 <p>Plotting wage versus age, grouping by education, adding regression smoothers:</p>
 <div class="highlight"><pre><span class="code-line">qq <span class="o">&lt;-</span> qplot<span class="p">(</span>age<span class="p">,</span> wage<span class="p">,</span> color <span class="o">=</span> education<span class="p">,</span> data <span class="o">=</span> training<span class="p">)</span></span>
 <span class="code-line">qq <span class="o">+</span> geom_smooth<span class="p">(</span>method <span class="o">=</span> <span class="s">"lm"</span><span class="p">,</span> formula <span class="o">=</span> y <span class="o">~</span> x<span class="p">)</span></span>
 </pre></div>
 <div class="rimage center"><img src="figure/exploring-data-for-marchine-learning-5-1.png"/></div>
+<p>The "Advanced Degree" education seems to also explained a lot of the variation at the top.</p>
 <h2 id="data-repartition">Data Repartition</h2>
 <p>Breaking up the wage variable into three groups (factors actually) with the R cut2 function (from the Hmisc package):</p>
 <div class="highlight"><pre><span class="code-line"><span class="kn">library</span><span class="p">(</span>Hmisc<span class="p">)</span></span>
@@ -191,7 +195,7 @@ This dataset reports wage and other data (age, education, jobclass, etc.) for a 
 <span class="code-line">## [ 20.1, 91.7) [ 91.7,118.9) [118.9,314.3] </span>
 <span class="code-line">##           506           519           476</span>
 </pre></div>
-<p>Looling at the repartition, we can see that there are more industrial jobs that there are information jobs with lower wage. Then the trend reverses itself.</p>
+<p>Looking at the repartition, we can see that there are more industrial jobs that there are information jobs with lower wage. Then the trend reverses itself.</p>
 <p>Plotting a boxplot of the wage groups created above:</p>
 <div class="highlight"><pre><span class="code-line">qplot<span class="p">(</span>cutWage<span class="p">,</span> age<span class="p">,</span> data <span class="o">=</span> training<span class="p">,</span> fill <span class="o">=</span> cutWage<span class="p">,</span> geom <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">"boxplot"</span><span class="p">))</span></span>
 </pre></div>
@@ -218,21 +222,29 @@ This dataset reports wage and other data (age, education, jobclass, etc.) for a 
 <p>62% of the low wage job correponds to industrial jobs, 38% to information jobs.</p>
 <h2 id="density-plots">Density Plots</h2>
 <p>Density plot can be a much more effective way to view the distribution of a variable than boxplots.</p>
-<p>Ploting a density plot of the values of wages, grouping by education:</p>
+<p>Plotting a density plot of the values of wages, grouping by education:</p>
 <div class="highlight"><pre><span class="code-line">qplot<span class="p">(</span>wage<span class="p">,</span> color <span class="o">=</span> education<span class="p">,</span> data <span class="o">=</span> training<span class="p">,</span> geom <span class="o">=</span> <span class="s">"density"</span><span class="p">)</span></span>
 </pre></div>
 <div class="rimage center"><img src="figure/exploring-data-for-marchine-learning-10-1.png"/></div>
 <p>The "&lt;HS grad" workers tend to have more values in the lower part of the range of wage. There is an outgroup of Advanced Degree and College Grad workers with higher wage.</p>
+<p>In the <a href="linear-model-diagnosis-for-machine-learning.html">next post</a>, we'll fit a linear model with wage as outcome and age, jobclass and education as predictors and perform some diagnosis analysis.</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
+    <h4>Part 1 of the Machine Learning Modeling series</h4>
+       <h5>Next articles</h5>
+       <ul>
+           <li><a href="http://stephanie-w.github.io/blog/linear-model-diagnosis-for-machine-learning.html">R : Linear Model Diagnosis for Machine Learning Modeling</a></li>
+       </ul>
+</section>
+<section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="http://stephanie-w.github.io/blog/statinf2.html">Notes on Statistical Inference : Hypothesis Testing and t-tests</a></li>
+        <li><a href="http://stephanie-w.github.io/blog/weather_event_impact.html">R: Analysis of weather events impact on population health and economy.</a></li>
         <li><a href="http://stephanie-w.github.io/blog/multivariable-regression.html">R: Multivariable Regression</a></li>
-        <li><a href="http://stephanie-w.github.io/blog/variance-inflation.html">R : Variance Inflation</a></li>
-        <li><a href="http://stephanie-w.github.io/blog/last_earthquakes.html">R: Earthquakes from the past 30 days</a></li>
         <li><a href="http://stephanie-w.github.io/blog/experimentation-of-clt.html">R: Experimentation of the Cental Limit Theorem</a></li>
+        <li><a href="http://stephanie-w.github.io/blog/hypothesis-testing-and-t-tests.html">Notes on Statistical Inference : Hypothesis Testing and t-tests</a></li>
+        <li><a href="http://stephanie-w.github.io/blog/linear-model-diagnosis-for-machine-learning.html">R : Linear Model Diagnosis for Machine Learning Modeling</a></li>
     </ul>
 </section>
         </article>
@@ -246,7 +258,7 @@ This dataset reports wage and other data (age, education, jobclass, etc.) for a 
     <ul class="list-group list-group-flush">
     <li class="list-group-item">
         <ul class="list-group" id="links">
-            <img width="100%" class="img-thumbnail" src="http://stephanie-w.github.io/blog/images/post_1246903_635089122565391744.jpg"/>
+            <img class="img-thumbnail" src="http://stephanie-w.github.io/blog/images/brain-scribble.jpg"/>
         </ul>
     </li>
             <li class="list-group-item"><h4><i class="fa fa-crosshairs"></i><span class="icon-label">Table of Contents</span></h4>
@@ -268,7 +280,16 @@ This dataset reports wage and other data (age, education, jobclass, etc.) for a 
 
 
 
-
+                    <li class="list-group-item"><h4><i class="fa fa-tags fa-list-ul"></i><span class="icon-label">Series</span></h4>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                            </li>
+                            <li class="list-group-item">
+                                <h5>Next article</h5>
+                                <a href="http://stephanie-w.github.io/blog/linear-model-diagnosis-for-machine-learning.html">R : Linear Model Diagnosis for Machine Learning Modeling</a>
+                            </li>
+                        </ul>
+                    </li>
     </ul>
 </section>
             </aside>

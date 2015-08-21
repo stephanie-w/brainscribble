@@ -26,6 +26,26 @@ h6,.h6{
     font-weight: bold;
 }
 
+/* Summaries */
+
+.summary h2,.h2,h3,.h3,h4,.h4{
+    font-size: inherit;
+    font-weight: bold;
+}
+
+.summary{
+    display: block;
+    padding-left: 10px;
+    overflow: auto;
+}
+
+.image_summary {
+    width:350px;
+    display:block;
+    float:left;
+    margin-right:10px;
+}
+
 /* Tables */
 
 table {
