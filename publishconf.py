@@ -34,8 +34,8 @@ DISPLAY_ARTICLE_INFO_ON_INDEX = True
 PROFILE_IMAGE_URL = "http://stephanie-w.github.io/blog/images/post_1246903_635089122565391744.jpg"
 BOOTSTRAP_THEME = "lumen"
 #SITELOGO = "images/post_1246903_635089122565391744.jpg"
-SIDEBAR_IMAGES = ["http://stephanie-w.github.io/blog/images/brain-scribble.jpg"]
-FAVICON = "images/brain-scribble.jpg"
+SIDEBAR_IMAGES = ["http://stephanie-w.github.io/blog/images/brain-scribble.png"]
+FAVICON = "images/brain-scribble.png"
 BOOTSTRAP_NAVBAR_INVERSE = False
 
 PYGMENTS_STYLE = 'solarized'
