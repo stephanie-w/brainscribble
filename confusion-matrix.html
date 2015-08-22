@@ -141,11 +141,19 @@ y false negatives (FN) : the number of sick people incorrectly identified as hea
 </p>
 <div class="math">$$Accuracy = \frac{TP+TN}{TP+FP+FN+TN}$$</div>
 <h2 id="examples">Examples</h2>
-<p>A diagnostic test with sensitivity 67% and specificity 91% is applied to 2030 people to look for a disorder with a population prevalence of 1.48%.</p>
+<p><em>Example 1</em> 
+A diagnostic test with sensitivity 67% and specificity 91% is applied to 2030 people to look for a disorder with a population prevalence of 1.48%.</p>
 <p>Let's build the associated 2×2 contingency table:</p>
 <p><img alt="" src="figure/confusion-matrix-1.png" /></p>
 <p><img alt="" src="figure/confusion-matrix-2.png" /></p>
-<p>Suppose that we have created a machine learning algorithm that predicts whether a link will be clicked with 99% sensitivity and 99% specificity. The rate the link is clicked is 1/1000 of visits to a website. If we predict the link will be clicked on a specific visit, what is the probability it will actually be clicked?</p>
+<p>To summary and more simply:</p>
+<ul>
+<li>There were 2030 people tested, then 2030 predictions</li>
+<li>Out of those 2030 tests, 200 were identified as sick, 1830 as healthy</li>
+<li>In reality, 30 people are sick, 2000 are healthy</li>
+</ul>
+<p><em>Example 2</em> 
+Suppose that we have created a machine learning algorithm that predicts whether a link will be clicked with 99% sensitivity and 99% specificity. The rate the link is clicked is 1/1000 of visits to a website. If we predict the link will be clicked on a specific visit, what is the probability it will actually be clicked?</p>
 <p>Let's be 100000 the number of visits:</p>
 <p><img alt="" src="figure/confusion-matrix-3.png" /></p>
 <p>According to the confusion matrix above, the probability that the link will be actually clicked is 9%.</p>
