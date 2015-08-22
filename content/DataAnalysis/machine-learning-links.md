@@ -32,6 +32,7 @@ Algorithms:
     * Papers:
         * [The BigChaos Solution to the Netflix Grand Prize](http://www.netflixprize.com/assets/GrandPrize2009_BPC_BigChaos.pdf)
         $ [My milestone 1 solution to the Heritage Health Prize](https://kaggle2.blob.core.windows.net/wiki-files/327/09ccf652-8c1c-4a3d-b979-ce2369c985e4/Willem%20Mestrom%20-%20Milestone%201%20Description%20V2%202.pdf)
-* [Model-based clustering, discriminant analysis, and density estimation](http://www.stat.washington.edu/raftery/Research/PDF/fraley2002.pdf)
 
-* [Forecasting: principles and practice](https://www.otexts.org/fpp/)
+[Model-based clustering, discriminant analysis, and density estimation](http://www.stat.washington.edu/raftery/Research/PDF/fraley2002.pdf)
+
+[Forecasting: principles and practice](https://www.otexts.org/fpp/)
