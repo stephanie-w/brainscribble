@@ -57,6 +57,9 @@ CLEAN_SUMMARY_MINIMUM_ONE = False
 
 PLUGINS += ['pin_to_top']
 
+PLUGINS += ['feed_summary']
+FEED_USE_SUMMARY = True
+
 from markdown.extensions.codehilite import CodeHiliteExtension
 from markdown.extensions.toc import TocExtension
 MD_EXTENSIONS = [
@@ -98,3 +101,5 @@ STATIC_PATHS = [
     'images',
     'extra/robots.txt',
     ]
+
+BOOTSTRAP_FLUID = True
