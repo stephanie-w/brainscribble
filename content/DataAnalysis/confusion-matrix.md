@@ -39,6 +39,7 @@ $$Accuracy = \frac{TP+TN}{TP+FP+FN+TN}$$
 
 ## Examples
 
+*Example 1* 
 A diagnostic test with sensitivity 67% and specificity 91% is applied to 2030 people to look for a disorder with a population prevalence of 1.48%.
 
 Let's build the associated 2×2 contingency table:
@@ -47,7 +48,13 @@ Let's build the associated 2×2 contingency table:
 
 ![](figure/confusion-matrix-2.png)
 
+To summary and more simply:
 
+* There were 2030 people tested, then 2030 predictions
+* Out of those 2030 tests, 200 were identified as sick, 1830 as healthy
+* In reality, 30 people are sick, 2000 are healthy
+
+*Example 2* 
 Suppose that we have created a machine learning algorithm that predicts whether a link will be clicked with 99% sensitivity and 99% specificity. The rate the link is clicked is 1/1000 of visits to a website. If we predict the link will be clicked on a specific visit, what is the probability it will actually be clicked?
 
 Let's be 100000 the number of visits:
