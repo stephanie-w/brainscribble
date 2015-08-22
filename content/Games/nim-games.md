@@ -17,7 +17,7 @@ We'll explore the normal play game here.
 
 For example, on a table, there is heaps of stones (or matches or coins) from various sizes. Each player takes one or several stones in a single heap. The winner is the one who can empty the table.
 
-![](figure/nim-game-ex.png)
+![](figure/nim-game-ex-2.png)
 
 ## Game Graph
 
