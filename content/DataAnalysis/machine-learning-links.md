@@ -22,6 +22,7 @@ Papers:
 
 Algorithms:
 
+* [Choosing the right estimator](http://scikit-learn.org/stable/tutorial/machine_learning_map/)
 * [Comparing Supervised Learning Algorithms](http://www.dataschool.io/comparing-supervised-learning-algorithms/)
 * [Bagging and Boosting](http://stat.ethz.ch/education/semesters/FS_2008/CompStat/sk-ch8.pdf)
 * [Random Forests](http://www.stat.berkeley.edu/~breiman/RandomForests/cc_home.htm)
