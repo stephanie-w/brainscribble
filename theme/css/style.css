@@ -44,6 +44,7 @@ h6,.h6{
     display: block;
     padding-left: 10px;
     overflow: auto;
+    min-width: 250px;
 }
 
 .image_summary {
