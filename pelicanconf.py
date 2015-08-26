@@ -39,6 +39,7 @@ PLUGINS = ['code_include','extract_toc','related_posts','better_codeblock_line_n
 PLUGINS += ['render_math']
 MATH_JAX = {
    'process_summary': True,
+   'auto_insert': False,
 }
 
 PLUGINS += ['summary']
