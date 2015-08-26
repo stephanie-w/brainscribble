@@ -10,7 +10,7 @@ import sys
 sys.path.append(os.curdir)
 from pelicanconf import *
 
-SITEURL = 'http://stephanie-w.github.io/blog'
+SITEURL = 'http://stephanie-w.github.io/brainscribble'
 
 OUTPUT_PATH = 'output_prod/'
 
@@ -31,11 +31,11 @@ DISPLAY_ARTICLE_INFO_ON_INDEX = True
 #DISQUS_SITENAME = ""
 #GOOGLE_ANALYTICS = ""
 
-PROFILE_IMAGE_URL = "http://stephanie-w.github.io/blog/images/post_1246903_635089122565391744.jpg"
+PROFILE_IMAGE_URL = "http://stephanie-w.github.io/brainscribble/images/post_1246903_635089122565391744.jpg"
 BOOTSTRAP_THEME = "lumen"
 #SITELOGO = "images/post_1246903_635089122565391744.jpg"
 #SITELOGO_SIZE
-SIDEBAR_IMAGES = ["http://stephanie-w.github.io/blog/images/brain-scribble.png"]
+SIDEBAR_IMAGES = ["http://stephanie-w.github.io/brainscribble/images/brain-scribble.png"]
 FAVICON = "images/brain-scribble-ico.png"
 BOOTSTRAP_NAVBAR_INVERSE = False
 
