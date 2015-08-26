@@ -36,7 +36,7 @@ BOOTSTRAP_THEME = "lumen"
 #SITELOGO = "images/post_1246903_635089122565391744.jpg"
 #SITELOGO_SIZE
 SIDEBAR_IMAGES = ["http://stephanie-w.github.io/blog/images/brain-scribble.png"]
-FAVICON = "images/brain-scribble.png"
+FAVICON = "images/brain-scribble-ico.png"
 BOOTSTRAP_NAVBAR_INVERSE = False
 
 PYGMENTS_STYLE = 'solarized'
