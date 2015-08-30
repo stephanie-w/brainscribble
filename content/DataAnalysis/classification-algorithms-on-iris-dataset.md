@@ -5,7 +5,7 @@ tags: scikit-learn, machine-learning, ipython-notebook
 
 ---
 
-Source is available on [Github](https://github.com/stephanie-w/brainscribble/tree/master/source).
+Source available on [Nbviewer](http://nbviewer.ipython.org/github/stephanie-w/brainscribble/blob/master/source/classification-algorithms-on-iris-dataset.ipynb).
 
 
 ```python

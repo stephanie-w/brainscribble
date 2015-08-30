@@ -5,7 +5,7 @@ tags: ipython-notebook
 
 ---
 
-Source is available on [Github](https://github.com/stephanie-w/brainscribble/tree/master/source.
+Source available on [Nbviewer](http://nbviewer.ipython.org/github/stephanie-w/brainscribble/blob/master/source/plotting-last-earthquakes-on-a-map.ipynb)
 
 ```python
 # Render our plots inline
