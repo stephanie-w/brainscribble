@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Brain Scribble</title><link href="http://stephanie-w.github.io/brainscribble/" rel="alternate"></link><link href="http://stephanie-w.github.io/brainscribble/feeds/dataanalysis.atom.xml" rel="self"></link><id>http://stephanie-w.github.io/brainscribble/</id><updated>2015-08-30T00:00:00+02:00</updated><entry><title>scikit-learn: Classification Algorithms on Iris Dataset</title><link href="http://stephanie-w.github.io/brainscribble/classification-algorithms-on-iris-dataset.html" rel="alternate"></link><updated>2015-08-30T00:00:00+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-30:brainscribble/classification-algorithms-on-iris-dataset.html</id><summary type="html">&lt;hr /&gt;
-&lt;p&gt;Source is available on &lt;a href="https://github.com/stephanie-w/brainscribble/tree/master/source"&gt;Github&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Source available on &lt;a href="http://nbviewer.ipython.org/github/stephanie-w/brainscribble/blob/master/source/classification-algorithms-on-iris-dataset.ipynb"&gt;Nbviewer&lt;/a&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;pylab&lt;/span&gt; &lt;span class="n"&gt;inline&lt;/span&gt;&lt;/span&gt;
 &lt;span class="code-line"&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;matplotlib.pyplot&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;plt&lt;/span&gt;&lt;/span&gt;
 &lt;span class="code-line"&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;&lt;/span&gt;
@@ -12,8 +12,8 @@
 
 
 &lt;p&gt;The iris dataset consists of measurements of three different species of irises.
-scikit-learn embeds a copy of the iris CSV file along with a helper function ...&lt;/p&gt;</summary><category term="scikit-learn"></category><category term="machine-learning"></category><category term="ipython-notebook"></category></entry><entry><title>Plotting Last Earthquakes on a Map</title><link href="http://stephanie-w.github.io/brainscribble/plotting-last-earthquakes-on-a-map.html" rel="alternate"></link><updated>2015-08-30T00:00:00+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-30:brainscribble/plotting-last-earthquakes-on-a-map.html</id><summary type="html">&lt;hr /&gt;
-&lt;p&gt;Source is available on [Github](https://github.com/stephanie-w/brainscribble/tree/master/source.&lt;/p&gt;
+scikit-learn embeds a copy of the iris CSV file along with a helper function to ...&lt;/p&gt;</summary><category term="scikit-learn"></category><category term="machine-learning"></category><category term="ipython-notebook"></category></entry><entry><title>Plotting Last Earthquakes on a Map</title><link href="http://stephanie-w.github.io/brainscribble/plotting-last-earthquakes-on-a-map.html" rel="alternate"></link><updated>2015-08-30T00:00:00+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-30:brainscribble/plotting-last-earthquakes-on-a-map.html</id><summary type="html">&lt;hr /&gt;
+&lt;p&gt;Source available on &lt;a href="http://nbviewer.ipython.org/github/stephanie-w/brainscribble/blob/master/source/plotting-last-earthquakes-on-a-map.ipynb"&gt;Nbviewer&lt;/a&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span class="c"&gt;# Render our plots inline&lt;/span&gt;&lt;/span&gt;
 &lt;span class="code-line"&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;matplotlib&lt;/span&gt; &lt;span class="n"&gt;inline&lt;/span&gt;&lt;/span&gt;
 &lt;span class="code-line"&gt;&lt;/span&gt;
@@ -25,7 +25,21 @@ scikit-learn embeds a copy of the iris CSV file along with a helper function ...
 
 
 &lt;h3 id="loading-data"&gt;Loading data&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span class="n"&gt;dset&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read_csv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;http://earthquake.usgs.gov/earthquakes/feed/v1.0 ...&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><category term="ipython-notebook"></category></entry><entry><title>Machine Learning Links</title><link href="http://stephanie-w.github.io/brainscribble/machine-learning-links.html" rel="alternate"></link><updated>2015-08-21T00:00:00+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-21:brainscribble/machine-learning-links.html</id><summary type="html"></summary><category term="machine-learning"></category></entry><entry><title>Confusion Matrix</title><link href="http://stephanie-w.github.io/brainscribble/confusion-matrix.html" rel="alternate"></link><updated>2015-08-12T00:00:00+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-12:brainscribble/confusion-matrix.html</id><summary type="html">&lt;hr /&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span class="n"&gt;dset&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read_csv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_month.csv&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;                   &lt;span class="n"&gt;parse_dates&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;time&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span class="n"&gt;dset&lt;/span&gt;&lt;span class="p"&gt;[:&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div style="max-height:1000px;max-width:1500px;overflow:auto;"&gt;
+&lt;table border="1" class="dataframe"&gt;
+  &lt;thead&gt;
+    &lt;tr style="text-align: right;"&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;time ...&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;/table&gt;&lt;/div&gt;</summary><category term="ipython-notebook"></category></entry><entry><title>Machine Learning Links</title><link href="http://stephanie-w.github.io/brainscribble/machine-learning-links.html" rel="alternate"></link><updated>2015-08-21T00:00:00+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-21:brainscribble/machine-learning-links.html</id><summary type="html"></summary><category term="machine-learning"></category></entry><entry><title>Confusion Matrix</title><link href="http://stephanie-w.github.io/brainscribble/confusion-matrix.html" rel="alternate"></link><updated>2015-08-12T00:00:00+02:00</updated><author><name>Stephanie W</name></author><id>tag:stephanie-w.github.io,2015-08-12:brainscribble/confusion-matrix.html</id><summary type="html">&lt;hr /&gt;
 &lt;!-- BEGIN_SUMMARY --&gt;
 
 &lt;p&gt;A confusion matrix, also known as a contingency table or an error matrix or tavle of confusion, is a specific table layout that allows visualization of the performance of an algorithm, typically a supervised learning one (in unsupervised learning it is usually called a matching matrix).&lt;/p&gt;
