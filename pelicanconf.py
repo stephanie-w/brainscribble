@@ -103,6 +103,7 @@ STATIC_PATHS = [
     'figure',
     'images',
     'extra/robots.txt',
+    'source',
     ]
 
 BOOTSTRAP_FLUID = True

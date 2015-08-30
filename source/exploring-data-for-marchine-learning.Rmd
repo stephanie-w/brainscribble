@@ -1,0 +1,107 @@
+---
+title: "R : Exploring Data for Machine Learning Model"
+author: "Stephanie W"
+output: html_document
+---
+
+```{r setup, cache = F, echo = F, message = F, warning = F, tidy = F}
+library(knitr)
+options(width = 100)
+opts_chunk$set(message = F, error = F, warning = F, fig.align = 'center', dpi = 100, tidy = T, cache = F, cache.path = '.cache/', fig.path = 'fig/')
+knit_hooks$set(inline = function(x) {
+  if(is.numeric(x)) {
+    round(x, getOption('digits'))
+  } else {
+    paste(as.character(x), collapse = ', ')
+  }
+})
+knit_hooks$set(plot = knitr:::hook_plot_html)
+```
+
+When exploring data for Machine Learning, we're looking for:
+
+- imbalance outcomes/predictors
+- outliners
+- groups of outcome points not explained by any of the predictors
+- skewed variables (that needs to be transformed)
+
+We'll use the Wage dataset from the ISLR package.  
+This dataset reports wage and other data (age, education, jobclass, etc.) for a group of 3000 male workers in the Mid-Atlantic region.
+```{r}
+library(ISLR)
+data(Wage)
+summary(Wage)
+```
+Building training and testing sets (50% of the dataset each):
+```{r}
+library(caret)
+intrain <- createDataPartition(y=Wage$wage, p=0.5, list =F)
+training = Wage[intrain,]
+testing = Wage[-intrain,]
+```
+
+The exploration is always done on the training set.
+
+## Plotting predictors against outcome
+
+Plotting wage versus age, education and jobclass using the R featurePlot function (from the caret package):
+```{r}
+featurePlot(x=training[,c("age","education", "jobclass")], y=training$wage, plot="pairs")
+```
+
+Plotting wage versus age:
+```{r}
+library(ggplot2)
+qplot(age, wage, data=training)
+```
+The graph shows some patterns: a trend in wages comparing to ages and two distinct groups of observations (below and above 250 dollars raw wage).
+
+Plotting wage versus age grouping by jobclass:
+```{r}
+qplot(age, wage, color=jobclass, data=training)
+```
+The jobclass difference could explain the two distincts groups.
+
+Plotting wage versus age, grouping by education, adding regression smoothers:
+```{r}
+qq <- qplot(age, wage, color=education, data=training)
+qq + geom_smooth(method="lm", formula=y~x)
+```
+
+## Data Repartition
+
+Breaking up the wage variable into three groups (factors actually) with the R cut2 function (from the Hmisc package):
+```{r}
+library(Hmisc)
+cutWage <- cut2(training$wage, g=3)
+table(cutWage)
+```
+
+Looling at the repartition, we can see that there are more industrial jobs that there are information jobs with lower wage. Then the trend reverses itself.
+
+Plotting a boxplot of the wage groups created above:
+```{r}
+qplot(cutWage, age, data=training, fill=cutWage, geom=c("boxplot"))
+```
+
+Exploring the repartition of jobclass across wage groups:
+```{r}
+t1 <- table(cutWage, training$jobclass)
+t1
+```
+
+Using the prop function to get the proportion of jobclass (in each row) for each groups:
+```{r}
+prop.table(t1, 1)
+```
+62% of the low wage job correponds to industrial jobs, 38% to information jobs.
+
+## Density Plots
+ 
+Density plot can be a much more effective way to view the distribution of a variable than boxplots.
+
+Ploting a density plot of the values of wages grouping by education:
+```{r}
+qplot(wage, color=education, data=training, geom="density")
+```
+The "<HS grad" workers tend to have more values in the lower part of the range of wage. There is an outgroup of Advanced Degree and College Grad workers with higher wage.

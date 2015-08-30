@@ -1,0 +1,109 @@
+---
+title: "R: Multivariable Regression"
+author: "Stephanie W"
+output: html_document
+---
+
+```{r setup, cache = F, echo = F, message = F, warning = F, tidy = F}
+library(knitr)
+options(width = 100)
+opts_chunk$set(message = F, error = F, warning = F, fig.align = 'center', dpi = 100, tidy = T, cache = F, cache.path = '.cache/', fig.path = 'fig/', unnamed.chunk.label = 'multivariable-regression')
+knit_hooks$set(inline = function(x) {
+  if(is.numeric(x)) {
+    round(x, getOption('digits'))
+  } else {
+    paste(as.character(x), collapse = ', ')
+  }
+})
+knit_hooks$set(plot = knitr:::hook_plot_html)
+```
+
+This is my note on swirl course Regression Model : Multivariable Examples 3. 
+
+We'll use the hunger dataset from the course:
+```{r}
+download.file("https://raw.githubusercontent.com/swirldev/swirl_courses/master/Regression_Models/MultiVar_Examples3/hunger.csv", "hunger.csv", method="curl", quiet = T)
+hunger <- read.csv("hunger.csv")
+head(hunger)
+```
+
+The Numeric column gives the percentage of children under age 5 who were underweight when that sample was taken.  
+We fit a simple linear regression for Numeric (outcome) on Year:
+```{r}
+fit <- lm(Numeric ~ Year, hunger)
+summary(fit)
+```
+
+As time goes on, the rate of hunger decreases.  
+The intercept of the model represents the percentage of hungry children at year 0.  
+
+Let's look at the rates of hunger for the different genders to see how, or even if, they differ:
+```{r}
+lmF <- lm(Numeric[hunger$Sex=="Female"] ~ Year[hunger$Sex=="Female"], data=hunger )
+summary(lmF)
+lmM <- lm(Numeric[hunger$Sex=="Male"] ~ Year[hunger$Sex=="Male"], data=hunger )
+summary(lmM)
+```
+
+We plot the data points and fitted lines using different colors to distinguish between males (blue) and females (pink).
+```{r}
+plot(hunger$Year,hunger$Numeric,type="n")
+points(hunger$Year,hunger$Numeric,pch=19,col=((hunger$Sex=="Female")*1+125))
+lines(hunger$Year[hunger$Sex=="Male"],lmM$fitted,col="blue",lwd=3)
+lines(hunger$Year[hunger$Sex=="Female"],lmF$fitted,col="red",lwd=3)
+```
+
+We can see from the plot that the lines are not exactly parallel. On the right side of the graph (around the year 2010) they are closer together than on the left side (around 1970). Slopes are -0.29340 for femals, -0.32340 for males.
+
+Now instead of separating the data by subsetting the samples by gender, we'll use gender as another predictor to create the linear model:
+```{r}
+lmBoth <- lm(Numeric ~ Year + Sex, data=hunger)
+summary(lmBoth)
+```
+
+Notice that Male and Female are factors (factors are treated in alphabetic order, so reference, here, is the Female group).  
+The intercept represents the percentage of hungry females at year 0.  
+The estimate for the factor Male 1.9027 is a distance from the intercept (the estimate of the reference group Female). So the percentage of hungry males at year 0 is the sum of the intercept and the male estimate, ie. 633.5283 + 1.9027 = 635.431  
+The estimate for hunger$Year represents the annual decrease in percentage of both gender.
+
+In the plot, the red line will have the female intercept and the  blue line will have the male intercept:
+
+```{r}
+plot(hunger$Year,hunger$Numeric,pch=19)
+points(hunger$Year,hunger$Numeric,pch=19,col=((hunger$Sex=="Female")*1+125))
+abline(c(lmBoth$coeff[1],lmBoth$coeff[2]),col="red",lwd=3)
+abline(c(lmBoth$coeff[1] + lmBoth$coeff[3],lmBoth$coeff[2]),col="blue",lwd=3)
+```
+The lines are parallels (since, they have the same slope lmBoth$coeff[2]).
+
+Now we'll consider the interaction between year and gender to see how that affects changes in rates of hunger:
+```{r}
+lmInter <- lm(Numeric ~ Year + Sex + Sex*Year, data=hunger)
+summary(lmInter)
+```
+The percentage of hungry females at year 0 is 603.5058.  
+The percentage of hungry males at year 0 is 665.4535 (603.50580  + 61.94772).  
+The annual change (decrease) in percentage of hungry females is 0.29340.  
+The estimate associated with Year:SexMale represents the distance of the annual change in percent of males from that of females.
+The annual change in percentage of hungry males is -0.32340 (-0.29340 - 0.03000).
+
+```{r}
+plot(hunger$Year,hunger$Numeric,pch=19)
+points(hunger$Year,hunger$Numeric,pch=19,col=((hunger$Sex=="Male")*1+125))
+abline(c(lmInter$coeff[1],lmInter$coeff[2]),col="red",lwd=3)
+abline(c(lmInter$coeff[1] + lmInter$coeff[3],lmInter$coeff[2] +lmInter$coeff[4]),col="blue",lwd=3)
+```
+
+The lines are not parallel and will eventually intersect. The Male blue line indicates a faster rate of change.
+
+Here we're dealing with an interaction between factors.
+
+Suppose we have two interacting predictors and one of them is held constant.  
+The expected change in the outcome for a unit change in the other predictor is the coefficient of that changing predictor  + the coefficient of the interaction * the value of the predictor held constant.
+
+For example, let's the model be : $H_i = b_0 + (b_1*I_i) + (b_2*Y_i)+ (b_3*I_i*Y_i)$ with H the outcomes, I's and Y's the predictors and b's the estimated coefficients of the predictors.  
+If I is fixed at a value, 5 and Y varies, $b_2 + b3*5$ represents the change in H per unit change in Y given that I is fixed at 5.
+
+
+
+

@@ -1,0 +1,85 @@
+---
+title: "Linear Model Diagnosis for Machine Learning Modeling"
+
+---
+
+```{r setup, cache = F, echo = F, message = F, warning = F, tidy = F}
+library(knitr)
+options(width = 100)
+opts_chunk$set(message = F, error = F, warning = F, fig.align = 'center', dpi = 100, tidy = T, cache = F, cache.path = '.cache/', fig.path = 'fig/')
+knit_hooks$set(inline = function(x) {
+  if(is.numeric(x)) {
+    round(x, getOption('digits'))
+  } else {
+    paste(as.character(x), collapse = ', ')
+  }
+})
+knit_hooks$set(plot = knitr:::hook_plot_html)
+```
+
+This post follows the [R : Exploring Data for Machine Learning Modeling]() post, exploring linear model in the context of machine learning.
+
+We'll still use the Wage dataset from the ISLR package.  
+This dataset reports wage and other data (age, education, jobclass, etc.) for a group of 3000 male workers in the Mid-Atlantic region.
+
+We build a training and testing set (50% of the Wage dataset each):
+```{r}
+library(ISLR)
+data(Wage)
+library(caret)
+intrain <- createDataPartition(y = Wage$wage, p = 0.5, list = F)
+training = Wage[intrain,]
+testing = Wage[-intrain,]
+```
+
+We'll fit a linear model on the training set with wage as outcome and age, jobclass and education as predictors:
+```{r}
+fit <- train(wage ~ age + jobclass + education, method="lm", data=training)
+final <- fit$finalModel
+print(fit)
+```
+
+## Diagnosis plots
+
+### Residuals vs fitted
+
+Plotting residuals by the predictions (the fitted values) in the training set against the residuals, ie. amont of variation left over after the model fit. 
+
+```{r}
+plot(final, 1, pch=19,cex=0.5,col="#00000010")
+
+```
+
+The red line should be centered at 0 on the y-axis (since it represents the difference between the real values and the fitted values).  
+Outliners labeled at the top of the graph should be explored further for identifying explanotary variables. 
+
+We can then using colors for coloring a variable not used in the model to help spotting a trend in that variable.
+
+```{r}
+qplot(final$fitted, final$residuals, color=race, data=training)
+
+```
+
+We see in the graph above that some of the outliners might be explained by the race variable.
+
+### Plots by index
+
+Plotting residuals vs index (ie; row numbers) can be helpful in showing missing variables.  
+If there’s a trend/pattern in the residuals, it is highly likely that another variable (such as age/time) should be included.  
+Residuals should not have relationship to index (ie. order of observations).
+
+```{r}
+plot(final$residuals,pch=19,cex=0.5)
+```
+
+We're looking for residuals appearing at higher or lower rows and/or trends with respect to row numbers, suggesting there is a variable missing from the model, some continuous variable that the rows are ordered by (tipycally a variable expressing a relationship with respect to time or age).
+
+### Predicted vs real values plot
+
+Plotting wage variable in the test set vs the predicted values in the test set.
+```{r}
+pred <- predict(fit, testing)
+qplot(wage, pred, color=year, data=testing)
+```
+
+Ideally, these varaible are close to each other and there is a straight line on the 45° line.
