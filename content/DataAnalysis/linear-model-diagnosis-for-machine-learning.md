@@ -1,6 +1,6 @@
 ---
 title: R : Linear Model Diagnosis for Machine Learning Modeling
-tags: R
+tags: R, machine-learning
 date: 2015-08-10
 series: Machine Learning Modeling
 

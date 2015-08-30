@@ -1,6 +1,6 @@
 ---
 title: R : Exploring Data for Machine Learning Modeling
-tags: R
+tags: R, machine-learning
 date: 2015-08-09
 series: Machine Learning Modeling
 Image: figure/exploring-data-for-marchine-learning-4-1.png
