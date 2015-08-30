@@ -1,11 +1,13 @@
 ---
 title: Machine Learning Links
 date: 2015-08-21
+tags: machine-learning
 summary: 
 
 ---
 
 [Practical machine learning: methods and algorithmics](http://www.cbcb.umd.edu/~hcorrada/PracticalML/)  
+
 [Deep Learning](http://www.iro.umontreal.ca/~bengioy/dlbook/)  
 
 Caret (R Library for Machine Learning):
@@ -16,9 +18,8 @@ Caret (R Library for Machine Learning):
     * [Model Training and Tuning](http://topepo.github.io/caret/training.html)
     * [Visualizations](http://topepo.github.io/caret/visualizations.html)
     * [Pre-Processing](http://topepo.github.io/caret/preprocess.html)
-Papers:
-
-* [Building Predictive Models in R Using the caret Package](http://www.jstatsoft.org/v28/i05/paper)
+* Papers:
+    * [Building Predictive Models in R Using the caret Package](http://www.jstatsoft.org/v28/i05/paper)
 
 Algorithms:
 
@@ -36,4 +37,12 @@ Algorithms:
 
 [Model-based clustering, discriminant analysis, and density estimation](http://www.stat.washington.edu/raftery/Research/PDF/fraley2002.pdf)
 
-[Forecasting: principles and practice](https://www.otexts.org/fpp/)
+Forecasting:
+
+* [Forecasting: principles and practice](https://www.otexts.org/fpp/)
+* [Forecasting and timeseries prediction](http://en.wikipedia.org/wiki/Forecasting)
+
+Regularized Regression:
+
+* [Hector Corrada Bravo's Practical Machine Learning lecture notes](http://www.cbcb.umd.edu/%7Ehcorrada/PracticalML/)
+* [Hector's penalized regression reading list](http://www.cbcb.umd.edu/%7Ehcorrada/AMSC689.html#readings)
