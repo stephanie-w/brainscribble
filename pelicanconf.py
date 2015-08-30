@@ -30,7 +30,7 @@ AUTHOR_FEED_RSS = None
 
 DEFAULT_DATE_FORMAT = '%Y-%m-%d'
 DEFAULT_DATE = 'fs'
-IGNORE_FILES = ['*.Rmd']
+IGNORE_FILES = ['*.Rmd', '*.ipynb']
 
 #Plugins
 PLUGIN_PATHS = ['/home/stephanie/git/pelican/pelican-plugins/']
@@ -103,7 +103,6 @@ STATIC_PATHS = [
     'figure',
     'images',
     'extra/robots.txt',
-    'source',
     ]
 
 BOOTSTRAP_FLUID = True
