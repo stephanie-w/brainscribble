@@ -9,13 +9,11 @@ Source available on [Nbviewer](http://nbviewer.ipython.org/github/stephanie-w/br
 
 
 ```python
-%pylab inline
+%matplotlib inline
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib.colors import ListedColormap
 ```
-
-    Populating the interactive namespace from numpy and matplotlib
-
 
 The iris dataset consists of measurements of three different species of irises.
 scikit-learn embeds a copy of the iris CSV file along with a helper function to load it into numpy arrays.
@@ -48,7 +46,7 @@ print iris.target.shape
     (150,)
 
 
-## Exloring the dataset
+## Exploring the dataset
 
 The target classes to predict are iris classification:
 
@@ -249,19 +247,22 @@ y_min, y_max = X[:, 1].min() - .1, X[:, 1].max() + .1 #min and max sepal width
 xx, yy = np.meshgrid(np.linspace(x_min, x_max, 100),
                      np.linspace(y_min, y_max, 100))
 Z = knn.predict(np.c_[xx.ravel(), yy.ravel()])
+Z = Z.reshape(xx.shape)
 ```
 
 Let's put the result into a color plot:
 
 
 ```python
-Z = Z.reshape(xx.shape)
 plt.figure()
+
 # Create color maps for 3-class classification problem
 from matplotlib.colors import ListedColormap
 cmap_light = ListedColormap(['#FFAAAA', '#AAFFAA', '#AAAAFF'])
 cmap_bold = ListedColormap(['#FF0000', '#00FF00', '#0000FF'])
-plt.pcolormesh(xx, yy, Z, cmap=cmap_light)
+
+# Plot Classification Map
+plt.pcolormesh(xx, yy, Z, cmap=cmap_light, )
 plt.xlabel('sepal length (cm)')
 plt.ylabel('sepal width (cm)')
 plt.axis('tight')
@@ -283,6 +284,7 @@ Let's add the actual values of iris sepal lenght/width vs classification to the 
 
 ```python
 plt.pcolormesh(xx, yy, Z, cmap=cmap_light)
+# Add training points
 plt.scatter(X[:, 0], X[:, 1], c=y, cmap=cmap_bold)
 plt.xlabel('sepal length (cm)')
 plt.ylabel('sepal width (cm)')
@@ -307,6 +309,11 @@ plt.axis('tight')
 from sklearn import svm
 
 clf = svm.LinearSVC(loss = 'l2')
+```
+
+#### Fitting the model
+
+```python
 clf.fit(iris.data, iris.target)
 ```
 
@@ -330,17 +337,6 @@ print iris.target_names[result]
     ['virginica']
 
 
-
-```python
-clf = svm.SVC(kernel="linear")
-clf.fit(iris.data, iris.target)
-result = clf.predict([[3, 5, 4, 2],])# What is the iris class for 3cm x 5cm sepal and 4cm x 2cm petal?
-print iris.target_names[result]
-```
-
-    ['versicolor']
-
-
 ### Exploring different classifiers (kernels)
 
 
@@ -351,32 +347,42 @@ y = iris.target
 
 
 ```python
-def plot_iris_svc(kernel, X, y, title, **params):
+def plot_class_map(clf, X, y, title="", **params):
     C = 1.0  # SVM regularization parameter
-    clf = svm.SVC(kernel=kernel, C=C, **params)
+
     clf.fit(X, y)
     x_min, x_max = X[:, 0].min() - .1, X[:, 0].max() + .1
     y_min, y_max = X[:, 1].min() - .1, X[:, 1].max() + .1
     xx, yy = np.meshgrid(np.linspace(x_min, x_max, 100),
-                     np.linspace(y_min, y_max, 100))
+                         np.linspace(y_min, y_max, 100))
     Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])
     Z = Z.reshape(xx.shape)
+
     plt.figure()
     
     from matplotlib.colors import ListedColormap
     cmap_light = ListedColormap(['#FFAAAA', '#AAFFAA', '#AAAAFF'])
     cmap_bold = ListedColormap(['#FF0000', '#00FF00', '#0000FF'])
     plt.pcolormesh(xx, yy, Z, cmap=cmap_light)
-    #Plot training points as  well
+    #Plot training points as well
     plt.scatter(X[:, 0], X[:, 1], c=y, cmap=cmap_bold)
     plt.xlabel('sepal length (cm)')
     plt.ylabel('sepal width (cm)')
     plt.axis('tight')
     plt.title(title)
 
-plot_iris_svc('linear', X, y, 'SVC with linear kernel') 
-plot_iris_svc('rbf', X, y, 'SVC with RBF kernel')
-plot_iris_svc('poly', X, y, "SVC with polynomial kernel (3 degrees)", degree=3)
+# Linear
+clf = svm.SVC(kernel='linear')
+plot_class_map(clf, X, y, 'SVC with linear kernel')
+
+# RBF
+clf = svm.SVC(kernel='rbf')
+plot_class_map(clf, X, y, 'SVC with linear kernel')
+
+# RBF 
+clf = svm.SVC(kernel='poly', degree=3)
+plot_class_map(clf, X, y, 'SVC with polynomial kernel (3 degrees)')
+
 ```
 
 
@@ -392,8 +398,89 @@ plot_iris_svc('poly', X, y, "SVC with polynomial kernel (3 degrees)", degree=3)
 
 
 Note:
+
 The linear models LinearSVC() and SVC(kernel='linear') yield slightly different decision boundaries. This can be a consequence of the following differences:
 
 * LinearSVC minimizes the squared hinge loss while SVC minimizes the regular hinge loss.
 * LinearSVC uses the One-vs-All (also known as One-vs-Rest) multiclass reduction while SVC uses the One-vs-One multiclass reduction.
+
+
+
+```python
+clf = svm.SVC(kernel="linear")
+clf.fit(iris.data, iris.target)
+result = clf.predict([[3, 5, 4, 2],])# What is the iris class for 3cm x 5cm sepal and 4cm x 2cm petal?
+print iris.target_names[result]
+```
+
+    ['versicolor']
+
+
+### Random Forest
+
+
+```python
+from sklearn.tree import DecisionTreeClassifier
+
+clf = DecisionTreeClassifier()
+```
+
+#### Fitting the model
+
+
+```python
+clf.fit(iris.data, iris.target)
+```
+
+
+
+
+    DecisionTreeClassifier(compute_importances=None, criterion='gini',
+                max_depth=None, max_features=None, max_leaf_nodes=None,
+                min_density=None, min_samples_leaf=1, min_samples_split=2,
+                random_state=None, splitter='best')
+
+
+
+#### Doing a predicition
+
+
+```python
+result = clf.predict([[3, 5, 4, 2],])# What is the iris class for 3cm x 5cm sepal and 4cm x 2cm petal?
+print iris.target_names[result]
+```
+
+    ['versicolor']
+
+
+#### Decision Trees and over-fitting
+
+
+```python
+X = iris.data[:, :2] #Working with the two first features : sepal length and sepal width
+y = iris.target
+clf.fit(X,y)
+
+plot_class_map(clf, X, y)
+```
+
+
+![png](figure/classification-algorithms-on-iris-dataset_48_0.png)
+
+
+The issue with RF is it's tending to overfit the data.  
+hey are flexible enough that they can learn the structure of the noise in the data rather than the signal.
+
+
+```python
+clf = DecisionTreeClassifier(max_depth=4)
+clf.fit(X,y)
+plot_class_map(clf, X, y)
+```
+
+
+![png](figure/classification-algorithms-on-iris-dataset_50_0.png)
+
+
+The model obtained by limiting tree depth is a much better fit to the data.
 
