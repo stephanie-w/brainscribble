@@ -2,6 +2,9 @@
 title: scikit-learn: Classification Algorithms on Iris Dataset
 date: 2015-08-30
 tags: scikit-learn, machine-learning, ipython-notebook
+Pin: True
+
+[TOC]
 
 ---
 
