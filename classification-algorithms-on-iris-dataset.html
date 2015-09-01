@@ -14,13 +14,13 @@
 
         <meta name="author" content="Stephanie W" />
         <meta name="keywords" content="scikit-learn,machine-learning,ipython-notebook" />
-        <meta name="description" content="Source available on Nbviewer. %pylab inline import matplotlib.pyplot as plt import numpy as np Populating the interactive namespace from numpy and matplotlib The iris dataset consists of measurements of three different species of irises. scikit-learn embeds a copy of the iris CSV file along with a helper function to ..." />
+        <meta name="description" content="Source available on Nbviewer. %matplotlib inline import matplotlib.pyplot as plt import numpy as np from matplotlib.colors import ListedColormap The iris dataset consists of measurements of three different species of irises. scikit-learn embeds a copy of the iris CSV file along with a helper function to load it into ..." />
 
         <meta property="og:site_name" content="Brain Scribble" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="scikit-learn: Classification Algorithms on Iris Dataset"/>
         <meta property="og:url" content="http://stephanie-w.github.io/brainscribble/classification-algorithms-on-iris-dataset.html"/>
-        <meta property="og:description" content="Source available on Nbviewer. %pylab inline import matplotlib.pyplot as plt import numpy as np Populating the interactive namespace from numpy and matplotlib The iris dataset consists of measurements of three different species of irises. scikit-learn embeds a copy of the iris CSV file along with a helper function to ..."/>
+        <meta property="og:description" content="Source available on Nbviewer. %matplotlib inline import matplotlib.pyplot as plt import numpy as np from matplotlib.colors import ListedColormap The iris dataset consists of measurements of three different species of irises. scikit-learn embeds a copy of the iris CSV file along with a helper function to load it into ..."/>
         <meta property="article:published_time" content="2015-08-30" />
             <meta property="article:section" content="DataAnalysis" />
             <meta property="article:tag" content="scikit-learn" />
@@ -121,44 +121,30 @@
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <hr />
+                
+<hr/>
 <p>Source available on <a href="http://nbviewer.ipython.org/github/stephanie-w/brainscribble/blob/master/source/classification-algorithms-on-iris-dataset.ipynb">Nbviewer</a>.</p>
-<div class="highlight"><pre><span class="code-line"><span class="o">%</span><span class="n">pylab</span> <span class="n">inline</span></span>
+<div class="highlight"><pre><span class="code-line"><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span></span>
 <span class="code-line"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span></span>
 <span class="code-line"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span></span>
+<span class="code-line"><span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">ListedColormap</span></span>
 </pre></div>
-
-
-<div class="highlight"><pre><span class="code-line">Populating the interactive namespace from numpy and matplotlib</span>
-</pre></div>
-
-
 <p>The iris dataset consists of measurements of three different species of irises.
 scikit-learn embeds a copy of the iris CSV file along with a helper function to load it into numpy arrays.</p>
 <div class="highlight"><pre><span class="code-line"><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span></span>
 <span class="code-line"><span class="n">iris</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span></span>
 </pre></div>
-
-
 <div class="highlight"><pre><span class="code-line"><span class="n">iris</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span></span>
 </pre></div>
-
-
-<div class="highlight"><pre><span class="code-line">[&#39;target_names&#39;, &#39;data&#39;, &#39;target&#39;, &#39;DESCR&#39;, &#39;feature_names&#39;]</span>
+<div class="highlight"><pre><span class="code-line">['target_names', 'data', 'target', 'DESCR', 'feature_names']</span>
 </pre></div>
-
-
 <div class="highlight"><pre><span class="code-line"><span class="k">print</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span></span>
 <span class="code-line"><span class="k">print</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">shape</span></span>
 </pre></div>
-
-
 <div class="highlight"><pre><span class="code-line">(150, 4)</span>
 <span class="code-line">(150,)</span>
 </pre></div>
-
-
-<h2 id="exloring-the-dataset">Exloring the dataset</h2>
+<h2 id="exploring-the-dataset">Exploring the dataset</h2>
 <p>The target classes to predict are iris classification:</p>
 <ul>
 <li>setosa</li>
@@ -167,13 +153,9 @@ scikit-learn embeds a copy of the iris CSV file along with a helper function to 
 </ul>
 <div class="highlight"><pre><span class="code-line"><span class="n">iris</span><span class="o">.</span><span class="n">target_names</span></span>
 </pre></div>
-
-
-<div class="highlight"><pre><span class="code-line">array([&#39;setosa&#39;, &#39;versicolor&#39;, &#39;virginica&#39;], </span>
-<span class="code-line">      dtype=&#39;|S10&#39;)</span>
+<div class="highlight"><pre><span class="code-line">array(['setosa', 'versicolor', 'virginica'], </span>
+<span class="code-line">      dtype='|S10')</span>
 </pre></div>
-
-
 <p>The features in the iris dataset are :</p>
 <ul>
 <li>sepal length</li>
@@ -183,21 +165,15 @@ scikit-learn embeds a copy of the iris CSV file along with a helper function to 
 </ul>
 <div class="highlight"><pre><span class="code-line"><span class="n">iris</span><span class="o">.</span><span class="n">feature_names</span></span>
 </pre></div>
-
-
-<div class="highlight"><pre><span class="code-line">[&#39;sepal length (cm)&#39;,</span>
-<span class="code-line"> &#39;sepal width (cm)&#39;,</span>
-<span class="code-line"> &#39;petal length (cm)&#39;,</span>
-<span class="code-line"> &#39;petal width (cm)&#39;]</span>
+<div class="highlight"><pre><span class="code-line">['sepal length (cm)',</span>
+<span class="code-line"> 'sepal width (cm)',</span>
+<span class="code-line"> 'petal length (cm)',</span>
+<span class="code-line"> 'petal width (cm)']</span>
 </pre></div>
-
-
 <div class="highlight"><pre><span class="code-line"><span class="n">x_index</span> <span class="o">=</span> <span class="mi">2</span> <span class="c">#Petal Length</span></span>
 <span class="code-line"><span class="n">y_index</span> <span class="o">=</span> <span class="mi">3</span> <span class="c">#Petal Width</span></span>
 <span class="code-line"><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">[:,</span><span class="n">x_index</span><span class="p">]</span> <span class="c"># Petal Length values</span></span>
 </pre></div>
-
-
 <div class="highlight"><pre><span class="code-line">array([ 1.4,  1.4,  1.3,  1.5,  1.4,  1.7,  1.4,  1.5,  1.4,  1.5,  1.5,</span>
 <span class="code-line">        1.6,  1.4,  1.1,  1.2,  1.5,  1.3,  1.4,  1.7,  1.5,  1.7,  1.5,</span>
 <span class="code-line">        1. ,  1.7,  1.9,  1.6,  1.6,  1.5,  1.4,  1.6,  1.6,  1.5,  1.5,</span>
@@ -213,12 +189,8 @@ scikit-learn embeds a copy of the iris CSV file along with a helper function to 
 <span class="code-line">        5.6,  5.1,  5.6,  6.1,  5.6,  5.5,  4.8,  5.4,  5.6,  5.1,  5.1,</span>
 <span class="code-line">        5.9,  5.7,  5.2,  5. ,  5.2,  5.4,  5.1])</span>
 </pre></div>
-
-
 <div class="highlight"><pre><span class="code-line"><span class="n">iris</span><span class="o">.</span><span class="n">target</span> <span class="c"># Iris Classification values</span></span>
 </pre></div>
-
-
 <div class="highlight"><pre><span class="code-line">array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span>
 <span class="code-line">       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span>
 <span class="code-line">       0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
@@ -227,8 +199,6 @@ scikit-learn embeds a copy of the iris CSV file along with a helper function to 
 <span class="code-line">       2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,</span>
 <span class="code-line">       2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2])</span>
 </pre></div>
-
-
 <div class="highlight"><pre><span class="code-line"><span class="n">formatter</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">iris</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">)])</span></span>
 <span class="code-line"></span>
 <span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">[:,</span> <span class="n">x_index</span><span class="p">],</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">[:,</span> <span class="n">y_index</span><span class="p">],</span></span>
@@ -236,15 +206,11 @@ scikit-learn embeds a copy of the iris CSV file along with a helper function to 
 <span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">ticks</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">format</span><span class="o">=</span><span class="n">formatter</span><span class="p">)</span></span>
 <span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">feature_names</span><span class="p">[</span><span class="n">x_index</span><span class="p">])</span></span>
 <span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">feature_names</span><span class="p">[</span><span class="n">y_index</span><span class="p">])</span></span>
-<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&quot;Iris classification according to Petal measurements&quot;</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">"Iris classification according to Petal measurements"</span><span class="p">)</span></span>
 </pre></div>
-
-
 <div class="highlight"><pre><span class="code-line">&lt;matplotlib.text.Text at 0x7f9ae75f2790&gt;</span>
 </pre></div>
-
-
-<p><img alt="png" src="figure/classification-algorithms-on-iris-dataset_13_1.png" /></p>
+<p><img alt="png" src="figure/classification-algorithms-on-iris-dataset_13_1.png"/></p>
 <div class="highlight"><pre><span class="code-line"><span class="n">x_index</span> <span class="o">=</span> <span class="mi">0</span> <span class="c"># Sepal Lenght</span></span>
 <span class="code-line"><span class="n">y_index</span> <span class="o">=</span> <span class="mi">1</span> <span class="c"># Sepal Width</span></span>
 <span class="code-line"><span class="n">formatter</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">iris</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">)])</span></span>
@@ -254,15 +220,11 @@ scikit-learn embeds a copy of the iris CSV file along with a helper function to 
 <span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">ticks</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">format</span><span class="o">=</span><span class="n">formatter</span><span class="p">)</span></span>
 <span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">feature_names</span><span class="p">[</span><span class="n">x_index</span><span class="p">])</span></span>
 <span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">feature_names</span><span class="p">[</span><span class="n">y_index</span><span class="p">])</span></span>
-<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&quot;Iris classification according to sepal measurements&quot;</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">"Iris classification according to sepal measurements"</span><span class="p">)</span></span>
 </pre></div>
-
-
 <div class="highlight"><pre><span class="code-line">&lt;matplotlib.text.Text at 0x7f9aead96090&gt;</span>
 </pre></div>
-
-
-<p><img alt="png" src="figure/classification-algorithms-on-iris-dataset_14_1.png" /></p>
+<p><img alt="png" src="figure/classification-algorithms-on-iris-dataset_14_1.png"/></p>
 <h2 id="using-classification-algorithm">Using classification algorithm</h2>
 <h3 id="kneighborsclassifier">KNeighborsClassifier</h3>
 <p>The simplest possible classifier is the nearest neighbor.</p>
@@ -271,25 +233,17 @@ scikit-learn embeds a copy of the iris CSV file along with a helper function to 
 <span class="code-line"><span class="n">knn</span> <span class="o">=</span> <span class="n">neighbors</span><span class="o">.</span><span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></span>
 <span class="code-line"><span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span> </span>
 </pre></div>
-
-
-<div class="highlight"><pre><span class="code-line">KNeighborsClassifier(algorithm=&#39;auto&#39;, leaf_size=30, metric=&#39;minkowski&#39;,</span>
-<span class="code-line">           metric_params=None, n_neighbors=1, p=2, weights=&#39;uniform&#39;)</span>
+<div class="highlight"><pre><span class="code-line">KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',</span>
+<span class="code-line">           metric_params=None, n_neighbors=1, p=2, weights='uniform')</span>
 </pre></div>
-
-
 <h4 id="doing-a-predicition">Doing a predicition</h4>
 <div class="highlight"><pre><span class="code-line"><span class="n">result</span> <span class="o">=</span> <span class="n">knn</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">],])</span> <span class="c"># What is the iris class for 3cm x 5cm sepal and 4cm x 2cm petal?</span></span>
 <span class="code-line"><span class="k">print</span> <span class="n">iris</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">result</span><span class="p">]</span></span>
 </pre></div>
-
-
-<div class="highlight"><pre><span class="code-line">[&#39;virginica&#39;]</span>
+<div class="highlight"><pre><span class="code-line">['virginica']</span>
 </pre></div>
-
-
 <h4 id="exploring-the-results">Exploring the results</h4>
-<p>Let's draw the classification region according to sepal measurements.<br />
+<p>Let's draw the classification region according to sepal measurements.<br/>
 First, let's fit the model using the two first features only:</p>
 <div class="highlight"><pre><span class="code-line"><span class="n">X</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="c">#Working with the two first features : sepal length and sepal width</span></span>
 <span class="code-line"><span class="n">y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span></span>
@@ -297,143 +251,164 @@ First, let's fit the model using the two first features only:</p>
 <span class="code-line"><span class="n">knn</span> <span class="o">=</span> <span class="n">neighbors</span><span class="o">.</span><span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span></span>
 <span class="code-line"><span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span></span>
 </pre></div>
-
-
-<div class="highlight"><pre><span class="code-line">KNeighborsClassifier(algorithm=&#39;auto&#39;, leaf_size=30, metric=&#39;minkowski&#39;,</span>
-<span class="code-line">           metric_params=None, n_neighbors=3, p=2, weights=&#39;uniform&#39;)</span>
+<div class="highlight"><pre><span class="code-line">KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',</span>
+<span class="code-line">           metric_params=None, n_neighbors=3, p=2, weights='uniform')</span>
 </pre></div>
-
-
 <p>Then, let's build a input data matrix containing continuous values of sepal length and width (from min to max) and aply the predict function to it:</p>
 <div class="highlight"><pre><span class="code-line"><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="o">.</span><span class="mi">1</span> <span class="c">#min and max sepal length</span></span>
 <span class="code-line"><span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="o">.</span><span class="mi">1</span> <span class="c">#min and max sepal width</span></span>
 <span class="code-line"><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span></span>
 <span class="code-line">                     <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span></span>
 <span class="code-line"><span class="n">Z</span> <span class="o">=</span> <span class="n">knn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">xx</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">yy</span><span class="o">.</span><span class="n">ravel</span><span class="p">()])</span></span>
+<span class="code-line"><span class="n">Z</span> <span class="o">=</span> <span class="n">Z</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span></span>
 </pre></div>
-
-
 <p>Let's put the result into a color plot:</p>
-<div class="highlight"><pre><span class="code-line"><span class="n">Z</span> <span class="o">=</span> <span class="n">Z</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span></span>
+<div class="highlight"><pre><span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span></span>
+<span class="code-line"></span>
 <span class="code-line"><span class="c"># Create color maps for 3-class classification problem</span></span>
 <span class="code-line"><span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">ListedColormap</span></span>
-<span class="code-line"><span class="n">cmap_light</span> <span class="o">=</span> <span class="n">ListedColormap</span><span class="p">([</span><span class="s">&#39;#FFAAAA&#39;</span><span class="p">,</span> <span class="s">&#39;#AAFFAA&#39;</span><span class="p">,</span> <span class="s">&#39;#AAAAFF&#39;</span><span class="p">])</span></span>
-<span class="code-line"><span class="n">cmap_bold</span> <span class="o">=</span> <span class="n">ListedColormap</span><span class="p">([</span><span class="s">&#39;#FF0000&#39;</span><span class="p">,</span> <span class="s">&#39;#00FF00&#39;</span><span class="p">,</span> <span class="s">&#39;#0000FF&#39;</span><span class="p">])</span></span>
-<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap_light</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;sepal length (cm)&#39;</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;sepal width (cm)&#39;</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s">&#39;tight&#39;</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">cmap_light</span> <span class="o">=</span> <span class="n">ListedColormap</span><span class="p">([</span><span class="s">'#FFAAAA'</span><span class="p">,</span> <span class="s">'#AAFFAA'</span><span class="p">,</span> <span class="s">'#AAAAFF'</span><span class="p">])</span></span>
+<span class="code-line"><span class="n">cmap_bold</span> <span class="o">=</span> <span class="n">ListedColormap</span><span class="p">([</span><span class="s">'#FF0000'</span><span class="p">,</span> <span class="s">'#00FF00'</span><span class="p">,</span> <span class="s">'#0000FF'</span><span class="p">])</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="c"># Plot Classification Map</span></span>
+<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap_light</span><span class="p">,</span> <span class="p">)</span></span>
+<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'sepal length (cm)'</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'sepal width (cm)'</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s">'tight'</span><span class="p">)</span></span>
 </pre></div>
-
-
 <div class="highlight"><pre><span class="code-line">(4.2000000000000002, 8.0, 1.8999999999999999, 4.5)</span>
 </pre></div>
-
-
-<p><img alt="png" src="figure/classification-algorithms-on-iris-dataset_27_1.png" /></p>
+<p><img alt="png" src="figure/classification-algorithms-on-iris-dataset_27_1.png"/></p>
 <p>Let's add the actual values of iris sepal lenght/width vs classification to the color map:</p>
 <div class="highlight"><pre><span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap_light</span><span class="p">)</span></span>
+<span class="code-line"><span class="c"># Add training points</span></span>
 <span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap_bold</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;sepal length (cm)&#39;</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;sepal width (cm)&#39;</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s">&#39;tight&#39;</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'sepal length (cm)'</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'sepal width (cm)'</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s">'tight'</span><span class="p">)</span></span>
 </pre></div>
-
-
 <div class="highlight"><pre><span class="code-line">(4.0099999999999998, 8.1899999999999995, 1.77, 4.6299999999999999)</span>
 </pre></div>
-
-
-<p><img alt="png" src="figure/classification-algorithms-on-iris-dataset_29_1.png" /></p>
+<p><img alt="png" src="figure/classification-algorithms-on-iris-dataset_29_1.png"/></p>
 <h3 id="support-vector-classifier-svc">Support Vector Classifier (SVC)</h3>
 <div class="highlight"><pre><span class="code-line"><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span></span>
 <span class="code-line"></span>
-<span class="code-line"><span class="n">clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">LinearSVC</span><span class="p">(</span><span class="n">loss</span> <span class="o">=</span> <span class="s">&#39;l2&#39;</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">LinearSVC</span><span class="p">(</span><span class="n">loss</span> <span class="o">=</span> <span class="s">'l2'</span><span class="p">)</span></span>
 </pre></div>
-
-
+<h4 id="fitting-the-model_1">Fitting the model</h4>
+<div class="highlight"><pre><span class="code-line"><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span></span>
+</pre></div>
 <div class="highlight"><pre><span class="code-line">LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,</span>
-<span class="code-line">     intercept_scaling=1, loss=&#39;l2&#39;, multi_class=&#39;ovr&#39;, penalty=&#39;l2&#39;,</span>
+<span class="code-line">     intercept_scaling=1, loss='l2', multi_class='ovr', penalty='l2',</span>
 <span class="code-line">     random_state=None, tol=0.0001, verbose=0)</span>
 </pre></div>
-
-
 <h4 id="doing-a-predicition_1">Doing a predicition</h4>
 <div class="highlight"><pre><span class="code-line"><span class="n">result</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">],])</span><span class="c"># What is the iris class for 3cm x 5cm sepal and 4cm x 2cm petal?</span></span>
 <span class="code-line"><span class="k">print</span> <span class="n">iris</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">result</span><span class="p">]</span></span>
 </pre></div>
-
-
-<div class="highlight"><pre><span class="code-line">[&#39;virginica&#39;]</span>
+<div class="highlight"><pre><span class="code-line">['virginica']</span>
 </pre></div>
-
-
-<div class="highlight"><pre><span class="code-line"><span class="n">clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s">&quot;linear&quot;</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">result</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">],])</span><span class="c"># What is the iris class for 3cm x 5cm sepal and 4cm x 2cm petal?</span></span>
-<span class="code-line"><span class="k">print</span> <span class="n">iris</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">result</span><span class="p">]</span></span>
-</pre></div>
-
-
-<div class="highlight"><pre><span class="code-line">[&#39;versicolor&#39;]</span>
-</pre></div>
-
-
 <h3 id="exploring-different-classifiers-kernels">Exploring different classifiers (kernels)</h3>
 <div class="highlight"><pre><span class="code-line"><span class="n">X</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="c">#Working with the two first features : sepal length and sepal width</span></span>
 <span class="code-line"><span class="n">y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span></span>
 </pre></div>
-
-
-<div class="highlight"><pre><span class="code-line"><span class="k">def</span> <span class="nf">plot_iris_svc</span><span class="p">(</span><span class="n">kernel</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span></span>
+<div class="highlight"><pre><span class="code-line"><span class="k">def</span> <span class="nf">plot_class_map</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">""</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span></span>
 <span class="code-line">    <span class="n">C</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c"># SVM regularization parameter</span></span>
-<span class="code-line">    <span class="n">clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="n">kernel</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span></span>
+<span class="code-line"></span>
 <span class="code-line">    <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span></span>
 <span class="code-line">    <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="o">.</span><span class="mi">1</span></span>
 <span class="code-line">    <span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="o">.</span><span class="mi">1</span></span>
 <span class="code-line">    <span class="n">xx</span><span class="p">,</span> <span class="n">yy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span></span>
-<span class="code-line">                     <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span></span>
+<span class="code-line">                         <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span></span>
 <span class="code-line">    <span class="n">Z</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">xx</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">yy</span><span class="o">.</span><span class="n">ravel</span><span class="p">()])</span></span>
 <span class="code-line">    <span class="n">Z</span> <span class="o">=</span> <span class="n">Z</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span></span>
+<span class="code-line"></span>
 <span class="code-line">    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span></span>
 <span class="code-line"></span>
 <span class="code-line">    <span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">ListedColormap</span></span>
-<span class="code-line">    <span class="n">cmap_light</span> <span class="o">=</span> <span class="n">ListedColormap</span><span class="p">([</span><span class="s">&#39;#FFAAAA&#39;</span><span class="p">,</span> <span class="s">&#39;#AAFFAA&#39;</span><span class="p">,</span> <span class="s">&#39;#AAAAFF&#39;</span><span class="p">])</span></span>
-<span class="code-line">    <span class="n">cmap_bold</span> <span class="o">=</span> <span class="n">ListedColormap</span><span class="p">([</span><span class="s">&#39;#FF0000&#39;</span><span class="p">,</span> <span class="s">&#39;#00FF00&#39;</span><span class="p">,</span> <span class="s">&#39;#0000FF&#39;</span><span class="p">])</span></span>
+<span class="code-line">    <span class="n">cmap_light</span> <span class="o">=</span> <span class="n">ListedColormap</span><span class="p">([</span><span class="s">'#FFAAAA'</span><span class="p">,</span> <span class="s">'#AAFFAA'</span><span class="p">,</span> <span class="s">'#AAAAFF'</span><span class="p">])</span></span>
+<span class="code-line">    <span class="n">cmap_bold</span> <span class="o">=</span> <span class="n">ListedColormap</span><span class="p">([</span><span class="s">'#FF0000'</span><span class="p">,</span> <span class="s">'#00FF00'</span><span class="p">,</span> <span class="s">'#0000FF'</span><span class="p">])</span></span>
 <span class="code-line">    <span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap_light</span><span class="p">)</span></span>
-<span class="code-line">    <span class="c">#Plot training points as  well</span></span>
+<span class="code-line">    <span class="c">#Plot training points as well</span></span>
 <span class="code-line">    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap_bold</span><span class="p">)</span></span>
-<span class="code-line">    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;sepal length (cm)&#39;</span><span class="p">)</span></span>
-<span class="code-line">    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;sepal width (cm)&#39;</span><span class="p">)</span></span>
-<span class="code-line">    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s">&#39;tight&#39;</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'sepal length (cm)'</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'sepal width (cm)'</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s">'tight'</span><span class="p">)</span></span>
 <span class="code-line">    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span></span>
 <span class="code-line"></span>
-<span class="code-line"><span class="n">plot_iris_svc</span><span class="p">(</span><span class="s">&#39;linear&#39;</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s">&#39;SVC with linear kernel&#39;</span><span class="p">)</span> </span>
-<span class="code-line"><span class="n">plot_iris_svc</span><span class="p">(</span><span class="s">&#39;rbf&#39;</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s">&#39;SVC with RBF kernel&#39;</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">plot_iris_svc</span><span class="p">(</span><span class="s">&#39;poly&#39;</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s">&quot;SVC with polynomial kernel (3 degrees)&quot;</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span></span>
+<span class="code-line"><span class="c"># Linear</span></span>
+<span class="code-line"><span class="n">clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s">'linear'</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">plot_class_map</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s">'SVC with linear kernel'</span><span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="c"># RBF</span></span>
+<span class="code-line"><span class="n">clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s">'rbf'</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">plot_class_map</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s">'SVC with linear kernel'</span><span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="c"># RBF </span></span>
+<span class="code-line"><span class="n">clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s">'poly'</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">plot_class_map</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s">'SVC with polynomial kernel (3 degrees)'</span><span class="p">)</span></span>
 </pre></div>
-
-
-<p><img alt="png" src="figure/classification-algorithms-on-iris-dataset_37_0.png" /></p>
-<p><img alt="png" src="figure/classification-algorithms-on-iris-dataset_37_1.png" /></p>
-<p><img alt="png" src="figure/classification-algorithms-on-iris-dataset_37_2.png" /></p>
-<p>Note:
-The linear models LinearSVC() and SVC(kernel='linear') yield slightly different decision boundaries. This can be a consequence of the following differences:</p>
+<p><img alt="png" src="figure/classification-algorithms-on-iris-dataset_37_0.png"/></p>
+<p><img alt="png" src="figure/classification-algorithms-on-iris-dataset_37_1.png"/></p>
+<p><img alt="png" src="figure/classification-algorithms-on-iris-dataset_37_2.png"/></p>
+<p>Note:</p>
+<p>The linear models LinearSVC() and SVC(kernel='linear') yield slightly different decision boundaries. This can be a consequence of the following differences:</p>
 <ul>
 <li>LinearSVC minimizes the squared hinge loss while SVC minimizes the regular hinge loss.</li>
 <li>LinearSVC uses the One-vs-All (also known as One-vs-Rest) multiclass reduction while SVC uses the One-vs-One multiclass reduction.</li>
 </ul>
+<div class="highlight"><pre><span class="code-line"><span class="n">clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s">"linear"</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">result</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">],])</span><span class="c"># What is the iris class for 3cm x 5cm sepal and 4cm x 2cm petal?</span></span>
+<span class="code-line"><span class="k">print</span> <span class="n">iris</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">result</span><span class="p">]</span></span>
+</pre></div>
+<div class="highlight"><pre><span class="code-line">['versicolor']</span>
+</pre></div>
+<h3 id="random-forest">Random Forest</h3>
+<div class="highlight"><pre><span class="code-line"><span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">clf</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">()</span></span>
+</pre></div>
+<h4 id="fitting-the-model_2">Fitting the model</h4>
+<div class="highlight"><pre><span class="code-line"><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span></span>
+</pre></div>
+<div class="highlight"><pre><span class="code-line">DecisionTreeClassifier(compute_importances=None, criterion='gini',</span>
+<span class="code-line">            max_depth=None, max_features=None, max_leaf_nodes=None,</span>
+<span class="code-line">            min_density=None, min_samples_leaf=1, min_samples_split=2,</span>
+<span class="code-line">            random_state=None, splitter='best')</span>
+</pre></div>
+<h4 id="doing-a-predicition_2">Doing a predicition</h4>
+<div class="highlight"><pre><span class="code-line"><span class="n">result</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">],])</span><span class="c"># What is the iris class for 3cm x 5cm sepal and 4cm x 2cm petal?</span></span>
+<span class="code-line"><span class="k">print</span> <span class="n">iris</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">result</span><span class="p">]</span></span>
+</pre></div>
+<div class="highlight"><pre><span class="code-line">['versicolor']</span>
+</pre></div>
+<h4 id="decision-trees-and-over-fitting">Decision Trees and over-fitting</h4>
+<div class="highlight"><pre><span class="code-line"><span class="n">X</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="c">#Working with the two first features : sepal length and sepal width</span></span>
+<span class="code-line"><span class="n">y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span></span>
+<span class="code-line"><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">plot_class_map</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span></span>
+</pre></div>
+<p><img alt="png" src="figure/classification-algorithms-on-iris-dataset_48_0.png"/></p>
+<p>The issue with RF is it's tending to overfit the data.<br/>
+hey are flexible enough that they can learn the structure of the noise in the data rather than the signal.</p>
+<div class="highlight"><pre><span class="code-line"><span class="n">clf</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">plot_class_map</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span></span>
+</pre></div>
+<p><img alt="png" src="figure/classification-algorithms-on-iris-dataset_50_0.png"/></p>
+<p>The model obtained by limiting tree depth is a much better fit to the data.</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
+        <li><a href="http://stephanie-w.github.io/brainscribble/classification-algorithm-random-forest.html">scikit-learn: Random Forest</a></li>
         <li><a href="http://stephanie-w.github.io/brainscribble/plotting-last-earthquakes-on-a-map.html">Plotting Last Earthquakes on a Map</a></li>
+        <li><a href="http://stephanie-w.github.io/brainscribble/machine-learning-links.html">Machine Learning Links</a></li>
         <li><a href="http://stephanie-w.github.io/brainscribble/exploring-data-for-marchine-learning.html">R : Exploring Data for Machine Learning Modeling</a></li>
         <li><a href="http://stephanie-w.github.io/brainscribble/linear-model-diagnosis-for-machine-learning.html">R : Linear Model Diagnosis for Machine Learning Modeling</a></li>
-        <li><a href="http://stephanie-w.github.io/brainscribble/machine-learning-links.html">Machine Learning Links</a></li>
     </ul>
 </section>
         </article>
@@ -452,6 +427,34 @@ Brain Scribble    <li class="list-group-item">
         </ul>
     </li>
         </a>
+            <li class="list-group-item"><h4><i class="fa fa-crosshairs"></i><span class="icon-label">Table of Contents</span></h4>
+            <div class="toc">
+<ul>
+<li><a href="#exploring-the-dataset">Exploring the dataset</a></li>
+<li><a href="#using-classification-algorithm">Using classification algorithm</a><ul>
+<li><a href="#kneighborsclassifier">KNeighborsClassifier</a><ul>
+<li><a href="#fitting-the-model">Fitting the model</a></li>
+<li><a href="#doing-a-predicition">Doing a predicition</a></li>
+<li><a href="#exploring-the-results">Exploring the results</a></li>
+</ul>
+</li>
+<li><a href="#support-vector-classifier-svc">Support Vector Classifier (SVC)</a><ul>
+<li><a href="#fitting-the-model_1">Fitting the model</a></li>
+<li><a href="#doing-a-predicition_1">Doing a predicition</a></li>
+</ul>
+</li>
+<li><a href="#exploring-different-classifiers-kernels">Exploring different classifiers (kernels)</a></li>
+<li><a href="#random-forest">Random Forest</a><ul>
+<li><a href="#fitting-the-model_2">Fitting the model</a></li>
+<li><a href="#doing-a-predicition_2">Doing a predicition</a></li>
+<li><a href="#decision-trees-and-over-fitting">Decision Trees and over-fitting</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+             <hr />
 
 
 
@@ -462,22 +465,22 @@ Brain Scribble    <li class="list-group-item">
                             R
                         </a>
                     </li>
+                    <li class="list-group-item tag-1">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/machine-learning.html">
+                            machine-learning
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/ipython-notebook.html">
+                            ipython-notebook
+                        </a>
+                    </li>
                     <li class="list-group-item tag-2">
                         <a href="http://stephanie-w.github.io/brainscribble/tag/stats.html">
                             stats
                         </a>
                     </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://stephanie-w.github.io/brainscribble/tag/machine-learning.html">
-                            machine-learning
-                        </a>
-                    </li>
                     <li class="list-group-item tag-3">
-                        <a href="http://stephanie-w.github.io/brainscribble/tag/ipython-notebook.html">
-                            ipython-notebook
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-4">
                         <a href="http://stephanie-w.github.io/brainscribble/tag/scikit-learn.html">
                             scikit-learn
                         </a>
