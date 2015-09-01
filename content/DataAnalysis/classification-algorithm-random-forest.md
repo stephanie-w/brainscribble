@@ -35,16 +35,10 @@ from sklearn.tree import DecisionTreeClassifier
 X, y = make_blobs(n_samples=500, centers=4,
                   random_state=0, cluster_std=1.5)
 # Plot data X vs X, group by y 
+target_names = ['class 0', 'class 1', 'class 2', 'class 3']
 plt.scatter(X[:,0], X[:,1], c=y, s=50, cmap="rainbow")
-plt.colorbar(ticks=np.arange(4), format=plt.FuncFormatter(lambda i, *args: str(i + 1)))
+plt.colorbar(ticks=np.arange(4), format=plt.FuncFormatter(lambda i, *args: "class " + str(i)))
 ```
-
-
-
-
-    <matplotlib.colorbar.Colorbar instance at 0x7f7298db8320>
-
-
 
 
 ![png](figure/classification-algorithm-random-forest_5_1.png)
@@ -99,6 +93,8 @@ pred
 
 
 
+## Evaluating the model
+
 
 ```python
 # Compute confusion matrix
@@ -107,9 +103,8 @@ print cm
 
 # Plot confusion matrix
 plt.imshow(cm, interpolation='nearest', cmap=plt.cm.Blues)
-y_val = np.arange(4)
-plt.xticks(y_val, y_val)
-plt.yticks(y_val, y_val)
+plt.xticks(y_val, target_names)
+plt.yticks(y_val, target_names)
 plt.colorbar()
 plt.title('Confusion Matrix')
 plt.ylabel('True label')
@@ -123,14 +118,49 @@ plt.xlabel('Predicted label')
 
 
 
-
-
-    <matplotlib.text.Text at 0x7f7297d29f10>
-
-
-
-
 ![png](figure/classification-algorithm-random-forest_11_2.png)
+
+
+
+```python
+clf.score(X_test, y_test)
+```
+
+
+
+
+    0.72999999999999998
+
+
+
+
+```python
+from sklearn.metrics import accuracy_score
+accuracy_score(y_test, pred)
+```
+
+
+
+
+    0.72999999999999998
+
+
+
+
+```python
+from sklearn.metrics import classification_report
+print(classification_report(y_test, pred, target_names=target_names))
+```
+
+                 precision    recall  f1-score   support
+    
+        class 0       0.54      0.61      0.57        51
+        class 1       0.80      0.74      0.77        50
+        class 2       0.75      0.72      0.73        61
+        class 3       0.89      0.89      0.89        38
+    
+    avg / total       0.74      0.73      0.73       200
+    
 
 
 
@@ -145,11 +175,6 @@ plt.scatter(X_test[:,0], X_test[:,1], c=pred, s=50, cmap="rainbow")
 X_wrong = X_test[pred != y_test,:]
 plt.scatter(X_wrong[:,0], X_wrong[:,1], s=150, facecolors='none', zorder=10)
 ```
-
-
-
-
-    <matplotlib.collections.PathCollection at 0x7f7297d39510>
 
 
 
@@ -172,14 +197,6 @@ plt.scatter(X_test[:,0], X_test[:,1], c=y_test, s=50)
 
 plt.axis('tight')
 ```
-
-
-
-
-    (-5.7935534404250326,
-     6.7707063165022134,
-     -4.1330113827708388,
-     12.846278594742767)
 
 
 
