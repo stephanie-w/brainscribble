@@ -151,12 +151,6 @@ plt.title("Iris classification according to Petal measurements")
 
 
 
-
-    <matplotlib.text.Text at 0x7f9ae75f2790>
-
-
-
-
 ![png](figure/classification-algorithms-on-iris-dataset_13_1.png)
 
 
@@ -173,11 +167,6 @@ plt.xlabel(iris.feature_names[x_index])
 plt.ylabel(iris.feature_names[y_index])
 plt.title("Iris classification according to sepal measurements")
 ```
-
-
-
-
-    <matplotlib.text.Text at 0x7f9aead96090>
 
 
 
@@ -486,4 +475,3 @@ plot_class_map(clf, X, y)
 
 
 The model obtained by limiting tree depth is a much better fit to the data.
-

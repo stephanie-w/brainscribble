@@ -138,6 +138,3 @@ plt.show()
 
 
 
-```python
-
-```
