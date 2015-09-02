@@ -141,10 +141,9 @@
 <span class="code-line"><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_blobs</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">centers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span></span>
 <span class="code-line">                  <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cluster_std</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span></span>
 <span class="code-line"><span class="c"># Plot data X vs X, group by y </span></span>
+<span class="code-line"><span class="n">target_names</span> <span class="o">=</span> <span class="p">[</span><span class="s">'class 0'</span><span class="p">,</span> <span class="s">'class 1'</span><span class="p">,</span> <span class="s">'class 2'</span><span class="p">,</span> <span class="s">'class 3'</span><span class="p">]</span></span>
 <span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s">"rainbow"</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">ticks</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">format</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)))</span></span>
-</pre></div>
-<div class="highlight"><pre><span class="code-line">&lt;matplotlib.colorbar.Colorbar instance at 0x7f7298db8320&gt;</span>
+<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">ticks</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">format</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s">"class "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span></span>
 </pre></div>
 <p><img alt="png" src="figure/classification-algorithm-random-forest_5_1.png"/></p>
 <div class="highlight"><pre><span class="code-line"><span class="c"># Create training and testing set (60%-40%)</span></span>
@@ -175,15 +174,15 @@
 <span class="code-line">       0, 1, 3, 0, 0, 3, 0, 0, 2, 2, 1, 3, 1, 1, 2, 0, 3, 0, 0, 1, 2, 2, 0,</span>
 <span class="code-line">       1, 1, 3, 0, 0, 3, 0, 2, 3, 0, 3, 3, 1, 1, 3, 1])</span>
 </pre></div>
+<h2 id="evaluating-the-model">Evaluating the model</h2>
 <div class="highlight"><pre><span class="code-line"><span class="c"># Compute confusion matrix</span></span>
 <span class="code-line"><span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span></span>
 <span class="code-line"><span class="k">print</span> <span class="n">cm</span></span>
 <span class="code-line"></span>
 <span class="code-line"><span class="c"># Plot confusion matrix</span></span>
 <span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">cm</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s">'nearest'</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Blues</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">y_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">target_names</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">target_names</span><span class="p">)</span></span>
 <span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span></span>
 <span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">'Confusion Matrix'</span><span class="p">)</span></span>
 <span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'True label'</span><span class="p">)</span></span>
@@ -193,14 +192,29 @@
 <span class="code-line"> <span class="k">[ 7 37  2  0]</span></span>
 <span class="code-line"> <span class="k">[ 9  5 44  1]</span></span>
 <span class="code-line"> <span class="k">[ 4  0  0 34]]</span></span>
-<span class="code-line"></span>
-<span class="code-line"></span>
-<span class="code-line"></span>
-<span class="code-line"></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="err">&lt;matplotlib.text.Text</span> <span class="err">at</span> <span class="err">0x7f7297d29f10&gt;</span></span>
 </pre></div>
 <p><img alt="png" src="figure/classification-algorithm-random-forest_11_2.png"/></p>
+<div class="highlight"><pre><span class="code-line"><span class="n">clf</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span></span>
+</pre></div>
+<div class="highlight"><pre><span class="code-line">0.72999999999999998</span>
+</pre></div>
+<div class="highlight"><pre><span class="code-line"><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span></span>
+<span class="code-line"><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred</span><span class="p">)</span></span>
+</pre></div>
+<div class="highlight"><pre><span class="code-line">0.72999999999999998</span>
+</pre></div>
+<div class="highlight"><pre><span class="code-line"><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span></span>
+<span class="code-line"><span class="k">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="n">target_names</span><span class="p">))</span></span>
+</pre></div>
+<div class="highlight"><pre><span class="code-line">             precision    recall  f1-score   support</span>
+<span class="code-line"></span>
+<span class="code-line">    class 0       0.54      0.61      0.57        51</span>
+<span class="code-line">    class 1       0.80      0.74      0.77        50</span>
+<span class="code-line">    class 2       0.75      0.72      0.73        61</span>
+<span class="code-line">    class 3       0.89      0.89      0.89        38</span>
+<span class="code-line"></span>
+<span class="code-line">avg / total       0.74      0.73      0.73       200</span>
+</pre></div>
 <div class="highlight"><pre><span class="code-line"><span class="c">#plt.scatter(X[:,0], X[:,1], c=y, zorder=10, cmap=plt.cm.Paired)</span></span>
 <span class="code-line"><span class="c">#plt.scatter(X_test[:, 0], X_test[:, 1], c=y, s=80, facecolors='none', zorder=10)</span></span>
 <span class="code-line"></span>
@@ -210,8 +224,6 @@
 <span class="code-line"><span class="c"># Circle out the incorrect predictions</span></span>
 <span class="code-line"><span class="n">X_wrong</span> <span class="o">=</span> <span class="n">X_test</span><span class="p">[</span><span class="n">pred</span> <span class="o">!=</span> <span class="n">y_test</span><span class="p">,:]</span></span>
 <span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_wrong</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">X_wrong</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">facecolors</span><span class="o">=</span><span class="s">'none'</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span></span>
-</pre></div>
-<div class="highlight"><pre><span class="code-line">&lt;matplotlib.collections.PathCollection at 0x7f7297d39510&gt;</span>
 </pre></div>
 <p><img alt="png" src="figure/classification-algorithm-random-forest_12_1.png"/></p>
 <div class="highlight"><pre><span class="code-line"><span class="n">h</span> <span class="o">=</span> <span class="mi">100</span></span>
@@ -227,11 +239,6 @@
 <span class="code-line"></span>
 <span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s">'tight'</span><span class="p">)</span></span>
 </pre></div>
-<div class="highlight"><pre><span class="code-line">(-5.7935534404250326,</span>
-<span class="code-line"> 6.7707063165022134,</span>
-<span class="code-line"> -4.1330113827708388,</span>
-<span class="code-line"> 12.846278594742767)</span>
-</pre></div>
 <p><img alt="png" src="figure/classification-algorithm-random-forest_13_1.png"/></p>
             </div>
             <!-- /.entry-content -->
@@ -240,9 +247,9 @@
     <ul>
         <li><a href="http://stephanie-w.github.io/brainscribble/classification-algorithms-on-iris-dataset.html">scikit-learn: Classification Algorithms on Iris Dataset</a></li>
         <li><a href="http://stephanie-w.github.io/brainscribble/plotting-last-earthquakes-on-a-map.html">Plotting Last Earthquakes on a Map</a></li>
+        <li><a href="http://stephanie-w.github.io/brainscribble/linear-model-diagnosis-for-machine-learning.html">R : Linear Model Diagnosis for Machine Learning Modeling</a></li>
         <li><a href="http://stephanie-w.github.io/brainscribble/machine-learning-links.html">Machine Learning Links</a></li>
         <li><a href="http://stephanie-w.github.io/brainscribble/exploring-data-for-marchine-learning.html">R : Exploring Data for Machine Learning Modeling</a></li>
-        <li><a href="http://stephanie-w.github.io/brainscribble/linear-model-diagnosis-for-machine-learning.html">R : Linear Model Diagnosis for Machine Learning Modeling</a></li>
     </ul>
 </section>
         </article>
@@ -267,6 +274,7 @@ Brain Scribble    <li class="list-group-item">
 <li><a href="#creating-random-data">Creating random Data</a></li>
 <li><a href="#fitting-the-prediction-model">Fitting the prediction model</a></li>
 <li><a href="#doing-predictions">Doing predictions</a></li>
+<li><a href="#evaluating-the-model">Evaluating the model</a></li>
 </ul>
 </div>
              <hr />
@@ -276,23 +284,23 @@ Brain Scribble    <li class="list-group-item">
             <li class="list-group-item"><a href="http://stephanie-w.github.io/brainscribble/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
                 <ul class="list-group " id="tags">
                     <li class="list-group-item tag-1">
-                        <a href="http://stephanie-w.github.io/brainscribble/tag/r.html">
-                            R
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-1">
                         <a href="http://stephanie-w.github.io/brainscribble/tag/machine-learning.html">
                             machine-learning
                         </a>
                     </li>
-                    <li class="list-group-item tag-2">
-                        <a href="http://stephanie-w.github.io/brainscribble/tag/ipython-notebook.html">
-                            ipython-notebook
+                    <li class="list-group-item tag-1">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/r.html">
+                            R
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
                         <a href="http://stephanie-w.github.io/brainscribble/tag/stats.html">
                             stats
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/ipython-notebook.html">
+                            ipython-notebook
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
@@ -341,6 +349,23 @@ Brain Scribble    <li class="list-group-item">
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
 <script src="http://stephanie-w.github.io/brainscribble/theme/js/respond.min.js"></script>
 
+    <!-- Google Analytics -->
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-67062346-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+    <!-- End Google Analytics Code -->
 
 </body>
 </html>
