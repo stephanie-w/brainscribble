@@ -52,6 +52,7 @@ h6,.h6{
     display:block;
     float:left;
     margin-right:10px;
+    max-width: 60%;
 }
 
 /* Tables */
