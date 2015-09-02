@@ -2,17 +2,15 @@
 title: Notes on Statistical Inference : Hypothesis Testing and t-tests
 tags: R, stats
 date: 2015-07-23
-
+Summary: The Central Limit Theorem states that the distribution of sample statistics (e.g. mean) is approximatively normal, regardless of the underlying distribution, with mean = $\mu$ and variance = $\sigma^2$ ...
 [TOC]
 
 ---
-<!-- BEGIN_SUMMARY -->
 These are  my notes on the Statistical Inference course (2th part) : Hypothesis Testing and t-tests
 
-<!-- END_SUMMARY -->
 ## CLT : Central Limit Theorem
 
-The distribution of sample statistics (e.g. mean) is approximatively normal, regardless of the underlying distribution, with mean = $\mu$ and variance = $\sigma^2$
+The Central Limit Theorem states that the distribution of sample statistics (e.g. mean) is approximatively normal, regardless of the underlying distribution, with mean = $\mu$ and variance = $\sigma^2$
 
 $\bar{X} \sim N(mean = \mu, sd = \frac{\sigma}{\sqrt{n}})$ 
 

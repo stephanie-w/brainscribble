@@ -3,6 +3,7 @@ title: scikit-learn: Classification Algorithms on Iris Dataset
 date: 2015-08-30
 tags: scikit-learn, machine-learning, ipython-notebook
 Pin: True
+Summary: scikit-learn comes with a few standard datasets, for instance the iris and digits datasets for classification. The iris dataset consists of measurements of three different species of irises ...
 
 [TOC]
 
@@ -18,7 +19,8 @@ import numpy as np
 from matplotlib.colors import ListedColormap
 ```
 
-The iris dataset consists of measurements of three different species of irises.
+scikit-learn comes with a few standard datasets, for instance the iris and digits datasets for classification.  
+The iris dataset consists of measurements of three different species of irises.  
 scikit-learn embeds a copy of the iris CSV file along with a helper function to load it into numpy arrays.
 
 

@@ -2,7 +2,7 @@
 title: R: Earthquakes from the past 30 days
 tags: R
 date: 2015-06-23
-summary: Plotting the earthquakes of the last 30 months with R and the earthquake.usgs.gov
+Summary: Plotting the earthquakes of the last 30 months with R and the the National Earthquake Hazards Reduction Program (NEHRP) feed ...
     
 ---
 

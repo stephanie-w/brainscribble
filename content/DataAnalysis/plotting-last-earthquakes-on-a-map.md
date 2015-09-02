@@ -2,10 +2,15 @@
 title: Plotting Last Earthquakes on a Map
 date: 2015-08-30
 tags: ipython-notebook
+Summary: Plotting the earthquakes of the last 30 months with R and the the National Earthquake Hazards Reduction Program (NEHRP) feed ...
 
 ---
 
 Source available on [Nbviewer](http://nbviewer.ipython.org/github/stephanie-w/brainscribble/blob/master/source/plotting-last-earthquakes-on-a-map.ipynb)
+
+The USGS Earthquake Hazards Program is part of the National Earthquake Hazards Reduction Program (NEHRP) and provides several data on earthquake location and magnitude.
+
+The data on earthquakes of the last 30 months is avaiblable at http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_month.csv. 
 
 ```python
 # Render our plots inline

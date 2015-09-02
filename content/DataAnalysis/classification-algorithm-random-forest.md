@@ -4,6 +4,7 @@ date: 2015-09-01
 tags: scikit-learn, machine-learning, ipython-notebook
 Image: figure/classification-algorithm-random-forest_11_2.png
 Pin: True
+Summary: A random forest is a meta estimator that fits a number of decision tree classifiers on various sub-samples of the dataset and use averaging to improve the predictive accuracy and control over-fitting ...
 
 [TOC]
 
