@@ -29,7 +29,7 @@ DISPLAY_ARTICLE_INFO_ON_INDEX = True
 # Following items are often useful when publishing
 
 #DISQUS_SITENAME = ""
-#GOOGLE_ANALYTICS = ""
+GOOGLE_ANALYTICS = "UA-67062346-1"
 
 PROFILE_IMAGE_URL = "http://stephanie-w.github.io/brainscribble/images/post_1246903_635089122565391744.jpg"
 BOOTSTRAP_THEME = "lumen"
