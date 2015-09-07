@@ -63,6 +63,7 @@ FEED_USE_SUMMARY = True
 
 PLUGINS += ['tag_cloud']
 
+
 from markdown.extensions.codehilite import CodeHiliteExtension
 from markdown.extensions.toc import TocExtension
 MD_EXTENSIONS = [
@@ -75,8 +76,9 @@ MD_EXTENSIONS = [
  
 
 # Blogroll
-LINKS = ()
-#LINKS = ('Pelican', 'http://getpelican.com/'),
+LINKS = (('codeeval Profile', 'https://www.codeeval.com/profile/lisptick/'),
+('hackerrank Profile', 'https://www.hackerrank.com/lisptick'),)
+#LINKS = (('Pelican', 'http://getpelican.com/'),
 #         ('Python.org', 'http://python.org/'),
 #         ('Jinja2', 'http://jinja.pocoo.org/'),)
 
