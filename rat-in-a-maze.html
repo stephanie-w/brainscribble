@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Backtracking - Rat in a Maze - Brain Scribble</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="http://stephanie-w.github.io/brainscribble/images/brain-scribble-ico.png" rel="icon">
+
+<link rel="canonical" href="http://stephanie-w.github.io/brainscribble/rat-in-a-maze.html">
+
+        <meta name="author" content="Stephanie W" />
+        <meta name="keywords" content="python,algorithm" />
+        <meta name="description" content="A Maze is given as N*N binary matrix of blocks where source block is the upper left most block i.e., maze[0][0] and destination block is lower rightmost block i.e., maze[N-1][N-1]. A rat starts from source and has to reach destination. The rat can ..." />
+
+        <meta property="og:site_name" content="Brain Scribble" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Backtracking - Rat in a Maze"/>
+        <meta property="og:url" content="http://stephanie-w.github.io/brainscribble/rat-in-a-maze.html"/>
+        <meta property="og:description" content="A Maze is given as N*N binary matrix of blocks where source block is the upper left most block i.e., maze[0][0] and destination block is lower rightmost block i.e., maze[N-1][N-1]. A rat starts from source and has to reach destination. The rat can ..."/>
+        <meta property="article:published_time" content="2015-09-07" />
+            <meta property="article:section" content="PythonIdioms" />
+            <meta property="article:tag" content="python" />
+            <meta property="article:tag" content="algorithm" />
+            <meta property="article:author" content="Stephanie W" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://stephanie-w.github.io/brainscribble/theme/css/bootstrap.lumen.min.css" type="text/css"/>
+    <link href="http://stephanie-w.github.io/brainscribble/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://stephanie-w.github.io/brainscribble/theme/css/pygments/solarized.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://stephanie-w.github.io/brainscribble/theme/css/style.css" type="text/css"/>
+
+        <link href="http://stephanie-w.github.io/brainscribble/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Brain Scribble ATOM Feed"/>
+
+
+
+        <link href="http://stephanie-w.github.io/brainscribble/feeds/pythonidioms.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Brain Scribble PythonIdioms ATOM Feed"/>
+
+    <!-- Mathjax -->
+    <script type="text/javascript"
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://stephanie-w.github.io/brainscribble/" class="navbar-brand">
+Brain Scribble            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="http://stephanie-w.github.io/brainscribble/category/dataanalysis.html">DataAnalysis</a>
+                        </li>
+                        <li >
+                            <a href="http://stephanie-w.github.io/brainscribble/category/games.html">Games</a>
+                        </li>
+                        <li >
+                            <a href="http://stephanie-w.github.io/brainscribble/category/projectmanagement.html">ProjectManagement</a>
+                        </li>
+                        <li class="active">
+                            <a href="http://stephanie-w.github.io/brainscribble/category/pythonidioms.html">PythonIdioms</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="http://stephanie-w.github.io/brainscribble/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="http://stephanie-w.github.io/brainscribble/rat-in-a-maze.html"
+                       rel="bookmark"
+                       title="Permalink to Backtracking - Rat in a Maze">
+                        Backtracking - Rat in a Maze
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2015-09-07T00:00:00+02:00"> 2015-09-07</time>
+    </span>
+
+            <span class="label label-default">Series</span>
+            Part 2 of backtracking
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="http://stephanie-w.github.io/brainscribble/tag/python.html">python</a>
+        /
+	<a href="http://stephanie-w.github.io/brainscribble/tag/algorithm.html">algorithm</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <hr />
+<p>A Maze is given as N*N binary matrix of blocks where source block is the upper left most block i.e., maze[0][0] and destination block is lower rightmost block i.e., maze[N-1][N-1]. A rat starts from source and has to reach destination. The rat can move only in two directions: forward and down.<br />
+In the maze matrix, 0 means the block is dead end and 1 means the block can be used in the path from source to destination.<br />
+Note that this is a simple version of the typical Maze problem. For example, a more complex version can be that the rat can move in 4 directions and a more complex version can be with limited number of moves.</p>
+<p><img alt="" src="figure/ratinmaze_filled_path1.png" /></p>
+<p>The binary representation of the maze above is as follow:</p>
+<div class="highlight"><pre><span class="code-line">[</span>
+<span class="code-line">    [1, 0, 0, 0],</span>
+<span class="code-line">    [1, 1, 0, 1],</span>
+<span class="code-line">    [0, 1, 0, 0],</span>
+<span class="code-line">    [1, 1, 1, 1]</span>
+<span class="code-line">]</span>
+</pre></div>
+
+
+<p>The solution matrix (output of program) for the above input matrix is as follow:</p>
+<div class="highlight"><pre><span class="code-line">[</span>
+<span class="code-line">    [1, 0, 0, 0],</span>
+<span class="code-line">    [1, 1, 0, 0],</span>
+<span class="code-line">    [0, 1, 0, 0],</span>
+<span class="code-line">    [0, 1, 1, 1]</span>
+<span class="code-line">]</span>
+</pre></div>
+
+
+<p>Algotithm :</p>
+<div class="highlight"><pre><span class="code-line">If destination is reached</span>
+<span class="code-line">    print the solution matrix</span>
+<span class="code-line">Else</span>
+<span class="code-line">   a. Mark current cell in the solution matrix</span>
+<span class="code-line">   b. Move forward horizontaly and recursively check if this leads to a solution</span>
+<span class="code-line">   c. If there is no solution, move down and recursively check if this leads to a solution</span>
+<span class="code-line">   d. If none of the above solution work, unmark the cell and return False</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="code-line"><span class="c"># Utility to check if the current cell position (x,y)</span></span>
+<span class="code-line"><span class="c"># is in the maze</span></span>
+<span class="code-line"><span class="k">def</span> <span class="nf">isSafe</span><span class="p">(</span><span class="n">maze</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sol</span><span class="p">):</span></span>
+<span class="code-line">    <span class="c"># Get maze dimensions</span></span>
+<span class="code-line">    <span class="n">X</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">maze</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span></span>
+<span class="code-line">    <span class="n">Y</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">maze</span><span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="k">if</span> <span class="n">x</span><span class="o">&gt;=</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">x</span><span class="o">&lt;</span><span class="n">X</span> <span class="ow">and</span> <span class="n">y</span><span class="o">&gt;=</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">y</span><span class="o">&lt;</span><span class="n">Y</span> <span class="ow">and</span> <span class="n">maze</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>    </span>
+<span class="code-line">        <span class="k">return</span> <span class="bp">True</span></span>
+<span class="code-line">    <span class="k">return</span> <span class="bp">False</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="c"># (x,y) is the current cell position</span></span>
+<span class="code-line"><span class="k">def</span> <span class="nf">solveMaze</span><span class="p">(</span><span class="n">maze</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sol</span><span class="p">):</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="c"># Get maze size</span></span>
+<span class="code-line">    <span class="n">X</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">maze</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span></span>
+<span class="code-line">    <span class="n">Y</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">maze</span><span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="c"># check if (x,y) is goal</span></span>
+<span class="code-line">    <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">X</span><span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">y</span> <span class="o">==</span> <span class="n">Y</span><span class="o">-</span><span class="mi">1</span> <span class="p">:</span> </span>
+<span class="code-line">        <span class="n">sol</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span></span>
+<span class="code-line">        <span class="k">return</span> <span class="bp">True</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="c"># Check if we&#39;re inside the maze</span></span>
+<span class="code-line">    <span class="k">if</span> <span class="n">isSafe</span><span class="p">(</span><span class="n">maze</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sol</span><span class="p">):</span></span>
+<span class="code-line">        <span class="c"># Mark the current cell in solution (BACKTRACK)</span></span>
+<span class="code-line">        <span class="n">sol</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span></span>
+<span class="code-line">        <span class="c"># Move right</span></span>
+<span class="code-line">        <span class="k">if</span> <span class="n">solveMaze</span><span class="p">(</span><span class="n">maze</span><span class="p">,</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sol</span><span class="p">):</span></span>
+<span class="code-line">            <span class="k">return</span> <span class="bp">True</span></span>
+<span class="code-line">        <span class="c"># Move down</span></span>
+<span class="code-line">        <span class="k">if</span> <span class="n">solveMaze</span><span class="p">(</span><span class="n">maze</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">sol</span><span class="p">):</span></span>
+<span class="code-line">            <span class="k">return</span> <span class="bp">True</span></span>
+<span class="code-line">        <span class="c"># Remove current cell from solution</span></span>
+<span class="code-line">        <span class="c"># If the 2 moves above failed</span></span>
+<span class="code-line">        <span class="n">sol</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span></span>
+<span class="code-line">        <span class="k">return</span> <span class="bp">False</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">maze</span> <span class="o">=</span> <span class="p">[</span></span>
+<span class="code-line">    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span></span>
+<span class="code-line">    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span></span>
+<span class="code-line">    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span></span>
+<span class="code-line">    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,]</span></span>
+<span class="code-line"><span class="p">]</span></span>
+<span class="code-line"><span class="c"># Initiate the solution matrix</span></span>
+<span class="code-line"><span class="n">sol</span> <span class="o">=</span> <span class="p">[</span></span>
+<span class="code-line">    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span></span>
+<span class="code-line">    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span></span>
+<span class="code-line">    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span></span>
+<span class="code-line">    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span></span>
+<span class="code-line"><span class="p">]</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="c"># Given a maze NxM,</span></span>
+<span class="code-line"><span class="c"># we start at (0, 0), goal is (N-1, M-1)</span></span>
+<span class="code-line"><span class="k">if</span> <span class="n">solveMaze</span><span class="p">(</span><span class="n">maze</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sol</span><span class="p">):</span></span>
+<span class="code-line">    <span class="k">print</span> <span class="n">sol</span></span>
+<span class="code-line"><span class="k">else</span><span class="p">:</span></span>
+<span class="code-line">    <span class="k">print</span> <span class="s">&quot;No solution&quot;</span></span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="code-line">[[1, 0, 0, 0], [1, 1, 0, 0], [0, 1, 0, 0], [0, 1, 1, 1]]</span>
+</pre></div>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Part 2 of the backtracking series</h4>
+       <h5>Previous articles</h5>
+       <ul>
+           <li><a href="http://stephanie-w.github.io/brainscribble/m-coloring-problem.html">Backtracking - M Coloring Problem</a></li>
+       </ul>
+</section>
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="http://stephanie-w.github.io/brainscribble/m-coloring-problem.html">Backtracking - M Coloring Problem</a></li>
+        <li><a href="http://stephanie-w.github.io/brainscribble/binary2int.html">Decoding Binary Code (int)</a></li>
+        <li><a href="http://stephanie-w.github.io/brainscribble/binary2ascii.html">Decoding Binary Code (ascii)</a></li>
+        <li><a href="http://stephanie-w.github.io/brainscribble/primes.html">Generating n primes</a></li>
+        <li><a href="http://stephanie-w.github.io/brainscribble/combinations.html">All possible combinations</a></li>
+    </ul>
+</section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+        <a href="http://stephanie-w.github.io/brainscribble/" class="home-url">
+Brain Scribble    <li class="list-group-item">
+        <ul class="list-group" id="links">
+            <img class="img-thumbnail" src="http://stephanie-w.github.io/brainscribble/images/brain-scribble.png"/>
+        </ul>
+    </li>
+        </a>
+
+
+
+                    <li class="list-group-item"><h4><i class="fa fa-tags fa-list-ul"></i><span class="icon-label">Series</span></h4>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <h5></i> Previous article</h5>
+                                <a href="http://stephanie-w.github.io/brainscribble/m-coloring-problem.html">Backtracking - M Coloring Problem</a>
+                            </li>
+                            <li class="list-group-item">
+                            </li>
+                        </ul>
+                    </li>
+
+            <li class="list-group-item"><a href="http://stephanie-w.github.io/brainscribble/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group " id="tags">
+                    <li class="list-group-item tag-1">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/r.html">
+                            R
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-1">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/python.html">
+                            python
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-1">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/machine-learning.html">
+                            machine-learning
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/ipython-notebook.html">
+                            ipython-notebook
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/stats.html">
+                            stats
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/scikit-learn.html">
+                            scikit-learn
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/algorithm.html">
+                            algorithm
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/hadoop.html">
+                            hadoop
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="https://fr.linkedin.com/pub/stephanie-werli/26/b69/a0b"><i class="fa fa-linkedin-square fa-lg"></i> linkedin</a></li>
+                <li class="list-group-item"><a href="http://github.com/stephanie-w"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+              </ul>
+            </li>
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="https://www.codeeval.com/profile/lisptick/" target="_blank">
+                codeeval Profile
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="https://www.hackerrank.com/lisptick" target="_blank">
+                hackerrank Profile
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container-fluid">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2015 Stephanie W
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://stephanie-w.github.io/brainscribble/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://stephanie-w.github.io/brainscribble/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://stephanie-w.github.io/brainscribble/theme/js/respond.min.js"></script>
+
+    <!-- Google Analytics -->
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-67062346-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+    <!-- End Google Analytics Code -->
+
+</body>
+</html>
