@@ -77,7 +77,8 @@ MD_EXTENSIONS = [
 
 # Blogroll
 LINKS = (('codeeval Profile', 'https://www.codeeval.com/profile/lisptick/'),
-('hackerrank Profile', 'https://www.hackerrank.com/lisptick'),)
+('hackerrank Profile', 'https://www.hackerrank.com/lisptick'),
+('Tableau Profile', 'https://public.tableau.com/profile/stephanie.w3667#!/'))
 #LINKS = (('Pelican', 'http://getpelican.com/'),
 #         ('Python.org', 'http://python.org/'),
 #         ('Jinja2', 'http://jinja.pocoo.org/'),)
