@@ -41,6 +41,7 @@ Algotithm :
        c. If there is no solution, move down and recursively check if this leads to a solution
        d. If none of the above solution work, unmark the cell and return False
 
+Code :
 
 ```python
 # Utility to check if the current cell position (x,y)
@@ -104,4 +105,9 @@ else:
 ```
 
     [[1, 0, 0, 0], [1, 1, 0, 0], [0, 1, 0, 0], [0, 1, 1, 1]]
+
+<!-- Source
+http://www.geeksforgeeks.org/backttracking-set-2-rat-in-a-maze/
+-->
+
 

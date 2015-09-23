@@ -11,7 +11,7 @@ Backtracking is an algorithmic paradigm that tries different solutions until fin
 
 Given an undirected graph and a number m, determine if the graph can be colored with at most m colors such that no two adjacent vertices of the graph are colored with same color. Here coloring of a graph means assignment of colors to all vertices.
 
-1) A 2D array graph[V][V] where V is the number of vertices in graph and graph[V][V] is adjacency matrix representation of the graph. A value graph[i][j] is 1 if there is a direct edge from i to j, otherwise graph[i][j] is 0.
+1) A 2D array graph[V][V] where V is the number of vertices in graph and graph[V][V] is adjacency matrix representation of the graph. A value graph[i][j] is 1 if there is a direct edge from i to j, otherwise graph[i][j] is 0.  
 2) An integer m which is maximum number of colors that can be used.
 
 Output:
@@ -29,12 +29,13 @@ Algorithm:
         b. If color assignment is possible, recursivelty assign colors to next vertices
         c. If color assignment is not possible, de-assign color, return False
 
+Code:
 
 ```python
 def is_safe(n, graph, colors, c):
     # Iterate trough adjacent vertices
     # and check if the vertex color is different from c
-    for i in range(n):
+    for i in xrange(n):
         if graph[n][i] and c == colors[i]: return False
     return True
 
@@ -45,7 +46,7 @@ def graphColoringUtil(graph, color_nb, colors, n):
         return True
     
     # Trying differents color for the vertex n
-    for c in range(1, color_nb+1):
+    for c in xrange(1, color_nb+1):
         # Check if assignment of color c to n is possible
         if is_safe(n, graph, colors, c):
             # Assign color c to n
@@ -89,3 +90,13 @@ else:
 
     [1, 2, 3, 2]
 
+
+The solution corresponds to the following assignments:   
+1st node : color 1  
+2nd node : color 2  
+3rd node : color 3  
+
+<!--
+Sources
+http://www.geeksforgeeks.org/backttracking-set-5-m-coloring-problem/
+-->
