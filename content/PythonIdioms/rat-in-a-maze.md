@@ -3,7 +3,6 @@ title: Backtracking - Rat in a Maze
 date: 2015-09-07
 tags: python, algorithm
 series: backtracking
-Pin: true
 
 ---
 
