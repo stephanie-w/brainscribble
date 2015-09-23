@@ -126,7 +126,7 @@ Brain Scribble            </a>
                 <hr />
 <p>Backtracking is an algorithmic paradigm that tries different solutions until finds a solution that “works”. Problems which are typically solved using backtracking technique have following property in common. These problems can only be solved by trying every possible configuration and each configuration is tried only once.</p>
 <p>Given an undirected graph and a number m, determine if the graph can be colored with at most m colors such that no two adjacent vertices of the graph are colored with same color. Here coloring of a graph means assignment of colors to all vertices.</p>
-<p>1) A 2D array graph[V][V] where V is the number of vertices in graph and graph[V][V] is adjacency matrix representation of the graph. A value graph[i][j] is 1 if there is a direct edge from i to j, otherwise graph[i][j] is 0.
+<p>1) A 2D array graph[V][V] where V is the number of vertices in graph and graph[V][V] is adjacency matrix representation of the graph. A value graph[i][j] is 1 if there is a direct edge from i to j, otherwise graph[i][j] is 0.<br />
 2) An integer m which is maximum number of colors that can be used.</p>
 <p>Output:
 An array color[V] that should have numbers from 1 to m. color[i] should represent the color assigned to the ith vertex. The code should also return false if the graph cannot be colored with m colors.</p>
@@ -141,10 +141,11 @@ An array color[V] that should have numbers from 1 to m. color[i] should represen
 </pre></div>
 
 
+<p>Code:</p>
 <div class="highlight"><pre><span class="code-line"><span class="k">def</span> <span class="nf">is_safe</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">colors</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span></span>
 <span class="code-line">    <span class="c"># Iterate trough adjacent vertices</span></span>
 <span class="code-line">    <span class="c"># and check if the vertex color is different from c</span></span>
-<span class="code-line">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span></span>
+<span class="code-line">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">n</span><span class="p">):</span></span>
 <span class="code-line">        <span class="k">if</span> <span class="n">graph</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="ow">and</span> <span class="n">c</span> <span class="o">==</span> <span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span> <span class="k">return</span> <span class="bp">False</span></span>
 <span class="code-line">    <span class="k">return</span> <span class="bp">True</span></span>
 <span class="code-line"></span>
@@ -155,7 +156,7 @@ An array color[V] that should have numbers from 1 to m. color[i] should represen
 <span class="code-line">        <span class="k">return</span> <span class="bp">True</span></span>
 <span class="code-line"></span>
 <span class="code-line">    <span class="c"># Trying differents color for the vertex n</span></span>
-<span class="code-line">    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">color_nb</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span></span>
+<span class="code-line">    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">color_nb</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span></span>
 <span class="code-line">        <span class="c"># Check if assignment of color c to n is possible</span></span>
 <span class="code-line">        <span class="k">if</span> <span class="n">is_safe</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">colors</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span></span>
 <span class="code-line">            <span class="c"># Assign color c to n</span></span>
@@ -200,6 +201,16 @@ An array color[V] that should have numbers from 1 to m. color[i] should represen
 
 <div class="highlight"><pre><span class="code-line">[1, 2, 3, 2]</span>
 </pre></div>
+
+
+<p>The solution corresponds to the following assignments: <br />
+1st node : color 1<br />
+2nd node : color 2<br />
+3rd node : color 3  </p>
+<!--
+Sources
+http://www.geeksforgeeks.org/backttracking-set-5-m-coloring-problem/
+-->
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
@@ -213,10 +224,10 @@ An array color[V] that should have numbers from 1 to m. color[i] should represen
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="http://stephanie-w.github.io/brainscribble/rat-in-a-maze.html">Backtracking - Rat in a Maze</a></li>
-        <li><a href="http://stephanie-w.github.io/brainscribble/binary2int.html">Decoding Binary Code (int)</a></li>
         <li><a href="http://stephanie-w.github.io/brainscribble/binary2ascii.html">Decoding Binary Code (ascii)</a></li>
         <li><a href="http://stephanie-w.github.io/brainscribble/primes.html">Generating n primes</a></li>
         <li><a href="http://stephanie-w.github.io/brainscribble/combinations.html">All possible combinations</a></li>
+        <li><a href="http://stephanie-w.github.io/brainscribble/binary2int.html">Decoding Binary Code (int)</a></li>
     </ul>
 </section>
         </article>
@@ -257,13 +268,13 @@ Brain Scribble    <li class="list-group-item">
                         </a>
                     </li>
                     <li class="list-group-item tag-1">
-                        <a href="http://stephanie-w.github.io/brainscribble/tag/python.html">
-                            python
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/machine-learning.html">
+                            machine-learning
                         </a>
                     </li>
                     <li class="list-group-item tag-1">
-                        <a href="http://stephanie-w.github.io/brainscribble/tag/machine-learning.html">
-                            machine-learning
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/python.html">
+                            python
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
@@ -277,13 +288,13 @@ Brain Scribble    <li class="list-group-item">
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
-                        <a href="http://stephanie-w.github.io/brainscribble/tag/scikit-learn.html">
-                            scikit-learn
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/algorithm.html">
+                            algorithm
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
-                        <a href="http://stephanie-w.github.io/brainscribble/tag/algorithm.html">
-                            algorithm
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/scikit-learn.html">
+                            scikit-learn
                         </a>
                     </li>
                     <li class="list-group-item tag-4">
@@ -310,6 +321,11 @@ Brain Scribble    <li class="list-group-item">
         <li class="list-group-item">
             <a href="https://www.hackerrank.com/lisptick" target="_blank">
                 hackerrank Profile
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="https://public.tableau.com/profile/stephanie.w3667#!/" target="_blank">
+                Tableau Profile
             </a>
         </li>
       </ul>
