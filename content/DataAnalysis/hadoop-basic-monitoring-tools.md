@@ -1,12 +1,14 @@
 ---
 title: Hadoop: Basic Monitoring Tools
-date: 2015-10-19
+date: 2015-10-29
 tags: hadoop
+summary: Hadoop Web UI and logs
+pin: True
 
 ---
 
 
-## Web GUI
+## Web UI
 
 ### Namenode Web UI:   
 
@@ -54,7 +56,7 @@ starting datanode, logging to /var/log/hadoop/hdfs/hadoop-hdfs-datanode-hadoop.o
 
 A mapreduce job client set up an application context (local files, jar, command, etc.) and prepare the very first container that will run the Application Master service in charge of negociating resources from the Resource Manager and work with the NodeManagers to execute and monitor container.
 
-A mapreduce job application context is described on HDFS in the /user/<user_name>/.staging directory. The job client creates job.xml, job.<timestamp>.conf.xml containing all the hadoop params used to execute the job and jar files used in the hadoop jar command and then used by all the containers to execute the job.
+A mapreduce job application context is described on HDFS in the /user/&lt;user_name&gt;/.staging directory. The job client creates job.xml, job.&lt;timestamp&gt;.conf.xml containing all the hadoop parameters used to execute the job and jar files used in the hadoop jar command and then used by all the containers to execute the job.
 
 The following command runs the sleep example with one mapper and one reducer:
 
@@ -146,7 +148,7 @@ For more information on debugging see [How to Debug Map/Reduce Programs](http://
 Note:  
 The log aggregation feature allows Hadoop to store the application logs in HDFS.  
 This feature can be activated with the `yarn.log-aggregation-enable` property set to true in the yarn-site.xml file.  
-The logs will be located at hdfs:///logs/userlogs/<user>/<app_id>. To access them use the following command line:  
+The logs will be located at hdfs:///logs/userlogs/&lt;user_name&gt;/&lt;app_id&gt;. To access them use the following command line:  
 
 ```console
 $ yarn logs -applicationId <applicationId> # Read Application logs
