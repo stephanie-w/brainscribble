@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Hadoop: Basic Monitoring Tools - Brain Scribble</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="http://stephanie-w.github.io/brainscribble/images/brain-scribble-ico.png" rel="icon">
+
+<link rel="canonical" href="http://stephanie-w.github.io/brainscribble/hadoop-basic-monitoring-tools.html">
+
+        <meta name="author" content="Stephanie W" />
+        <meta name="keywords" content="hadoop" />
+        <meta name="description" content="Hadoop Web UI and logs" />
+
+        <meta property="og:site_name" content="Brain Scribble" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Hadoop: Basic Monitoring Tools"/>
+        <meta property="og:url" content="http://stephanie-w.github.io/brainscribble/hadoop-basic-monitoring-tools.html"/>
+        <meta property="og:description" content="Hadoop Web UI and logs"/>
+        <meta property="article:published_time" content="2015-10-29" />
+            <meta property="article:section" content="DataAnalysis" />
+            <meta property="article:tag" content="hadoop" />
+            <meta property="article:author" content="Stephanie W" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://stephanie-w.github.io/brainscribble/theme/css/bootstrap.lumen.min.css" type="text/css"/>
+    <link href="http://stephanie-w.github.io/brainscribble/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://stephanie-w.github.io/brainscribble/theme/css/pygments/solarized.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://stephanie-w.github.io/brainscribble/theme/css/style.css" type="text/css"/>
+
+        <link href="http://stephanie-w.github.io/brainscribble/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Brain Scribble ATOM Feed"/>
+
+
+
+        <link href="http://stephanie-w.github.io/brainscribble/feeds/dataanalysis.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Brain Scribble DataAnalysis ATOM Feed"/>
+
+    <!-- Mathjax -->
+    <script type="text/javascript"
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://stephanie-w.github.io/brainscribble/" class="navbar-brand">
+Brain Scribble            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="http://stephanie-w.github.io/brainscribble/category/dataanalysis.html">DataAnalysis</a>
+                        </li>
+                        <li >
+                            <a href="http://stephanie-w.github.io/brainscribble/category/games.html">Games</a>
+                        </li>
+                        <li >
+                            <a href="http://stephanie-w.github.io/brainscribble/category/projectmanagement.html">ProjectManagement</a>
+                        </li>
+                        <li >
+                            <a href="http://stephanie-w.github.io/brainscribble/category/pythonidioms.html">PythonIdioms</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="http://stephanie-w.github.io/brainscribble/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="http://stephanie-w.github.io/brainscribble/hadoop-basic-monitoring-tools.html"
+                       rel="bookmark"
+                       title="Permalink to Hadoop: Basic Monitoring Tools">
+                        Hadoop: Basic Monitoring Tools
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2015-10-29T00:00:00+01:00"> 2015-10-29</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="http://stephanie-w.github.io/brainscribble/tag/hadoop.html">hadoop</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <hr />
+<h2 id="web-ui">Web UI</h2>
+<h3 id="namenode-web-ui">Namenode Web UI:</h3>
+<p>Default port: 50070 (50470 for https)<br />
+The port can be configured with the <code>dfs.namenode.http-address</code> property of the hdfs-site.xml configuration file.<br />
+The Web Interface provides information on the Namenode and the HDfS as well. It provides also some utilities like file and logs browsing.  </p>
+<p><img alt="png" src="figure/DataNodesWebUI.png" /></p>
+<h3 id="datanodes-web-ui">Datanodes Web UI:</h3>
+<p>Default port: 50075 (50475 for https)<br />
+The port can be configured with the <code>dfs.namenode.http-address</code> property in the hdfs-site.xml configuration file.  </p>
+<p>Some useful entrypoints:<br />
+/blockScannerReport : datanode block checks report<br />
+/logLevel : log4j logging levels form. This is similar to <code>hadoop daemonlog</code> utility<br />
+/stacks : Stack traces for all threads<br />
+/metrics?format=json : Metrics for the server  </p>
+<h3 id="yarn-web-ui">YARN Web UI</h3>
+<p>Default Port: 8042<br />
+The port can be configured with the <code>yarn.resourcemanager.webapp.address</code> property of the yarn-site.xml configuration file.<br />
+The Resource Manager Web interface provides cluster information on applications and scheduler.  </p>
+<p><img alt="png" src="figure/Applications.png" /></p>
+<h2 id="daemon-logs">Daemon Logs</h2>
+<p>Each daemon writes its own logs.
+The logs location can be configured in the hadoop|yarn|mapred.env files.
+These logs contains useful information on possible slowness, connectivity issues, platform bugs, etc.<br />
+The log location will be reported in the console when daemons are launches (just replace .out by .log).</p>
+<div class="highlight"><pre><span class="code-line"><span class="gp">$</span> hadoop-daemon.sh start namenode</span>
+<span class="code-line"><span class="go">starting namenode, logging to /var/log/hadoop/hdfs/hadoop-hdfs-namenode-hadoop.out</span></span>
+<span class="code-line"><span class="gp">$</span> hadoop-daemon.sh start datanode</span>
+<span class="code-line"><span class="go">starting datanode, logging to /var/log/hadoop/hdfs/hadoop-hdfs-datanode-hadoop.out</span></span>
+</pre></div>
+
+
+<h2 id="the-job-client">The job client</h2>
+<p>A mapreduce job client set up an application context (local files, jar, command, etc.) and prepare the very first container that will run the Application Master service in charge of negociating resources from the Resource Manager and work with the NodeManagers to execute and monitor container.</p>
+<p>A mapreduce job application context is described on HDFS in the /user/&lt;user_name&gt;/.staging directory. The job client creates job.xml, job.&lt;timestamp&gt;.conf.xml containing all the hadoop parameters used to execute the job and jar files used in the hadoop jar command and then used by all the containers to execute the job.</p>
+<p>The following command runs the sleep example with one mapper and one reducer:</p>
+<div class="highlight"><pre><span class="code-line"><span class="gp">$</span> yarn jar /usr/hdp/current/hadoop-mapreduce-client/hadoop-mapreduce-client-jobclient.jar sleep -m <span class="m">1</span> -r <span class="m">1</span> -mt 6000000</span>
+</pre></div>
+
+
+<p>The information collected by the job client from the Application Master (through the Resource Manager) will be reported back to the console. </p>
+<div class="highlight"><pre><span class="code-line"><span class="gp">$</span> hdfs dfs -ls /user/client/.staging/job_1445722923719_0001</span>
+<span class="code-line"><span class="go">Found 6 items</span></span>
+<span class="code-line"><span class="go">-rw-r--r--  10 client supergroup    1533962 2015-10-24 23:42 /user/client/.staging/job_1445722923719_0001/job.jar</span></span>
+<span class="code-line"><span class="go">-rw-r--r--  10 client supergroup        151 2015-10-24 23:42 /user/client/.staging/job_1445722923719_0001/job.split</span></span>
+<span class="code-line"><span class="go">-rw-r--r--   2 client supergroup         19 2015-10-24 23:42 /user/client/.staging/job_1445722923719_0001/job.splitmetainfo</span></span>
+<span class="code-line"><span class="go">-rw-r--r--   2 client supergroup     100169 2015-10-24 23:42 /user/client/.staging/job_1445722923719_0001/job.xml</span></span>
+<span class="code-line"><span class="go">-rw-r--r--   2 client supergroup      12665 2015-10-24 23:43 /user/client/.staging/job_1445722923719_0001/job_1445722923719_0001_1.jhist</span></span>
+<span class="code-line"><span class="go">-rw-r--r--   2 client supergroup     119192 2015-10-24 23:43 /user/client/.staging/job_1445722923719_0001/job_1445722923719_0001_1_conf.xml</span></span>
+</pre></div>
+
+
+<p>To kill the job, find the running job id with the <code>mapred job -list</code> command, then use <code>mapred job -kill job_1445722923719_0001</code></p>
+<h2 id="the-application-master">The Application Master</h2>
+<h3 id="how-it-works">How it works</h3>
+<p>The Application Master is the actual owner of the job.<br />
+The Application Master service is in charge of negociating resources from the Resource Manager and works with the NodeManagers to execute and monitor job containers.</p>
+<p>The client submits the application and the Application Master specifications to the RM wich will negociate the NodeManager in which the Application Master will be launched.  </p>
+<p>The NodeManager generates shell script in the local application cache which are used to execute the application master container.<br />
+The application master server container directory is located in the <code>yarn.nodemanager.local-dirs</code> directory defined in <code>yarn-site.xml</code>.</p>
+<div class="highlight"><pre><span class="code-line"><span class="gp">$</span> ls -al usercache/client/appcache/application_1445722923719_0001/container_1445722923719_0001_01_000001</span>
+<span class="code-line"><span class="go">total 56</span></span>
+<span class="code-line"><span class="go">drwx--x--- 4 yarn yarn 4096 Oct 25 00:47 .</span></span>
+<span class="code-line"><span class="go">drwx--x--- 6 yarn yarn 4096 Oct 25 00:47 ..</span></span>
+<span class="code-line"><span class="go">-rw-r--r-- 1 yarn yarn   12 Oct 25 00:47 .container_tokens.crc</span></span>
+<span class="code-line"><span class="go">-rw-r--r-- 1 yarn yarn   16 Oct 25 00:47 .default_container_executor.sh.crc</span></span>
+<span class="code-line"><span class="go">-rw-r--r-- 1 yarn yarn   16 Oct 25 00:47 .default_container_executor_session.sh.crc</span></span>
+<span class="code-line"><span class="go">-rw-r--r-- 1 yarn yarn   36 Oct 25 00:47 .launch_container.sh.crc</span></span>
+<span class="code-line"><span class="go">-rw-r--r-- 1 yarn yarn  105 Oct 25 00:47 container_tokens</span></span>
+<span class="code-line"><span class="go">-rwx------ 1 yarn yarn  717 Oct 25 00:47 default_container_executor.sh</span></span>
+<span class="code-line"><span class="go">-rwx------ 1 yarn yarn  663 Oct 25 00:47 default_container_executor_session.sh</span></span>
+<span class="code-line"><span class="go">lrwxrwxrwx 1 yarn yarn  105 Oct 25 00:47 job.jar -&gt; /srv/hadoop_data/yarn/local/usercache/client/appcache/application_1445722923719_0001/filecache/10/job.jar</span></span>
+<span class="code-line"><span class="go">lrwxrwxrwx 1 yarn yarn  105 Oct 25 00:47 job.xml -&gt; /srv/hadoop_data/yarn/local/usercache/client/appcache/application_1445722923719_0001/filecache/13/job.xml</span></span>
+<span class="code-line"><span class="go">drwxr-xr-x 2 yarn yarn 4096 Oct 25 00:47 jobSubmitDir</span></span>
+<span class="code-line"><span class="go">-rwx------ 1 yarn yarn 3490 Oct 25 00:47 launch_container.sh</span></span>
+<span class="code-line"><span class="go">drwx--x--- 2 yarn yarn 4096 Oct 25 00:47 tmp</span></span>
+</pre></div>
+
+
+<p>NOTE:  job.jar is only a soft link that points to the actual job.jar in the applications filecache directory.  This is how yarn handles distributed cache for containers.</p>
+<p>Once launched, The AM communicate with RM to negociate appropriate resource containers according to its need. The Scheduler (in the Resource Manager) responds to this request by granting a container.
+After allocation, AM communicate with the Node Managers to launch container application on them.<br />
+The container is the resource allocation and grants an application to use a specific amount of resources (memory, cpu, etc.) on a specific host.</p>
+<p>The client through the RM can communicate with its own AM to get status, progress updates, etc.</p>
+<p>Once the application is complete, the Application Master deregisters with the Resource Manager and shuts down, allowing its own container to be repurposed.</p>
+<h3 id="mapreduce-containers">MapReduce Containers</h3>
+<p>During application code execution within a container, the resulting logs are located in the <code>yarn.nodemanager.log-dirs</code> directory (syslog, stderr, stdout). </p>
+<p>If a map or reduce task stay stucked, the syslog and stderr files are a good place to check. <br />
+Once the job has completed the NodeManager will keep the log for each container for <code>yarn.nodemanager.log.retain-seconds</code>.</p>
+<div class="highlight"><pre><span class="code-line"><span class="gp">$</span> find  application_1445722923719_0002/ -print</span>
+<span class="code-line"><span class="go">application_1445722923719_0002/</span></span>
+<span class="code-line"><span class="go">application_1445722923719_0002/container_1445722923719_0002_01_000001</span></span>
+<span class="code-line"><span class="go">application_1445722923719_0002/container_1445722923719_0002_01_000001/stdout</span></span>
+<span class="code-line"><span class="go">application_1445722923719_0002/container_1445722923719_0002_01_000001/stderr</span></span>
+<span class="code-line"><span class="go">application_1445722923719_0002/container_1445722923719_0002_01_000001/syslog</span></span>
+<span class="code-line"><span class="go">application_1445722923719_0002/container_1445722923719_0002_01_000002</span></span>
+<span class="code-line"><span class="go">application_1445722923719_0002/container_1445722923719_0002_01_000002/stdout</span></span>
+<span class="code-line"><span class="go">application_1445722923719_0002/container_1445722923719_0002_01_000002/stderr</span></span>
+<span class="code-line"><span class="go">application_1445722923719_0002/container_1445722923719_0002_01_000002/syslog</span></span>
+</pre></div>
+
+
+<p>To debug failed tasks, set the <code>mapreduce.task.files.preserve.failedtasks</code> property in the mapred-site.yml file to true since it allows to leave "dead" files. </p>
+<p>For more information on debugging see <a href="http://wiki.apache.org/hadoop/HowToDebugMapReducePrograms">How to Debug Map/Reduce Programs</a></p>
+<p>Note:<br />
+The log aggregation feature allows Hadoop to store the application logs in HDFS.<br />
+This feature can be activated with the <code>yarn.log-aggregation-enable</code> property set to true in the yarn-site.xml file.<br />
+The logs will be located at hdfs:///logs/userlogs/&lt;user_name&gt;/&lt;app_id&gt;. To access them use the following command line:  </p>
+<div class="highlight"><pre><span class="code-line"><span class="gp">$</span> yarn logs -applicationId &lt;applicationId&gt; <span class="c"># Read Application logs</span></span>
+</pre></div>
+
+
+<p>Note:<br />
+<a href="https://hadoop.apache.org/docs/r2.7.1/hadoop-project-dist/hadoop-hdfs/hdfs-default.xml">Hdfs default configuration</a><br />
+<a href="https://hadoop.apache.org/docs/r2.7.1/hadoop-mapreduce-client/hadoop-mapreduce-client-core/mapred-default.xml">MapReduce default configuration</a> <br />
+<a href="https://hadoop.apache.org/docs/r2.7.1/hadoop-yarn/hadoop-yarn-common/yarn-default.xml">Yarn default configuration</a>  </p>
+<!-- Sources:
+https://support.pivotal.io/hc/en-us/articles/201925118-How-to-Find-and-Review-Logs-for-Yarn-Mapreduce-Jobs
+http://hortonworks.com/blog/apache-hadoop-yarn-concepts-and-applications/
+-->
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="http://stephanie-w.github.io/brainscribble/hadoop-word-count-explained.html">Hadoop: Word Count Code explained</a></li>
+    </ul>
+</section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+        <a href="http://stephanie-w.github.io/brainscribble/" class="home-url">
+Brain Scribble    <li class="list-group-item">
+        <ul class="list-group" id="links">
+            <img class="img-thumbnail" src="http://stephanie-w.github.io/brainscribble/images/brain-scribble.png"/>
+        </ul>
+    </li>
+        </a>
+
+
+
+
+            <li class="list-group-item"><a href="http://stephanie-w.github.io/brainscribble/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group " id="tags">
+                    <li class="list-group-item tag-1">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/r.html">
+                            R
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-1">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/machine-learning.html">
+                            machine-learning
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-1">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/python.html">
+                            python
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/stats.html">
+                            stats
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/ipython-notebook.html">
+                            ipython-notebook
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/algorithm.html">
+                            algorithm
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/scikit-learn.html">
+                            scikit-learn
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/hadoop.html">
+                            hadoop
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="https://fr.linkedin.com/pub/stephanie-werli/26/b69/a0b"><i class="fa fa-linkedin-square fa-lg"></i> linkedin</a></li>
+                <li class="list-group-item"><a href="http://github.com/stephanie-w"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+              </ul>
+            </li>
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="https://www.codeeval.com/profile/lisptick/" target="_blank">
+                codeeval Profile
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="https://www.hackerrank.com/lisptick" target="_blank">
+                hackerrank Profile
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="https://public.tableau.com/profile/stephanie.w3667#!/" target="_blank">
+                Tableau Profile
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container-fluid">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2015 Stephanie W
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://stephanie-w.github.io/brainscribble/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://stephanie-w.github.io/brainscribble/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://stephanie-w.github.io/brainscribble/theme/js/respond.min.js"></script>
+
+    <!-- Google Analytics -->
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-67062346-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+    <!-- End Google Analytics Code -->
+
+</body>
+</html>

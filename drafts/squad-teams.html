@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Continuous Deployment - Brain Scribble</title>
+    <title>Squad Teams - Brain Scribble</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,17 +10,17 @@
 
     <link href="http://stephanie-w.github.io/brainscribble/images/brain-scribble-ico.png" rel="icon">
 
-<link rel="canonical" href="http://stephanie-w.github.io/brainscribble/drafts/continuous-development.html">
+<link rel="canonical" href="http://stephanie-w.github.io/brainscribble/drafts/squad-teams.html">
 
         <meta name="author" content="Stephanie W" />
-        <meta name="description" content="Continuous deployment challenges: Dev workflow The &#34;All to master&#34; development model (see Git Workflows vs &#34;All to Master&#34;) is suitable for continuous deployment, however it is a huge step to developers used to work on isolated branch, but it enforces good habits like decomposing stories and features into incremental tasks ..." />
+        <meta name="description" content="A squad is a cross-functionnal self-organizing team (less than 8 people) The team has end-to-end responsability for the stuff they build (design, deployment, operation). It work on a long-term mission the key word here is aitonomous Squad team is a small business cluster running like a startup in its own ..." />
 
         <meta property="og:site_name" content="Brain Scribble" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Continuous Deployment"/>
-        <meta property="og:url" content="http://stephanie-w.github.io/brainscribble/drafts/continuous-development.html"/>
-        <meta property="og:description" content="Continuous deployment challenges: Dev workflow The &#34;All to master&#34; development model (see Git Workflows vs &#34;All to Master&#34;) is suitable for continuous deployment, however it is a huge step to developers used to work on isolated branch, but it enforces good habits like decomposing stories and features into incremental tasks ..."/>
-        <meta property="article:published_time" content="2015-10-30" />
+        <meta property="og:title" content="Squad Teams"/>
+        <meta property="og:url" content="http://stephanie-w.github.io/brainscribble/drafts/squad-teams.html"/>
+        <meta property="og:description" content="A squad is a cross-functionnal self-organizing team (less than 8 people) The team has end-to-end responsability for the stuff they build (design, deployment, operation). It work on a long-term mission the key word here is aitonomous Squad team is a small business cluster running like a startup in its own ..."/>
+        <meta property="article:published_time" content="2015-10-17" />
             <meta property="article:section" content="ProjectManagement" />
             <meta property="article:author" content="Stephanie W" />
 
@@ -91,10 +91,10 @@ Brain Scribble            </a>
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="http://stephanie-w.github.io/brainscribble/drafts/continuous-development.html"
+                    <a href="http://stephanie-w.github.io/brainscribble/drafts/squad-teams.html"
                        rel="bookmark"
-                       title="Permalink to Continuous Deployment">
-                        Continuous Deployment
+                       title="Permalink to Squad Teams">
+                        Squad Teams
                     </a>
                 </h1>
             </header>
@@ -104,7 +104,7 @@ Brain Scribble            </a>
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2015-10-30T11:45:09.195169+01:00"> 2015-10-30</time>
+        <i class="fa fa-calendar"></i><time datetime="2015-10-17T00:00:00+02:00"> 2015-10-17</time>
     </span>
 
 
@@ -115,26 +115,17 @@ Brain Scribble            </a>
 </footer><!-- /.post-info -->                    </div>
                 </div>
                 <hr />
-<h2 id="continuous-deployment-challenges">Continuous deployment challenges:</h2>
-<h3 id="dev-workflow">Dev workflow</h3>
-<p>The "All to master" development model (see <a href="git-workflows.html">Git Workflows vs "All to Master"</a>) is suitable for continuous deployment, however it is a huge step to developers used to work on isolated branch, but it enforces good habits like decomposing stories and features into incremental tasks, committing at least once a day to master,  be rigourous with pre- and post-commits tests.</p>
-<ul>
-<li>A version control infrastructure that allows a developer at any site full access to the latest source code with the ability to commit early and frequently.</li>
-<li>The ability to set up continuous integration (build and test) infrastructure that operates well under heavy load at multiple locations.</li>
-</ul>
-<h3 id="infrastructure">Infrastructure</h3>
-<p>In the context of continuous deployment, it is important the infrastructure don't slow down the development tempo. In a large distributed environment, one of the biggest challenge is to build or rebuild an infrastructure which minimize divergence between development and production.</p>
-<p>There are many interesting approaches to designing software, and the <a href="http://12factor.net/">12-factor app</a> is an example of one such approach. The twelve-factor app is a methodology specifically designed to maximize developer productivity and application maintainability.</p>
-<p>Sources :</p>
-<ul>
-<li><a href="http://12factor.net/">The twelve factor App</a>  </li>
-<li><a href="http://mike-clarke.com/2013/11/applied-docker-continuous-integration/">Applied Docker: Continuous Integration</a>
-http://blog.assembla.com/AssemblaBlog/tabid/12618/bid/92411/Continuous-Delivery-vs-Continuous-Deployment-vs-Continuous-Integration-Wait-huh.aspx</li>
-</ul>
-<!--
-Sources : 
-http://blogs.wandisco.com/2013/07/24/git-workflows-and-continuous-delivery-using-multisite-replication-to-facilitate-a-global-mainline/  
--->
+<p>A squad is a cross-functionnal self-organizing team (less than 8 people)
+The team has end-to-end responsability for the stuff they build (design, deployment, operation). It work on a long-term mission
+the key word here is aitonomous
+Squad team is a small business cluster running like a startup in its own right.
+Squad team is the smallest grouping unit which behaves like a lean startup in its own right.
+Each focuses on a specific function and iterates on minimum viable product, releasing updates early and often.
+This squad has their own workspaces and managemet structure, a product owner, who leads on making connections with other squads.
+Ideally, each squad is fully autonomous. There should be no blocking dependencies to other squads. So It has all the skills/tools to design, develop, test and relaese to production.</p>
+<p>Related squad are are grouped into tribes. These behave as “incubators” for the startup-like squads.</p>
+<p>Tribe attemps to remain autonomous. Grouping tribes together for specific projects is called "creating scrums".
+For further working together and communication, there are larger groupings, called chapters and guilds.</p>
             </div>
             <!-- /.entry-content -->
         </article>

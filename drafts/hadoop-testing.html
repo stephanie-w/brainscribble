@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Continuous Deployment - Brain Scribble</title>
+    <title>Hadoop Testing - Brain Scribble</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,18 +10,18 @@
 
     <link href="http://stephanie-w.github.io/brainscribble/images/brain-scribble-ico.png" rel="icon">
 
-<link rel="canonical" href="http://stephanie-w.github.io/brainscribble/drafts/continuous-development.html">
+<link rel="canonical" href="http://stephanie-w.github.io/brainscribble/drafts/hadoop-testing.html">
 
         <meta name="author" content="Stephanie W" />
-        <meta name="description" content="Continuous deployment challenges: Dev workflow The &#34;All to master&#34; development model (see Git Workflows vs &#34;All to Master&#34;) is suitable for continuous deployment, however it is a huge step to developers used to work on isolated branch, but it enforces good habits like decomposing stories and features into incremental tasks ..." />
+        <meta name="description" content="http://hortonworks.com/kb/test-mapreduce-setup/ Testing /usr/hdp/2.3.2.0-2950/hadoop/share/hadoop/yarn/hadoop-yarn-applications-distributedshell-2.2.0.jar [root@hadoop conf]# $HADOOP_PREFIX/bin/hadoop jar $HADOOP_PREFIX/share/hadoop/yarn/hadoop-yarn-applications-distributedshell-2.2.0.jar org.apache.hadoop.yarn.applications.distributedshell.Client --jar $HADOOP_PREFIX/share/hadoo^Cyarn/hadoop-yarn-applications-distributedshell-2.2.0 ..." />
 
         <meta property="og:site_name" content="Brain Scribble" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Continuous Deployment"/>
-        <meta property="og:url" content="http://stephanie-w.github.io/brainscribble/drafts/continuous-development.html"/>
-        <meta property="og:description" content="Continuous deployment challenges: Dev workflow The &#34;All to master&#34; development model (see Git Workflows vs &#34;All to Master&#34;) is suitable for continuous deployment, however it is a huge step to developers used to work on isolated branch, but it enforces good habits like decomposing stories and features into incremental tasks ..."/>
-        <meta property="article:published_time" content="2015-10-30" />
-            <meta property="article:section" content="ProjectManagement" />
+        <meta property="og:title" content="Hadoop Testing"/>
+        <meta property="og:url" content="http://stephanie-w.github.io/brainscribble/drafts/hadoop-testing.html"/>
+        <meta property="og:description" content="http://hortonworks.com/kb/test-mapreduce-setup/ Testing /usr/hdp/2.3.2.0-2950/hadoop/share/hadoop/yarn/hadoop-yarn-applications-distributedshell-2.2.0.jar [root@hadoop conf]# $HADOOP_PREFIX/bin/hadoop jar $HADOOP_PREFIX/share/hadoop/yarn/hadoop-yarn-applications-distributedshell-2.2.0.jar org.apache.hadoop.yarn.applications.distributedshell.Client --jar $HADOOP_PREFIX/share/hadoo^Cyarn/hadoop-yarn-applications-distributedshell-2.2.0 ..."/>
+        <meta property="article:published_time" content="2015-10-20" />
+            <meta property="article:section" content="DataAnalysis" />
             <meta property="article:author" content="Stephanie W" />
 
 
@@ -37,8 +37,8 @@
 
 
 
-        <link href="http://stephanie-w.github.io/brainscribble/feeds/projectmanagement.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Brain Scribble ProjectManagement ATOM Feed"/>
+        <link href="http://stephanie-w.github.io/brainscribble/feeds/dataanalysis.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Brain Scribble DataAnalysis ATOM Feed"/>
 
     <!-- Mathjax -->
     <script type="text/javascript"
@@ -62,13 +62,13 @@ Brain Scribble            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
-                        <li >
+                        <li class="active">
                             <a href="http://stephanie-w.github.io/brainscribble/category/dataanalysis.html">DataAnalysis</a>
                         </li>
                         <li >
                             <a href="http://stephanie-w.github.io/brainscribble/category/games.html">Games</a>
                         </li>
-                        <li class="active">
+                        <li >
                             <a href="http://stephanie-w.github.io/brainscribble/category/projectmanagement.html">ProjectManagement</a>
                         </li>
                         <li >
@@ -91,10 +91,10 @@ Brain Scribble            </a>
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="http://stephanie-w.github.io/brainscribble/drafts/continuous-development.html"
+                    <a href="http://stephanie-w.github.io/brainscribble/drafts/hadoop-testing.html"
                        rel="bookmark"
-                       title="Permalink to Continuous Deployment">
-                        Continuous Deployment
+                       title="Permalink to Hadoop Testing">
+                        Hadoop Testing
                     </a>
                 </h1>
             </header>
@@ -104,7 +104,7 @@ Brain Scribble            </a>
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2015-10-30T11:45:09.195169+01:00"> 2015-10-30</time>
+        <i class="fa fa-calendar"></i><time datetime="2015-10-20T00:00:00+02:00"> 2015-10-20</time>
     </span>
 
 
@@ -115,26 +115,12 @@ Brain Scribble            </a>
 </footer><!-- /.post-info -->                    </div>
                 </div>
                 <hr />
-<h2 id="continuous-deployment-challenges">Continuous deployment challenges:</h2>
-<h3 id="dev-workflow">Dev workflow</h3>
-<p>The "All to master" development model (see <a href="git-workflows.html">Git Workflows vs "All to Master"</a>) is suitable for continuous deployment, however it is a huge step to developers used to work on isolated branch, but it enforces good habits like decomposing stories and features into incremental tasks, committing at least once a day to master,  be rigourous with pre- and post-commits tests.</p>
-<ul>
-<li>A version control infrastructure that allows a developer at any site full access to the latest source code with the ability to commit early and frequently.</li>
-<li>The ability to set up continuous integration (build and test) infrastructure that operates well under heavy load at multiple locations.</li>
-</ul>
-<h3 id="infrastructure">Infrastructure</h3>
-<p>In the context of continuous deployment, it is important the infrastructure don't slow down the development tempo. In a large distributed environment, one of the biggest challenge is to build or rebuild an infrastructure which minimize divergence between development and production.</p>
-<p>There are many interesting approaches to designing software, and the <a href="http://12factor.net/">12-factor app</a> is an example of one such approach. The twelve-factor app is a methodology specifically designed to maximize developer productivity and application maintainability.</p>
-<p>Sources :</p>
-<ul>
-<li><a href="http://12factor.net/">The twelve factor App</a>  </li>
-<li><a href="http://mike-clarke.com/2013/11/applied-docker-continuous-integration/">Applied Docker: Continuous Integration</a>
-http://blog.assembla.com/AssemblaBlog/tabid/12618/bid/92411/Continuous-Delivery-vs-Continuous-Deployment-vs-Continuous-Integration-Wait-huh.aspx</li>
-</ul>
-<!--
-Sources : 
-http://blogs.wandisco.com/2013/07/24/git-workflows-and-continuous-delivery-using-multisite-replication-to-facilitate-a-global-mainline/  
--->
+<p>http://hortonworks.com/kb/test-mapreduce-setup/</p>
+<p>Testing
+/usr/hdp/2.3.2.0-2950/hadoop/share/hadoop/yarn/hadoop-yarn-applications-distributedshell-2.2.0.jar
+[root@hadoop conf]# $HADOOP_PREFIX/bin/hadoop jar $HADOOP_PREFIX/share/hadoop/yarn/hadoop-yarn-applications-distributedshell-2.2.0.jar org.apache.hadoop.yarn.applications.distributedshell.Client --jar $HADOOP_PREFIX/share/hadoo^Cyarn/hadoop-yarn-applications-distributedshell-2.2.0.jar --shell_command date
+o</p>
+<p>/usr/hdp/current/hadoop-client/bin/hadoop jar /usr/hdp/2.3.2.0-2950/hadoop-yarn/hadoop-yarn-applications-distributedshell.jar org.apache.hadoop.yarn.applications.distributedshell.Client --jar /usr/hdp/2.3.2.0-2950/hadoop-yarn/hadoop-yarn-applications-distributedshell.jar --shell_command date #--num_containers 2</p>
             </div>
             <!-- /.entry-content -->
         </article>
