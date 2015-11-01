@@ -2,13 +2,13 @@
 title: Hadoop: Basic Monitoring Tools
 date: 2015-10-29
 tags: hadoop
-summary: Hadoop Web UI and logs
+summary: Hadoop Web UIs and logs
 pin: True
 
 ---
 
 
-## Web UI
+## Web UIs
 
 ### Namenode Web UI:   
 
