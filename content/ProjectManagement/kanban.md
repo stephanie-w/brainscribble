@@ -192,10 +192,3 @@ Sources:
 [Agile Rambling - Tag Archives: metrics](http://agileramblings.com/tag/metrics-2/)
 [Designing Your Kanban Board to Map Your Process](http://leankit.com/blog/2014/02/map-your-process-with-kanban)
 
-https://support.leankit.com/hc/en-us/articles/204389308-Top-10-Board-Templates
-http://leankit.com/kanban/kanban-board-examples-for-development-and-operations/
-http://leankit.com/blog/2014/02/map-your-process-with-kanban/
-
-
-http://217.70.190.132:8080/secure/SessionTimeoutMessage.jspa
-www.lynda.com/JIRA-tutorials/Cloning-linking-moving-issue/191943/378671-4.
