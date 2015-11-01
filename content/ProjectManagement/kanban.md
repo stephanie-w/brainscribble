@@ -1,5 +1,5 @@
 ---
-title: Kanban Practices
+title: Kanban Principles
 date: 2015-07-02
 
 [TOC]
@@ -10,6 +10,14 @@ date: 2015-07-02
 Kanban in the context of software development mean a visual process-management system that tells what to produce, when to produce it, and how much to produce - inspired by the Toyota Production System and by Lean manufacturing.
 
 <!-- END_SUMMARY -->
+Kanban board core properties are:
+
+* visualize the work in the worflow
+* limit the work in progress
+* manage flow
+* make process policies explicit
+* improve collaboratively
+
 A Kanban board must be visual, tactile, collaborative.  
 
 ## Kanban Composants 
@@ -61,6 +69,23 @@ Possible workflow step could be chosen among the following steps:
 
 The Kanban method starts with existing roles and process and stimulates continuous, incremental and evolutionary change in the system by monitoring, adapting and improving the workflow, by measuring effectiveness by tracking flow, quality, throughput, lead times.
 
+## Building a kanban
+
+** A methodology to discover WIP**  
+On a sheet of paper, ask the team to write down 5-10 things you're currently working on.  
+For each items, the team should answer the following questions:
+
+* what type of work is it? (user story, feature, defect, task, request, ticket, white pater, test, etc.)
+* where is it now? (in development, waiting for, etc.)
+* where was it just before I got it?
+* where will it go when i'm done with it? (ready to deploy, in production, etc.)
+
+The resulting material is the base for a first shot of the mapping of the workflow, drawing a board representing the path from a task entering the system (ie. the team sharing the same process) to the done step, trying to find a place for each piece of work.  
+First, examine the entering work by identifying the source of demand: What's the cause of event? What is the source of demand? Then what is the destination of the completed work?: software development environment, test platform, etc.?   
+The next step is identifying the queues, places where tasks are waiting to be picked by someone and to be moved to the next step (ex: a "development done"or a "Ready to deploy" column). A important point is also to identify who owns the queues (the development team, the QA team,...) cause the limit WIP should be base on the process limit of the owner.  
+A Kanban is a "pull" system, the work is pull along by the owner of the queue when it is ready for it and has the capacity to work on it. This helps balancing the demand against the available throughput preventing bottleneck.
+
+Even if the mapping will be reajusted, improved from time to time, it is important to track work progess by collecting metric starting with basic Kanban metrics: Total WIP, #Blockers, Troughput (Cards complete/day or week).
 
 ## Kanban Metrics
 
@@ -130,25 +155,11 @@ This report shows a trend of the average number of defects opened against a Stor
 
 
 <!--
-##Kanban Strategies:
+## Kanban Strategies:
 a kanban by project?
-a kanban by team? a kanban by team seems more as one of the goal is to improve collaborative work.  
+a kanban by team? a kanban by team seems more appropriate as one of the goal is to improve collaborative work.  
 Team kanban can be combined with techniques like user map stories which allow to visualize project big pictures. 
 
-## Building a kanban
-
-Methodologies to validate the model:
-
-* Produce a sketch from your top-down or bottom-up model.
-* Make sure that actual work items map to your sketch or top-down model, then use the "what does this item need?" questions.
-* Consider whether it would be helpful to group, consolidate, or break down categories.
-
-
-Links:
-
-* Explain Kanban practices with a game [Kanban Pizza Game](http://www.agile42.com/en/training/kanban-pizza-game/)
-* Kanban Board App [Trello](http://trello.com)
-* Kanban Board App [Restyaboard](http://restya.com/board/)
 
 ### Six Rules for an Effective Kanban System
 
@@ -160,6 +171,12 @@ A Kanban should accompany each item, every time.
 Defects and incorrect amounts are never sent to the next downstream process.  
 The number of Kanbans is reduced carefully to lower inventories and to reveal problems.  
 -->
+
+Some Links:
+
+* Explain Kanban practices with a game [Kanban Pizza Game](http://www.agile42.com/en/training/kanban-pizza-game/)
+* Kanban Board App [Trello](http://trello.com)
+* Kanban Board App [Restyaboard](http://restya.com/board/)
 
 Sources:
 
@@ -173,3 +190,12 @@ Sources:
 [Stack Exchange : What are commonly tracked metrics in kanban?](http://pm.stackexchange.com/questions/10657/what-are-some-commonly-tracked-metrics-in-kanban)
 [Kanban Analytics part II: Cycle Time](http://blog.kanbanize.com/kanban-analytics-part-ii-cycle-time/)
 [Agile Rambling - Tag Archives: metrics](http://agileramblings.com/tag/metrics-2/)
+[Designing Your Kanban Board to Map Your Process](http://leankit.com/blog/2014/02/map-your-process-with-kanban)
+
+https://support.leankit.com/hc/en-us/articles/204389308-Top-10-Board-Templates
+http://leankit.com/kanban/kanban-board-examples-for-development-and-operations/
+http://leankit.com/blog/2014/02/map-your-process-with-kanban/
+
+
+http://217.70.190.132:8080/secure/SessionTimeoutMessage.jspa
+www.lynda.com/JIRA-tutorials/Cloning-linking-moving-issue/191943/378671-4.
