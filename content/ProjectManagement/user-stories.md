@@ -7,7 +7,9 @@ Image: figure/story-map.png
 
 
 <!-- BEGIN_SUMMARY -->
-A user story is a tool used in Agile software development to capture a description of a software feature from an end-user perspective. The user story describes the type of user, what they want and why. A user story helps to create a simplified description of a requirement.
+A user story is a tool used in Agile software development to capture a description of a software feature from an end-user perspective.
+It's a very high level definition of requirement, containing just information so than developers can produce a reasonable estimate of the effort to implement it
+The user story describes the type of user, what they want and why. A user story helps to create a simplified description of a requirement.
 
 <!-- END_SUMMARY -->
 A user story typically follow a simple template:
