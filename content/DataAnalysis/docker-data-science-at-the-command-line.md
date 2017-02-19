@@ -1,5 +1,6 @@
 ---
 title: A docker container for the "Data Science at the Command Line" book 
+tags: docker
 date: 2016-02-19
 Pin: true
 
