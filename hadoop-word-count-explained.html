@@ -33,13 +33,9 @@
     <link href="http://stephanie-w.github.io/brainscribble/theme/css/pygments/solarized.css" rel="stylesheet">
     <link rel="stylesheet" href="http://stephanie-w.github.io/brainscribble/theme/css/style.css" type="text/css"/>
 
-        <link href="http://stephanie-w.github.io/brainscribble/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Brain Scribble ATOM Feed"/>
 
 
 
-        <link href="http://stephanie-w.github.io/brainscribble/feeds/dataanalysis.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Brain Scribble DataAnalysis ATOM Feed"/>
 
     <!-- Mathjax -->
     <script type="text/javascript"
@@ -124,8 +120,8 @@ Brain Scribble            </a>
 
 <p>Map Reduce Data Flow Diagram</p>
 <p><img alt="Map Reduce WordCount Diagram" src="figure/wordcount.png" /></p>
-<h2 id="mapper-code">Mapper Code</h2>
-<div class="highlight"><pre><span class="code-line"><span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="p">;</span></span>
+<h2 id="mapper-code">Mapper Code<a class="headerlink" href="#mapper-code" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="p">;</span></span>
 <span class="code-line"><span class="kn">import</span> <span class="nn">java.util.StringTokenizer</span><span class="p">;</span></span>
 <span class="code-line"><span class="kn">import</span> <span class="nn">org.apache.hadoop.io.IntWritable</span><span class="p">;</span></span>
 <span class="code-line"><span class="kn">import</span> <span class="nn">org.apache.hadoop.io.LongWritable</span><span class="p">;</span></span>
@@ -141,26 +137,26 @@ Brain Scribble            </a>
 
 
 <p>The mapper class (WordCountMapper) is static and extends MapReduceBase and implements Mapper.</p>
-<div class="highlight"><pre><span class="code-line">    <span class="kd">private</span> <span class="kd">final</span> <span class="n">IntWritable</span> <span class="n">one</span> <span class="o">=</span> <span class="k">new</span> <span class="n">IntWritable</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>    <span class="kd">private</span> <span class="kd">final</span> <span class="n">IntWritable</span> <span class="n">one</span> <span class="o">=</span> <span class="k">new</span> <span class="n">IntWritable</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span></span>
 <span class="code-line">    <span class="kd">private</span> <span class="n">Text</span> <span class="n">word</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Text</span><span class="o">();</span></span>
 </pre></div>
 
 
 <p>The variable <code>one</code> of IntWritable type is initialized to one. The variables <code>one</code> and <code>word</code> are the key/value pair respectively.</p>
-<div class="highlight"><pre><span class="code-line">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">map</span><span class="o">(</span><span class="n">LongWritable</span> <span class="n">key</span><span class="o">,</span> <span class="n">Text</span> <span class="n">value</span><span class="o">,</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">map</span><span class="o">(</span><span class="n">LongWritable</span> <span class="n">key</span><span class="o">,</span> <span class="n">Text</span> <span class="n">value</span><span class="o">,</span></span>
 <span class="code-line">        <span class="n">OutputCollector</span><span class="o">&lt;</span><span class="n">Text</span><span class="o">,</span> <span class="n">IntWritable</span><span class="o">&gt;</span> <span class="n">output</span><span class="o">,</span> <span class="n">Reporter</span> <span class="n">reporter</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span></span>
 </pre></div>
 
 
 <p>The map method takes as parameters a LongWritable, which is the key, a text, which is the value and a OutputCollector which takes a Text and IntWritable output, then the reporter for status reporting.
 It throws a file exception if the file can't be acceeses for some reason.</p>
-<div class="highlight"><pre><span class="code-line">        <span class="n">String</span> <span class="n">line</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>        <span class="n">String</span> <span class="n">line</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span></span>
 <span class="code-line">        <span class="n">StringTokenizer</span> <span class="n">itr</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringTokenizer</span><span class="o">(</span><span class="n">line</span><span class="o">.</span><span class="na">toLowerCase</span><span class="o">());</span></span>
 </pre></div>
 
 
 <p>The SringTokenizer class is a utility class in the MapReduceAPI that breaks down line into words. That's the defaut method fo tokenize lines. But Many times, in production context, this class will be extended or replaced.</p>
-<div class="highlight"><pre><span class="code-line">        <span class="k">while</span><span class="o">(</span><span class="n">itr</span><span class="o">.</span><span class="na">hasMoreTokens</span><span class="o">())</span> <span class="o">{</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>        <span class="k">while</span><span class="o">(</span><span class="n">itr</span><span class="o">.</span><span class="na">hasMoreTokens</span><span class="o">())</span> <span class="o">{</span></span>
 <span class="code-line">            <span class="n">word</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">itr</span><span class="o">.</span><span class="na">nextToken</span><span class="o">());</span></span>
 <span class="code-line">            <span class="n">output</span><span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">word</span><span class="o">,</span> <span class="n">one</span><span class="o">);</span></span>
 <span class="code-line">        <span class="o">}</span></span>
@@ -171,8 +167,8 @@ It throws a file exception if the file can't be acceeses for some reason.</p>
 
 <p>While the tokenizer has still tokens, take the word and set the tokenizer to the next token. Then collect <code>word</code> and <code>one</code> in the output collector.</p>
 <p>This code is runned on each of the physical nodes and takes chunks of text from the HDFS file system by default and break them into a set of key/value pairs (ie. word and one)</p>
-<h2 id="reducer-code">Reducer Code</h2>
-<div class="highlight"><pre><span class="code-line"><span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span></span>
+<h2 id="reducer-code">Reducer Code<a class="headerlink" href="#reducer-code" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span></span>
 <span class="code-line"><span class="kn">import</span> <span class="nn">java.util.Iterator</span><span class="o">;</span></span>
 <span class="code-line"><span class="kn">import</span> <span class="nn">org.apache.hadoop.io.IntWritable</span><span class="o">;</span></span>
 <span class="code-line"><span class="kn">import</span> <span class="nn">org.apache.hadoop.io.Text</span><span class="o">;</span></span>
@@ -187,7 +183,7 @@ It throws a file exception if the file can't be acceeses for some reason.</p>
 
 
 <p>The Reduce class <code>WordCountReducer</code> extends MapReduceBase and implements a reducer.</p>
-<div class="highlight"><pre><span class="code-line">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">reduce</span><span class="o">(</span><span class="n">Text</span> <span class="n">key</span><span class="o">,</span> <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">IntWritable</span><span class="o">&gt;</span> <span class="n">values</span><span class="o">,</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">reduce</span><span class="o">(</span><span class="n">Text</span> <span class="n">key</span><span class="o">,</span> <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">IntWritable</span><span class="o">&gt;</span> <span class="n">values</span><span class="o">,</span></span>
 <span class="code-line">        <span class="n">OutputCollector</span><span class="o">&lt;</span><span class="n">Text</span><span class="o">,</span> <span class="n">IntWritable</span><span class="o">&gt;</span> <span class="n">output</span><span class="o">,</span> <span class="n">Reporter</span> <span class="n">reporter</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span></span>
 <span class="code-line">        <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span></span>
 <span class="code-line">        <span class="k">while</span> <span class="o">(</span><span class="n">values</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span></span>
@@ -205,7 +201,7 @@ It throws a file exception if the file can't be acceeses for some reason.</p>
 <p>All the values with the same key are presented to a single reducer together.
 The reducer receives a key and an iterator of input values from an input list, returning a single output value.</p>
 <p>To resume:</p>
-<div class="highlight"><pre><span class="code-line">mapper(filename, file-contents):</span>
+<div class="highlight"><pre><span class="code-line"><span></span>mapper(filename, file-contents):</span>
 <span class="code-line">  for each word in file-contents:</span>
 <span class="code-line">    emit (word, 1)</span>
 <span class="code-line"></span>
@@ -217,10 +213,10 @@ The reducer receives a key and an iterator of input values from an input list, r
 </pre></div>
 
 
-<h2 id="driver-code">Driver Code</h2>
+<h2 id="driver-code">Driver Code<a class="headerlink" href="#driver-code" title="Permanent link">&para;</a></h2>
 <p>The mapreduce code is runned by a main method, called the Driver.
 The driver initializes the job and instructs the Hadoop platform to execute the code on a set of input files, and controls where the output files are placed.</p>
-<div class="highlight"><pre><span class="code-line"><span class="kn">import</span> <span class="nn">org.apache.hadoop.fs.Path</span><span class="o">;</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="kn">import</span> <span class="nn">org.apache.hadoop.fs.Path</span><span class="o">;</span></span>
 <span class="code-line"><span class="kn">import</span> <span class="nn">org.apache.hadoop.io.IntWritable</span><span class="o">;</span></span>
 <span class="code-line"><span class="kn">import</span> <span class="nn">org.apache.hadoop.io.Text</span><span class="o">;</span></span>
 <span class="code-line"><span class="kn">import</span> <span class="nn">org.apache.hadoop.mapred.FileInputFormat</span><span class="o">;</span></span>
@@ -234,30 +230,30 @@ The driver initializes the job and instructs the Hadoop platform to execute the 
 
 
 <p>Create an instance of job configuration that parse the WordCount.class:</p>
-<div class="highlight"><pre><span class="code-line">        <span class="n">JobClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JobClient</span><span class="o">();</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>        <span class="n">JobClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JobClient</span><span class="o">();</span></span>
 <span class="code-line">        <span class="n">JobConf</span> <span class="n">conf</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JobConf</span><span class="o">(</span><span class="n">WordCount</span><span class="o">.</span><span class="na">class</span><span class="o">);</span></span>
 </pre></div>
 
 
 <p>Specify output types:</p>
-<div class="highlight"><pre><span class="code-line">        <span class="n">conf</span><span class="o">.</span><span class="na">setOutputKeyClass</span><span class="o">(</span><span class="n">Text</span><span class="o">.</span><span class="na">class</span><span class="o">);</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>        <span class="n">conf</span><span class="o">.</span><span class="na">setOutputKeyClass</span><span class="o">(</span><span class="n">Text</span><span class="o">.</span><span class="na">class</span><span class="o">);</span></span>
 <span class="code-line">        <span class="n">conf</span><span class="o">.</span><span class="na">setOutputValueClass</span><span class="o">(</span><span class="n">IntWritable</span><span class="o">.</span><span class="na">class</span><span class="o">);</span></span>
 </pre></div>
 
 
 <p>Specify input and output directories:</p>
-<div class="highlight"><pre><span class="code-line">        <span class="n">FileInputFormat</span><span class="o">.</span><span class="na">addInputPath</span><span class="o">(</span><span class="n">conf</span><span class="o">,</span> <span class="k">new</span> <span class="n">Path</span><span class="o">(</span><span class="s">&quot;input&quot;</span><span class="o">));</span>  </span>
+<div class="highlight"><pre><span class="code-line"><span></span>        <span class="n">FileInputFormat</span><span class="o">.</span><span class="na">addInputPath</span><span class="o">(</span><span class="n">conf</span><span class="o">,</span> <span class="k">new</span> <span class="n">Path</span><span class="o">(</span><span class="s">&quot;input&quot;</span><span class="o">));</span>  </span>
 <span class="code-line">        <span class="n">FileOutputFormat</span><span class="o">.</span><span class="na">setOutputPath</span><span class="o">(</span><span class="n">conf</span><span class="o">,</span> <span class="k">new</span> <span class="n">Path</span><span class="o">(</span><span class="s">&quot;output&quot;</span><span class="o">));</span></span>
 </pre></div>
 
 
 <p>Specify a mapper:</p>
-<div class="highlight"><pre><span class="code-line">        <span class="n">conf</span><span class="o">.</span><span class="na">setMapperClass</span><span class="o">(</span><span class="n">WordCountMapper</span><span class="o">.</span><span class="na">class</span><span class="o">);</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>        <span class="n">conf</span><span class="o">.</span><span class="na">setMapperClass</span><span class="o">(</span><span class="n">WordCountMapper</span><span class="o">.</span><span class="na">class</span><span class="o">);</span></span>
 </pre></div>
 
 
 <p>Specify a reducer:</p>
-<div class="highlight"><pre><span class="code-line">        <span class="n">conf</span><span class="o">.</span><span class="na">setReducerClass</span><span class="o">(</span><span class="n">WordCountReducer</span><span class="o">.</span><span class="na">class</span><span class="o">);</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>        <span class="n">conf</span><span class="o">.</span><span class="na">setReducerClass</span><span class="o">(</span><span class="n">WordCountReducer</span><span class="o">.</span><span class="na">class</span><span class="o">);</span></span>
 <span class="code-line">        <span class="n">conf</span><span class="o">.</span><span class="na">setCombinerClass</span><span class="o">(</span><span class="n">WordCountReducer</span><span class="o">.</span><span class="na">class</span><span class="o">);</span></span>
 <span class="code-line"></span>
 <span class="code-line">        <span class="n">client</span><span class="o">.</span><span class="na">setConf</span><span class="o">(</span><span class="n">conf</span><span class="o">);</span></span>
@@ -265,7 +261,7 @@ The driver initializes the job and instructs the Hadoop platform to execute the 
 
 
 <p>Run the Job by submitting the job to Mapreduce:</p>
-<div class="highlight"><pre><span class="code-line">        <span class="k">try</span> <span class="o">{</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>        <span class="k">try</span> <span class="o">{</span></span>
 <span class="code-line">            <span class="n">JobClient</span><span class="o">.</span><span class="na">runJob</span><span class="o">(</span><span class="n">conf</span><span class="o">);</span></span>
 <span class="code-line">        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span></span>
 <span class="code-line">            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span></span>
@@ -275,7 +271,7 @@ The driver initializes the job and instructs the Hadoop platform to execute the 
 </pre></div>
 
 
-<h2 id="high-level-mapreduce-pipeline">High level MapReduce Pipeline</h2>
+<h2 id="high-level-mapreduce-pipeline">High level MapReduce Pipeline<a class="headerlink" href="#high-level-mapreduce-pipeline" title="Permanent link">&para;</a></h2>
 <p><img alt="" src="https://farm4.static.flickr.com/3126/3529146657_5b5d025a5f_o.png" /></p>
 <p>In details:</p>
 <p><img alt="" src="https://farm3.static.flickr.com/2275/3529146683_c8247ff6db_o.png" /></p>
@@ -397,23 +393,23 @@ Brain Scribble    <li class="list-group-item">
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
-                        <a href="http://stephanie-w.github.io/brainscribble/tag/stats.html">
-                            stats
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
                         <a href="http://stephanie-w.github.io/brainscribble/tag/ipython-notebook.html">
                             ipython-notebook
                         </a>
                     </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://stephanie-w.github.io/brainscribble/tag/scikit-learn.html">
-                            scikit-learn
+                    <li class="list-group-item tag-2">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/stats.html">
+                            stats
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
                         <a href="http://stephanie-w.github.io/brainscribble/tag/algorithm.html">
                             algorithm
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/scikit-learn.html">
+                            scikit-learn
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
@@ -459,7 +455,7 @@ Brain Scribble    <li class="list-group-item">
    <div class="container-fluid">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2015 Stephanie W
+         <div class="col-xs-10">&copy; 2016 Stephanie W
             &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
@@ -475,23 +471,6 @@ Brain Scribble    <li class="list-group-item">
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
 <script src="http://stephanie-w.github.io/brainscribble/theme/js/respond.min.js"></script>
 
-    <!-- Google Analytics -->
-    <script type="text/javascript">
-
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-67062346-1']);
-        _gaq.push(['_trackPageview']);
-
-        (function () {
-            var ga = document.createElement('script');
-            ga.type = 'text/javascript';
-            ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(ga, s);
-        })();
-    </script>
-    <!-- End Google Analytics Code -->
 
 </body>
 </html>

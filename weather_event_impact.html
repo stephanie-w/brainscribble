@@ -14,13 +14,13 @@
 
         <meta name="author" content="Stephanie W" />
         <meta name="keywords" content="R" />
-        <meta name="description" content="Synopsis This analysis involves exploring the U.S. National Oceanic and Atmospheric Administration&#39;s (NOAA) storm database. This database tracks characteristics of major storms and weather events in the United States, including when and where they occur, as well as estimates of any fatalities, injuries, and property damage. This analysis ..." />
+        <meta name="description" content="Synopsis¶ This analysis involves exploring the U.S. National Oceanic and Atmospheric Administration&#39;s (NOAA) storm database. This database tracks characteristics of major storms and weather events in the United States, including when and where they occur, as well as estimates of any fatalities, injuries, and property damage. This analysis focuses …" />
 
         <meta property="og:site_name" content="Brain Scribble" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="R: Analysis of weather events impact on population health and economy."/>
         <meta property="og:url" content="http://stephanie-w.github.io/brainscribble/weather_event_impact.html"/>
-        <meta property="og:description" content="Synopsis This analysis involves exploring the U.S. National Oceanic and Atmospheric Administration&#39;s (NOAA) storm database. This database tracks characteristics of major storms and weather events in the United States, including when and where they occur, as well as estimates of any fatalities, injuries, and property damage. This analysis ..."/>
+        <meta property="og:description" content="Synopsis¶ This analysis involves exploring the U.S. National Oceanic and Atmospheric Administration&#39;s (NOAA) storm database. This database tracks characteristics of major storms and weather events in the United States, including when and where they occur, as well as estimates of any fatalities, injuries, and property damage. This analysis focuses …"/>
         <meta property="article:published_time" content="2015-06-15" />
             <meta property="article:section" content="DataAnalysis" />
             <meta property="article:tag" content="R" />
@@ -34,13 +34,9 @@
     <link href="http://stephanie-w.github.io/brainscribble/theme/css/pygments/solarized.css" rel="stylesheet">
     <link rel="stylesheet" href="http://stephanie-w.github.io/brainscribble/theme/css/style.css" type="text/css"/>
 
-        <link href="http://stephanie-w.github.io/brainscribble/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Brain Scribble ATOM Feed"/>
 
 
 
-        <link href="http://stephanie-w.github.io/brainscribble/feeds/dataanalysis.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Brain Scribble DataAnalysis ATOM Feed"/>
 
     <!-- Mathjax -->
     <script type="text/javascript"
@@ -119,7 +115,7 @@ Brain Scribble            </a>
 </footer><!-- /.post-info -->                    </div>
                 </div>
                 <hr />
-<h2 id="synopsis">Synopsis</h2>
+<h2 id="synopsis">Synopsis<a class="headerlink" href="#synopsis" title="Permanent link">&para;</a></h2>
 <!-- BEGIN_SUMMARY -->
 
 <p>This analysis involves exploring the U.S. National Oceanic and Atmospheric Administration's (NOAA) storm database. </p>
@@ -129,10 +125,10 @@ Brain Scribble            </a>
 <p>This analysis focuses on fatalities, injuries, property and crop damages to answer to the 2 following questions : 
 Across the United States, which types of events (as indicated in the EVTYPE variable) are most harmful with respect to population health?
 Across the United States, which types of events have the greatest economic consequences?</p>
-<h2 id="data-processing">Data Processing</h2>
+<h2 id="data-processing">Data Processing<a class="headerlink" href="#data-processing" title="Permanent link">&para;</a></h2>
 <p>The data comes in the form of a comma-separated-value file compressed via the bzip2.</p>
 <p>We download it and unzip it in a ProjectData directory:</p>
-<div class="highlight"><pre><span class="code-line">download.file<span class="p">(</span><span class="s">&quot;https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2FStormData.csv.bz2&quot;</span><span class="p">,</span> <span class="s">&quot;FStormData.csv.bz2&quot;</span><span class="p">,</span> </span>
+<div class="highlight"><pre><span class="code-line"><span></span>download.file<span class="p">(</span><span class="s">&quot;https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2FStormData.csv.bz2&quot;</span><span class="p">,</span> <span class="s">&quot;FStormData.csv.bz2&quot;</span><span class="p">,</span> </span>
 <span class="code-line">    method <span class="o">=</span> <span class="s">&quot;curl&quot;</span><span class="p">,</span> quiet <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span></span>
 <span class="code-line"></span>
 <span class="code-line">raw <span class="o">&lt;-</span> read.csv<span class="p">(</span><span class="kp">bzfile</span><span class="p">(</span><span class="s">&quot;FStormData.csv.bz2&quot;</span><span class="p">),</span> sep <span class="o">=</span> <span class="s">&quot;,&quot;</span><span class="p">,</span> quote <span class="o">=</span> <span class="s">&quot;\&quot;&quot;</span><span class="p">,</span> header <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> stringsAsFactors <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span></span>
@@ -142,7 +138,7 @@ Across the United States, which types of events have the greatest economic conse
 
 
 <p>The Storm Events Database reports that all weather events are only recorded since 1996 (see http://www.ncdc.noaa.gov/stormevents/details.jsp).</p>
-<div class="highlight"><pre><span class="code-line">    Event Types Available:</span>
+<div class="highlight"><pre><span class="code-line"><span></span>    Event Types Available:</span>
 <span class="code-line">    Add more info about event types here. Link to collections page/tab when referencing data collection source.</span>
 <span class="code-line"></span>
 <span class="code-line">    1. Tornado: From 1950 through 1954, only tornado events were recorded.</span>
@@ -154,41 +150,41 @@ Across the United States, which types of events have the greatest economic conse
 
 
 <p>Since we're reporting impacts from various weather events, we'll focus our study on data since 1996.</p>
-<div class="highlight"><pre><span class="code-line">data <span class="o">&lt;-</span> <span class="kp">raw</span><span class="p">[</span><span class="kp">raw</span><span class="o">$</span>BGN_DATE <span class="o">&gt;</span> <span class="s">&quot;1996-01-01&quot;</span><span class="p">,</span> <span class="p">]</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>data <span class="o">&lt;-</span> <span class="kp">raw</span><span class="p">[</span><span class="kp">raw</span><span class="o">$</span>BGN_DATE <span class="o">&gt;</span> <span class="s">&quot;1996-01-01&quot;</span><span class="p">,</span> <span class="p">]</span></span>
 <span class="code-line"><span class="kp">rm</span><span class="p">(</span><span class="kp">raw</span><span class="p">)</span></span>
 </pre></div>
 
 
-<h2 id="results">Results</h2>
+<h2 id="results">Results<a class="headerlink" href="#results" title="Permanent link">&para;</a></h2>
 <p><em>Weather events impact on population health across the United States since 1996</em></p>
 <p>To study the weather events impact on poulation health, we examine the INJURIES AND FATALITIES columns of the dataset.</p>
 <p>We compute the sum of total of injuries/fatalities by weather event type an store the values in a new dataset:</p>
-<div class="highlight"><pre><span class="code-line">fat_by_ev <span class="o">&lt;-</span> aggregate<span class="p">(</span>FATALITIES <span class="o">~</span> EVTYPE<span class="p">,</span> data <span class="o">=</span> data<span class="p">,</span> <span class="kp">sum</span><span class="p">,</span> na.rm <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>fat_by_ev <span class="o">&lt;-</span> aggregate<span class="p">(</span>FATALITIES <span class="o">~</span> EVTYPE<span class="p">,</span> data <span class="o">=</span> data<span class="p">,</span> <span class="kp">sum</span><span class="p">,</span> na.rm <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span></span>
 <span class="code-line">inj_by_ev <span class="o">&lt;-</span> aggregate<span class="p">(</span>INJURIES <span class="o">~</span> EVTYPE<span class="p">,</span> data <span class="o">=</span> data<span class="p">,</span> <span class="kp">sum</span><span class="p">,</span> na.rm <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span></span>
 </pre></div>
 
 
 <p>For fatalities, the quantile function shows that only 1% of the values of the total of injuries/fatalities by event type are significant (&gt; 326 fatalities, &gt; 1635 injuries).</p>
-<div class="highlight"><pre><span class="code-line">quantile<span class="p">(</span>fat_by_ev<span class="o">$</span>FATALITIES<span class="p">,</span> probs <span class="o">=</span> <span class="kp">seq</span><span class="p">(</span><span class="m">0.9</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">0.01</span><span class="p">))</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>quantile<span class="p">(</span>fat_by_ev<span class="o">$</span>FATALITIES<span class="p">,</span> probs <span class="o">=</span> <span class="kp">seq</span><span class="p">(</span><span class="m">0.9</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">0.01</span><span class="p">))</span></span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="code-line">##     90%     91%     92%     93%     94%     95%     96%     97%     98%     99%    100% </span>
+<div class="highlight"><pre><span class="code-line"><span></span>##     90%     91%     92%     93%     94%     95%     96%     97%     98%     99%    100% </span>
 <span class="code-line">##    4.00    5.74    9.88   14.02   28.80   57.90   78.08  105.32  198.92  326.14 1797.00</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="code-line">quantile<span class="p">(</span>inj_by_ev<span class="o">$</span>INJURIES<span class="p">,</span> probs <span class="o">=</span> <span class="kp">seq</span><span class="p">(</span><span class="m">0.9</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">0.01</span><span class="p">))</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>quantile<span class="p">(</span>inj_by_ev<span class="o">$</span>INJURIES<span class="p">,</span> probs <span class="o">=</span> <span class="kp">seq</span><span class="p">(</span><span class="m">0.9</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">0.01</span><span class="p">))</span></span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="code-line">##      90%      91%      92%      93%      94%      95%      96%      97%      98%      99%     100% </span>
+<div class="highlight"><pre><span class="code-line"><span></span>##      90%      91%      92%      93%      94%      95%      96%      97%      98%      99%     100% </span>
 <span class="code-line">##    21.60    25.74    39.76    70.04    85.76   171.90   304.56   477.80  1034.84  1635.64 20667.00</span>
 </pre></div>
 
 
 <p>We order the new datas by fatalities/injuries (decreasing order) and display the 10th first rows:</p>
-<div class="highlight"><pre><span class="code-line">fat_temp <span class="o">&lt;-</span> fat_by_ev<span class="p">[</span><span class="kp">order</span><span class="p">(</span>fat_by_ev<span class="o">$</span>FATALITIES<span class="p">,</span> decreasing <span class="o">=</span> <span class="kc">TRUE</span><span class="p">),</span> <span class="p">][</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span> <span class="p">]</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>fat_temp <span class="o">&lt;-</span> fat_by_ev<span class="p">[</span><span class="kp">order</span><span class="p">(</span>fat_by_ev<span class="o">$</span>FATALITIES<span class="p">,</span> decreasing <span class="o">=</span> <span class="kc">TRUE</span><span class="p">),</span> <span class="p">][</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span> <span class="p">]</span></span>
 <span class="code-line"><span class="kp">colnames</span><span class="p">(</span>fat_temp<span class="p">)</span> <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;event.type&quot;</span><span class="p">,</span> <span class="s">&quot;fatalities&quot;</span><span class="p">)</span></span>
 <span class="code-line">inj_temp <span class="o">&lt;-</span> inj_by_ev<span class="p">[</span><span class="kp">order</span><span class="p">(</span>inj_by_ev<span class="o">$</span>INJURIES<span class="p">,</span> decreasing <span class="o">=</span> <span class="kc">TRUE</span><span class="p">),</span> <span class="p">][</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span> <span class="p">]</span></span>
 <span class="code-line"><span class="kp">colnames</span><span class="p">(</span>inj_temp<span class="p">)</span> <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;event.type&quot;</span><span class="p">,</span> <span class="s">&quot;injuries&quot;</span><span class="p">)</span></span>
@@ -258,7 +254,7 @@ Across the United States, which types of events have the greatest economic conse
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre><span class="code-line">kable<span class="p">(</span>inj_temp<span class="p">,</span> caption <span class="o">=</span> <span class="s">&quot;Total injuries by weather event type since 1996&quot;</span><span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>kable<span class="p">(</span>inj_temp<span class="p">,</span> caption <span class="o">=</span> <span class="s">&quot;Total injuries by weather event type since 1996&quot;</span><span class="p">)</span></span>
 </pre></div>
 
 
@@ -324,7 +320,7 @@ Across the United States, which types of events have the greatest economic conse
 </tbody>
 </table>
 <p>Then plot the datas:</p>
-<div class="highlight"><pre><span class="code-line"><span class="kn">library</span><span class="p">(</span>ggplot2<span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="kn">library</span><span class="p">(</span>ggplot2<span class="p">)</span></span>
 <span class="code-line">ggplot<span class="p">(</span>fat_temp<span class="p">,</span> aes<span class="p">(</span>reorder<span class="p">(</span><span class="kp">factor</span><span class="p">(</span>event.type<span class="p">),</span> <span class="o">-</span>fatalities<span class="p">),</span> fatalities<span class="p">))</span> <span class="o">+</span> geom_bar<span class="p">(</span>stat <span class="o">=</span> <span class="s">&quot;identity&quot;</span><span class="p">)</span> <span class="o">+</span> </span>
 <span class="code-line">    labs<span class="p">(</span>x <span class="o">=</span> <span class="s">&quot;Weather event type&quot;</span><span class="p">,</span> y <span class="o">=</span> <span class="s">&quot;Fatalities&quot;</span><span class="p">,</span> title <span class="o">=</span> <span class="s">&quot;Total fatalities by weather event type since 1996&quot;</span><span class="p">)</span> <span class="o">+</span> </span>
 <span class="code-line">    theme<span class="p">(</span>axis.text.x <span class="o">=</span> element_text<span class="p">(</span>angle <span class="o">=</span> <span class="m">90</span><span class="p">,</span> hjust <span class="o">=</span> <span class="m">1</span><span class="p">))</span></span>
@@ -333,7 +329,7 @@ Across the United States, which types of events have the greatest economic conse
 
 <div class="rimage center"><img src="figure/weather_events_impact_fatalities-1.png" title="plot of chunk weather_events_impact_fatalities" alt="plot of chunk weather_events_impact_fatalities" class="plot" /></div>
 
-<div class="highlight"><pre><span class="code-line">ggplot<span class="p">(</span>inj_temp<span class="p">,</span> aes<span class="p">(</span>reorder<span class="p">(</span><span class="kp">factor</span><span class="p">(</span>event.type<span class="p">),</span> <span class="o">-</span>injuries<span class="p">),</span> injuries<span class="p">))</span> <span class="o">+</span> geom_bar<span class="p">(</span>stat <span class="o">=</span> <span class="s">&quot;identity&quot;</span><span class="p">)</span> <span class="o">+</span> </span>
+<div class="highlight"><pre><span class="code-line"><span></span>ggplot<span class="p">(</span>inj_temp<span class="p">,</span> aes<span class="p">(</span>reorder<span class="p">(</span><span class="kp">factor</span><span class="p">(</span>event.type<span class="p">),</span> <span class="o">-</span>injuries<span class="p">),</span> injuries<span class="p">))</span> <span class="o">+</span> geom_bar<span class="p">(</span>stat <span class="o">=</span> <span class="s">&quot;identity&quot;</span><span class="p">)</span> <span class="o">+</span> </span>
 <span class="code-line">    labs<span class="p">(</span>x <span class="o">=</span> <span class="s">&quot;Weather event type&quot;</span><span class="p">,</span> y <span class="o">=</span> <span class="s">&quot;Injuries&quot;</span><span class="p">,</span> title <span class="o">=</span> <span class="s">&quot;Total injuries by weather event type since 1996&quot;</span><span class="p">)</span> <span class="o">+</span> </span>
 <span class="code-line">    theme<span class="p">(</span>axis.text.x <span class="o">=</span> element_text<span class="p">(</span>angle <span class="o">=</span> <span class="m">90</span><span class="p">,</span> hjust <span class="o">=</span> <span class="m">1</span><span class="p">))</span></span>
 </pre></div>
@@ -342,7 +338,7 @@ Across the United States, which types of events have the greatest economic conse
 <div class="rimage center"><img src="figure/weather_events_impact_injuries-1.png" title="plot of chunk weather_events_impact_injuries" alt="plot of chunk weather_events_impact_injuries" class="plot" /></div>
 
 <p>To go deeper, we can examine single weather types by having a closer look on their frequency/injuries and fatalities ratio :</p>
-<div class="highlight"><pre><span class="code-line"><span class="kn">library</span><span class="p">(</span>plyr<span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="kn">library</span><span class="p">(</span>plyr<span class="p">)</span></span>
 <span class="code-line">fat_ev_count <span class="o">&lt;-</span> count<span class="p">(</span>data<span class="p">[</span>data<span class="o">$</span>FATALITIES <span class="o">&gt;</span> <span class="m">0</span><span class="p">,</span> <span class="p">],</span> vars <span class="o">=</span> <span class="s">&quot;EVTYPE&quot;</span><span class="p">)</span></span>
 <span class="code-line"></span>
 <span class="code-line">temp <span class="o">&lt;-</span> <span class="kp">merge</span><span class="p">(</span>fat_ev_count<span class="p">,</span> fat_by_ev<span class="p">,</span> by <span class="o">=</span> <span class="s">&quot;EVTYPE&quot;</span><span class="p">)</span></span>
@@ -575,7 +571,7 @@ Across the United States, which types of events have the greatest economic conse
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre><span class="code-line">inj_ev_count <span class="o">&lt;-</span> count<span class="p">(</span>data<span class="p">[</span>data<span class="o">$</span>INJURIES <span class="o">&gt;</span> <span class="m">0</span><span class="p">,</span> <span class="p">],</span> vars <span class="o">=</span> <span class="s">&quot;EVTYPE&quot;</span><span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>inj_ev_count <span class="o">&lt;-</span> count<span class="p">(</span>data<span class="p">[</span>data<span class="o">$</span>INJURIES <span class="o">&gt;</span> <span class="m">0</span><span class="p">,</span> <span class="p">],</span> vars <span class="o">=</span> <span class="s">&quot;EVTYPE&quot;</span><span class="p">)</span></span>
 <span class="code-line">temp <span class="o">&lt;-</span> <span class="kp">merge</span><span class="p">(</span>inj_ev_count<span class="p">,</span> inj_by_ev<span class="p">,</span> by <span class="o">=</span> <span class="s">&quot;EVTYPE&quot;</span><span class="p">)</span></span>
 <span class="code-line">temp<span class="o">$</span>ratio <span class="o">&lt;-</span> temp<span class="o">$</span>INJURIES<span class="o">/</span>temp<span class="o">$</span>freq</span>
 <span class="code-line"><span class="kp">colnames</span><span class="p">(</span>temp<span class="p">)</span> <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;event.type&quot;</span><span class="p">,</span> <span class="s">&quot;event.frequency&quot;</span><span class="p">,</span> <span class="s">&quot;event.injuries&quot;</span><span class="p">,</span> <span class="s">&quot;event.injuries.ratio&quot;</span><span class="p">)</span></span>
@@ -819,28 +815,28 @@ Across the United States, which types of events have the greatest economic conse
 </ul>
 <p>Note: Except for these exponential values (H,K,M,B), there is some inexpected values : ? + - and numbers in the initial dataset. This values doesn't appear in the dataset filtered by BGN_DATE &gt; 1996-01-01.</p>
 <p>Let's check the repartition of the exponential categories:</p>
-<div class="highlight"><pre><span class="code-line"><span class="kp">table</span><span class="p">(</span>data<span class="o">$</span>CROPDMGEXP<span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="kp">table</span><span class="p">(</span>data<span class="o">$</span>CROPDMGEXP<span class="p">)</span></span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="code-line">## </span>
+<div class="highlight"><pre><span class="code-line"><span></span>## </span>
 <span class="code-line">##             B      K      M </span>
 <span class="code-line">## 373047      4 278685   1771</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="code-line"><span class="kp">table</span><span class="p">(</span>data<span class="o">$</span>PROPDMGEXP<span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="kp">table</span><span class="p">(</span>data<span class="o">$</span>PROPDMGEXP<span class="p">)</span></span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="code-line">## </span>
+<div class="highlight"><pre><span class="code-line"><span></span>## </span>
 <span class="code-line">##             0      B      K      M </span>
 <span class="code-line">## 276166      1     32 369934   7374</span>
 </pre></div>
 
 
 <p>We convert PROPDMG/PROPDMGEXP and CROPDMG/CROPDMGEXP pairs into numbers:</p>
-<div class="highlight"><pre><span class="code-line">data<span class="o">$</span>cropdmg.exp <span class="o">&lt;-</span> <span class="m">1</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>data<span class="o">$</span>cropdmg.exp <span class="o">&lt;-</span> <span class="m">1</span></span>
 <span class="code-line">data<span class="p">[</span>data<span class="o">$</span>CROPDMGEXP <span class="o">==</span> <span class="s">&quot;H&quot;</span><span class="p">,</span> <span class="s">&quot;cropdmg.exp&quot;</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="m">100</span></span>
 <span class="code-line">data<span class="p">[</span>data<span class="o">$</span>CROPDMGEXP <span class="o">==</span> <span class="s">&quot;K&quot;</span><span class="p">,</span> <span class="s">&quot;cropdmg.exp&quot;</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="m">1000</span></span>
 <span class="code-line">data<span class="p">[</span>data<span class="o">$</span>CROPDMGEXP <span class="o">==</span> <span class="s">&quot;M&quot;</span><span class="p">,</span> <span class="s">&quot;cropdmg.exp&quot;</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="m">10</span><span class="o">^</span><span class="m">6</span></span>
@@ -857,31 +853,31 @@ Across the United States, which types of events have the greatest economic conse
 
 
 <p>We perform the same analysis as for weather type impact on population health:</p>
-<div class="highlight"><pre><span class="code-line">crop_by_ev <span class="o">&lt;-</span> aggregate<span class="p">(</span>cropdmg.val <span class="o">~</span> EVTYPE<span class="p">,</span> data <span class="o">=</span> data<span class="p">,</span> <span class="kp">sum</span><span class="p">,</span> na.rm <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>crop_by_ev <span class="o">&lt;-</span> aggregate<span class="p">(</span>cropdmg.val <span class="o">~</span> EVTYPE<span class="p">,</span> data <span class="o">=</span> data<span class="p">,</span> <span class="kp">sum</span><span class="p">,</span> na.rm <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span></span>
 <span class="code-line">quantile<span class="p">(</span>crop_by_ev<span class="o">$</span>cropdmg.val<span class="p">,</span> probs <span class="o">=</span> <span class="kp">seq</span><span class="p">(</span><span class="m">0.9</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">0.01</span><span class="p">))</span></span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="code-line">##         90%         91%         92%         93%         94%         95%         96%         97% </span>
+<div class="highlight"><pre><span class="code-line"><span></span>##         90%         91%         92%         93%         94%         95%         96%         97% </span>
 <span class="code-line">##       80000      522000     1830000     8518338    15105600    22067850    51986350   225801006 </span>
 <span class="code-line">##         98%         99%        100% </span>
 <span class="code-line">##   611260434  1328471682 13367566000</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="code-line">prop_by_ev <span class="o">&lt;-</span> aggregate<span class="p">(</span>propdmg.val <span class="o">~</span> EVTYPE<span class="p">,</span> data <span class="o">=</span> data<span class="p">,</span> <span class="kp">sum</span><span class="p">,</span> na.rm <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>prop_by_ev <span class="o">&lt;-</span> aggregate<span class="p">(</span>propdmg.val <span class="o">~</span> EVTYPE<span class="p">,</span> data <span class="o">=</span> data<span class="p">,</span> <span class="kp">sum</span><span class="p">,</span> na.rm <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span></span>
 <span class="code-line">quantile<span class="p">(</span>prop_by_ev<span class="o">$</span>propdmg.val<span class="p">,</span> probs <span class="o">=</span> <span class="kp">seq</span><span class="p">(</span><span class="m">0.9</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">0.01</span><span class="p">))</span></span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="code-line">##          90%          91%          92%          93%          94%          95%          96% </span>
+<div class="highlight"><pre><span class="code-line"><span></span>##          90%          91%          92%          93%          94%          95%          96% </span>
 <span class="code-line">##      6087080      7928162      9823200     19765792     40787880    117527100    551709366 </span>
 <span class="code-line">##          97%          98%          99%         100% </span>
 <span class="code-line">##   1328347705   4595502763  14205618003 143944833550</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="code-line">crop_temp <span class="o">&lt;-</span> crop_by_ev<span class="p">[</span><span class="kp">order</span><span class="p">(</span>crop_by_ev<span class="o">$</span>cropdmg.val<span class="p">,</span> decreasing <span class="o">=</span> <span class="kc">TRUE</span><span class="p">),</span> <span class="p">][</span><span class="m">1</span><span class="o">:</span><span class="m">20</span><span class="p">,</span> <span class="p">]</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>crop_temp <span class="o">&lt;-</span> crop_by_ev<span class="p">[</span><span class="kp">order</span><span class="p">(</span>crop_by_ev<span class="o">$</span>cropdmg.val<span class="p">,</span> decreasing <span class="o">=</span> <span class="kc">TRUE</span><span class="p">),</span> <span class="p">][</span><span class="m">1</span><span class="o">:</span><span class="m">20</span><span class="p">,</span> <span class="p">]</span></span>
 <span class="code-line"><span class="kp">colnames</span><span class="p">(</span>crop_temp<span class="p">)</span> <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;event.type&quot;</span><span class="p">,</span> <span class="s">&quot;cropdmg.val&quot;</span><span class="p">)</span></span>
 <span class="code-line">prop_temp <span class="o">&lt;-</span> prop_by_ev<span class="p">[</span><span class="kp">order</span><span class="p">(</span>prop_by_ev<span class="o">$</span>propdmg.val<span class="p">,</span> decreasing <span class="o">=</span> <span class="kc">TRUE</span><span class="p">),</span> <span class="p">][</span><span class="m">1</span><span class="o">:</span><span class="m">20</span><span class="p">,</span> <span class="p">]</span></span>
 <span class="code-line"><span class="kp">colnames</span><span class="p">(</span>prop_temp<span class="p">)</span> <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;event.type&quot;</span><span class="p">,</span> <span class="s">&quot;propdmg.val&quot;</span><span class="p">)</span></span>
@@ -1000,7 +996,7 @@ Across the United States, which types of events have the greatest economic conse
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre><span class="code-line">kable<span class="p">(</span>prop_temp<span class="p">,</span> caption <span class="o">=</span> <span class="s">&quot;Total property damages (in US dollars) by weather event type&quot;</span><span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>kable<span class="p">(</span>prop_temp<span class="p">,</span> caption <span class="o">=</span> <span class="s">&quot;Total property damages (in US dollars) by weather event type&quot;</span><span class="p">)</span></span>
 </pre></div>
 
 
@@ -1115,7 +1111,7 @@ Across the United States, which types of events have the greatest economic conse
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre><span class="code-line">ggplot<span class="p">(</span>crop_temp<span class="p">,</span> aes<span class="p">(</span>reorder<span class="p">(</span><span class="kp">factor</span><span class="p">(</span>event.type<span class="p">),</span> <span class="o">-</span>cropdmg.val<span class="p">),</span> cropdmg.val<span class="p">))</span> <span class="o">+</span> geom_bar<span class="p">(</span>stat <span class="o">=</span> <span class="s">&quot;identity&quot;</span><span class="p">)</span> <span class="o">+</span> </span>
+<div class="highlight"><pre><span class="code-line"><span></span>ggplot<span class="p">(</span>crop_temp<span class="p">,</span> aes<span class="p">(</span>reorder<span class="p">(</span><span class="kp">factor</span><span class="p">(</span>event.type<span class="p">),</span> <span class="o">-</span>cropdmg.val<span class="p">),</span> cropdmg.val<span class="p">))</span> <span class="o">+</span> geom_bar<span class="p">(</span>stat <span class="o">=</span> <span class="s">&quot;identity&quot;</span><span class="p">)</span> <span class="o">+</span> </span>
 <span class="code-line">    labs<span class="p">(</span>x <span class="o">=</span> <span class="s">&quot;Weather event type&quot;</span><span class="p">,</span> y <span class="o">=</span> <span class="s">&quot;Crop damages in US dollars&quot;</span><span class="p">,</span> title <span class="o">=</span> <span class="s">&quot;Total Crop damages by weather event type&quot;</span><span class="p">)</span> <span class="o">+</span> </span>
 <span class="code-line">    theme<span class="p">(</span>axis.text.x <span class="o">=</span> element_text<span class="p">(</span>angle <span class="o">=</span> <span class="m">90</span><span class="p">,</span> hjust <span class="o">=</span> <span class="m">1</span><span class="p">))</span></span>
 </pre></div>
@@ -1123,7 +1119,7 @@ Across the United States, which types of events have the greatest economic conse
 
 <div class="rimage center"><img src="figure/weather_events_impact_crop_damages-1.png" title="plot of chunk weather_events_impact_crop_damages" alt="plot of chunk weather_events_impact_crop_damages" class="plot" /></div>
 
-<div class="highlight"><pre><span class="code-line">ggplot<span class="p">(</span>prop_temp<span class="p">,</span> aes<span class="p">(</span>reorder<span class="p">(</span><span class="kp">factor</span><span class="p">(</span>event.type<span class="p">),</span> <span class="o">-</span>propdmg.val<span class="p">),</span> propdmg.val<span class="p">))</span> <span class="o">+</span> geom_bar<span class="p">(</span>stat <span class="o">=</span> <span class="s">&quot;identity&quot;</span><span class="p">)</span> <span class="o">+</span> </span>
+<div class="highlight"><pre><span class="code-line"><span></span>ggplot<span class="p">(</span>prop_temp<span class="p">,</span> aes<span class="p">(</span>reorder<span class="p">(</span><span class="kp">factor</span><span class="p">(</span>event.type<span class="p">),</span> <span class="o">-</span>propdmg.val<span class="p">),</span> propdmg.val<span class="p">))</span> <span class="o">+</span> geom_bar<span class="p">(</span>stat <span class="o">=</span> <span class="s">&quot;identity&quot;</span><span class="p">)</span> <span class="o">+</span> </span>
 <span class="code-line">    labs<span class="p">(</span>x <span class="o">=</span> <span class="s">&quot;Weather event type type&quot;</span><span class="p">,</span> y <span class="o">=</span> <span class="s">&quot;Properties damages in US dollars&quot;</span><span class="p">,</span> title <span class="o">=</span> <span class="s">&quot;Total Properties damages by weather event type&quot;</span><span class="p">)</span> <span class="o">+</span> </span>
 <span class="code-line">    theme<span class="p">(</span>axis.text.x <span class="o">=</span> element_text<span class="p">(</span>angle <span class="o">=</span> <span class="m">90</span><span class="p">,</span> hjust <span class="o">=</span> <span class="m">1</span><span class="p">))</span></span>
 </pre></div>
@@ -1132,7 +1128,7 @@ Across the United States, which types of events have the greatest economic conse
 <div class="rimage center"><img src="figure/weather_events_impact_properties_damages-1.png" title="plot of chunk weather_events_impact_properties_damages" alt="plot of chunk weather_events_impact_properties_damages" class="plot" /></div>
 
 <p>and we check damages ratio by event type:</p>
-<div class="highlight"><pre><span class="code-line">crop_ev_count <span class="o">&lt;-</span> count<span class="p">(</span>data<span class="p">[</span>data<span class="o">$</span>cropdmg.val <span class="o">&gt;</span> <span class="m">0</span><span class="p">,</span> <span class="p">],</span> vars <span class="o">=</span> <span class="s">&quot;EVTYPE&quot;</span><span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>crop_ev_count <span class="o">&lt;-</span> count<span class="p">(</span>data<span class="p">[</span>data<span class="o">$</span>cropdmg.val <span class="o">&gt;</span> <span class="m">0</span><span class="p">,</span> <span class="p">],</span> vars <span class="o">=</span> <span class="s">&quot;EVTYPE&quot;</span><span class="p">)</span></span>
 <span class="code-line">temp <span class="o">&lt;-</span> <span class="kp">merge</span><span class="p">(</span>crop_ev_count<span class="p">,</span> crop_by_ev<span class="p">,</span> by <span class="o">=</span> <span class="s">&quot;EVTYPE&quot;</span><span class="p">)</span></span>
 <span class="code-line">temp<span class="o">$</span>ratio <span class="o">&lt;-</span> temp<span class="o">$</span>cropdmg.val<span class="o">/</span>temp<span class="o">$</span>freq</span>
 <span class="code-line"><span class="kp">colnames</span><span class="p">(</span>temp<span class="p">)</span> <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;event.type&quot;</span><span class="p">,</span> <span class="s">&quot;event.frequency&quot;</span><span class="p">,</span> <span class="s">&quot;event.cropdamages&quot;</span><span class="p">,</span> <span class="s">&quot;event.cropdamages.ratio&quot;</span><span class="p">)</span></span>
@@ -1293,7 +1289,7 @@ Across the United States, which types of events have the greatest economic conse
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre><span class="code-line">prop_ev_count <span class="o">&lt;-</span> count<span class="p">(</span>data<span class="p">[</span>data<span class="o">$</span>propdmg.val <span class="o">&gt;</span> <span class="m">0</span><span class="p">,</span> <span class="p">],</span> vars <span class="o">=</span> <span class="s">&quot;EVTYPE&quot;</span><span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>prop_ev_count <span class="o">&lt;-</span> count<span class="p">(</span>data<span class="p">[</span>data<span class="o">$</span>propdmg.val <span class="o">&gt;</span> <span class="m">0</span><span class="p">,</span> <span class="p">],</span> vars <span class="o">=</span> <span class="s">&quot;EVTYPE&quot;</span><span class="p">)</span></span>
 <span class="code-line">temp <span class="o">&lt;-</span> <span class="kp">merge</span><span class="p">(</span>prop_ev_count<span class="p">,</span> prop_by_ev<span class="p">,</span> by <span class="o">=</span> <span class="s">&quot;EVTYPE&quot;</span><span class="p">)</span></span>
 <span class="code-line">temp<span class="o">$</span>ratio <span class="o">&lt;-</span> temp<span class="o">$</span>propdmg.val<span class="o">/</span>temp<span class="o">$</span>freq</span>
 <span class="code-line"><span class="kp">colnames</span><span class="p">(</span>temp<span class="p">)</span> <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;event.type&quot;</span><span class="p">,</span> <span class="s">&quot;event.frequency&quot;</span><span class="p">,</span> <span class="s">&quot;event.propdamages&quot;</span><span class="p">,</span> <span class="s">&quot;event.propdamages.ratio&quot;</span><span class="p">)</span></span>
@@ -1454,7 +1450,7 @@ Across the United States, which types of events have the greatest economic conse
 </tr>
 </tbody>
 </table>
-<h2 id="conclusions">Conclusions</h2>
+<h2 id="conclusions">Conclusions<a class="headerlink" href="#conclusions" title="Permanent link">&para;</a></h2>
 <p><em>Wheater events impact on population health</em>
 Our analysys shows that since 1996:</p>
 <ul>
@@ -1485,9 +1481,9 @@ Our analysys shows that since 1996:</p>
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="http://stephanie-w.github.io/brainscribble/experimentation-of-clt.html">R: Experimentation of the Cental Limit Theorem</a></li>
         <li><a href="http://stephanie-w.github.io/brainscribble/multivariable-regression.html">R: Multivariable Regression</a></li>
         <li><a href="http://stephanie-w.github.io/brainscribble/latest_earthquakes.html">R: Earthquakes from the past 30 days</a></li>
+        <li><a href="http://stephanie-w.github.io/brainscribble/experimentation-of-clt.html">R: Experimentation of the Cental Limit Theorem</a></li>
         <li><a href="http://stephanie-w.github.io/brainscribble/variance-inflation.html">R : Variance Inflation</a></li>
         <li><a href="http://stephanie-w.github.io/brainscribble/hypothesis-testing-and-t-tests.html">Notes on Statistical Inference : Hypothesis Testing and t-tests</a></li>
     </ul>
@@ -1530,23 +1526,23 @@ Brain Scribble    <li class="list-group-item">
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
-                        <a href="http://stephanie-w.github.io/brainscribble/tag/stats.html">
-                            stats
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
                         <a href="http://stephanie-w.github.io/brainscribble/tag/ipython-notebook.html">
                             ipython-notebook
                         </a>
                     </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://stephanie-w.github.io/brainscribble/tag/scikit-learn.html">
-                            scikit-learn
+                    <li class="list-group-item tag-2">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/stats.html">
+                            stats
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
                         <a href="http://stephanie-w.github.io/brainscribble/tag/algorithm.html">
                             algorithm
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/scikit-learn.html">
+                            scikit-learn
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
@@ -1592,7 +1588,7 @@ Brain Scribble    <li class="list-group-item">
    <div class="container-fluid">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2015 Stephanie W
+         <div class="col-xs-10">&copy; 2016 Stephanie W
             &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
@@ -1608,23 +1604,6 @@ Brain Scribble    <li class="list-group-item">
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
 <script src="http://stephanie-w.github.io/brainscribble/theme/js/respond.min.js"></script>
 
-    <!-- Google Analytics -->
-    <script type="text/javascript">
-
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-67062346-1']);
-        _gaq.push(['_trackPageview']);
-
-        (function () {
-            var ga = document.createElement('script');
-            ga.type = 'text/javascript';
-            ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(ga, s);
-        })();
-    </script>
-    <!-- End Google Analytics Code -->
 
 </body>
 </html>

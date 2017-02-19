@@ -14,13 +14,13 @@
 
         <meta name="author" content="Stephanie W" />
         <meta name="keywords" content="python,algorithm" />
-        <meta name="description" content="Backtracking is an algorithmic paradigm that tries different solutions until finds a solution that “works”. Problems which are typically solved using backtracking technique have following property in common. These problems can only be solved by trying every possible configuration and each configuration is tried only once. Given an undirected graph ..." />
+        <meta name="description" content="Backtracking is an algorithmic paradigm that tries different solutions until finds a solution that “works”. Problems which are typically solved using backtracking technique have following property in common. These problems can only be solved by trying every possible configuration and each configuration is tried only once. Given an undirected graph …" />
 
         <meta property="og:site_name" content="Brain Scribble" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="Backtracking - M Coloring Problem"/>
         <meta property="og:url" content="http://stephanie-w.github.io/brainscribble/m-coloring-problem.html"/>
-        <meta property="og:description" content="Backtracking is an algorithmic paradigm that tries different solutions until finds a solution that “works”. Problems which are typically solved using backtracking technique have following property in common. These problems can only be solved by trying every possible configuration and each configuration is tried only once. Given an undirected graph ..."/>
+        <meta property="og:description" content="Backtracking is an algorithmic paradigm that tries different solutions until finds a solution that “works”. Problems which are typically solved using backtracking technique have following property in common. These problems can only be solved by trying every possible configuration and each configuration is tried only once. Given an undirected graph …"/>
         <meta property="article:published_time" content="2015-09-06" />
             <meta property="article:section" content="PythonIdioms" />
             <meta property="article:tag" content="python" />
@@ -35,13 +35,9 @@
     <link href="http://stephanie-w.github.io/brainscribble/theme/css/pygments/solarized.css" rel="stylesheet">
     <link rel="stylesheet" href="http://stephanie-w.github.io/brainscribble/theme/css/style.css" type="text/css"/>
 
-        <link href="http://stephanie-w.github.io/brainscribble/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Brain Scribble ATOM Feed"/>
 
 
 
-        <link href="http://stephanie-w.github.io/brainscribble/feeds/pythonidioms.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Brain Scribble PythonIdioms ATOM Feed"/>
 
     <!-- Mathjax -->
     <script type="text/javascript"
@@ -132,7 +128,7 @@ Brain Scribble            </a>
 An array color[V] that should have numbers from 1 to m. color[i] should represent the color assigned to the ith vertex. The code should also return false if the graph cannot be colored with m colors.</p>
 <p><img alt="png" src="figure/graph_col.png" /></p>
 <p>Algorithm:</p>
-<div class="highlight"><pre><span class="code-line">If all colors are assigned,</span>
+<div class="highlight"><pre><span class="code-line"><span></span>If all colors are assigned,</span>
 <span class="code-line">    print vertex assigned colors</span>
 <span class="code-line">Else</span>
 <span class="code-line">    a. Trying all possible colors, assign a color to the vertex</span>
@@ -142,34 +138,34 @@ An array color[V] that should have numbers from 1 to m. color[i] should represen
 
 
 <p>Code:</p>
-<div class="highlight"><pre><span class="code-line"><span class="k">def</span> <span class="nf">is_safe</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">colors</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span></span>
-<span class="code-line">    <span class="c"># Iterate trough adjacent vertices</span></span>
-<span class="code-line">    <span class="c"># and check if the vertex color is different from c</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="k">def</span> <span class="nf">is_safe</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">colors</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span></span>
+<span class="code-line">    <span class="c1"># Iterate trough adjacent vertices</span></span>
+<span class="code-line">    <span class="c1"># and check if the vertex color is different from c</span></span>
 <span class="code-line">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">n</span><span class="p">):</span></span>
 <span class="code-line">        <span class="k">if</span> <span class="n">graph</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="ow">and</span> <span class="n">c</span> <span class="o">==</span> <span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span> <span class="k">return</span> <span class="bp">False</span></span>
 <span class="code-line">    <span class="k">return</span> <span class="bp">True</span></span>
 <span class="code-line"></span>
-<span class="code-line"><span class="c"># n = vertex nb</span></span>
+<span class="code-line"><span class="c1"># n = vertex nb</span></span>
 <span class="code-line"><span class="k">def</span> <span class="nf">graphColoringUtil</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">color_nb</span><span class="p">,</span> <span class="n">colors</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span></span>
-<span class="code-line">    <span class="c"># Check if all vertices are assigned a color</span></span>
+<span class="code-line">    <span class="c1"># Check if all vertices are assigned a color</span></span>
 <span class="code-line">    <span class="k">if</span> <span class="n">color_nb</span><span class="o">+</span><span class="mi">1</span> <span class="o">==</span> <span class="n">n</span> <span class="p">:</span></span>
 <span class="code-line">        <span class="k">return</span> <span class="bp">True</span></span>
 <span class="code-line"></span>
-<span class="code-line">    <span class="c"># Trying differents color for the vertex n</span></span>
+<span class="code-line">    <span class="c1"># Trying differents color for the vertex n</span></span>
 <span class="code-line">    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">color_nb</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span></span>
-<span class="code-line">        <span class="c"># Check if assignment of color c to n is possible</span></span>
+<span class="code-line">        <span class="c1"># Check if assignment of color c to n is possible</span></span>
 <span class="code-line">        <span class="k">if</span> <span class="n">is_safe</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">colors</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span></span>
-<span class="code-line">            <span class="c"># Assign color c to n</span></span>
+<span class="code-line">            <span class="c1"># Assign color c to n</span></span>
 <span class="code-line">            <span class="n">colors</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span></span>
-<span class="code-line">            <span class="c"># Recursively assign colors to the rest of the vertices</span></span>
+<span class="code-line">            <span class="c1"># Recursively assign colors to the rest of the vertices</span></span>
 <span class="code-line">            <span class="k">if</span> <span class="n">graphColoringUtil</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">color_nb</span><span class="p">,</span> <span class="n">colors</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span> <span class="k">return</span> <span class="bp">True</span></span>
-<span class="code-line">            <span class="c"># If there is no solution, remove color (BACKTRACK)</span></span>
+<span class="code-line">            <span class="c1"># If there is no solution, remove color (BACKTRACK)</span></span>
 <span class="code-line">            <span class="n">colors</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span></span>
 </pre></div>
 
 
 <p>We test the algorithm for the following graph and test whether it is 3 colorable:</p>
-<div class="highlight"><pre><span class="code-line">   (3)---(2)</span>
+<div class="highlight"><pre><span class="code-line"><span></span>   (3)---(2)</span>
 <span class="code-line">    |   / |</span>
 <span class="code-line">    |  /  |</span>
 <span class="code-line">    | /   |</span>
@@ -177,11 +173,11 @@ An array color[V] that should have numbers from 1 to m. color[i] should represen
 </pre></div>
 
 
-<div class="highlight"><pre><span class="code-line"><span class="c">#nb of vertex</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="c1">#nb of vertex</span></span>
 <span class="code-line"><span class="n">vertex_nb</span> <span class="o">=</span> <span class="mi">4</span></span>
-<span class="code-line"><span class="c"># nb of colors</span></span>
+<span class="code-line"><span class="c1"># nb of colors</span></span>
 <span class="code-line"><span class="n">color_nb</span> <span class="o">=</span> <span class="mi">3</span></span>
-<span class="code-line"><span class="c"># Initiate vertex colors</span></span>
+<span class="code-line"><span class="c1"># Initiate vertex colors</span></span>
 <span class="code-line"><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">vertex_nb</span></span>
 <span class="code-line"></span>
 <span class="code-line"><span class="n">graph</span> <span class="o">=</span> <span class="p">[</span></span>
@@ -191,15 +187,15 @@ An array color[V] that should have numbers from 1 to m. color[i] should represen
 <span class="code-line">    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span></span>
 <span class="code-line"><span class="p">]</span></span>
 <span class="code-line"></span>
-<span class="code-line"><span class="c">#beginning with vertex 0</span></span>
+<span class="code-line"><span class="c1">#beginning with vertex 0</span></span>
 <span class="code-line"><span class="k">if</span> <span class="n">graphColoringUtil</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">color_nb</span><span class="p">,</span> <span class="n">colors</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span></span>
 <span class="code-line">    <span class="k">print</span> <span class="n">colors</span></span>
 <span class="code-line"><span class="k">else</span><span class="p">:</span></span>
-<span class="code-line">    <span class="k">print</span> <span class="s">&quot;No solutions&quot;</span></span>
+<span class="code-line">    <span class="k">print</span> <span class="s2">&quot;No solutions&quot;</span></span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="code-line">[1, 2, 3, 2]</span>
+<div class="highlight"><pre><span class="code-line"><span></span>[1, 2, 3, 2]</span>
 </pre></div>
 
 
@@ -224,9 +220,9 @@ http://www.geeksforgeeks.org/backttracking-set-5-m-coloring-problem/
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="http://stephanie-w.github.io/brainscribble/rat-in-a-maze.html">Backtracking - Rat in a Maze</a></li>
-        <li><a href="http://stephanie-w.github.io/brainscribble/binary2ascii.html">Decoding Binary Code (ascii)</a></li>
-        <li><a href="http://stephanie-w.github.io/brainscribble/combinations.html">All possible combinations</a></li>
         <li><a href="http://stephanie-w.github.io/brainscribble/vigenere_cypher.html">Encoding/Decoding Vigenere Cypher</a></li>
+        <li><a href="http://stephanie-w.github.io/brainscribble/combinations.html">All possible combinations</a></li>
+        <li><a href="http://stephanie-w.github.io/brainscribble/binary2ascii.html">Decoding Binary Code (ascii)</a></li>
         <li><a href="http://stephanie-w.github.io/brainscribble/primes.html">Generating n primes</a></li>
     </ul>
 </section>
@@ -278,23 +274,23 @@ Brain Scribble    <li class="list-group-item">
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
-                        <a href="http://stephanie-w.github.io/brainscribble/tag/stats.html">
-                            stats
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
                         <a href="http://stephanie-w.github.io/brainscribble/tag/ipython-notebook.html">
                             ipython-notebook
                         </a>
                     </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://stephanie-w.github.io/brainscribble/tag/scikit-learn.html">
-                            scikit-learn
+                    <li class="list-group-item tag-2">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/stats.html">
+                            stats
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
                         <a href="http://stephanie-w.github.io/brainscribble/tag/algorithm.html">
                             algorithm
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/scikit-learn.html">
+                            scikit-learn
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
@@ -340,7 +336,7 @@ Brain Scribble    <li class="list-group-item">
    <div class="container-fluid">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2015 Stephanie W
+         <div class="col-xs-10">&copy; 2016 Stephanie W
             &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
@@ -356,23 +352,6 @@ Brain Scribble    <li class="list-group-item">
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
 <script src="http://stephanie-w.github.io/brainscribble/theme/js/respond.min.js"></script>
 
-    <!-- Google Analytics -->
-    <script type="text/javascript">
-
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-67062346-1']);
-        _gaq.push(['_trackPageview']);
-
-        (function () {
-            var ga = document.createElement('script');
-            ga.type = 'text/javascript';
-            ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(ga, s);
-        })();
-    </script>
-    <!-- End Google Analytics Code -->
 
 </body>
 </html>

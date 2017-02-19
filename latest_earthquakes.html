@@ -34,13 +34,9 @@
     <link href="http://stephanie-w.github.io/brainscribble/theme/css/pygments/solarized.css" rel="stylesheet">
     <link rel="stylesheet" href="http://stephanie-w.github.io/brainscribble/theme/css/style.css" type="text/css"/>
 
-        <link href="http://stephanie-w.github.io/brainscribble/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Brain Scribble ATOM Feed"/>
 
 
 
-        <link href="http://stephanie-w.github.io/brainscribble/feeds/dataanalysis.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Brain Scribble DataAnalysis ATOM Feed"/>
 
     <!-- Mathjax -->
     <script type="text/javascript"
@@ -122,7 +118,7 @@ Brain Scribble            </a>
 <p>The USGS Earthquake Hazards Program is part of the National Earthquake Hazards Reduction Program (NEHRP) and provides several data on earthquake location and magnitude.</p>
 <p>The data on earthquakes of the last 30 months is avaiblable at http://earthquake.usgs.gov/earthquakes/feed/v1.0/csv.php. </p>
 <p>Below are the fields included in the spreadsheet output:</p>
-<div class="highlight"><pre><span class="code-line">time</span>
+<div class="highlight"><pre><span class="code-line"><span></span>time</span>
 <span class="code-line">latitude</span>
 <span class="code-line">longitude</span>
 <span class="code-line">depth</span>
@@ -140,7 +136,7 @@ Brain Scribble            </a>
 
 
 <p>Loading libraries and downloading the feed:</p>
-<div class="highlight"><pre><span class="code-line"><span class="kn">library</span><span class="p">(</span>reshape2<span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="kn">library</span><span class="p">(</span>reshape2<span class="p">)</span></span>
 <span class="code-line"><span class="kn">library</span><span class="p">(</span>ggplot2<span class="p">)</span></span>
 <span class="code-line"><span class="kn">library</span><span class="p">(</span>ggmap<span class="p">)</span></span>
 <span class="code-line">eq <span class="o">&lt;-</span> read.csv<span class="p">(</span><span class="s">&quot;http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv&quot;</span><span class="p">,</span> as.is <span class="o">=</span> <span class="bp">T</span><span class="p">)</span></span>
@@ -148,7 +144,7 @@ Brain Scribble            </a>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="code-line">##                       time longitude latitude</span>
+<div class="highlight"><pre><span class="code-line"><span></span>##                       time longitude latitude</span>
 <span class="code-line">## 1 2015-08-29T10:28:59.920Z -122.4257 38.76217</span>
 <span class="code-line">## 2 2015-08-29T10:19:59.980Z -116.7772 33.27117</span>
 <span class="code-line">## 3 2015-08-29T10:17:04.360Z  -97.3440 36.26630</span>
@@ -166,21 +162,21 @@ Brain Scribble            </a>
 
 
 <p>Preprocessing the data:</p>
-<div class="highlight"><pre><span class="code-line">eq <span class="o">&lt;-</span> <span class="kp">subset</span><span class="p">(</span>eq<span class="p">,</span> type<span class="o">==</span><span class="s">&quot;earthquake&quot;</span><span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>eq <span class="o">&lt;-</span> <span class="kp">subset</span><span class="p">(</span>eq<span class="p">,</span> type<span class="o">==</span><span class="s">&quot;earthquake&quot;</span><span class="p">)</span></span>
 <span class="code-line">eq<span class="o">$</span>area <span class="o">&lt;-</span> <span class="kp">factor</span><span class="p">(</span><span class="kp">sub</span><span class="p">(</span><span class="s">&quot;^[^,]+, &quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> eq<span class="o">$</span>place<span class="p">))</span></span>
 <span class="code-line">eq<span class="o">$</span>date <span class="o">&lt;-</span> <span class="kp">as.Date</span><span class="p">(</span><span class="kp">strtrim</span><span class="p">(</span>eq<span class="o">$</span>time<span class="p">,</span> <span class="m">19</span><span class="p">),</span> format <span class="o">=</span> <span class="s">&quot;%Y-%m-%dT%H:%M:%S&quot;</span><span class="p">)</span></span>
 </pre></div>
 
 
 <p>Building a new dataset with magnitude frequencies by day:</p>
-<div class="highlight"><pre><span class="code-line">eqFreq1 <span class="o">&lt;-</span> <span class="kp">with</span><span class="p">(</span>eq<span class="p">,</span> <span class="kp">table</span><span class="p">(</span><span class="kp">date</span><span class="p">,</span> mag<span class="p">))</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>eqFreq1 <span class="o">&lt;-</span> <span class="kp">with</span><span class="p">(</span>eq<span class="p">,</span> <span class="kp">table</span><span class="p">(</span><span class="kp">date</span><span class="p">,</span> mag<span class="p">))</span></span>
 <span class="code-line">eqFreq2 <span class="o">&lt;-</span> melt<span class="p">(</span>eqFreq1<span class="p">)</span></span>
 <span class="code-line"><span class="kp">names</span><span class="p">(</span>eqFreq2<span class="p">)</span> <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;date&quot;</span><span class="p">,</span> <span class="s">&quot;magnitude&quot;</span><span class="p">,</span> <span class="s">&quot;freq&quot;</span><span class="p">)</span></span>
 <span class="code-line"><span class="kp">head</span><span class="p">(</span><span class="kp">subset</span><span class="p">(</span>eqFreq2<span class="p">,</span> freq <span class="o">&gt;</span> <span class="m">0</span> <span class="o">&amp;</span> magnitude <span class="o">&gt;</span> <span class="m">0</span><span class="p">))</span></span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="code-line">##            date magnitude freq</span>
+<div class="highlight"><pre><span class="code-line"><span></span>##            date magnitude freq</span>
 <span class="code-line">## 1066 2015-08-10      0.01    1</span>
 <span class="code-line">## 1071 2015-08-15      0.01    1</span>
 <span class="code-line">## 1072 2015-08-16      0.01    1</span>
@@ -191,7 +187,7 @@ Brain Scribble            </a>
 
 
 <p>Plotting a stacked bars graph of earthquakes magnitude frequencies by day:</p>
-<div class="highlight"><pre><span class="code-line">eqFreq2<span class="o">$</span>magnitude <span class="o">&lt;-</span> <span class="kp">factor</span><span class="p">(</span><span class="kp">round</span><span class="p">(</span>eqFreq2<span class="o">$</span>magnitude<span class="p">))</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>eqFreq2<span class="o">$</span>magnitude <span class="o">&lt;-</span> <span class="kp">factor</span><span class="p">(</span><span class="kp">round</span><span class="p">(</span>eqFreq2<span class="o">$</span>magnitude<span class="p">))</span></span>
 <span class="code-line">ggplot<span class="p">(</span>eqFreq2<span class="p">,</span> aes<span class="p">(</span><span class="kp">date</span><span class="p">,</span> weight <span class="o">=</span> freq<span class="p">,</span> fill <span class="o">=</span> magnitude<span class="p">))</span> <span class="o">+</span></span>
 <span class="code-line">        geom_bar<span class="p">(</span>binwidth <span class="o">=</span> <span class="m">60</span> <span class="o">*</span> <span class="m">60</span> <span class="o">*</span> <span class="m">24</span><span class="p">)</span> <span class="o">+</span></span>
 <span class="code-line">        labs<span class="p">(</span>x <span class="o">=</span> <span class="s">&quot;Date&quot;</span><span class="p">,</span> y <span class="o">=</span> <span class="s">&quot;Frequency&quot;</span><span class="p">,</span> </span>
@@ -204,7 +200,7 @@ Brain Scribble            </a>
 <div class="rimage center"><img src="figure/earthquakes_frequency-1.png" title="plot of chunk earthquakes_frequency" alt="plot of chunk earthquakes_frequency" class="plot" /></div>
 
 <p>Using the original dataset to plot a map with the locations of the 100 biggest earthquakes:</p>
-<div class="highlight"><pre><span class="code-line">BiggestMag <span class="o">&lt;-</span> <span class="kp">tail</span><span class="p">(</span><span class="kp">sort</span><span class="p">(</span>eq<span class="o">$</span>mag<span class="p">),</span> n<span class="o">=</span><span class="m">100</span><span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>BiggestMag <span class="o">&lt;-</span> <span class="kp">tail</span><span class="p">(</span><span class="kp">sort</span><span class="p">(</span>eq<span class="o">$</span>mag<span class="p">),</span> n<span class="o">=</span><span class="m">100</span><span class="p">)</span></span>
 <span class="code-line"><span class="c1">#Plotting</span></span>
 <span class="code-line"><span class="kn">library</span><span class="p">(</span>maps<span class="p">)</span></span>
 <span class="code-line">world_map <span class="o">&lt;-</span> map_data<span class="p">(</span><span class="s">&quot;world&quot;</span><span class="p">)</span></span>
@@ -226,10 +222,10 @@ Brain Scribble            </a>
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="http://stephanie-w.github.io/brainscribble/experimentation-of-clt.html">R: Experimentation of the Cental Limit Theorem</a></li>
         <li><a href="http://stephanie-w.github.io/brainscribble/multivariable-regression.html">R: Multivariable Regression</a></li>
-        <li><a href="http://stephanie-w.github.io/brainscribble/variance-inflation.html">R : Variance Inflation</a></li>
         <li><a href="http://stephanie-w.github.io/brainscribble/weather_event_impact.html">R: Analysis of weather events impact on population health and economy.</a></li>
+        <li><a href="http://stephanie-w.github.io/brainscribble/experimentation-of-clt.html">R: Experimentation of the Cental Limit Theorem</a></li>
+        <li><a href="http://stephanie-w.github.io/brainscribble/variance-inflation.html">R : Variance Inflation</a></li>
         <li><a href="http://stephanie-w.github.io/brainscribble/hypothesis-testing-and-t-tests.html">Notes on Statistical Inference : Hypothesis Testing and t-tests</a></li>
     </ul>
 </section>
@@ -271,23 +267,23 @@ Brain Scribble    <li class="list-group-item">
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
-                        <a href="http://stephanie-w.github.io/brainscribble/tag/stats.html">
-                            stats
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
                         <a href="http://stephanie-w.github.io/brainscribble/tag/ipython-notebook.html">
                             ipython-notebook
                         </a>
                     </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://stephanie-w.github.io/brainscribble/tag/scikit-learn.html">
-                            scikit-learn
+                    <li class="list-group-item tag-2">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/stats.html">
+                            stats
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
                         <a href="http://stephanie-w.github.io/brainscribble/tag/algorithm.html">
                             algorithm
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/scikit-learn.html">
+                            scikit-learn
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
@@ -333,7 +329,7 @@ Brain Scribble    <li class="list-group-item">
    <div class="container-fluid">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2015 Stephanie W
+         <div class="col-xs-10">&copy; 2016 Stephanie W
             &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
@@ -349,23 +345,6 @@ Brain Scribble    <li class="list-group-item">
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
 <script src="http://stephanie-w.github.io/brainscribble/theme/js/respond.min.js"></script>
 
-    <!-- Google Analytics -->
-    <script type="text/javascript">
-
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-67062346-1']);
-        _gaq.push(['_trackPageview']);
-
-        (function () {
-            var ga = document.createElement('script');
-            ga.type = 'text/javascript';
-            ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(ga, s);
-        })();
-    </script>
-    <!-- End Google Analytics Code -->
 
 </body>
 </html>

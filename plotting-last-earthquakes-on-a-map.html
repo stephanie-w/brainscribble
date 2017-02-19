@@ -34,13 +34,9 @@
     <link href="http://stephanie-w.github.io/brainscribble/theme/css/pygments/solarized.css" rel="stylesheet">
     <link rel="stylesheet" href="http://stephanie-w.github.io/brainscribble/theme/css/style.css" type="text/css"/>
 
-        <link href="http://stephanie-w.github.io/brainscribble/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Brain Scribble ATOM Feed"/>
 
 
 
-        <link href="http://stephanie-w.github.io/brainscribble/feeds/dataanalysis.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Brain Scribble DataAnalysis ATOM Feed"/>
 
     <!-- Mathjax -->
     <script type="text/javascript"
@@ -122,7 +118,7 @@ Brain Scribble            </a>
 <p>Source available on <a href="http://nbviewer.ipython.org/github/stephanie-w/brainscribble/blob/master/source/plotting-last-earthquakes-on-a-map.ipynb">Nbviewer</a></p>
 <p>The USGS Earthquake Hazards Program is part of the National Earthquake Hazards Reduction Program (NEHRP) and provides several data on earthquake location and magnitude.</p>
 <p>The data on earthquakes of the last 30 months is avaiblable at http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_month.csv. </p>
-<div class="highlight"><pre><span class="code-line"><span class="c"># Render our plots inline</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="c1"># Render our plots inline</span></span>
 <span class="code-line"><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span></span>
 <span class="code-line"></span>
 <span class="code-line"><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span></span>
@@ -132,13 +128,13 @@ Brain Scribble            </a>
 </pre></div>
 
 
-<h3 id="loading-data">Loading data</h3>
-<div class="highlight"><pre><span class="code-line"><span class="n">dset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">&quot;http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_month.csv&quot;</span><span class="p">,</span></span>
-<span class="code-line">                   <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;time&#39;</span><span class="p">])</span></span>
+<h3 id="loading-data">Loading data<a class="headerlink" href="#loading-data" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="n">dset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_month.csv&quot;</span><span class="p">,</span></span>
+<span class="code-line">                   <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">])</span></span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="code-line"><span class="n">dset</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="n">dset</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span></span>
 </pre></div>
 
 
@@ -223,17 +219,17 @@ Brain Scribble            </a>
 </table>
 </div>
 
-<h3 id="drawing-the-map">Drawing the map</h3>
-<div class="highlight"><pre><span class="code-line"><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span></span>
+<h3 id="drawing-the-map">Drawing the map<a class="headerlink" href="#drawing-the-map" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span></span>
 <span class="code-line"><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span></span>
-<span class="code-line"><span class="c"># miller projection</span></span>
-<span class="code-line"><span class="nb">map</span> <span class="o">=</span> <span class="n">Basemap</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s">&#39;mill&#39;</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">dset</span><span class="p">[</span><span class="s">&quot;longitude&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">dset</span><span class="p">[</span><span class="s">&quot;latitude&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">magnitude</span> <span class="o">=</span> <span class="n">dset</span><span class="p">[</span><span class="s">&quot;mag&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span></span>
-<span class="code-line"><span class="nb">map</span><span class="o">.</span><span class="n">drawcoastlines</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s">&#39;0.50&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span></span>
-<span class="code-line"><span class="nb">map</span><span class="o">.</span><span class="n">fillcontinents</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s">&#39;0.95&#39;</span><span class="p">)</span></span>
+<span class="code-line"><span class="c1"># miller projection</span></span>
+<span class="code-line"><span class="nb">map</span> <span class="o">=</span> <span class="n">Basemap</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;mill&#39;</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">dset</span><span class="p">[</span><span class="s2">&quot;longitude&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">dset</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">magnitude</span> <span class="o">=</span> <span class="n">dset</span><span class="p">[</span><span class="s2">&quot;mag&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span></span>
+<span class="code-line"><span class="nb">map</span><span class="o">.</span><span class="n">drawcoastlines</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;0.50&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span></span>
+<span class="code-line"><span class="nb">map</span><span class="o">.</span><span class="n">fillcontinents</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;0.95&#39;</span><span class="p">)</span></span>
 <span class="code-line"><span class="nb">map</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">magnitude</span><span class="p">)</span><span class="o">*</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span></span>
-<span class="code-line">            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s">&quot;m&quot;</span><span class="p">)</span></span>
+<span class="code-line">            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;m&quot;</span><span class="p">)</span></span>
 <span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> </span>
 </pre></div>
 
@@ -244,8 +240,8 @@ Brain Scribble            </a>
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="http://stephanie-w.github.io/brainscribble/classification-algorithms-on-iris-dataset.html">scikit-learn: Classification Algorithms on Iris Dataset</a></li>
         <li><a href="http://stephanie-w.github.io/brainscribble/classification-algorithm-random-forest.html">scikit-learn: Random Forest</a></li>
+        <li><a href="http://stephanie-w.github.io/brainscribble/classification-algorithms-on-iris-dataset.html">scikit-learn: Classification Algorithms on Iris Dataset</a></li>
     </ul>
 </section>
         </article>
@@ -286,23 +282,23 @@ Brain Scribble    <li class="list-group-item">
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
-                        <a href="http://stephanie-w.github.io/brainscribble/tag/stats.html">
-                            stats
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
                         <a href="http://stephanie-w.github.io/brainscribble/tag/ipython-notebook.html">
                             ipython-notebook
                         </a>
                     </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://stephanie-w.github.io/brainscribble/tag/scikit-learn.html">
-                            scikit-learn
+                    <li class="list-group-item tag-2">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/stats.html">
+                            stats
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
                         <a href="http://stephanie-w.github.io/brainscribble/tag/algorithm.html">
                             algorithm
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/scikit-learn.html">
+                            scikit-learn
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
@@ -348,7 +344,7 @@ Brain Scribble    <li class="list-group-item">
    <div class="container-fluid">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2015 Stephanie W
+         <div class="col-xs-10">&copy; 2016 Stephanie W
             &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
@@ -364,23 +360,6 @@ Brain Scribble    <li class="list-group-item">
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
 <script src="http://stephanie-w.github.io/brainscribble/theme/js/respond.min.js"></script>
 
-    <!-- Google Analytics -->
-    <script type="text/javascript">
-
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-67062346-1']);
-        _gaq.push(['_trackPageview']);
-
-        (function () {
-            var ga = document.createElement('script');
-            ga.type = 'text/javascript';
-            ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(ga, s);
-        })();
-    </script>
-    <!-- End Google Analytics Code -->
 
 </body>
 </html>

@@ -34,13 +34,9 @@
     <link href="http://stephanie-w.github.io/brainscribble/theme/css/pygments/solarized.css" rel="stylesheet">
     <link rel="stylesheet" href="http://stephanie-w.github.io/brainscribble/theme/css/style.css" type="text/css"/>
 
-        <link href="http://stephanie-w.github.io/brainscribble/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Brain Scribble ATOM Feed"/>
 
 
 
-        <link href="http://stephanie-w.github.io/brainscribble/feeds/dataanalysis.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Brain Scribble DataAnalysis ATOM Feed"/>
 
     <!-- Mathjax -->
     <script type="text/javascript"
@@ -123,14 +119,14 @@ Brain Scribble            </a>
 <!-- END_SUMMARY -->
 This is my note on swirl course Regression Model : Multivariable Examples 3. </p>
 <p>We'll use the hunger dataset from the course:</p>
-<div class="highlight"><pre><span class="code-line">download.file<span class="p">(</span><span class="s">&quot;https://raw.githubusercontent.com/swirldev/swirl_courses/master/Regression_Models/MultiVar_Examples3/hunger.csv&quot;</span><span class="p">,</span> </span>
+<div class="highlight"><pre><span class="code-line"><span></span>download.file<span class="p">(</span><span class="s">&quot;https://raw.githubusercontent.com/swirldev/swirl_courses/master/Regression_Models/MultiVar_Examples3/hunger.csv&quot;</span><span class="p">,</span> </span>
 <span class="code-line">    <span class="s">&quot;hunger.csv&quot;</span><span class="p">,</span> method <span class="o">=</span> <span class="s">&quot;curl&quot;</span><span class="p">,</span> quiet <span class="o">=</span> <span class="bp">T</span><span class="p">)</span></span>
 <span class="code-line">hunger <span class="o">&lt;-</span> read.csv<span class="p">(</span><span class="s">&quot;hunger.csv&quot;</span><span class="p">)</span></span>
 <span class="code-line"><span class="kp">head</span><span class="p">(</span>hunger<span class="p">)</span></span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="code-line">##    X                              Indicator Data.Source PUBLISH.STATES Year WHO.region  Country</span>
+<div class="highlight"><pre><span class="code-line"><span></span>##    X                              Indicator Data.Source PUBLISH.STATES Year WHO.region  Country</span>
 <span class="code-line">## 1  8 Children aged &lt;5 years underweight (%) NLIS_310044      Published 1986     Africa  Senegal</span>
 <span class="code-line">## 2 11 Children aged &lt;5 years underweight (%) NLIS_310095      Published 1989     Africa   Uganda</span>
 <span class="code-line">## 3 13 Children aged &lt;5 years underweight (%) NLIS_310138      Published 1988     Africa Zimbabwe</span>
@@ -149,12 +145,12 @@ This is my note on swirl course Regression Model : Multivariable Examples 3. </p
 
 <p>The Numeric column gives the percentage of children under age 5 who were underweight when that sample was taken.<br />
 We fit a simple linear regression for Numeric (outcome) on Year:</p>
-<div class="highlight"><pre><span class="code-line">fit <span class="o">&lt;-</span> lm<span class="p">(</span>Numeric <span class="o">~</span> Year<span class="p">,</span> hunger<span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>fit <span class="o">&lt;-</span> lm<span class="p">(</span>Numeric <span class="o">~</span> Year<span class="p">,</span> hunger<span class="p">)</span></span>
 <span class="code-line"><span class="kp">summary</span><span class="p">(</span>fit<span class="p">)</span></span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="code-line">## </span>
+<div class="highlight"><pre><span class="code-line"><span></span>## </span>
 <span class="code-line">## Call:</span>
 <span class="code-line">## lm(formula = Numeric ~ Year, data = hunger)</span>
 <span class="code-line">## </span>
@@ -178,62 +174,62 @@ We fit a simple linear regression for Numeric (outcome) on Year:</p>
 <p>As time goes on, the rate of hunger decreases.<br />
 The intercept of the model represents the percentage of hungry children at year 0.  </p>
 <p>Let's look at the rates of hunger for the different genders to see how, or even if, they differ:</p>
-<div class="highlight"><pre><span class="code-line">lmF <span class="o">&lt;-</span> lm<span class="p">(</span>Numeric<span class="p">[</span>hunger<span class="o">$</span>Sex <span class="o">==</span> <span class="s">&quot;Female&quot;</span><span class="p">]</span> <span class="o">~</span> Year<span class="p">[</span>hunger<span class="o">$</span>Sex <span class="o">==</span> <span class="s">&quot;Female&quot;</span><span class="p">],</span> data <span class="o">=</span> hunger<span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>lmF <span class="o">&lt;-</span> lm<span class="p">(</span>Numeric<span class="p">[</span>hunger<span class="o">$</span>Sex <span class="o">==</span> <span class="s">&quot;Female&quot;</span><span class="p">]</span> <span class="o">~</span> Year<span class="p">[</span>hunger<span class="o">$</span>Sex <span class="o">==</span> <span class="s">&quot;Female&quot;</span><span class="p">],</span> data <span class="o">=</span> hunger<span class="p">)</span></span>
 <span class="code-line"><span class="kp">summary</span><span class="p">(</span>lmF<span class="p">)</span></span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="code-line"><span class="cp">##</span><span class="c"> </span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c"> Call:</span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c"> lm(formula = Numeric[hunger$Sex == &quot;Female&quot;] ~ Year[hunger$Sex == </span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c">     &quot;Female&quot;], data = hunger)</span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c"> </span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c"> Residuals:</span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c">     Min      1Q  Median      3Q     Max </span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c"> -23.228 -10.638  -1.959   6.859  46.146 </span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c"> </span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c"> Coefficients:</span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c">                               Estimate Std. Error t value Pr(&gt;|t|)    </span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c"> (Intercept)                  603.50580  167.53201   3.602 0.000349 ***</span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c"> Year[hunger$Sex == &quot;Female&quot;]  -0.29340    0.08371  -3.505 0.000500 ***</span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c"> ---</span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c"> Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c"> </span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c"> Residual standard error: 12.94 on 472 degrees of freedom</span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c"> Multiple R-squared:  0.02537,    Adjusted R-squared:  0.0233 </span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c"> F-statistic: 12.29 on 1 and 472 DF,  p-value: 5e-04</span><span class="x"></span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>## </span>
+<span class="code-line">## Call:</span>
+<span class="code-line">## lm(formula = Numeric[hunger$Sex == &quot;Female&quot;] ~ Year[hunger$Sex == </span>
+<span class="code-line">##     &quot;Female&quot;], data = hunger)</span>
+<span class="code-line">## </span>
+<span class="code-line">## Residuals:</span>
+<span class="code-line">##     Min      1Q  Median      3Q     Max </span>
+<span class="code-line">## -23.228 -10.638  -1.959   6.859  46.146 </span>
+<span class="code-line">## </span>
+<span class="code-line">## Coefficients:</span>
+<span class="code-line">##                               Estimate Std. Error t value Pr(&gt;|t|)    </span>
+<span class="code-line">## (Intercept)                  603.50580  167.53201   3.602 0.000349 ***</span>
+<span class="code-line">## Year[hunger$Sex == &quot;Female&quot;]  -0.29340    0.08371  -3.505 0.000500 ***</span>
+<span class="code-line">## ---</span>
+<span class="code-line">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span>
+<span class="code-line">## </span>
+<span class="code-line">## Residual standard error: 12.94 on 472 degrees of freedom</span>
+<span class="code-line">## Multiple R-squared:  0.02537,    Adjusted R-squared:  0.0233 </span>
+<span class="code-line">## F-statistic: 12.29 on 1 and 472 DF,  p-value: 5e-04</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="code-line">lmM <span class="o">&lt;-</span> lm<span class="p">(</span>Numeric<span class="p">[</span>hunger<span class="o">$</span>Sex <span class="o">==</span> <span class="s">&quot;Male&quot;</span><span class="p">]</span> <span class="o">~</span> Year<span class="p">[</span>hunger<span class="o">$</span>Sex <span class="o">==</span> <span class="s">&quot;Male&quot;</span><span class="p">],</span> data <span class="o">=</span> hunger<span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>lmM <span class="o">&lt;-</span> lm<span class="p">(</span>Numeric<span class="p">[</span>hunger<span class="o">$</span>Sex <span class="o">==</span> <span class="s">&quot;Male&quot;</span><span class="p">]</span> <span class="o">~</span> Year<span class="p">[</span>hunger<span class="o">$</span>Sex <span class="o">==</span> <span class="s">&quot;Male&quot;</span><span class="p">],</span> data <span class="o">=</span> hunger<span class="p">)</span></span>
 <span class="code-line"><span class="kp">summary</span><span class="p">(</span>lmM<span class="p">)</span></span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="code-line"><span class="cp">##</span><span class="c"> </span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c"> Call:</span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c"> lm(formula = Numeric[hunger$Sex == &quot;Male&quot;] ~ Year[hunger$Sex == </span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c">     &quot;Male&quot;], data = hunger)</span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c"> </span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c"> Residuals:</span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c">     Min      1Q  Median      3Q     Max </span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c"> -25.913 -11.741  -1.832   7.399  42.255 </span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c"> </span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c"> Coefficients:</span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c">                             Estimate Std. Error t value Pr(&gt;|t|)    </span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c"> (Intercept)                665.45352  174.50726   3.813 0.000155 ***</span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c"> Year[hunger$Sex == &quot;Male&quot;]  -0.32340    0.08719  -3.709 0.000233 ***</span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c"> ---</span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c"> Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c"> </span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c"> Residual standard error: 13.48 on 472 degrees of freedom</span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c"> Multiple R-squared:  0.02832,    Adjusted R-squared:  0.02626 </span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c"> F-statistic: 13.76 on 1 and 472 DF,  p-value: 0.0002328</span><span class="x"></span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>## </span>
+<span class="code-line">## Call:</span>
+<span class="code-line">## lm(formula = Numeric[hunger$Sex == &quot;Male&quot;] ~ Year[hunger$Sex == </span>
+<span class="code-line">##     &quot;Male&quot;], data = hunger)</span>
+<span class="code-line">## </span>
+<span class="code-line">## Residuals:</span>
+<span class="code-line">##     Min      1Q  Median      3Q     Max </span>
+<span class="code-line">## -25.913 -11.741  -1.832   7.399  42.255 </span>
+<span class="code-line">## </span>
+<span class="code-line">## Coefficients:</span>
+<span class="code-line">##                             Estimate Std. Error t value Pr(&gt;|t|)    </span>
+<span class="code-line">## (Intercept)                665.45352  174.50726   3.813 0.000155 ***</span>
+<span class="code-line">## Year[hunger$Sex == &quot;Male&quot;]  -0.32340    0.08719  -3.709 0.000233 ***</span>
+<span class="code-line">## ---</span>
+<span class="code-line">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span>
+<span class="code-line">## </span>
+<span class="code-line">## Residual standard error: 13.48 on 472 degrees of freedom</span>
+<span class="code-line">## Multiple R-squared:  0.02832,    Adjusted R-squared:  0.02626 </span>
+<span class="code-line">## F-statistic: 13.76 on 1 and 472 DF,  p-value: 0.0002328</span>
 </pre></div>
 
 
 <p>We plot the data points and fitted lines using different colors to distinguish between males (blue) and females (pink).</p>
-<div class="highlight"><pre><span class="code-line">plot<span class="p">(</span>hunger<span class="o">$</span>Year<span class="p">,</span> hunger<span class="o">$</span>Numeric<span class="p">,</span> type <span class="o">=</span> <span class="s">&quot;n&quot;</span><span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>plot<span class="p">(</span>hunger<span class="o">$</span>Year<span class="p">,</span> hunger<span class="o">$</span>Numeric<span class="p">,</span> type <span class="o">=</span> <span class="s">&quot;n&quot;</span><span class="p">)</span></span>
 <span class="code-line">points<span class="p">(</span>hunger<span class="o">$</span>Year<span class="p">,</span> hunger<span class="o">$</span>Numeric<span class="p">,</span> pch <span class="o">=</span> <span class="m">19</span><span class="p">,</span> col <span class="o">=</span> <span class="p">((</span>hunger<span class="o">$</span>Sex <span class="o">==</span> <span class="s">&quot;Female&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="m">1</span> <span class="o">+</span> <span class="m">125</span><span class="p">))</span></span>
 <span class="code-line">lines<span class="p">(</span>hunger<span class="o">$</span>Year<span class="p">[</span>hunger<span class="o">$</span>Sex <span class="o">==</span> <span class="s">&quot;Male&quot;</span><span class="p">],</span> lmM<span class="o">$</span>fitted<span class="p">,</span> col <span class="o">=</span> <span class="s">&quot;blue&quot;</span><span class="p">,</span> lwd <span class="o">=</span> <span class="m">3</span><span class="p">)</span></span>
 <span class="code-line">lines<span class="p">(</span>hunger<span class="o">$</span>Year<span class="p">[</span>hunger<span class="o">$</span>Sex <span class="o">==</span> <span class="s">&quot;Female&quot;</span><span class="p">],</span> lmF<span class="o">$</span>fitted<span class="p">,</span> col <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> lwd <span class="o">=</span> <span class="m">3</span><span class="p">)</span></span>
@@ -244,12 +240,12 @@ The intercept of the model represents the percentage of hungry children at year 
 
 <p>We can see from the plot that the lines are not exactly parallel. On the right side of the graph (around the year 2010) they are closer together than on the left side (around 1970). Slopes are -0.29340 for femals, -0.32340 for males.</p>
 <p>Now instead of separating the data by subsetting the samples by gender, we'll use gender as another predictor to create the linear model:</p>
-<div class="highlight"><pre><span class="code-line">lmBoth <span class="o">&lt;-</span> lm<span class="p">(</span>Numeric <span class="o">~</span> Year <span class="o">+</span> Sex<span class="p">,</span> data <span class="o">=</span> hunger<span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>lmBoth <span class="o">&lt;-</span> lm<span class="p">(</span>Numeric <span class="o">~</span> Year <span class="o">+</span> Sex<span class="p">,</span> data <span class="o">=</span> hunger<span class="p">)</span></span>
 <span class="code-line"><span class="kp">summary</span><span class="p">(</span>lmBoth<span class="p">)</span></span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="code-line">## </span>
+<div class="highlight"><pre><span class="code-line"><span></span>## </span>
 <span class="code-line">## Call:</span>
 <span class="code-line">## lm(formula = Numeric ~ Year + Sex, data = hunger)</span>
 <span class="code-line">## </span>
@@ -276,7 +272,7 @@ The intercept represents the percentage of hungry females at year 0.<br />
 The estimate for the factor Male 1.9027 is a distance from the intercept (the estimate of the reference group Female). So the percentage of hungry males at year 0 is the sum of the intercept and the male estimate, ie. 633.5283 + 1.9027 = 635.431<br />
 The estimate for hunger$Year represents the annual decrease in percentage of both gender.</p>
 <p>In the plot, the red line will have the female intercept and the  blue line will have the male intercept:</p>
-<div class="highlight"><pre><span class="code-line">plot<span class="p">(</span>hunger<span class="o">$</span>Year<span class="p">,</span> hunger<span class="o">$</span>Numeric<span class="p">,</span> pch <span class="o">=</span> <span class="m">19</span><span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>plot<span class="p">(</span>hunger<span class="o">$</span>Year<span class="p">,</span> hunger<span class="o">$</span>Numeric<span class="p">,</span> pch <span class="o">=</span> <span class="m">19</span><span class="p">)</span></span>
 <span class="code-line">points<span class="p">(</span>hunger<span class="o">$</span>Year<span class="p">,</span> hunger<span class="o">$</span>Numeric<span class="p">,</span> pch <span class="o">=</span> <span class="m">19</span><span class="p">,</span> col <span class="o">=</span> <span class="p">((</span>hunger<span class="o">$</span>Sex <span class="o">==</span> <span class="s">&quot;Female&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="m">1</span> <span class="o">+</span> <span class="m">125</span><span class="p">))</span></span>
 <span class="code-line">abline<span class="p">(</span><span class="kt">c</span><span class="p">(</span>lmBoth<span class="o">$</span>coeff<span class="p">[</span><span class="m">1</span><span class="p">],</span> lmBoth<span class="o">$</span>coeff<span class="p">[</span><span class="m">2</span><span class="p">]),</span> col <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> lwd <span class="o">=</span> <span class="m">3</span><span class="p">)</span></span>
 <span class="code-line">abline<span class="p">(</span><span class="kt">c</span><span class="p">(</span>lmBoth<span class="o">$</span>coeff<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="o">+</span> lmBoth<span class="o">$</span>coeff<span class="p">[</span><span class="m">3</span><span class="p">],</span> lmBoth<span class="o">$</span>coeff<span class="p">[</span><span class="m">2</span><span class="p">]),</span> col <span class="o">=</span> <span class="s">&quot;blue&quot;</span><span class="p">,</span> lwd <span class="o">=</span> <span class="m">3</span><span class="p">)</span></span>
@@ -287,12 +283,12 @@ The estimate for hunger$Year represents the annual decrease in percentage of bot
 
 <p>The lines are parallels (since, they have the same slope lmBoth$coeff[2]).</p>
 <p>Now we'll consider the interaction between year and gender to see how that affects changes in rates of hunger:</p>
-<div class="highlight"><pre><span class="code-line">lmInter <span class="o">&lt;-</span> lm<span class="p">(</span>Numeric <span class="o">~</span> Year <span class="o">+</span> Sex <span class="o">+</span> Sex <span class="o">*</span> Year<span class="p">,</span> data <span class="o">=</span> hunger<span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>lmInter <span class="o">&lt;-</span> lm<span class="p">(</span>Numeric <span class="o">~</span> Year <span class="o">+</span> Sex <span class="o">+</span> Sex <span class="o">*</span> Year<span class="p">,</span> data <span class="o">=</span> hunger<span class="p">)</span></span>
 <span class="code-line"><span class="kp">summary</span><span class="p">(</span>lmInter<span class="p">)</span></span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="code-line">## </span>
+<div class="highlight"><pre><span class="code-line"><span></span>## </span>
 <span class="code-line">## Call:</span>
 <span class="code-line">## lm(formula = Numeric ~ Year + Sex + Sex * Year, data = hunger)</span>
 <span class="code-line">## </span>
@@ -320,7 +316,7 @@ The percentage of hungry males at year 0 is 665.4535 (603.50580  + 61.94772).<br
 The annual change (decrease) in percentage of hungry females is 0.29340.<br />
 The estimate associated with Year:SexMale represents the distance of the annual change in percent of males from that of females.
 The annual change in percentage of hungry males is -0.32340 (-0.29340 - 0.03000).</p>
-<div class="highlight"><pre><span class="code-line">plot<span class="p">(</span>hunger<span class="o">$</span>Year<span class="p">,</span> hunger<span class="o">$</span>Numeric<span class="p">,</span> pch <span class="o">=</span> <span class="m">19</span><span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>plot<span class="p">(</span>hunger<span class="o">$</span>Year<span class="p">,</span> hunger<span class="o">$</span>Numeric<span class="p">,</span> pch <span class="o">=</span> <span class="m">19</span><span class="p">)</span></span>
 <span class="code-line">points<span class="p">(</span>hunger<span class="o">$</span>Year<span class="p">,</span> hunger<span class="o">$</span>Numeric<span class="p">,</span> pch <span class="o">=</span> <span class="m">19</span><span class="p">,</span> col <span class="o">=</span> <span class="p">((</span>hunger<span class="o">$</span>Sex <span class="o">==</span> <span class="s">&quot;Male&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="m">1</span> <span class="o">+</span> <span class="m">125</span><span class="p">))</span></span>
 <span class="code-line">abline<span class="p">(</span><span class="kt">c</span><span class="p">(</span>lmInter<span class="o">$</span>coeff<span class="p">[</span><span class="m">1</span><span class="p">],</span> lmInter<span class="o">$</span>coeff<span class="p">[</span><span class="m">2</span><span class="p">]),</span> col <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> lwd <span class="o">=</span> <span class="m">3</span><span class="p">)</span></span>
 <span class="code-line">abline<span class="p">(</span><span class="kt">c</span><span class="p">(</span>lmInter<span class="o">$</span>coeff<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="o">+</span> lmInter<span class="o">$</span>coeff<span class="p">[</span><span class="m">3</span><span class="p">],</span> lmInter<span class="o">$</span>coeff<span class="p">[</span><span class="m">2</span><span class="p">]</span> <span class="o">+</span> lmInter<span class="o">$</span>coeff<span class="p">[</span><span class="m">4</span><span class="p">]),</span> col <span class="o">=</span> <span class="s">&quot;blue&quot;</span><span class="p">,</span> lwd <span class="o">=</span> <span class="m">3</span><span class="p">)</span></span>
@@ -340,10 +336,10 @@ If I is fixed at a value, 5 and Y varies, <span class="math">\(b_2 + b3*5\)</spa
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="http://stephanie-w.github.io/brainscribble/experimentation-of-clt.html">R: Experimentation of the Cental Limit Theorem</a></li>
-        <li><a href="http://stephanie-w.github.io/brainscribble/latest_earthquakes.html">R: Earthquakes from the past 30 days</a></li>
-        <li><a href="http://stephanie-w.github.io/brainscribble/variance-inflation.html">R : Variance Inflation</a></li>
         <li><a href="http://stephanie-w.github.io/brainscribble/weather_event_impact.html">R: Analysis of weather events impact on population health and economy.</a></li>
+        <li><a href="http://stephanie-w.github.io/brainscribble/latest_earthquakes.html">R: Earthquakes from the past 30 days</a></li>
+        <li><a href="http://stephanie-w.github.io/brainscribble/experimentation-of-clt.html">R: Experimentation of the Cental Limit Theorem</a></li>
+        <li><a href="http://stephanie-w.github.io/brainscribble/variance-inflation.html">R : Variance Inflation</a></li>
         <li><a href="http://stephanie-w.github.io/brainscribble/hypothesis-testing-and-t-tests.html">Notes on Statistical Inference : Hypothesis Testing and t-tests</a></li>
     </ul>
 </section>
@@ -385,23 +381,23 @@ Brain Scribble    <li class="list-group-item">
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
-                        <a href="http://stephanie-w.github.io/brainscribble/tag/stats.html">
-                            stats
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
                         <a href="http://stephanie-w.github.io/brainscribble/tag/ipython-notebook.html">
                             ipython-notebook
                         </a>
                     </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://stephanie-w.github.io/brainscribble/tag/scikit-learn.html">
-                            scikit-learn
+                    <li class="list-group-item tag-2">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/stats.html">
+                            stats
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
                         <a href="http://stephanie-w.github.io/brainscribble/tag/algorithm.html">
                             algorithm
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/scikit-learn.html">
+                            scikit-learn
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
@@ -447,7 +443,7 @@ Brain Scribble    <li class="list-group-item">
    <div class="container-fluid">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2015 Stephanie W
+         <div class="col-xs-10">&copy; 2016 Stephanie W
             &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
@@ -463,23 +459,6 @@ Brain Scribble    <li class="list-group-item">
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
 <script src="http://stephanie-w.github.io/brainscribble/theme/js/respond.min.js"></script>
 
-    <!-- Google Analytics -->
-    <script type="text/javascript">
-
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-67062346-1']);
-        _gaq.push(['_trackPageview']);
-
-        (function () {
-            var ga = document.createElement('script');
-            ga.type = 'text/javascript';
-            ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(ga, s);
-        })();
-    </script>
-    <!-- End Google Analytics Code -->
 
 </body>
 </html>

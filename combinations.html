@@ -33,13 +33,9 @@
     <link href="http://stephanie-w.github.io/brainscribble/theme/css/pygments/solarized.css" rel="stylesheet">
     <link rel="stylesheet" href="http://stephanie-w.github.io/brainscribble/theme/css/style.css" type="text/css"/>
 
-        <link href="http://stephanie-w.github.io/brainscribble/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Brain Scribble ATOM Feed"/>
 
 
 
-        <link href="http://stephanie-w.github.io/brainscribble/feeds/pythonidioms.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Brain Scribble PythonIdioms ATOM Feed"/>
 
     <!-- Mathjax -->
     <script type="text/javascript"
@@ -119,21 +115,21 @@ Brain Scribble            </a>
                 </div>
                 <hr />
 <p>Use :</p>
-<div class="highlight"><pre><span class="code-line">itertools.combinations(iterable, r)</span>
+<div class="highlight"><pre><span class="code-line"><span></span>itertools.combinations(iterable, r)</span>
 </pre></div>
 
 
 <p>or the following code:</p>
-<div class="highlight"><pre><span class="code-line"><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span><span class="p">,</span> <span class="n">compress</span></span>
-<span class="code-line"><span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;A&#39;</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">,</span> <span class="s">&#39;C&#39;</span><span class="p">,</span> <span class="s">&#39;C&#39;</span><span class="p">,</span> <span class="s">&#39;D&#39;</span><span class="p">]</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span><span class="p">,</span> <span class="n">compress</span></span>
+<span class="code-line"><span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">]</span></span>
 <span class="code-line"></span>
 <span class="code-line"><span class="nb">list</span><span class="p">(</span> <span class="nb">set</span><span class="p">(</span><span class="n">compress</span><span class="p">(</span><span class="n">items</span><span class="p">,</span><span class="n">mask</span><span class="p">))</span> </span>
 <span class="code-line">     <span class="k">for</span> <span class="n">mask</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">))</span> <span class="p">)</span></span>
-<span class="code-line"><span class="c"># alternative: ...in product([0,1], repeat=len(items)) )</span></span>
+<span class="code-line"><span class="c1"># alternative: ...in product([0,1], repeat=len(items)) )</span></span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="code-line">[set(),</span>
+<div class="highlight"><pre><span class="code-line"><span></span>[set(),</span>
 <span class="code-line"> {&#39;D&#39;},</span>
 <span class="code-line"> {&#39;C&#39;},</span>
 <span class="code-line"> {&#39;C&#39;, &#39;D&#39;},</span>
@@ -169,11 +165,11 @@ Brain Scribble            </a>
 
 
 <p>that uses this generated mask:</p>
-<div class="highlight"><pre><span class="code-line"><span class="nb">list</span><span class="p">(</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)))</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="nb">list</span><span class="p">(</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)))</span></span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="code-line">[(0, 0, 0, 0, 0),</span>
+<div class="highlight"><pre><span class="code-line"><span></span>[(0, 0, 0, 0, 0),</span>
 <span class="code-line"> (0, 0, 0, 0, 1),</span>
 <span class="code-line"> (0, 0, 0, 1, 0),</span>
 <span class="code-line"> (0, 0, 0, 1, 1),</span>
@@ -215,9 +211,9 @@ Brain Scribble            </a>
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="http://stephanie-w.github.io/brainscribble/binary2ascii.html">Decoding Binary Code (ascii)</a></li>
-        <li><a href="http://stephanie-w.github.io/brainscribble/rat-in-a-maze.html">Backtracking - Rat in a Maze</a></li>
         <li><a href="http://stephanie-w.github.io/brainscribble/vigenere_cypher.html">Encoding/Decoding Vigenere Cypher</a></li>
+        <li><a href="http://stephanie-w.github.io/brainscribble/binary2ascii.html">Decoding Binary Code (ascii)</a></li>
+        <li><a href="http://stephanie-w.github.io/brainscribble/m-coloring-problem.html">Backtracking - M Coloring Problem</a></li>
         <li><a href="http://stephanie-w.github.io/brainscribble/primes.html">Generating n primes</a></li>
         <li><a href="http://stephanie-w.github.io/brainscribble/binary2int.html">Decoding Binary Code (int)</a></li>
     </ul>
@@ -260,23 +256,23 @@ Brain Scribble    <li class="list-group-item">
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
-                        <a href="http://stephanie-w.github.io/brainscribble/tag/stats.html">
-                            stats
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
                         <a href="http://stephanie-w.github.io/brainscribble/tag/ipython-notebook.html">
                             ipython-notebook
                         </a>
                     </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://stephanie-w.github.io/brainscribble/tag/scikit-learn.html">
-                            scikit-learn
+                    <li class="list-group-item tag-2">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/stats.html">
+                            stats
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
                         <a href="http://stephanie-w.github.io/brainscribble/tag/algorithm.html">
                             algorithm
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/scikit-learn.html">
+                            scikit-learn
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
@@ -322,7 +318,7 @@ Brain Scribble    <li class="list-group-item">
    <div class="container-fluid">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2015 Stephanie W
+         <div class="col-xs-10">&copy; 2016 Stephanie W
             &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
@@ -338,23 +334,6 @@ Brain Scribble    <li class="list-group-item">
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
 <script src="http://stephanie-w.github.io/brainscribble/theme/js/respond.min.js"></script>
 
-    <!-- Google Analytics -->
-    <script type="text/javascript">
-
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-67062346-1']);
-        _gaq.push(['_trackPageview']);
-
-        (function () {
-            var ga = document.createElement('script');
-            ga.type = 'text/javascript';
-            ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(ga, s);
-        })();
-    </script>
-    <!-- End Google Analytics Code -->
 
 </body>
 </html>

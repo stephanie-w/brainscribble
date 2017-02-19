@@ -14,13 +14,13 @@
 
         <meta name="author" content="Stephanie W" />
         <meta name="keywords" content="R,stats" />
-        <meta name="description" content="This is my note on swirl course Regression Model : Overfitting and Underfitting. Definition A variance inflation factor (VIF) is a ratio of estimated variances, the variance due to including the ith regressor, divided by that due to including a corresponding ideal regressor which is uncorrelated with the others. VIF is ..." />
+        <meta name="description" content="This is my note on swirl course Regression Model : Overfitting and Underfitting. Definition¶ A variance inflation factor (VIF) is a ratio of estimated variances, the variance due to including the ith regressor, divided by that due to including a corresponding ideal regressor which is uncorrelated with the others. VIF is …" />
 
         <meta property="og:site_name" content="Brain Scribble" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="R : Variance Inflation"/>
         <meta property="og:url" content="http://stephanie-w.github.io/brainscribble/variance-inflation.html"/>
-        <meta property="og:description" content="This is my note on swirl course Regression Model : Overfitting and Underfitting. Definition A variance inflation factor (VIF) is a ratio of estimated variances, the variance due to including the ith regressor, divided by that due to including a corresponding ideal regressor which is uncorrelated with the others. VIF is ..."/>
+        <meta property="og:description" content="This is my note on swirl course Regression Model : Overfitting and Underfitting. Definition¶ A variance inflation factor (VIF) is a ratio of estimated variances, the variance due to including the ith regressor, divided by that due to including a corresponding ideal regressor which is uncorrelated with the others. VIF is …"/>
         <meta property="article:published_time" content="2015-07-18" />
             <meta property="article:section" content="DataAnalysis" />
             <meta property="article:tag" content="R" />
@@ -35,13 +35,9 @@
     <link href="http://stephanie-w.github.io/brainscribble/theme/css/pygments/solarized.css" rel="stylesheet">
     <link rel="stylesheet" href="http://stephanie-w.github.io/brainscribble/theme/css/style.css" type="text/css"/>
 
-        <link href="http://stephanie-w.github.io/brainscribble/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Brain Scribble ATOM Feed"/>
 
 
 
-        <link href="http://stephanie-w.github.io/brainscribble/feeds/dataanalysis.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Brain Scribble DataAnalysis ATOM Feed"/>
 
     <!-- Mathjax -->
     <script type="text/javascript"
@@ -123,7 +119,7 @@ Brain Scribble            </a>
                 </div>
                 <hr />
 <p>This is my note on swirl course Regression Model : Overfitting and Underfitting.</p>
-<h2 id="definition">Definition</h2>
+<h2 id="definition">Definition<a class="headerlink" href="#definition" title="Permanent link">&para;</a></h2>
 <p><!-- BEGIN_SUMMARY -->
 A variance inflation factor (VIF) is a ratio of estimated variances, the variance due to including the ith regressor, divided by that due to including a corresponding ideal regressor which is uncorrelated with the others.
 VIF is the square of standard error inflation.</p>
@@ -131,15 +127,15 @@ VIF is the square of standard error inflation.</p>
 
 <p>More simply, it estimates how much the variance of a coefficient is "inflated" because of linear dependence with other predictors. Thus, a VIF of 1.8 tells us that the variance of a particular coefficient is 80% larger than it would be if that predictor was completely uncorrelated with all the other predictors.<br />
 The VIF has a lower bound of 1 but no upper bound. </p>
-<h2 id="examples-with-the-swiss-dataset">Examples with the swiss dataset</h2>
+<h2 id="examples-with-the-swiss-dataset">Examples with the swiss dataset<a class="headerlink" href="#examples-with-the-swiss-dataset" title="Permanent link">&para;</a></h2>
 <p>To explore VIF, we'll use the Swiss Fertility and Socioeconomic Indicators (1888) dataset which reports standardized fertility measure and socio-economic indicators for each of 47 French-speaking provinces of Switzerland at about 1888. </p>
-<div class="highlight"><pre><span class="code-line">data<span class="p">(</span>swiss<span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>data<span class="p">(</span>swiss<span class="p">)</span></span>
 <span class="code-line"><span class="kp">head</span><span class="p">(</span>swiss<span class="p">)</span></span>
 </pre></div>
 
 
 <p>We fit a model with Fertility as outcome and use the R's function vif (from the car package) to compute variance inflations:</p>
-<div class="highlight"><pre><span class="code-line">data<span class="p">(</span>swiss<span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>data<span class="p">(</span>swiss<span class="p">)</span></span>
 <span class="code-line"><span class="kp">head</span><span class="p">(</span>swiss<span class="p">)</span></span>
 <span class="code-line">mdl <span class="o">&lt;-</span> lm<span class="p">(</span>Fertility <span class="o">~</span> <span class="m">.</span><span class="p">,</span> data <span class="o">=</span> swiss<span class="p">)</span></span>
 <span class="code-line"><span class="kn">library</span><span class="p">(</span>car<span class="p">)</span></span>
@@ -147,7 +143,7 @@ The VIF has a lower bound of 1 but no upper bound. </p>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="code-line">##      Agriculture      Examination        Education         Catholic Infant.Mortality </span>
+<div class="highlight"><pre><span class="code-line"><span></span>##      Agriculture      Examination        Education         Catholic Infant.Mortality </span>
 <span class="code-line">##         2.284129         3.675420         2.774943         1.937160         1.107542</span>
 </pre></div>
 
@@ -155,12 +151,12 @@ The VIF has a lower bound of 1 but no upper bound. </p>
 <p>For each regression coefficient, the variance inflation due to including all the others.<br />
 For instance, the variance in the estimated coefficient of Education is 2.774943 times what it might have been if Education were not correlated with the other regressors.<br />
 We can guess that Examination and Education are likely to be correlated, so most of the variance inflation for Education is due to including Examination.</p>
-<div class="highlight"><pre><span class="code-line">mdl2 <span class="o">&lt;-</span> lm<span class="p">(</span>Fertility <span class="o">~</span> <span class="m">.</span> <span class="o">-</span> Examination<span class="p">,</span> swiss<span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>mdl2 <span class="o">&lt;-</span> lm<span class="p">(</span>Fertility <span class="o">~</span> <span class="m">.</span> <span class="o">-</span> Examination<span class="p">,</span> swiss<span class="p">)</span></span>
 <span class="code-line">vif<span class="p">(</span>mdl2<span class="p">)</span></span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="code-line">##      Agriculture        Education         Catholic Infant.Mortality </span>
+<div class="highlight"><pre><span class="code-line"><span></span>##      Agriculture        Education         Catholic Infant.Mortality </span>
 <span class="code-line">##         2.147153         1.816361         1.299916         1.107528</span>
 </pre></div>
 
@@ -168,13 +164,13 @@ We can guess that Examination and Education are likely to be correlated, so most
 <p>As expected, omitting Examination in the model decreased the VIF for Education, from 2.774943 to 1.816361. Notice it has almost no effect on the VIF for Infant Mortality.</p>
 <p>Including new variables to a model will increase standard errors of coefficient estimates of other correlated refressors. On the other hand, omitting varaibles results can bias in coefficients of regressors which are correlated with the omitted one.</p>
 <p>Analysis of variance (ANOVA) is a useful way to quantify the significance of additional regressors.</p>
-<div class="highlight"><pre><span class="code-line">fit1 <span class="o">&lt;-</span> lm<span class="p">(</span>Fertility <span class="o">~</span> Agriculture<span class="p">,</span> data <span class="o">=</span> swiss<span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>fit1 <span class="o">&lt;-</span> lm<span class="p">(</span>Fertility <span class="o">~</span> Agriculture<span class="p">,</span> data <span class="o">=</span> swiss<span class="p">)</span></span>
 <span class="code-line">fit3 <span class="o">&lt;-</span> lm<span class="p">(</span>Fertility <span class="o">~</span> Agriculture <span class="o">+</span> Examination <span class="o">+</span> Education<span class="p">,</span> data <span class="o">=</span> swiss<span class="p">)</span></span>
 <span class="code-line">anova<span class="p">(</span>fit1<span class="p">,</span> fit3<span class="p">)</span></span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="code-line">## Analysis of Variance Table</span>
+<div class="highlight"><pre><span class="code-line"><span></span>## Analysis of Variance Table</span>
 <span class="code-line">## </span>
 <span class="code-line">## Model 1: Fertility ~ Agriculture</span>
 <span class="code-line">## Model 2: Fertility ~ Agriculture + Examination + Education</span>
@@ -189,69 +185,69 @@ We can guess that Examination and Education are likely to be correlated, so most
 <p>The null hypothesis is rejected at the 0.001 level based on a right-tailed F test (F value=20.968).  </p>
 <p>RSS (Residual sum of squares) are 6283.1 and 3180.9.<br />
 We can check the results with the R's deviance function, which calculate the residual sum of squares:</p>
-<div class="highlight"><pre><span class="code-line">deviance<span class="p">(</span>fit1<span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>deviance<span class="p">(</span>fit1<span class="p">)</span></span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="code-line">## [1] 6283.116</span>
+<div class="highlight"><pre><span class="code-line"><span></span>## [1] 6283.116</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="code-line">deviance<span class="p">(</span>fit3<span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>deviance<span class="p">(</span>fit3<span class="p">)</span></span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="code-line">## [1] 3180.925</span>
+<div class="highlight"><pre><span class="code-line"><span></span>## [1] 3180.925</span>
 </pre></div>
 
 
 <p>The F statistic is the ratio of the two sums of squares divided by their respective degrees of freedom.<br />
 For the F value computing, this is the ratio of the difference of deviance divided by the difference in the residual degrees of freedom of fit1 and fit3 (2) and the fit3's residual sum of squares divided by its degrees of freedom. fit3 has 43 residual degrees of freedom (47 number of samples - 4 predictors (the 3 named and the intercept)):</p>
-<div class="highlight"><pre><span class="code-line">n <span class="o">&lt;-</span> <span class="p">(</span>deviance<span class="p">(</span>fit1<span class="p">)</span> <span class="o">-</span> deviance<span class="p">(</span>fit3<span class="p">))</span><span class="o">/</span><span class="m">2</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>n <span class="o">&lt;-</span> <span class="p">(</span>deviance<span class="p">(</span>fit1<span class="p">)</span> <span class="o">-</span> deviance<span class="p">(</span>fit3<span class="p">))</span><span class="o">/</span><span class="m">2</span></span>
 <span class="code-line">d <span class="o">&lt;-</span> deviance<span class="p">(</span>fit3<span class="p">)</span><span class="o">/</span><span class="m">43</span></span>
 <span class="code-line">n<span class="o">/</span>d</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="code-line">## [1] 20.96783</span>
+<div class="highlight"><pre><span class="code-line"><span></span>## [1] 20.96783</span>
 </pre></div>
 
 
 <p>If the two scaled sums are independent and centrally chi-squared distributed with the same variance, the statistic will have an F distribution with parameters given by the two degrees of freedom.</p>
 <p>For the p-value is the probability that a value of n/d or larger would be drawn from an F distribution which has parameters 2 and 43. The p-value is 4.407e-07, a very unlikely value if the null hypothesis vwere true.</p>
 <p>The p-value can be computed with the R's pf function:</p>
-<div class="highlight"><pre><span class="code-line">pf<span class="p">(</span>n<span class="o">/</span>d<span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">43</span><span class="p">,</span> lower.tail <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>pf<span class="p">(</span>n<span class="o">/</span>d<span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">43</span><span class="p">,</span> lower.tail <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span></span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="code-line">## [1] 4.406913e-07</span>
+<div class="highlight"><pre><span class="code-line"><span></span>## [1] 4.406913e-07</span>
 </pre></div>
 
 
 <p>Based on the calculated p-value, a false rejection of the null hypothesis is extremely unlikely. We are confident that fit3 is significantly better than fit1, with one caveat: analysis of variance is sensitive to its assumption that model residuals are approximately normal.<br />
 If they are not, we could get a small p-value for that reason.<br />
 It is thus worth testing residuals for normality. The Shapiro-Wilk test tests the residual of fit 3. Normality is its null hypothesis.</p>
-<div class="highlight"><pre><span class="code-line">shapiro.test<span class="p">(</span>fit3<span class="o">$</span>residuals<span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>shapiro.test<span class="p">(</span>fit3<span class="o">$</span>residuals<span class="p">)</span></span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="code-line"><span class="cp">##</span><span class="c"> </span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c">  Shapiro-Wilk normality test</span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c"> </span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c"> data:  fit3$residuals</span><span class="x"></span></span>
-<span class="code-line"><span class="cp">##</span><span class="c"> W = 0.97276, p-value = 0.336</span><span class="x"></span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>## </span>
+<span class="code-line">##  Shapiro-Wilk normality test</span>
+<span class="code-line">## </span>
+<span class="code-line">## data:  fit3$residuals</span>
+<span class="code-line">## W = 0.97276, p-value = 0.336</span>
 </pre></div>
 
 
 <p>The Shapiro-Wilk p-value of 0.336 fails to reject normality, supporting confidence in the analysis of variance.</p>
 <p>We can go on with ANOVA and other variables:</p>
-<div class="highlight"><pre><span class="code-line">fit5 <span class="o">&lt;-</span> lm<span class="p">(</span>Fertility <span class="o">~</span> Agriculture <span class="o">+</span> Examination <span class="o">+</span> Education <span class="o">+</span> Catholic<span class="p">,</span> data <span class="o">=</span> swiss<span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>fit5 <span class="o">&lt;-</span> lm<span class="p">(</span>Fertility <span class="o">~</span> Agriculture <span class="o">+</span> Examination <span class="o">+</span> Education <span class="o">+</span> Catholic<span class="p">,</span> data <span class="o">=</span> swiss<span class="p">)</span></span>
 <span class="code-line">fit6 <span class="o">&lt;-</span> lm<span class="p">(</span>Fertility <span class="o">~</span> Agriculture <span class="o">+</span> Examination <span class="o">+</span> Education <span class="o">+</span> Catholic <span class="o">+</span> Infant.Mortality<span class="p">,</span> data <span class="o">=</span> swiss<span class="p">)</span></span>
 <span class="code-line">anova<span class="p">(</span>fit1<span class="p">,</span> fit3<span class="p">,</span> fit5<span class="p">,</span> fit6<span class="p">)</span></span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="code-line">## Analysis of Variance Table</span>
+<div class="highlight"><pre><span class="code-line"><span></span>## Analysis of Variance Table</span>
 <span class="code-line">## </span>
 <span class="code-line">## Model 1: Fertility ~ Agriculture</span>
 <span class="code-line">## Model 2: Fertility ~ Agriculture + Examination + Education</span>
@@ -287,8 +283,8 @@ http://statisticalhorizons.com/multicollinearity
         <li><a href="http://stephanie-w.github.io/brainscribble/experimentation-of-clt.html">R: Experimentation of the Cental Limit Theorem</a></li>
         <li><a href="http://stephanie-w.github.io/brainscribble/hypothesis-testing-and-t-tests.html">Notes on Statistical Inference : Hypothesis Testing and t-tests</a></li>
         <li><a href="http://stephanie-w.github.io/brainscribble/multivariable-regression.html">R: Multivariable Regression</a></li>
-        <li><a href="http://stephanie-w.github.io/brainscribble/latest_earthquakes.html">R: Earthquakes from the past 30 days</a></li>
         <li><a href="http://stephanie-w.github.io/brainscribble/weather_event_impact.html">R: Analysis of weather events impact on population health and economy.</a></li>
+        <li><a href="http://stephanie-w.github.io/brainscribble/latest_earthquakes.html">R: Earthquakes from the past 30 days</a></li>
     </ul>
 </section>
         </article>
@@ -329,23 +325,23 @@ Brain Scribble    <li class="list-group-item">
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
-                        <a href="http://stephanie-w.github.io/brainscribble/tag/stats.html">
-                            stats
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
                         <a href="http://stephanie-w.github.io/brainscribble/tag/ipython-notebook.html">
                             ipython-notebook
                         </a>
                     </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://stephanie-w.github.io/brainscribble/tag/scikit-learn.html">
-                            scikit-learn
+                    <li class="list-group-item tag-2">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/stats.html">
+                            stats
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
                         <a href="http://stephanie-w.github.io/brainscribble/tag/algorithm.html">
                             algorithm
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/scikit-learn.html">
+                            scikit-learn
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
@@ -391,7 +387,7 @@ Brain Scribble    <li class="list-group-item">
    <div class="container-fluid">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2015 Stephanie W
+         <div class="col-xs-10">&copy; 2016 Stephanie W
             &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
@@ -407,23 +403,6 @@ Brain Scribble    <li class="list-group-item">
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
 <script src="http://stephanie-w.github.io/brainscribble/theme/js/respond.min.js"></script>
 
-    <!-- Google Analytics -->
-    <script type="text/javascript">
-
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-67062346-1']);
-        _gaq.push(['_trackPageview']);
-
-        (function () {
-            var ga = document.createElement('script');
-            ga.type = 'text/javascript';
-            ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(ga, s);
-        })();
-    </script>
-    <!-- End Google Analytics Code -->
 
 </body>
 </html>

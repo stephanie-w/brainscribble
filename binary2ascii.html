@@ -33,13 +33,9 @@
     <link href="http://stephanie-w.github.io/brainscribble/theme/css/pygments/solarized.css" rel="stylesheet">
     <link rel="stylesheet" href="http://stephanie-w.github.io/brainscribble/theme/css/style.css" type="text/css"/>
 
-        <link href="http://stephanie-w.github.io/brainscribble/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Brain Scribble ATOM Feed"/>
 
 
 
-        <link href="http://stephanie-w.github.io/brainscribble/feeds/pythonidioms.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Brain Scribble PythonIdioms ATOM Feed"/>
 
     <!-- Mathjax -->
     <script type="text/javascript"
@@ -118,8 +114,8 @@ Brain Scribble            </a>
 </footer><!-- /.post-info -->                    </div>
                 </div>
                 <hr />
-<div class="highlight"><pre><span class="code-line"><span class="k">def</span> <span class="nf">binary2ascii</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span></span>
-<span class="code-line">    <span class="n">result</span> <span class="o">=</span> <span class="s">&quot;&quot;</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="k">def</span> <span class="nf">binary2ascii</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span></span>
+<span class="code-line">    <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span></span>
 <span class="code-line">    <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span></span>
 <span class="code-line">    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span></span>
 <span class="code-line">        <span class="n">s</span> <span class="o">=</span> <span class="nb">input</span><span class="p">[</span><span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="o">+</span><span class="mi">8</span><span class="p">]</span></span>
@@ -135,20 +131,20 @@ Brain Scribble            </a>
 
 
 <p>Example:</p>
-<div class="highlight"><pre><span class="code-line"><span class="n">binary2ascii</span><span class="p">(</span><span class="s">&#39;0110010001100101011000110110111101100100011001010110110101100101&#39;</span><span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="n">binary2ascii</span><span class="p">(</span><span class="s1">&#39;0110010001100101011000110110111101100100011001010110110101100101&#39;</span><span class="p">)</span></span>
 </pre></div>
 
 
-<div class="highlight"><pre><span class="code-line">&#39;decodeme&#39;</span>
+<div class="highlight"><pre><span class="code-line"><span></span>&#39;decodeme&#39;</span>
 </pre></div>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="http://stephanie-w.github.io/brainscribble/rat-in-a-maze.html">Backtracking - Rat in a Maze</a></li>
-        <li><a href="http://stephanie-w.github.io/brainscribble/combinations.html">All possible combinations</a></li>
         <li><a href="http://stephanie-w.github.io/brainscribble/vigenere_cypher.html">Encoding/Decoding Vigenere Cypher</a></li>
+        <li><a href="http://stephanie-w.github.io/brainscribble/combinations.html">All possible combinations</a></li>
+        <li><a href="http://stephanie-w.github.io/brainscribble/m-coloring-problem.html">Backtracking - M Coloring Problem</a></li>
         <li><a href="http://stephanie-w.github.io/brainscribble/primes.html">Generating n primes</a></li>
         <li><a href="http://stephanie-w.github.io/brainscribble/binary2int.html">Decoding Binary Code (int)</a></li>
     </ul>
@@ -191,23 +187,23 @@ Brain Scribble    <li class="list-group-item">
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
-                        <a href="http://stephanie-w.github.io/brainscribble/tag/stats.html">
-                            stats
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
                         <a href="http://stephanie-w.github.io/brainscribble/tag/ipython-notebook.html">
                             ipython-notebook
                         </a>
                     </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://stephanie-w.github.io/brainscribble/tag/scikit-learn.html">
-                            scikit-learn
+                    <li class="list-group-item tag-2">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/stats.html">
+                            stats
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
                         <a href="http://stephanie-w.github.io/brainscribble/tag/algorithm.html">
                             algorithm
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/scikit-learn.html">
+                            scikit-learn
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
@@ -253,7 +249,7 @@ Brain Scribble    <li class="list-group-item">
    <div class="container-fluid">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2015 Stephanie W
+         <div class="col-xs-10">&copy; 2016 Stephanie W
             &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
@@ -269,23 +265,6 @@ Brain Scribble    <li class="list-group-item">
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
 <script src="http://stephanie-w.github.io/brainscribble/theme/js/respond.min.js"></script>
 
-    <!-- Google Analytics -->
-    <script type="text/javascript">
-
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-67062346-1']);
-        _gaq.push(['_trackPageview']);
-
-        (function () {
-            var ga = document.createElement('script');
-            ga.type = 'text/javascript';
-            ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(ga, s);
-        })();
-    </script>
-    <!-- End Google Analytics Code -->
 
 </body>
 </html>

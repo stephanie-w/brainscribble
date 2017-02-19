@@ -28,8 +28,6 @@
     <link href="http://stephanie-w.github.io/brainscribble/theme/css/pygments/solarized.css" rel="stylesheet">
     <link rel="stylesheet" href="http://stephanie-w.github.io/brainscribble/theme/css/style.css" type="text/css"/>
 
-        <link href="http://stephanie-w.github.io/brainscribble/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Brain Scribble ATOM Feed"/>
 
 
 
@@ -82,24 +80,28 @@ Brain Scribble            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
+                <h2><a href="http://stephanie-w.github.io/brainscribble/docker-data-science-at-the-command-line.html">A docker container for the "Data Science at the Command Line" book</a></h2>
+                <div class="summary entry-content">
+                    <hr />
+<p><a href="https://github.com/stephanie-w/docker-data-science-at-the-command-line">docker-data-science-at-the-command-line</a> contains everything to build a doker container to use with the book <a href="http://datascienceatthecommandline.com">Data Science at the Command Line</a>.</p>
+<p>To build the container :</p>
+<div class="highlight"><pre><span class="code-line"><span></span>cd docker--t data-science-toolbox .</span>
+<span class="code-line">docker build -t data-science-toolbox .</span>
+</pre></div>
+
+
+<p>To run the container :</p>
+<div class="highlight"><pre><span class="code-line"><span></span>docker run -v `pwd`:/data -it --rm data-science-toolbox /bin/bash</span>
+</pre></div>
+                    <a class="btn btn-default btn-xs" href="http://stephanie-w.github.io/brainscribble/docker-data-science-at-the-command-line.html">more ...</a>
+                </div>
+            </article>
+            <br clear="both">
+            <hr/>
+            <article>
                 <h2><a href="http://stephanie-w.github.io/brainscribble/hadoop-basic-monitoring-tools.html">Hadoop: Basic Monitoring Tools</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2015-10-29T00:00:00+01:00"> 2015-10-29</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="http://stephanie-w.github.io/brainscribble/tag/hadoop.html">hadoop</a>
-    
-</footer><!-- /.post-info -->                    </div>
                     <img class="image_summary" src="http://stephanie-w.github.io/brainscribble/figure/DataNodesWebUI.png">
-                <div class="summary">
+                <div class="summary entry-content">
                     <p>Hadoop Web UIs and logs</p>
                     <a class="btn btn-default btn-xs" href="http://stephanie-w.github.io/brainscribble/hadoop-basic-monitoring-tools.html">more ...</a>
                 </div>
@@ -108,24 +110,11 @@ Brain Scribble            </a>
             <hr/>
             <article>
                 <h2><a href="http://stephanie-w.github.io/brainscribble/squad-teams.html">Squad Teams</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2015-10-17T00:00:00+02:00"> 2015-10-17</time>
-    </span>
-
-
-
-
-
-    
-</footer><!-- /.post-info -->                    </div>
                     <img class="image_summary" src="http://stephanie-w.github.io/brainscribble/figure/squad_teams.png">
-                <div class="summary">
+                <div class="summary entry-content">
                     <hr />
 <p>A squad is a cross-functionnal self-organizing team (less than 8 people). It is a small business cluster running like a startup in its own right.  <br />
-The team has end-to-end responsability for the stuff they build (design, deployment, operation). Ideally, each squad is fully autonomous. There should be no blocking dependencies ...</p>
+The team has end-to-end responsability for the stuff they build (design, deployment, operation). Ideally, each squad is fully autonomous. There should be no blocking dependencies …</p>
                     <a class="btn btn-default btn-xs" href="http://stephanie-w.github.io/brainscribble/squad-teams.html">more ...</a>
                 </div>
             </article>
@@ -133,29 +122,10 @@ The team has end-to-end responsability for the stuff they build (design, deploym
             <hr/>
             <article>
                 <h2><a href="http://stephanie-w.github.io/brainscribble/rat-in-a-maze.html">Backtracking - Rat in a Maze</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2015-09-07T00:00:00+02:00"> 2015-09-07</time>
-    </span>
-
-            <span class="label label-default">Series</span>
-            Part 2 of backtracking
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="http://stephanie-w.github.io/brainscribble/tag/python.html">python</a>
-        /
-	<a href="http://stephanie-w.github.io/brainscribble/tag/algorithm.html">algorithm</a>
-    
-</footer><!-- /.post-info -->                    </div>
                     <img class="image_summary" src="http://stephanie-w.github.io/brainscribble/figure/ratinmaze_filled_path1.png">
-                <div class="summary">
+                <div class="summary entry-content">
                     <hr />
-<p>A Maze is given as N*N binary matrix of blocks where source block is the upper left most block i.e., maze[0][0] and destination block is lower rightmost block i.e., maze[N-1][N-1]. A rat starts from source and has to reach destination. The rat can ...</p>
+<p>A Maze is given as N*N binary matrix of blocks where source block is the upper left most block i.e., maze[0][0] and destination block is lower rightmost block i.e., maze[N-1][N-1]. A rat starts from source and has to reach destination. The rat can …</p>
                     <a class="btn btn-default btn-xs" href="http://stephanie-w.github.io/brainscribble/rat-in-a-maze.html">more ...</a>
                 </div>
             </article>
@@ -163,30 +133,11 @@ The team has end-to-end responsability for the stuff they build (design, deploym
             <hr/>
             <article>
                 <h2><a href="http://stephanie-w.github.io/brainscribble/m-coloring-problem.html">Backtracking - M Coloring Problem</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2015-09-06T00:00:00+02:00"> 2015-09-06</time>
-    </span>
-
-            <span class="label label-default">Series</span>
-            Part 1 of backtracking
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="http://stephanie-w.github.io/brainscribble/tag/python.html">python</a>
-        /
-	<a href="http://stephanie-w.github.io/brainscribble/tag/algorithm.html">algorithm</a>
-    
-</footer><!-- /.post-info -->                    </div>
                     <img class="image_summary" src="http://stephanie-w.github.io/brainscribble/figure/graph_col.png">
-                <div class="summary">
+                <div class="summary entry-content">
                     <hr />
 <p>Backtracking is an algorithmic paradigm that tries different solutions until finds a solution that “works”. Problems which are typically solved using backtracking technique have following property in common. These problems can only be solved by trying every possible configuration and each configuration is tried only once.</p>
-<p>Given an undirected graph ...</p>
+<p>Given an undirected graph …</p>
                     <a class="btn btn-default btn-xs" href="http://stephanie-w.github.io/brainscribble/m-coloring-problem.html">more ...</a>
                 </div>
             </article>
@@ -194,27 +145,8 @@ The team has end-to-end responsability for the stuff they build (design, deploym
             <hr/>
             <article>
                 <h2><a href="http://stephanie-w.github.io/brainscribble/classification-algorithm-random-forest.html">scikit-learn: Random Forest</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2015-09-01T00:00:00+02:00"> 2015-09-01</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="http://stephanie-w.github.io/brainscribble/tag/scikit-learn.html">scikit-learn</a>
-        /
-	<a href="http://stephanie-w.github.io/brainscribble/tag/machine-learning.html">machine-learning</a>
-        /
-	<a href="http://stephanie-w.github.io/brainscribble/tag/ipython-notebook.html">ipython-notebook</a>
-    
-</footer><!-- /.post-info -->                    </div>
                     <img class="image_summary" src="http://stephanie-w.github.io/brainscribble/figure/classification-algorithm-random-forest_11_2.png">
-                <div class="summary">
+                <div class="summary entry-content">
                     <p>A random forest is a meta estimator that fits a number of decision tree classifiers on various sub-samples of the dataset and use averaging to improve the predictive accuracy and control over-fitting ...</p>
                     <a class="btn btn-default btn-xs" href="http://stephanie-w.github.io/brainscribble/classification-algorithm-random-forest.html">more ...</a>
                 </div>
@@ -223,27 +155,8 @@ The team has end-to-end responsability for the stuff they build (design, deploym
             <hr/>
             <article>
                 <h2><a href="http://stephanie-w.github.io/brainscribble/classification-algorithms-on-iris-dataset.html">scikit-learn: Classification Algorithms on Iris Dataset</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2015-08-30T00:00:00+02:00"> 2015-08-30</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="http://stephanie-w.github.io/brainscribble/tag/scikit-learn.html">scikit-learn</a>
-        /
-	<a href="http://stephanie-w.github.io/brainscribble/tag/machine-learning.html">machine-learning</a>
-        /
-	<a href="http://stephanie-w.github.io/brainscribble/tag/ipython-notebook.html">ipython-notebook</a>
-    
-</footer><!-- /.post-info -->                    </div>
                     <img class="image_summary" src="http://stephanie-w.github.io/brainscribble/figure/classification-algorithms-on-iris-dataset_13_1.png">
-                <div class="summary">
+                <div class="summary entry-content">
                     <p>scikit-learn comes with a few standard datasets, for instance the iris and digits datasets for classification. The iris dataset consists of measurements of three different species of irises ...</p>
                     <a class="btn btn-default btn-xs" href="http://stephanie-w.github.io/brainscribble/classification-algorithms-on-iris-dataset.html">more ...</a>
                 </div>
@@ -252,23 +165,8 @@ The team has end-to-end responsability for the stuff they build (design, deploym
             <hr/>
             <article>
                 <h2><a href="http://stephanie-w.github.io/brainscribble/plotting-last-earthquakes-on-a-map.html">Plotting Last Earthquakes on a Map</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2015-08-30T00:00:00+02:00"> 2015-08-30</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="http://stephanie-w.github.io/brainscribble/tag/ipython-notebook.html">ipython-notebook</a>
-    
-</footer><!-- /.post-info -->                    </div>
                     <img class="image_summary" src="http://stephanie-w.github.io/brainscribble/figure/plotting-last-earthquakes-on-a-map_5_0.png">
-                <div class="summary">
+                <div class="summary entry-content">
                     <p>Plotting the earthquakes of the last 30 months with R and the the National Earthquake Hazards Reduction Program (NEHRP) feed ...</p>
                     <a class="btn btn-default btn-xs" href="http://stephanie-w.github.io/brainscribble/plotting-last-earthquakes-on-a-map.html">more ...</a>
                 </div>
@@ -277,22 +175,7 @@ The team has end-to-end responsability for the stuff they build (design, deploym
             <hr/>
             <article>
                 <h2><a href="http://stephanie-w.github.io/brainscribble/machine-learning-links.html">Machine Learning Links</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2015-08-21T00:00:00+02:00"> 2015-08-21</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="http://stephanie-w.github.io/brainscribble/tag/machine-learning.html">machine-learning</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary">
+                <div class="summary entry-content">
                     
                     <a class="btn btn-default btn-xs" href="http://stephanie-w.github.io/brainscribble/machine-learning-links.html">more ...</a>
                 </div>
@@ -301,56 +184,14 @@ The team has end-to-end responsability for the stuff they build (design, deploym
             <hr/>
             <article>
                 <h2><a href="http://stephanie-w.github.io/brainscribble/nim-games.html">Nim Games</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2015-08-15T00:00:00+02:00"> 2015-08-15</time>
-    </span>
-
-
-
-
-
-    
-</footer><!-- /.post-info -->                    </div>
                     <img class="image_summary" src="http://stephanie-w.github.io/brainscribble/figure/nim-graph.png">
-                <div class="summary">
+                <div class="summary entry-content">
                     
 <hr/>
 <!-- BEGIN_SUMMARY -->
 <p>Nim is a mathematical game of strategy in which two players take turns removing objects from distinct heaps. On each turn, a player must remove at least one object, and may remove any number of objects provided they all come from the same heap.<br/>
-Nim can be played as a ...</br/></p></!--></hr/>
+Nim can be played as a …</p>
                     <a class="btn btn-default btn-xs" href="http://stephanie-w.github.io/brainscribble/nim-games.html">more ...</a>
-                </div>
-            </article>
-            <br clear="both">
-            <hr/>
-            <article>
-                <h2><a href="http://stephanie-w.github.io/brainscribble/confusion-matrix.html">Confusion Matrix</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2015-08-12T00:00:00+02:00"> 2015-08-12</time>
-    </span>
-
-
-
-
-
-    
-</footer><!-- /.post-info -->                    </div>
-                    <img class="image_summary" src="http://stephanie-w.github.io/brainscribble/figure/confusion-matrix-0.png">
-                <div class="summary">
-                    <hr />
-<!-- BEGIN_SUMMARY -->
-
-<p>A confusion matrix, also known as a contingency table or an error matrix or tavle of confusion, is a specific table layout that allows visualization of the performance of an algorithm, typically a supervised learning one (in unsupervised learning it is usually called a matching matrix).</p>
-<!-- END_SUMMARY -->
-
-<p>It is a table ...</p></!--></!-->
-                    <a class="btn btn-default btn-xs" href="http://stephanie-w.github.io/brainscribble/confusion-matrix.html">more ...</a>
                 </div>
             </article>
             <br clear="both">
@@ -364,6 +205,8 @@ Nim can be played as a ...</br/></p></!--></hr/>
                             href="http://stephanie-w.github.io/brainscribble/author/stephanie-w2.html">2</a></li>
                     <li class=""><a
                             href="http://stephanie-w.github.io/brainscribble/author/stephanie-w3.html">3</a></li>
+                    <li class=""><a
+                            href="http://stephanie-w.github.io/brainscribble/author/stephanie-w4.html">4</a></li>
                 <li class="next"><a
                         href="http://stephanie-w.github.io/brainscribble/author/stephanie-w2.html">&raquo;</a></li>
         </ul>
@@ -402,23 +245,23 @@ Brain Scribble    <li class="list-group-item">
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
-                        <a href="http://stephanie-w.github.io/brainscribble/tag/stats.html">
-                            stats
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
                         <a href="http://stephanie-w.github.io/brainscribble/tag/ipython-notebook.html">
                             ipython-notebook
                         </a>
                     </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://stephanie-w.github.io/brainscribble/tag/scikit-learn.html">
-                            scikit-learn
+                    <li class="list-group-item tag-2">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/stats.html">
+                            stats
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
                         <a href="http://stephanie-w.github.io/brainscribble/tag/algorithm.html">
                             algorithm
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/scikit-learn.html">
+                            scikit-learn
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
@@ -464,7 +307,7 @@ Brain Scribble    <li class="list-group-item">
    <div class="container-fluid">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2015 Stephanie W
+         <div class="col-xs-10">&copy; 2016 Stephanie W
             &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
@@ -480,23 +323,6 @@ Brain Scribble    <li class="list-group-item">
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
 <script src="http://stephanie-w.github.io/brainscribble/theme/js/respond.min.js"></script>
 
-    <!-- Google Analytics -->
-    <script type="text/javascript">
-
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-67062346-1']);
-        _gaq.push(['_trackPageview']);
-
-        (function () {
-            var ga = document.createElement('script');
-            ga.type = 'text/javascript';
-            ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(ga, s);
-        })();
-    </script>
-    <!-- End Google Analytics Code -->
 
 </body>
 </html>

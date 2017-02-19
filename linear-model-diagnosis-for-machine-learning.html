@@ -14,13 +14,13 @@
 
         <meta name="author" content="Stephanie W" />
         <meta name="keywords" content="R,machine-learning" />
-        <meta name="description" content="This post follows the R : Exploring Data for Machine Learning Modeling post, exploring linear model in the context of machine learning. We&#39;ll still use the Wage dataset from the ISLR package. This dataset reports wage and other data (age, education, jobclass, etc.) for a group of 3000 male workers ..." />
+        <meta name="description" content="This post follows the R : Exploring Data for Machine Learning Modeling post, exploring linear model in the context of machine learning. We&#39;ll still use the Wage dataset from the ISLR package. This dataset reports wage and other data (age, education, jobclass, etc.) for a group of 3000 male workers in …" />
 
         <meta property="og:site_name" content="Brain Scribble" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="R : Linear Model Diagnosis for Machine Learning Modeling"/>
         <meta property="og:url" content="http://stephanie-w.github.io/brainscribble/linear-model-diagnosis-for-machine-learning.html"/>
-        <meta property="og:description" content="This post follows the R : Exploring Data for Machine Learning Modeling post, exploring linear model in the context of machine learning. We&#39;ll still use the Wage dataset from the ISLR package. This dataset reports wage and other data (age, education, jobclass, etc.) for a group of 3000 male workers ..."/>
+        <meta property="og:description" content="This post follows the R : Exploring Data for Machine Learning Modeling post, exploring linear model in the context of machine learning. We&#39;ll still use the Wage dataset from the ISLR package. This dataset reports wage and other data (age, education, jobclass, etc.) for a group of 3000 male workers in …"/>
         <meta property="article:published_time" content="2015-08-10" />
             <meta property="article:section" content="DataAnalysis" />
             <meta property="article:tag" content="R" />
@@ -35,13 +35,9 @@
     <link href="http://stephanie-w.github.io/brainscribble/theme/css/pygments/solarized.css" rel="stylesheet">
     <link rel="stylesheet" href="http://stephanie-w.github.io/brainscribble/theme/css/style.css" type="text/css"/>
 
-        <link href="http://stephanie-w.github.io/brainscribble/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Brain Scribble ATOM Feed"/>
 
 
 
-        <link href="http://stephanie-w.github.io/brainscribble/feeds/dataanalysis.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Brain Scribble DataAnalysis ATOM Feed"/>
 
     <!-- Mathjax -->
     <script type="text/javascript"
@@ -130,9 +126,9 @@ Brain Scribble            </a>
 <!-- END_SUMMARY -->
 <p>We'll still use the Wage dataset from the ISLR package.<br/>
 This dataset reports wage and other data (age, education, jobclass, etc.) for a group of 3000 male workers in the Mid-Atlantic region.</p>
-<h2 id="linear-model">Linear Model</h2>
+<h2 id="linear-model">Linear Model<a class="headerlink" href="#linear-model" title="Permanent link">¶</a></h2>
 <p>We build a training and testing set (50% of the Wage dataset each):</p>
-<div class="highlight"><pre><span class="code-line"><span class="kn">library</span><span class="p">(</span>ISLR<span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span><span class="kn">library</span><span class="p">(</span>ISLR<span class="p">)</span></span>
 <span class="code-line">data<span class="p">(</span>Wage<span class="p">)</span></span>
 <span class="code-line"><span class="kn">library</span><span class="p">(</span>caret<span class="p">)</span></span>
 <span class="code-line">intrain <span class="o">&lt;-</span> createDataPartition<span class="p">(</span>y <span class="o">=</span> Wage<span class="o">$</span>wage<span class="p">,</span> p <span class="o">=</span> <span class="m">0.5</span><span class="p">,</span> <span class="kt">list</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span></span>
@@ -140,11 +136,11 @@ This dataset reports wage and other data (age, education, jobclass, etc.) for a 
 <span class="code-line">testing <span class="o">=</span> Wage<span class="p">[</span><span class="o">-</span>intrain<span class="p">,</span> <span class="p">]</span></span>
 </pre></div>
 <p>We'll fit a linear model on the training set with wage as outcome and age, jobclass and education as predictors:</p>
-<div class="highlight"><pre><span class="code-line">fit <span class="o">&lt;-</span> train<span class="p">(</span>wage <span class="o">~</span> age <span class="o">+</span> jobclass <span class="o">+</span> education<span class="p">,</span> method <span class="o">=</span> <span class="s">"lm"</span><span class="p">,</span> data <span class="o">=</span> training<span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>fit <span class="o">&lt;-</span> train<span class="p">(</span>wage <span class="o">~</span> age <span class="o">+</span> jobclass <span class="o">+</span> education<span class="p">,</span> method <span class="o">=</span> <span class="s">"lm"</span><span class="p">,</span> data <span class="o">=</span> training<span class="p">)</span></span>
 <span class="code-line">final <span class="o">&lt;-</span> fit<span class="o">$</span>finalModel</span>
 <span class="code-line"><span class="kp">print</span><span class="p">(</span>fit<span class="p">)</span></span>
 </pre></div>
-<div class="highlight"><pre><span class="code-line">## Linear Regression </span>
+<div class="highlight"><pre><span class="code-line"><span></span>## Linear Regression </span>
 <span class="code-line">## </span>
 <span class="code-line">## 1501 samples</span>
 <span class="code-line">##   11 predictor</span>
@@ -159,29 +155,29 @@ This dataset reports wage and other data (age, education, jobclass, etc.) for a 
 <span class="code-line">## </span>
 <span class="code-line">## </span>
 </pre></div>
-<h2 id="diagnosis-plots">Diagnosis plots</h2>
-<h3 id="residuals-vs-fitted">Residuals vs fitted</h3>
+<h2 id="diagnosis-plots">Diagnosis plots<a class="headerlink" href="#diagnosis-plots" title="Permanent link">¶</a></h2>
+<h3 id="residuals-vs-fitted">Residuals vs fitted<a class="headerlink" href="#residuals-vs-fitted" title="Permanent link">¶</a></h3>
 <p>Plotting residuals by the predictions (the fitted values) in the training set against the residuals, ie. amont of variation left over after the model fit. </p>
-<div class="highlight"><pre><span class="code-line">plot<span class="p">(</span>final<span class="p">,</span> <span class="m">1</span><span class="p">,</span> pch <span class="o">=</span> <span class="m">19</span><span class="p">,</span> cex <span class="o">=</span> <span class="m">0.5</span><span class="p">,</span> col <span class="o">=</span> <span class="s">"#00000010"</span><span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>plot<span class="p">(</span>final<span class="p">,</span> <span class="m">1</span><span class="p">,</span> pch <span class="o">=</span> <span class="m">19</span><span class="p">,</span> cex <span class="o">=</span> <span class="m">0.5</span><span class="p">,</span> col <span class="o">=</span> <span class="s">"#00000010"</span><span class="p">)</span></span>
 </pre></div>
 <div class="rimage center"><img src="figure/linear-model-diagnosis-for-machine-learning-3-1.png"/></div>
 <p>The red line should be centered at 0 on the y-axis (since it represents the difference between the real values and the fitted values).<br/>
 Outliners labeled at the top of the graph should be explored further for identifying explanotary variables. </p>
 <p>We can then using colors for coloring a variable not used in the model to help spotting a trend in that variable.</p>
-<div class="highlight"><pre><span class="code-line">qplot<span class="p">(</span>final<span class="o">$</span>fitted<span class="p">,</span> final<span class="o">$</span>residuals<span class="p">,</span> color <span class="o">=</span> race<span class="p">,</span> data <span class="o">=</span> training<span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>qplot<span class="p">(</span>final<span class="o">$</span>fitted<span class="p">,</span> final<span class="o">$</span>residuals<span class="p">,</span> color <span class="o">=</span> race<span class="p">,</span> data <span class="o">=</span> training<span class="p">)</span></span>
 </pre></div>
 <div class="rimage center"><img alt="plot of chunk unnamed-chunk-4" class="plot" src="figure/linear-model-diagnosis-for-machine-learning-4-1.png" title="plot of chunk unnamed-chunk-4"/></div>
 <p>We see in the graph above that some of the outliners might be explained by the race variable.</p>
-<h3 id="plots-by-index">Plots by index</h3>
+<h3 id="plots-by-index">Plots by index<a class="headerlink" href="#plots-by-index" title="Permanent link">¶</a></h3>
 <p>Plotting residuals vs index (ie; row numbers) can be helpful in showing missing variables.<br/>
 Residuals should not have relationship to index (ie. order of observations).</p>
-<div class="highlight"><pre><span class="code-line">plot<span class="p">(</span>final<span class="o">$</span>residuals<span class="p">,</span> pch <span class="o">=</span> <span class="m">19</span><span class="p">,</span> cex <span class="o">=</span> <span class="m">0.5</span><span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>plot<span class="p">(</span>final<span class="o">$</span>residuals<span class="p">,</span> pch <span class="o">=</span> <span class="m">19</span><span class="p">,</span> cex <span class="o">=</span> <span class="m">0.5</span><span class="p">)</span></span>
 </pre></div>
 <div class="rimage center"><img src="figure/linear-model-diagnosis-for-machine-learning-5-1.png"/></div>
 <p>We're looking for residuals appearing at higher or lower rows and/or trends with respect to row numbers, suggesting there is a variable missing from the model, some continuous variable that the rows are ordered by (tipycally a variable expressing a relationship with respect to time or age).</p>
-<h3 id="predicted-vs-real-values-plot">Predicted vs real values plot</h3>
+<h3 id="predicted-vs-real-values-plot">Predicted vs real values plot<a class="headerlink" href="#predicted-vs-real-values-plot" title="Permanent link">¶</a></h3>
 <p>Plotting wage variable in the test set vs the predicted values in the test set.</p>
-<div class="highlight"><pre><span class="code-line">pred <span class="o">&lt;-</span> predict<span class="p">(</span>fit<span class="p">,</span> testing<span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>pred <span class="o">&lt;-</span> predict<span class="p">(</span>fit<span class="p">,</span> testing<span class="p">)</span></span>
 <span class="code-line">qplot<span class="p">(</span>wage<span class="p">,</span> pred<span class="p">,</span> color <span class="o">=</span> year<span class="p">,</span> data <span class="o">=</span> testing<span class="p">)</span></span>
 </pre></div>
 <div class="rimage center"><img src="figure/linear-model-diagnosis-for-machine-learning-6-1.png"/></div>
@@ -199,10 +195,10 @@ Residuals should not have relationship to index (ie. order of observations).</p>
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="http://stephanie-w.github.io/brainscribble/exploring-data-for-marchine-learning.html">R : Exploring Data for Machine Learning Modeling</a></li>
-        <li><a href="http://stephanie-w.github.io/brainscribble/experimentation-of-clt.html">R: Experimentation of the Cental Limit Theorem</a></li>
         <li><a href="http://stephanie-w.github.io/brainscribble/multivariable-regression.html">R: Multivariable Regression</a></li>
+        <li><a href="http://stephanie-w.github.io/brainscribble/weather_event_impact.html">R: Analysis of weather events impact on population health and economy.</a></li>
         <li><a href="http://stephanie-w.github.io/brainscribble/latest_earthquakes.html">R: Earthquakes from the past 30 days</a></li>
-        <li><a href="http://stephanie-w.github.io/brainscribble/variance-inflation.html">R : Variance Inflation</a></li>
+        <li><a href="http://stephanie-w.github.io/brainscribble/experimentation-of-clt.html">R: Experimentation of the Cental Limit Theorem</a></li>
     </ul>
 </section>
         </article>
@@ -266,23 +262,23 @@ Brain Scribble    <li class="list-group-item">
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
-                        <a href="http://stephanie-w.github.io/brainscribble/tag/stats.html">
-                            stats
-                        </a>
-                    </li>
-                    <li class="list-group-item tag-2">
                         <a href="http://stephanie-w.github.io/brainscribble/tag/ipython-notebook.html">
                             ipython-notebook
                         </a>
                     </li>
-                    <li class="list-group-item tag-3">
-                        <a href="http://stephanie-w.github.io/brainscribble/tag/scikit-learn.html">
-                            scikit-learn
+                    <li class="list-group-item tag-2">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/stats.html">
+                            stats
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
                         <a href="http://stephanie-w.github.io/brainscribble/tag/algorithm.html">
                             algorithm
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-3">
+                        <a href="http://stephanie-w.github.io/brainscribble/tag/scikit-learn.html">
+                            scikit-learn
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
@@ -328,7 +324,7 @@ Brain Scribble    <li class="list-group-item">
    <div class="container-fluid">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2015 Stephanie W
+         <div class="col-xs-10">&copy; 2016 Stephanie W
             &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
@@ -344,23 +340,6 @@ Brain Scribble    <li class="list-group-item">
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
 <script src="http://stephanie-w.github.io/brainscribble/theme/js/respond.min.js"></script>
 
-    <!-- Google Analytics -->
-    <script type="text/javascript">
-
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-67062346-1']);
-        _gaq.push(['_trackPageview']);
-
-        (function () {
-            var ga = document.createElement('script');
-            ga.type = 'text/javascript';
-            ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(ga, s);
-        })();
-    </script>
-    <!-- End Google Analytics Code -->
 
 </body>
 </html>
