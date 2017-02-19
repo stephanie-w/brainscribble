@@ -33,7 +33,7 @@ DEFAULT_DATE = 'fs'
 IGNORE_FILES = ['*.Rmd', '*.ipynb']
 
 #Plugins
-PLUGIN_PATHS = ['/home/stephanie/git/pelican/pelican-plugins/']
+PLUGIN_PATHS = ['/home/stephanie/Git/pelican/pelican-plugins/']
 PLUGINS = ['code_include','extract_toc','related_posts','better_codeblock_line_numbering']
 
 PLUGINS += ['render_math']
@@ -64,16 +64,13 @@ FEED_USE_SUMMARY = True
 PLUGINS += ['tag_cloud']
 
 
-from markdown.extensions.codehilite import CodeHiliteExtension
-from markdown.extensions.toc import TocExtension
-MD_EXTENSIONS = [
-    CodeHiliteExtension(css_class='highlight'),
-    TocExtension(permalink=True),
-    CodeHiliteExtension(css_class='highlight', linenums=False),
-    TocExtension(),
-    'markdown.extensions.extra',
-]
- 
+MARKDOWN = {
+    'extensions' : ['markdown.extensions.codehilite', 'markdown.extensions.extra', 'markdown.extensions.meta', 'markdown.extensions.toc'],
+    'extension_configs': {
+        'markdown.extensions.codehilite': {'css_class': 'highlight', 'linenums':False},
+        'markdown.extensions.toc': {'permalink' : True},
+    }
+}
 
 # Blogroll
 LINKS = (('codeeval Profile', 'https://www.codeeval.com/profile/lisptick/'),
