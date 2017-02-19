@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 AUTHOR = u'Stephanie W'
 SITENAME = u'Brain Scribble'
-SITEURL = ''
+SITEURL = 'http://stephanie-w.github.io/brainscribble'
 
 PATH ='content/'
 OUTPUT_PATH = 'output/'
@@ -88,7 +88,7 @@ SOCIAL = (('linkedin', 'https://fr.linkedin.com/pub/stephanie-werli/26/b69/a0b')
 DEFAULT_PAGINATION = 10
 
 # Uncomment following line if you want document-relative URLs when developing
-RELATIVE_URLS = True
+RELATIVE_URLS = False
 
 # global metadata to all the contents
 DEFAULT_METADATA = {}
