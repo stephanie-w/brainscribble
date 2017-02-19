@@ -108,3 +108,5 @@ BOOTSTRAP_THEME = 'lumen'
 BOOTSTRAP_FLUID = True
 SIDEBAR_IMAGES = ['http://stephanie-w.github.io/brainscribble/images/brain-scribble.png']
 DISPLAY_TAGS_ON_SIDEBAR = True
+FAVICON = 'images/brain-scribble-ico.png'
+PYGMENTS_STYLE = 'solarized'
