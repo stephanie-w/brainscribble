@@ -5,14 +5,14 @@
             <article>
                 <h2><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></h2>
                 {% if DISPLAY_ARTICLE_INFO_ON_INDEX %}
-                    <div class="well well-sm">
+                    <div class="well well-sm entry-content">
                         {% include "includes/article_info.html" %}
                     </div>
                 {% endif %}
                 {% if article.featured_image %}
                     <img class="image_summary" src="{{ SITEURL }}/{{ article.featured_image }}">
                 {% endif %}
-                <div class="summary">
+                <div class="summary entry-content">
                     {{ article.summary }}
                     {% include 'includes/comment_count.html' %}
                     <a class="btn btn-default btn-xs" href="{{ SITEURL }}/{{ article.url }}">more ...</a>
