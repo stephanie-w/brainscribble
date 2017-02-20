@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Brain Scribble</title>
+    <title>docker - Brain Scribble</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,8 +10,9 @@
 
     <link href="http://stephanie-w.github.io/brainscribble/images/brain-scribble-ico.png" rel="icon">
 
-<link rel="canonical" href="http://stephanie-w.github.io/brainscribble">
-        <meta name="author" content="Stephanie W" />
+
+    <meta name="author" content="Stephanie W" />
+    <meta name="keywords" content="docker" />
 
     <!-- Open Graph tags -->
         <meta property="og:site_name" content="Brain Scribble" />
@@ -80,28 +81,25 @@ Brain Scribble            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
-                <h2><a href="http://stephanie-w.github.io/brainscribble/vigenere_cypher.html">Encoding/Decoding Vigenere Cypher</a></h2>
+                <h2><a href="http://stephanie-w.github.io/brainscribble/docker-data-science-at-the-command-line.html">A docker container for the "Data Science at the Command Line" book</a></h2>
                 <div class="summary entry-content">
-                    
-                    <a class="btn btn-default btn-xs" href="http://stephanie-w.github.io/brainscribble/vigenere_cypher.html">more ...</a>
+                    <hr />
+<p><a href="https://github.com/stephanie-w/docker-data-science-at-the-command-line">docker-data-science-at-the-command-line</a> contains everything to build a doker container to use with the book <a href="http://datascienceatthecommandline.com">Data Science at the Command Line</a>.</p>
+<p>To build the container :</p>
+<div class="highlight"><pre><span class="code-line"><span></span>cd docker-data-science-at-the-command-line</span>
+<span class="code-line">docker build -t docker-data-science-at-the-command-line .</span>
+</pre></div>
+
+
+<p>To run the container :</p>
+<div class="highlight"><pre><span class="code-line"><span></span>docker run -v `pwd`:/data -it docker-data-science-at-the-command-line /bin/bash</span>
+</pre></div>
+                    <a class="btn btn-default btn-xs" href="http://stephanie-w.github.io/brainscribble/docker-data-science-at-the-command-line.html">more ...</a>
                 </div>
             </article>
             <br clear="both">
             <hr/>
 
-        <ul class="pagination">
-                <li class="prev"><a href="http://stephanie-w.github.io/brainscribble/index3.html">&laquo;</a>
-                </li>
-                    <li class=""><a
-                            href="http://stephanie-w.github.io/brainscribble/index.html">1</a></li>
-                    <li class=""><a
-                            href="http://stephanie-w.github.io/brainscribble/index2.html">2</a></li>
-                    <li class=""><a
-                            href="http://stephanie-w.github.io/brainscribble/index3.html">3</a></li>
-                    <li class="active"><a
-                            href="http://stephanie-w.github.io/brainscribble/index4.html">4</a></li>
-                <li class="next disabled"><a href="#">&raquo;</a></li>
-        </ul>
         </div>
         <div class="col-sm-3" id="sidebar">
             <aside>
